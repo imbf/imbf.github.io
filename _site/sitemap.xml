@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/dummy/2015/04/19/dummy.html</loc>
+<loc>http://localhost:4000/spring/2015/04/19/dummy.html</loc>
 <lastmod>2015-04-19T04:25:52+09:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/dummy/2015/04/19/dummy2.html</loc>
+<loc>http://localhost:4000/web/2015/04/19/dummy2.html</loc>
 <lastmod>2015-04-19T04:25:52+09:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/dummy/2015/04/19/dummy3.html</loc>
+<loc>http://localhost:4000/project/2015/04/19/dummy3.html</loc>
 <lastmod>2015-04-19T04:25:52+09:00</lastmod>
 </url>
 <url>
@@ -17,7 +17,7 @@
 <lastmod>2015-04-19T04:25:52+09:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/dummy/2015/04/19/dummy5.html</loc>
+<loc>http://localhost:4000/java/2015/04/19/dummy5.html</loc>
 <lastmod>2015-04-19T04:25:52+09:00</lastmod>
 </url>
 <url>
@@ -58,7 +58,19 @@
 <loc>http://localhost:4000/tag/welcome/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/category/spring/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/category/web/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/category/project/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/category/dummy/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/category/java/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/category/jekyll/</loc>

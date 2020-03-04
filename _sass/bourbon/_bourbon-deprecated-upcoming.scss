@@ -46,7 +46,7 @@
   @if type-of($style) == number {
     $padding: $base-color;
     $text-size: $style;
-    $base-color: #4294f0;
+    $base-color: #66FF33; /*#4294f0*/
     $style: simple;
 
     @if $padding == #4294f0 {
