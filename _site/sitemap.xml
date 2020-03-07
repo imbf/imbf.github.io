@@ -37,6 +37,10 @@
 <lastmod>2015-04-20T17:43:59+09:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/todayilearned/2015/04/20/TIL.html</loc>
+<lastmod>2015-04-20T17:43:59+09:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/about/</loc>
 </url>
 <url>
@@ -74,5 +78,8 @@
 </url>
 <url>
 <loc>http://localhost:4000/category/jekyll/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/category/todayilearned/</loc>
 </url>
 </urlset>
