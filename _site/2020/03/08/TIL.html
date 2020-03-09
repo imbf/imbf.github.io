@@ -1,0 +1,132 @@
+<h1 id="2020-03-08-til">2020-03-08-TIL</h1>
+
+<h2 id="java-enum">Java enum</h2>
+
+<h3 id="enum이란">enum이란?</h3>
+
+<p>enum은 enumeration이라는 셈,계산, 열거, 목록이라는 영어단어의 앞부분만 따서 만든 예약어입니다. 어떤 클래스가 상수만으로 작성되어 있으면 반드시 class로 선언할 필요는 없다. 이럴 땐 class로 선언된 부분에 enum이라고 선언하면 이 객체는 상수의 집합이라는 것을 명시적으로 나타냅니다.</p>
+
+<h3 id="enum을-사용한-상수-정의하기">enum을 사용한 상수 정의하기</h3>
+
+<p>enum은 열거형이라고 한다. 열거형은 서로 연관된 상수들의 집합이라고 할 수 있다.</p>
+
+<p>enum에 대한 예제는 다음과 같다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="nc">Day</span><span class="o">{</span>  
+    <span class="no">MONDAY</span><span class="o">,</span><span class="no">TUESDAY</span><span class="o">,</span> <span class="no">WEDNESDAY</span><span class="o">,</span> <span class="no">THURSDAY</span><span class="o">,</span> <span class="no">FRIDAY</span><span class="o">,</span> <span class="no">SATURDAY</span><span class="o">,</span> <span class="no">SUNDAY</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">enum</span> <span class="nc">Month</span><span class="o">{</span>  
+    <span class="no">JANUARY</span><span class="o">,</span> <span class="no">FEBRUARY</span><span class="o">,</span> <span class="no">MARCH</span><span class="o">,</span> <span class="no">APRIL</span><span class="o">,</span> <span class="no">MAY</span><span class="o">,</span> <span class="no">JUNE</span><span class="o">,</span> <span class="no">JULY</span><span class="o">,</span> 
+    <span class="no">AUGUST</span><span class="o">,</span> <span class="no">SEPTEMBER</span><span class="o">,</span> <span class="no">OCTOBER</span><span class="o">,</span> <span class="no">NOVEMBER</span><span class="o">,</span> <span class="no">DECEMBER</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EnumExample</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>        
+
+        <span class="nc">Day</span> <span class="n">day</span> <span class="o">=</span> <span class="nc">Day</span><span class="o">.</span><span class="na">MONDAY</span><span class="o">;</span>
+
+        <span class="k">switch</span> <span class="o">(</span><span class="n">day</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="nl">MONDAY:</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"월요일입니다."</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="nl">TUESDAY:</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"화요일입니다."</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+        <span class="k">case</span> <span class="nl">WEDNESDAY:</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"수요일입니다."</span><span class="o">);</span>
+            <span class="k">break</span><span class="o">;</span>
+
+            <span class="cm">/*
+             * ... 생략 ...
+             */</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>enum이 나오기 전에는 class 또는 interface를 사용하여 정의하였습니다. 하지만 이제는 enum 키워드를 사용하면 됩니다.
+위 예제처럼 enum이라는 키워드를 사용하고 상수의 집합을 의미하는 이름을 입력하면 됩니다. 그리고 위 예제처럼 각각의 상수들의 이름을 차례대로 나열하면 상수가 정의됩니다.</p>
+
+<p><strong>enum 사용시의 장점</strong></p>
+
+<ul>
+  <li>코드가 단순해지며 가독성이 좋다.</li>
+  <li>인스턴스 생성과 상속을 방지한다.</li>
+  <li>키워드 enum을 사용하기 때문에 구현의 의도가 <strong>열거</strong>임을 분명하게 나타낼 수 있다.</li>
+</ul>
+
+<h3 id="enum과-생성자">enum과 생성자</h3>
+
+<h4 id="1-enum-클래스의-원소에-추가-속성-부여">1. enum 클래스의 원소에 추가 속성 부여</h4>
+
+<p>enum의 각 열거형 상수에 추가 속성을 부여할 수 있습니다. 예를 들어, enum타입의 상수들이 행성(Planet)을 의미할 때, 이름을 나타내는 상수뿐 만이 아니라 질량과 반지름이라는 속성까지 함께 표현할 수 습니다. 다음의 예제는 왼쪽과 오른쪽을 나타내는 상수에 한글이름이라는 추가 속성을 부여합니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">RoadSide</span> <span class="o">{</span>  
+    <span class="c1">//</span>
+    <span class="nc">Left</span><span class="o">(</span><span class="s">"왼쪽"</span><span class="o">),</span>
+    <span class="nc">Right</span><span class="o">(</span><span class="s">"오른쪽"</span><span class="o">);</span> 
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">krName</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nf">RoadSide</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">//</span>
+    <span class="o">}</span> 
+
+    <span class="kd">private</span> <span class="nf">RoadSide</span><span class="o">(</span><span class="nc">String</span> <span class="n">krName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">krName</span> <span class="o">=</span> <span class="n">krName</span><span class="o">;</span> 
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getKrName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">krName</span><span class="o">;</span> 
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>생성자의 파라미터를 통해 추가 속성을 enum클래스의 필드(field)에 설정해주고, getter 메소드를 통해 해당 속성을 필요할 때에 가져다 쓸 수 있게 합니다. 이러한 기능들을 사용하면 enum은 열거형 상수를 모아 놓은 간단한 형태에서 시작하지만, 끊임없이 진화하여 완벽한 <strong>추상체</strong>가 될 수 있는 것이다.</p>
+
+<h4 id="2-enum-생성자는-private이어야-한다">2. enum 생성자는 private이어야 한다.</h4>
+
+<p>enum 타입은 고정된 상수들의 집합으로써, 런타임(Run-time)이 아닌 컴파일타임(Compile-Time)에 모든 값을 알고 있어야 합니다. 즉 다른 패키지나 클래스에서 enum 타입에 접근해서 동적으로 어떤 값을 정해줄 수 없습니다. -&gt; <strong>컴파일 시에 타입 안정성이 보장된다.</strong> 이러한 이유 때문에 생성자의 접근제어자를 private로 설정해야 합니다.</p>
+
+<h3 id="enum-활용">enum 활용</h3>
+
+<h4 id="if문-사용-줄이기">if문 사용 줄이기</h4>
+
+<p>스위치를 on/off 하는 예제에서 on이면 전원을 off하고, off이면 전원을 on하는 예제를 사용해보겠다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">PowerSwitch</span> <span class="o">{</span>  
+    <span class="c1">//</span>
+    <span class="no">ON</span><span class="o">(</span><span class="s">"켜짐"</span><span class="o">),</span>
+    <span class="no">OFF</span><span class="o">(</span><span class="s">"꺼짐"</span><span class="o">);</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">krName</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nf">PowerSwitch</span><span class="o">(){</span>
+        <span class="c1">//</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nf">PowerSwitch</span><span class="o">(</span><span class="nc">String</span> <span class="n">krName</span><span class="o">){</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">krName</span> <span class="o">=</span> <span class="n">krName</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getKrName</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">krName</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">PowerSwitch</span> <span class="nf">opposite</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// </span>
+        <span class="k">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="nc">PowerSwitch</span><span class="o">.</span><span class="na">ON</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">PowerSwitch</span><span class="o">.</span><span class="na">OFF</span><span class="o">;</span>  
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nc">PowerSwitch</span><span class="o">.</span><span class="na">ON</span><span class="o">;</span> 
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>opposite() 메소드를 활용해서 if/else문을 줄일 수 있습니다.</p>
+
+<p>로또의 랭크와 갯수를 한번에 저장하고 싶다면 객체를 만들면 되는거 아닌가?</p>
+

@@ -6,9 +6,19 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 07 Mar 2020 19:32:02 +0900</pubDate>
-    <lastBuildDate>Sat, 07 Mar 2020 19:32:02 +0900</lastBuildDate>
+    <pubDate>Mon, 09 Mar 2020 23:12:39 +0900</pubDate>
+    <lastBuildDate>Mon, 09 Mar 2020 23:12:39 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Til</title>
+        <description>&lt;h1 id=&quot;2020-03-08-til&quot;&gt;2020-03-08-TIL&lt;/h1&gt; &lt;h2 id=&quot;java-enum&quot;&gt;Java enum&lt;/h2&gt; &lt;h3 id=&quot;enum이란&quot;&gt;enum이란?&lt;/h3&gt; &lt;p&gt;enum은 enumeration이라는 셈,계산, 열거, 목록이라는 영어단어의 앞부분만 따서 만든 예약어입니다. 어떤 클래스가 상수만으로 작성되어 있으면 반드시 class로 선언할 필요는 없다. 이럴 땐 class로...</description>
+        <pubDate>Sun, 08 Mar 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/2020/03/08/TIL.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/08/TIL.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>Til</title>
@@ -139,18 +149,6 @@
         
         
         <category>Web</category>
-        
-      </item>
-    
-      <item>
-        <title>Dummy Post</title>
-        <description>&lt;p&gt;This is just a dummy post. Lorem ipsum and all the rest.&lt;/p&gt; &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna...</description>
-        <pubDate>Sun, 19 Apr 2015 04:25:52 +0900</pubDate>
-        <link>http://localhost:4000/spring/2015/04/19/dummy.html</link>
-        <guid isPermaLink="true">http://localhost:4000/spring/2015/04/19/dummy.html</guid>
-        
-        
-        <category>Spring</category>
         
       </item>
     
