@@ -34,7 +34,7 @@ pagination:
   enabled: true
   per_page: 5
   permalink: "/page/:num/"
-  sort_reverse: trues
+  sort_reverse: true
 
 # Archive settings (see https://github.com/jekyll/jekyll-archives/)
 jekyll-archives:
@@ -59,6 +59,7 @@ descriptions:
 
   - cat: dummy
     desc: "Just some placeholder posts, lorem ipsum and the rest."
+
 
 # Social icons and sharing options
 #
