@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>2020-03-06-TIL(일급 컬렉션, 결합도, 응집도, Mock)</title>
+  <meta name="description" content="일급 콜렉션">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="일급 콜렉션" />
+  <meta property="og:url" content="http://localhost:4000/til/2020/03/06/TILd.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="2020-03-06-TIL(일급 컬렉션, 결합도, 응집도, Mock)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/instacode.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="2020-03-06-TIL(일급 컬렉션, 결합도, 응집도, Mock)">
+  <meta name="twitter:description" content="일급 콜렉션">
+  <meta name="twitter:image" content="http://localhost:4000/assets/instacode.png">
+  <meta name="twitter:url" content="http://localhost:4000/til/2020/03/06/TILd.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/til/2020/03/06/TILd.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">2020-03-06-TIL(일급 컬렉션, 결합도, 응집도, Mock)</h1>
+      <p class="info">by <strong>Ben Centra</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">March 6, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/TIL">Til</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="일급-콜렉션">일급 콜렉션</h2>
+
+<ul>
+  <li>콜렉션을 포함한 클래스는 반드시 다른 멤버 변수가 없어야 한다.</li>
+  <li>각 콜렉션은 그 자체로 포장되어 있으므로 이제 콜렉션과 관련된 동작은 근거지가 마련된셈이다.</li>
+  <li>필터가 일급 콜렉션의 일부가 됨을 알 수 있다. 필터는 또한 스스로 함수 객체가 될 수 있다.</li>
+  <li>일급 콜렉션은 두 그룹을 같이 묶는다든가 그룹의 각 원소에 규칙을 적용하는 등의 동작을 처리할 수 있다.</li>
+</ul>
+
+<p>예제를 들어 일급 콜렉션을 설명하자면 다음과 같다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 일반 콜렉션 사용</span>
+<span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+<span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"A"</span><span class="o">);</span>
+<span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"2"</span><span class="o">,</span> <span class="s">"B"</span><span class="o">);</span>
+<span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"3"</span><span class="o">,</span> <span class="s">"C"</span><span class="o">);</span>
+<span class="c1">// 일급 콜렉션 사용</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GameRanking</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">ranks</span><span class="o">;</span>
+   
+   <span class="kd">public</span> <span class="nf">GameRanking</span><span class="o">(</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">ranks</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">this</span><span class="o">.</span><span class="na">rank</span> <span class="o">=</span> <span class="n">rank</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이와 같이 Collection을 Wrapping하면서 <strong>그 외에 다른 멤버 변수가 없는 상태를 일급 컬렉션</strong>이라고 한다.</p>
+
+<p><strong>장점</strong></p>
+
+<ol>
+  <li>비지니스에 종속적인 자료구조</li>
+  <li>Collection의 불변성을 보장
+    <ul>
+      <li>final을 사용해서 일급 콜렉션 내의 콜렉션의 재할당을 금지시킬 수 있다.  =&gt; 즉 , 각각의 객체들이 절대 값이 바뀔일이 없다는게 보장된다.</li>
+    </ul>
+  </li>
+  <li>상태와 행위를 한 곳에서 관리
+    <ul>
+      <li>값과 로직이 함께 존재한다.</li>
+      <li>똑같은 기능을 하는 메소드의 중복 생성을 막을 수 있다.</li>
+    </ul>
+  </li>
+  <li>이름이 있는 컬렉션</li>
+</ol>
+
+<hr />
+
+<h2 id="결합도-coupling">결합도 (coupling)</h2>
+
+<p><strong>결합도는 한 모듈과 다른 모듈 간의 상호 의존도 또는 연관 관계이다.</strong> 각각의 모듈의 독립적인 관계를 결합도라고 하는데 모듈간의 낮은 결합도는 체계가 잘 분할되어 서로 관계없는 모듈은 분리되어 존재한다는 의미이다. 낮은 결합도를 가진 프로그램 코드는 한 모듈 내의 에러가 다른 모듈에 영향을 미치는 파급효과의 최소화가 가능하며, 한 모듈의 변경이 다른 모듈에 큰 영향을 미치지 않고 모듈의 유지 보수 및 변경이 가능하다. 또한 특정 모듈의 내부 사항을 알지 못해도 그와 관련된 다른 모듈의 효과적인 취급이 가능해진다.</p>
+
+<p><strong>결합도의 종류(순서대로 결합도는 증가한다.)</strong></p>
+
+<ol>
+  <li>Data coupling : 단일 파일 또는 동종 테이블을 매개 변수로 통신하는 결합성</li>
+  <li>Stamp coupling : 두 모듈이 동일한 자료 구조를 조회하는 경우의 결합성</li>
+  <li>Control coupling : 어떤 모듈이 다른 모듈의 내부 논리 조직을 제어하기 위한 목적으로 제어 신호를 이용하여 통신하는 결합성</li>
+  <li>Common coupling : 두 모듈이 동일한 총체적 자료 영역을 공동으로 조회하는 경우의 결합성</li>
+  <li>Content coupling : 한 모듈의 다른 모듈의 내부 기능 및 그 내부 자료를 조회하는 경우이며 내용 결합성이 발생하는 경우</li>
+</ol>
+
+<p><strong>개발자는 낮은 결합도를 유지하게끔 Product를 만들어야 한다.</strong></p>
+
+<hr />
+
+<h2 id="응집도-cohension">응집도 (Cohension)</h2>
+
+<p><strong>응집도는 한 모듈 내부의 처리 요소들 간의 기능적 연관도를 나타내며</strong> 모듈 내부 요소는 명령어, 명령어의 모임, 호출문 특정 작업 수행 코드 등 체계를 모듈 단위로 얼마나 잘 분할하는지를 지침이 되어 모듈간의 결합도를 최소함으로써 체계내의 모든 모듈의 양호한 응집도를 성취해야 합니다.</p>
+
+<p><strong>응집도의 종류 (순서대로 응집도는 감소한다)</strong></p>
+
+<ol>
+  <li>기능성 응집성(functional cohesion) : 잘 정의된 하나의 기능이 하나의 모듈을 이룬 경우, “판매 세금 계산”처럼 동사, 목적어 한 쌍으로 구성</li>
+  <li>순차적 응집성(sequential cohesion) : 모듈 내 한 작업의 출력이 다른 작업의 입력이 되는 경우. “다음 거래를 읽고, 그 결과를 마스터 파일에 반영”</li>
+  <li>교환적 응집성(communication cohesion) : 동일한 입력과 출력을 사용하는 여러 작업들이 모인 경우. “인사 기록 파일에 근무 성적을 기재하고 급여를 갱신함”</li>
+  <li>절차적 응집성(procedural cohesion) : 공유하는 것은 없으나 큰 테두리 안에서 같은 작업에 속하는 경우. “총계를 출력하고 화면을 지우고, 메뉴를 뿌리고, 메뉴를 선택”</li>
+  <li>시간적 응집성(temporal cohesion) : 특정 시간에만 수행되는 기능을 묶어놓은 모듈</li>
+  <li>논리적 응집성(local cohesion) : 유사 성격을 갖거나 특정 형태로 분류되는 처리 요소들은 하나의 모듈로 형성. “ 사칙 연산에서 주어진 매개변수에 따른 계산”</li>
+  <li>우연적 응집성(coincidental cohesion) : 아무 관계 없는 처리 요소들로 모듈이 형성된 경우. 모듈 개념이 상실되어 이해 및 유지보수가 힘든 단점이 있음</li>
+</ol>
+
+<p><strong>개발자는 높은 응집도를 유지하게끔 Product를 만들어야 한다.</strong></p>
+
+<hr />
+
+<h2 id="생성자에-많은-로직이-포함되면-안되는-이유">생성자에 많은 로직이 포함되면 안되는 이유</h2>
+
+<p><strong>생성자는 말 그대로 객체 생성을 위해서 설계되었습니다.</strong> 생성자 안에서 사용하는 로직이 지금의 요구사항에서는 문제가 없어보이지만, <strong>해당 객체를 다른 요구사항에서도 사용하게 된다면, 그 로직 때문에 원하는 객체 생성이 어려워집니다.</strong> 이미 상용에 배포된 코드면 수십억이 왔다갔다 하는 환경에서 그걸 변경하기란 매우 힘들어서, 똑같지만 생성자 내용만 다른 클래스를 만들어서 사용하게 되겠죠. <strong>정말 어디서나 공통적으로 쓰이겠다 싶은 간단한 비즈니스 룰 정도는 생성자에 포함하겠지만, 그런 것도 웬만하면 지양해야하는 안티패턴입니다. 예외처리 또한 마찬가지 입니다!!!</strong></p>
+
+<hr />
+
+<h2 id="mock">Mock</h2>
+
+<h3 id="mock이란">Mock이란?</h3>
+
+<p>실제 객체를 만들어 사용하기에 시간, 비용 등의 Cost가 높거나 혹은 객체 서로간의 의존성이 강해 구현하기 힘들 경우 대역 객체(Test Double)를 만들어 사용하는 방법이다.</p>
+
+<h3 id="mock-객체는-언제-필요한가">Mock 객체는 언제 필요한가?</h3>
+
+<ul>
+  <li>테스트 작성을 위한 환경 구축이 어려운 경우</li>
+  <li>테스트가 특정 경우나 순간에 의존적인 경우</li>
+  <li>테스트 시간이 오래 걸리는 경우</li>
+  <li>개인 PC의 성능이나 서버의 성능문제로 오래 걸릴 수 있는 경우 시간을 단축하기 위해 사용한다.</li>
+</ul>
+
+<h3 id="mock에-대한-기본적인-분류-개념-테스트-더블">Mock에 대한 기본적인 분류 개념, 테스트 더블</h3>
+
+<ol>
+  <li><strong>테스트 더블</strong>
+    <ul>
+      <li>테스트를 진행하기 어려운 경우 이를 대신해 테스트를 진행 할 수 있도록 만들어주는 객체를 말한다.</li>
+      <li>Mock 객체와 유사한 의미를 가지며 테스트 더블이 좀 더 <u>상위 의미</u>로 사용된다.</li>
+    </ul>
+  </li>
+  <li><strong>더미 객체(Dummy Object)</strong>
+    <ul>
+      <li>단순히 인스턴스화될 수 있는 수준으로만 객체를 구현한다.</li>
+      <li>인스턴스화된 객체가 필요할 뿐 해당 객체의 긴으까지 필요하지 않는 경우에 사용한다.</li>
+    </ul>
+  </li>
+  <li><strong>테스트 스텁(Test Stub)</strong>
+    <ul>
+      <li>더미 객체보다 좀 더 구현된 객체로 더미 객체가 마치 <strong>실제로 동작하는 것처럼 보이게 만들어 놓은 객체</strong>이다.</li>
+      <li>객체의 특정 상태를 가정해서 만들어 특정 값을 리턴해 주거나 특정 메시지를 출력해 주는 작업을 한다.</li>
+      <li><strong>특정 상태를 가정해서 하드코딩된 형태</strong>이기 때문에 로직에 따른 값의 변경은 테스트 할 수 없다.</li>
+      <li>즉, 어떤 행위가 호출됬을 때 특정 값으로 리턴시켜주는 형태가 Stub이다.</li>
+    </ul>
+  </li>
+  <li>페이크 객체(Fake Object)
+    <ul>
+      <li>여러 상태를 대표할 수 있도록 구현된 객체로 <strong>실제 로직이 구현된 것처럼 보이게 한다.</strong></li>
+      <li>실제로 DB에 접속해서 비교할 때와 동일한 모양이 보이도록 객체 내부에 구현할 수 있다.
+        <ul>
+          <li>테스트케이스 작성을위해서 다른 객체들과의 의존성을 제거하기 위해 사용한다.</li>
+          <li>페이크 객체를 만들 때 복잡도로 인해서 놀겨이 많이 들어 갈 경우 적절한 수준에서 구현하거나, Mock 프레임 워크를 사용한다.</li>
+          <li>페이크 객체를 생성하기 위한 노력이 많이 필요한 경우 실제 객체를 가져와 테스트 한다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>테스트 스파이(Test Spy)
+    <ul>
+      <li>테스트에 사용되는 객체, 메소드의 사용 여부 및 정상 호출 여부를 기록하고 요청시 알려준다.</li>
+      <li>테스트 더블로 구현된 객체에 자기 자신이 호출 되엇을 때 확인이 필요한 부분을 기록하도록 구현한다.</li>
+      <li>특정 테스트 메서드가 몇번 호출 되었는지 필요한 경우 전역 변수로 카운트를 설정하고 특정 테스트 메서드에 카운트를 올리는 부분을 추가한 후 이 카운트를 가져오는 메서드를 추가한다.</li>
+      <li>특정 메소드가 호출 되었을 때 또 다른 메서드가 실행이 되어야 한다와 같은 행위 기반 테스트가 필요한 경우 사용한다.</li>
+    </ul>
+  </li>
+  <li>Mock 객체(Mock Object)
+    <ul>
+      <li>행위를 검증하기 위해 사용되는 객체를 지칭하여 수동으로 만들 수도 있고 프레임워크를 통해 만들 수 있다.</li>
+      <li>행위 기반 테스트는 복잡도나 정확성등 작성하기 어려운 부분이 많기 때문에 상태 기반 테스트가 가능하다면 만들지 않는다.</li>
+      <li>Mock 객체는 테스트 더블 하위객체로 써의 좁은 의미와 테스트 더블을 포함한 넓은 의미 2가지로 사용될 수 있다.</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>이때 Mock Object는 행위 검증(Behavior Verification)에 사용하고, Stub는 상태 검증(State Verification)에 사용하는 것이다.</strong></p>
+
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/jekyll">jekyll</a>,&nbsp;<a href="/tag/welcome">welcome</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=2020-03-06-TIL%28%EC%9D%BC%EA%B8%89+%EC%BB%AC%EB%A0%89%EC%85%98%2C+%EA%B2%B0%ED%95%A9%EB%8F%84%2C+%EC%9D%91%EC%A7%91%EB%8F%84%2C+Mock%29&url=http%3A%2F%2Flocalhost%3A4000%2Ftil%2F2020%2F03%2F06%2FTILd.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=2020-03-06-TIL%28%EC%9D%BC%EA%B8%89+%EC%BB%AC%EB%A0%89%EC%85%98%2C+%EA%B2%B0%ED%95%A9%EB%8F%84%2C+%EC%9D%91%EC%A7%91%EB%8F%84%2C+Mock%29&u=http%3A%2F%2Flocalhost%3A4000%2Ftil%2F2020%2F03%2F06%2FTILd.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Ftil%2F2020%2F03%2F06%2FTILd.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=2020-03-06-TIL%28%EC%9D%BC%EA%B8%89+%EC%BB%AC%EB%A0%89%EC%85%98%2C+%EA%B2%B0%ED%95%A9%EB%8F%84%2C+%EC%9D%91%EC%A7%91%EB%8F%84%2C+Mock%29&url=http%3A%2F%2Flocalhost%3A4000%2Ftil%2F2020%2F03%2F06%2FTILd.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=2020-03-06-TIL%28%EC%9D%BC%EA%B8%89+%EC%BB%AC%EB%A0%89%EC%85%98%2C+%EA%B2%B0%ED%95%A9%EB%8F%84%2C+%EC%9D%91%EC%A7%91%EB%8F%84%2C+Mock%29&url=http%3A%2F%2Flocalhost%3A4000%2Ftil%2F2020%2F03%2F06%2FTILd.html&media=http://localhost:4000/assets/instacode.png"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/til/2020/03/06/TILd.html') + '&title=2020-03-06-TIL(일급 컬렉션, 결합도, 응집도, Mock)'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

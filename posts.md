@@ -7,7 +7,8 @@ main_nav: true
 
 {% for category in site.categories %}
   {% capture cat %}{{ category | first }}{% endcapture %}
-  <h2 id="{{cat}}">{{ cat | capitalize }}</h2>
+  <!-- <h2 id="{{cat}}">{{ cat | capitalize }}</h2> (deafult) -->
+  <h2 id="{{cat}}">{{ cat }}</h2> <!-- (대문자 자유롭게 사용할 수 있도록 수정) -->
   {% for desc in site.descriptions %}
     {% if desc.cat == cat %}
       <p class="desc"><em>{{ desc.desc }}</em></p>
