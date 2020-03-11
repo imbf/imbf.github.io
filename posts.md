@@ -5,7 +5,7 @@ permalink: /posts/
 main_nav: true
 ---
 
-{% for category in site.categories %}
+{% for category in site.categories reversed %}
   {% capture cat %}{{ category | first }}{% endcapture %}
   <!-- <h2 id="{{cat}}">{{ cat | capitalize }}</h2> (deafult) -->
   <h2 id="{{cat}}">{{ cat }}</h2> <!-- (대문자 자유롭게 사용할 수 있도록 수정) -->
