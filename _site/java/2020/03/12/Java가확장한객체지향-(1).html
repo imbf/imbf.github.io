@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Java가 확장한 객체 지향 - (1)</title>
+  <meta name="description" content="Java가 확장한 객체지향 - (1)">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Java가 확장한 객체지향 - (1)" />
+  <meta property="og:url" content="http://localhost:4000/java/2020/03/12/Java%E1%84%80%E1%85%A1%E1%84%92%E1%85%AA%E1%86%A8%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6%E1%84%8C%E1%85%B5%E1%84%92%E1%85%A3%E1%86%BC-(1).html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="Java가 확장한 객체 지향 - (1)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Java가 확장한 객체 지향 - (1)">
+  <meta name="twitter:description" content="Java가 확장한 객체지향 - (1)">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/java/2020/03/12/Java%E1%84%80%E1%85%A1%E1%84%92%E1%85%AA%E1%86%A8%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6%E1%84%8C%E1%85%B5%E1%84%92%E1%85%A3%E1%86%BC-(1).html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/java/2020/03/12/Java%E1%84%80%E1%85%A1%E1%84%92%E1%85%AA%E1%86%A8%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6%E1%84%8C%E1%85%B5%E1%84%92%E1%85%A3%E1%86%BC-(1).html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Java가 확장한 객체 지향 - (1)</h1>
+      <p class="info">by <strong>Green Frong Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">March 12, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Java">Java</a> (default) -->
+    <a href="/category/Java">Java</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h1 id="java가-확장한-객체지향---1">Java가 확장한 객체지향 - (1)</h1>
+
+<p><strong>이 글은 자바가 객체 지향을 확장하기 위해 어떠한 방법을 사용했는지 키워드를 중심으로 살펴볼 것이다.</strong></p>
+
+<p>이 포스팅은 <strong>스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)</strong>를 공부하면서 작성한 글이다.</p>
+
+<h2 id="1-abstract-키워드-추상-메서드와-추상-클래스">1. abstract 키워드 (추상 메서드와 추상 클래스)</h2>
+
+<p><strong>추상 메서드(Abstract method) :</strong> 선언부는 있는데 구현부가 없는 메서드를 일컫는다.</p>
+
+<p>추가적으로 추상 메서드(Abstract method)를 하나라도 갖고 있는 클래스는 반드시 <strong>추상 클래스(Abstract Class)</strong>로 선언해야한다. ( 추상 메서드 없이도 추상 클래스를 선언할 수 있다는 것은 알아두자!! )</p>
+
+<p><strong>추상 클래스와 추상 메서드의 Example</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
+	<span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">cry</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cat</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="o">{</span>
+   <span class="kt">void</span> <span class="nf">cry</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"나는 고양이! 야옹! 야옹!"</span><span class="o">)</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">Animal</span> <span class="n">tom</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Cat</span><span class="o">();</span>
+      <span class="n">tom</span><span class="o">.</span><span class="na">cry</span><span class="o">();</span>
+      
+      <span class="nc">Anumal</span> <span class="n">savage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Anumal</span><span class="o">();</span> 	<span class="c1">// 컴파일 에러 (인스턴스 생성 불가)</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이러한 <strong>추상클래스와 추상 메서드는 다음과 같은 4가지의 문제를 해결</strong>해 준다.</p>
+
+<ol>
+  <li>슈퍼 클래스 <u>객체가 생성</u>되는 것을 막아준다.</li>
+  <li>서브 클래스에서 오버라이딩 하는 슈퍼 클래스의 메소드를 정의하기 곤란했는데 추상 메소드로써 정의하면 보다 쉽게 정의할 수 있다. ( ex. cat 클래스의 cry() 메소드는 System.out.println(“야옹!!”) 으로 정의할 수 있지만 cat 클래스가 오버라이딩하는 animal 클래스의 cry() 메소드는 정의하기 참 곤란하다. =&gt; <u>abstract 메소드를 이용</u>하자)</li>
+  <li>슈퍼 클래스의 참조 변수 배열로 서브 클래스 객체들의 메소드를 호출하려면 <u>슈퍼 클래스에서 오버라이딩 되어지는 메서드를 정의</u>해야 하는데 이를 추상메서드로써 쉽게 가능하게 해준다.</li>
+  <li>서브 클래스가 슈퍼 클래스의 추상 메서드를 오버라이딩하지 않으면 <u>컴파일 시점에 에러</u>가 발생하기 때문에 런타임 시에 에러를 발생하는 경우보다 효율이 매우 증가한다!!</li>
+</ol>
+
+<p><strong>추상 클래스 및 추상 메서드의 특징</strong></p>
+
+<ul>
+  <li>추상 클래스는 인스턴스, 즉 <u>객체를 만들 수 없다.</u> 즉, new를 사용할 수 없다</li>
+  <li>추상 메서드는 하위 클래스에서 메서드 구현을 강제한다. <u>오버라이딩 강제</u>.</li>
+  <li>추상 메서드를 포함하는 클래스는 반드시 추상 클래스여야 한다,</li>
+</ul>
+
+<hr />
+
+<h2 id="2-생성자-new">2. 생성자 (new)</h2>
+
+<p><strong>생성자(Constructor)</strong> : 반환값이 없고 클래스명과 같은 이름을 가진 메서드이다. <strong>객체 생성자 메서드</strong>라고도 한다.</p>
+
+<ul>
+  <li>
+    <p>생성자가 존재하지 않으면 자바 컴파일러가 알아서 <u>기본 생성자</u>를 자동으로 만들어준다.</p>
+  </li>
+  <li>
+    <p>필요하다면 개발자가 인자를 갖는 생성자를 만들어 줄 수도 있다. (이러한 경우에는 기본 생성자는 만들어지지 않음)</p>
+  </li>
+  <li>
+    <p>생성자 예제</p>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">동물</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="n">동물</span><span class="o">()</span> <span class="o">{}</span> 	<span class="c1">// 기본 생성자 (생성자가 없다면 컴파일러가 기본적으로 만들어준다)</span>
+   <span class="kd">public</span> <span class="n">동물</span><span class="o">(</span><span class="nc">Strng</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// 하나의 인자가있는 생성자</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="3-클래스-생성-시의-실행-블록-static-블록">3. 클래스 생성 시의 실행 블록, static 블록</h2>
+
+<p>객체 생성자가 있다면 클래스 생성자도 있을 거라고 기대해 볼 만하다. 하지만 자바는 그 기대의 절반만 부응해 준다.
+절반만 부응한다는 말은 도대체 어떤 말일까?? 아래의 내용에서 다루어보자!!</p>
+
+<p><strong>클래스 생성자는 존재하지 않는다. 하지만 클래스가 스태틱 영역에 배치될 때 실행되는 코드블록이 있다. 바로 static 블록이다.</strong>
+예제는 다음과 같다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">staticBlock</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">동물</span> <span class="o">{</span>
+   <span class="kd">static</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"동물 클래스 레디 온!"</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">staticBlock</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver02</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+      <span class="n">동물</span> <span class="n">뽀로로</span> <span class="o">=</span> <span class="k">new</span> <span class="n">동물</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 실행 결과</span>
+<span class="n">동물</span> <span class="n">클래스</span> <span class="n">레디</span> <span class="n">온</span><span class="o">!</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">staticBlock</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver02</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main 메서드 시작!"</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 실행 결과</span>
+<span class="n">main</span> <span class="n">메서드</span> <span class="n">시작</span><span class="o">!</span>
+</code></pre></div></div>
+
+<p>두 main 메소드의 실행 결과에 대한 이유를 알 수 있겠는가? 그렇다. <strong>자바는 사용하지 않는 클래스는 Static 영역에 배치조차 하지 않는다</strong>. 해당 패키지 또는 클래스가 처음으로 사용될때 Static 영역에 로딩되기 때문이다.</p>
+
+<p>이러한 말을 증명시켜줄 예제 코드를 살펴보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">staticBlock</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver03</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main 메서드 시작!"</span><span class="o">);</span>
+      <span class="n">동물</span> <span class="n">뽀로로</span> <span class="o">=</span> <span class="k">new</span> <span class="n">동물</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 실행 결과</span>
+<span class="n">main</span> <span class="n">메서드</span> <span class="n">시작</span><span class="o">!</span>
+<span class="n">동물</span> <span class="n">클래스</span> <span class="n">레디</span> <span class="n">온</span><span class="o">!</span>
+</code></pre></div></div>
+
+<p>동물 클래스의 static 블록보다 main() 메서드의 실행문이 먼저 실행된 것을 볼 수 있다.(해당 클래스가 처음으로 사용 되어야만 Static 영역에 로딩된다.)</p>
+
+<p>Static 블록에서 사용할 수 있는 속성과 메서드는 당연히 <strong>static 멤버</strong> 뿐이다. (인스턴스 멤버에는 접근할 방법이 없다.)</p>
+
+<p><strong>이번에는 클래스의 인스턴스를 만드는 작업이 아닌 클래스의 정적 속성에 접근하는 경우에 대해서 예제를 통해 알아보자.</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">staticBlock</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver05</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main 메서드 시작!"</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Animal</span><span class="o">.</span><span class="na">age</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
+   <span class="kd">static</span> <span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+   
+   <span class="kd">static</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Animal class ready on!"</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+<span class="cm">/* 실행 결과
+main 메서드 시작!
+Animal class ready on!
+0
+*/</span>
+</code></pre></div></div>
+
+<p><strong>위 예제를 통해서 클래스 생성시의 실행 블록과 static 블록에 대해서 정리해 보면.</strong></p>
+
+<ul>
+  <li>클래스 정보는 <strong>해당 클래스가 코드에서 맨 처음 사용될 때 메모리의 Static 영역에 로딩</strong>된다. 이때 단 한번 해당 클래스의 <strong>Static 블록이 실행</strong>된다.</li>
+  <li>클래스가 맨 처음 사용될 때의 경우는 다음과 같다.
+    <ol>
+      <li>클래스의 <u>정적 속성</u>을 사용할 때</li>
+      <li>클래스의 <u>정적 메서드</u>를 사용할 때</li>
+      <li>클래스의 <u>인스턴스를 최초로 생성</u>할 때</li>
+    </ol>
+  </li>
+</ul>
+
+<p>그렇다면 왜 프로그램이 실행될 때 바로 클래스들의 정보를 메모리의 Static 영역에 로딩하지 않고 해당 클래스가 처음 사용될 때 로딩할까?</p>
+
+<p>이러한 이유는 <strong>스태틱 영역도 메모리</strong>이기 때문이다. <strong>메모리는 최대한 늦게 사용을 시작하고 최대한 빨리 반환하는 것이 정석이다.</strong> 물론 자바는 클래스가 Static 영역에 한번 올라가면 프로그램이 종료되기 전까지는 해당 메모리를 반환할 수 없지만 그럼에도 <u>최대한 늦게 로딩함으로써 메모리 사용을 최대한 늦추기 위해서이다.</u></p>
+
+<p><strong>static 블록</strong>은 거의 사용할 일이 없지만 그래도 알아두면 한번은 요긴하게 써먹을 수 있다.</p>
+
+<blockquote>
+  <p>사실 static 블록과 유사하게 클래스의 인스턴스를 위한 <strong>인스턴스 블록</strong>도 존재한다. 아무런 표시없이 {} 블록을 사용하게 되면 인스턴스가 새성될 때마다 {} 블록이 실행된다. <strong>{} 블록은 객체 생성자가 실행되기 전에 먼저 실행된다.</strong></p>
+
+  <p>객체는 주로 생성자를 통해 초기화하기 때문에 사실 {} 블록을 거의 사용할 일은 없지만 종종 사용한다.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="4-final-키워드">4. final 키워드</h2>
+
+<p><strong>final은 마지막, 최종</strong>이라는 의미를 가진 단어다. 
+<strong>final 키워드가 나타날 수 있는 곳은 <u>객체 지향 언어의 세가지 구성 요소인 클래스, 변수, 메소드</u>이다.</strong></p>
+
+<h3 id="fianl과-클래스">fianl과 클래스</h3>
+
+<p>클래스에 final이 붙었다면 어떤 의미가 될까? 예제를 통해 알아보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">finalClass</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">고양이</span> <span class="o">{</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">finalClass</span><span class="o">;</span>
+
+<span class="c1">// 컴파일 에러 : the type 길고양이 cannot subclass the final class 고양이</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">길고양이</span> <span class="kd">extends</span> <span class="n">고양이</span> <span class="o">{}</span>
+</code></pre></div></div>
+
+<p><strong>상속을 허락하지 않겠다는 의미이다.</strong>
+즉, 다음과 같은 서브 클래스를 만들면 <u>컴파일 에러</u>가 발생한다.</p>
+
+<h3 id="final과-변수">final과 변수</h3>
+
+<p>변수에 final이 붙었다면 그 의미는 뭘까? 예제를 통해 알아보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">finalVariable</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cat</span> <span class="o">{</span>
+   <span class="kd">final</span> <span class="kd">static</span> <span class="kt">int</span> <span class="no">STATIC_CONSTANT_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+   <span class="kd">final</span> <span class="kd">static</span> <span class="kt">int</span> <span class="no">STATIC_CONSTANT_2</span><span class="o">;</span>
+
+   <span class="kd">final</span> <span class="kt">int</span> <span class="no">INSTANCE_CONSTANT_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+   <span class="kd">final</span> <span class="kt">int</span> <span class="no">INSTANCE_CONSTANT_2</span><span class="o">;</span>
+
+   <span class="kd">static</span> <span class="o">{</span>
+      <span class="no">STATIC_CONSTANT_2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+      
+      <span class="c1">//STATIC_CONSTANT_2 = 4; 컴파일 에러 (상수(final)는 한 번 초기화되면 값을 변경할 수 없다.)</span>
+   <span class="o">}</span>
+
+   <span class="nc">Cat</span><span class="o">()</span> <span class="o">{</span>
+      <span class="no">INSTANCE_CONSTANT_2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+      
+      <span class="c1">//INSTANCE_CONSTANT_2 = 4; 컴파일 에러 (상수(final)는 한 번 초기화되면 값을 변경할 수 없다.)</span>
+
+      <span class="kd">final</span> <span class="kt">int</span> <span class="no">LOCAL_CONSTANT_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+      <span class="kd">final</span> <span class="kt">int</span> <span class="no">LOCAL_CONSTANT_2</span><span class="o">;</span>
+
+      <span class="no">LOCAL_CONSTANT_2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 코드에서 볼 수 있는 것 처럼 <strong>변수에 final이 붙으면 변경 불가능한 상수가 된다.</strong> 정적 상수는 선언 시에, 또는 정적 생성자에 해당하는 static 블록 내부에서 초기화가 가능하다. 객체 상수 역시 선언 시에, 또는 객체 생성자 또는 인스턴스 블록에서 초기화할 수 있다. 지역 상수 역시 선언 시에, 또는 최초 한 번만 초기화가 가능하다.</p>
+
+<p>다른 언어에서는 읽기 전용인 상수에 대해서 final 키워드 대신 const 키워드를 사용하기도 하는데 자바에서는 이런 혼동을 피하기 위해 const를 키워드로 등록해두고 쓰지 못하게 하고 있다.</p>
+
+<h3 id="final과-메서드">final과 메서드</h3>
+
+<p><strong>메서드가 final이면 재정의, 즉 오버라이딩을 금지하게 된다.</strong></p>
+
+<p>다음의 예제를 통해서 살펴보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">finalMethod</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">동물</span> <span class="o">{</span>
+   <span class="kd">final</span> <span class="kt">void</span> <span class="n">숨쉬다</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"호흡 중"</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">포유류</span> <span class="kd">extends</span> <span class="n">ehdanf</span> <span class="o">{</span>
+   
+   <span class="c1">// 컴파일 에러 : Cannot override the final method from 동물</span>
+   <span class="kt">void</span> <span class="n">숨쉬다</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"호흡 중"</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Java">Java</a>,&nbsp;<a href="/tag/OOP">OOP</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Java%EA%B0%80+%ED%99%95%EC%9E%A5%ED%95%9C+%EA%B0%9D%EC%B2%B4+%EC%A7%80%ED%96%A5+-+%281%29&url=http%3A%2F%2Flocalhost%3A4000%2Fjava%2F2020%2F03%2F12%2FJava%25E1%2584%2580%25E1%2585%25A1%25E1%2584%2592%25E1%2585%25AA%25E1%2586%25A8%25E1%2584%258C%25E1%2585%25A1%25E1%2586%25BC%25E1%2584%2592%25E1%2585%25A1%25E1%2586%25AB%25E1%2584%2580%25E1%2585%25A2%25E1%2586%25A8%25E1%2584%258E%25E1%2585%25A6%25E1%2584%258C%25E1%2585%25B5%25E1%2584%2592%25E1%2585%25A3%25E1%2586%25BC-%281%29.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Java%EA%B0%80+%ED%99%95%EC%9E%A5%ED%95%9C+%EA%B0%9D%EC%B2%B4+%EC%A7%80%ED%96%A5+-+%281%29&u=http%3A%2F%2Flocalhost%3A4000%2Fjava%2F2020%2F03%2F12%2FJava%25E1%2584%2580%25E1%2585%25A1%25E1%2584%2592%25E1%2585%25AA%25E1%2586%25A8%25E1%2584%258C%25E1%2585%25A1%25E1%2586%25BC%25E1%2584%2592%25E1%2585%25A1%25E1%2586%25AB%25E1%2584%2580%25E1%2585%25A2%25E1%2586%25A8%25E1%2584%258E%25E1%2585%25A6%25E1%2584%258C%25E1%2585%25B5%25E1%2584%2592%25E1%2585%25A3%25E1%2586%25BC-%281%29.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjava%2F2020%2F03%2F12%2FJava%25E1%2584%2580%25E1%2585%25A1%25E1%2584%2592%25E1%2585%25AA%25E1%2586%25A8%25E1%2584%258C%25E1%2585%25A1%25E1%2586%25BC%25E1%2584%2592%25E1%2585%25A1%25E1%2586%25AB%25E1%2584%2580%25E1%2585%25A2%25E1%2586%25A8%25E1%2584%258E%25E1%2585%25A6%25E1%2584%258C%25E1%2585%25B5%25E1%2584%2592%25E1%2585%25A3%25E1%2586%25BC-%281%29.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=Java%EA%B0%80+%ED%99%95%EC%9E%A5%ED%95%9C+%EA%B0%9D%EC%B2%B4+%EC%A7%80%ED%96%A5+-+%281%29&url=http%3A%2F%2Flocalhost%3A4000%2Fjava%2F2020%2F03%2F12%2FJava%25E1%2584%2580%25E1%2585%25A1%25E1%2584%2592%25E1%2585%25AA%25E1%2586%25A8%25E1%2584%258C%25E1%2585%25A1%25E1%2586%25BC%25E1%2584%2592%25E1%2585%25A1%25E1%2586%25AB%25E1%2584%2580%25E1%2585%25A2%25E1%2586%25A8%25E1%2584%258E%25E1%2585%25A6%25E1%2584%258C%25E1%2585%25B5%25E1%2584%2592%25E1%2585%25A3%25E1%2586%25BC-%281%29.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=Java%EA%B0%80+%ED%99%95%EC%9E%A5%ED%95%9C+%EA%B0%9D%EC%B2%B4+%EC%A7%80%ED%96%A5+-+%281%29&url=http%3A%2F%2Flocalhost%3A4000%2Fjava%2F2020%2F03%2F12%2FJava%25E1%2584%2580%25E1%2585%25A1%25E1%2584%2592%25E1%2585%25AA%25E1%2586%25A8%25E1%2584%258C%25E1%2585%25A1%25E1%2586%25BC%25E1%2584%2592%25E1%2585%25A1%25E1%2586%25AB%25E1%2584%2580%25E1%2585%25A2%25E1%2586%25A8%25E1%2584%258E%25E1%2585%25A6%25E1%2584%258C%25E1%2585%25B5%25E1%2584%2592%25E1%2585%25A3%25E1%2586%25BC-%281%29.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/java/2020/03/12/Java%E1%84%80%E1%85%A1%E1%84%92%E1%85%AA%E1%86%A8%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%92%E1%85%A1%E1%86%AB%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6%E1%84%8C%E1%85%B5%E1%84%92%E1%85%A3%E1%86%BC-(1).html') + '&title=Java가 확장한 객체 지향 - (1)'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
