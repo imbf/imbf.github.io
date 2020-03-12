@@ -156,7 +156,7 @@
   <div class="scrim ">
     <header class="post-header">
       <h1 class="title">Java가 확장한 객체 지향 - (2)</h1>
-      <p class="info">by <strong>Green Frong Developer</strong></p>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
     </header>
   </div>
 </div>
@@ -184,274 +184,216 @@
 <article class="post-content">
   <h1 id="java가-확장한-객체지향---2">Java가 확장한 객체지향 - (2)</h1>
 
-<p><strong>이 글은 자바가 객체 지향을 확장하기 위해 어떠한 방법을 사용했는지 키워드를 중심으로 살펴볼 것이다.</strong></p>
+<p><strong>이 글에서는 자바가 객체 지향을 확장하기 위해 어떠한 방법을 사용했는지 키워드 중심으로 살펴볼 것이다.</strong></p>
 
 <p>이 포스팅은 <strong>스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)</strong>를 공부하면서 작성한 글이다.</p>
 
-<h2 id="1-abstract-키워드-추상-메서드와-추상-클래스">1. abstract 키워드 (추상 메서드와 추상 클래스)</h2>
+<hr />
 
-<p><strong>추상 메서드(Abstract method) :</strong> 선언부는 있는데 구현부가 없는 메서드를 일컫는다.</p>
+<h2 id="5-instanceof-연산자">5. instanceof 연산자</h2>
 
-<p>추가적으로 추상 메서드(Abstract method)를 하나라도 갖고 있는 클래스는 반드시 <strong>추상 클래스(Abstract Class)</strong>로 선언해야한다. ( 추상 메서드 없이도 추상 클래스를 선언할 수 있다는 것은 알아두자!! )</p>
+<hr />
 
-<p><strong>추상 클래스와 추상 메서드의 Example</strong></p>
+<p><strong>instanceof 연산자 :</strong> 만들어진 특정 객체가 특정 클래스의 인스턴스인지 물어보는 연산자이다.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
-   <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">cry</span><span class="o">();</span>
+<ul>
+  <li>
+    <p>리턴값 : true 또는 false를 리턴한다.</p>
+  </li>
+  <li>
+    <p>사용법 : ( <strong>객체참조변수 instanceof 클래스명</strong> )</p>
+  </li>
+</ul>
+
+<p>다음은 instanceof의 예제이다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">instanceOf01</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">동물</span> <span class="o">{</span>
+   
 <span class="o">}</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cat</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="o">{</span>
-   <span class="kt">void</span> <span class="nf">cry</span><span class="o">()</span> <span class="o">{</span>
-      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"나는 고양이! 야옹! 야옹!"</span><span class="o">)</span>
+<span class="kd">class</span> <span class="nc">조류</span> <span class="kd">extends</span> <span class="n">동물</span> <span class="o">{</span>
+   
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">펭귄</span> <span class="kd">extends</span> <span class="n">조류</span> <span class="o">{</span>
+   
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">동물</span> <span class="n">동물객체</span> <span class="o">=</span> <span class="k">new</span> <span class="n">동물</span><span class="o">();</span>
+      <span class="n">동물</span> <span class="n">조류객체</span> <span class="o">=</span> <span class="k">new</span> <span class="n">조류</span><span class="o">();</span>
+      <span class="n">동물</span> <span class="n">펭귄객체</span> <span class="o">=</span> <span class="k">new</span> <span class="n">펭귄</span><span class="o">();</span>
+      
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">동물객체</span> <span class="k">instanceof</span> <span class="n">동물</span><span class="o">);</span>
+
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">조류객체</span> <span class="k">instanceof</span> <span class="n">동물</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">조류객체</span> <span class="k">instanceof</span> <span class="n">조류</span><span class="o">);</span>
+      
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">펭귄객체</span> <span class="k">instanceof</span> <span class="n">동물</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">펭귄객체</span> <span class="k">instanceof</span> <span class="n">조류</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">펭귄객체</span> <span class="k">instanceof</span> <span class="n">펭귄</span><span class="o">);</span>
+      
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">펭귄객체</span> <span class="k">instanceof</span> <span class="nc">Object</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>실행 결과는 모두 true이다.</strong> instanceof는 객체 참조 변수의 타입이 아닌 <strong>실제 객체 타입에 의해 처리</strong>하기 때문이다.
+또한 instanceof를 자주 쓰는 코드는 좋지 않을 코드일 수 있기 때문에 리팩토링의 대상이 아닌지 점검 해봐야할 필요가 있다.</p>
+
+<p>instanceof 연산자는 클래스들의 상속 관계 뿐만 아니라 <strong>인터페이스의 구현 관계에서도 동일하게 적용</strong>된다.</p>
+
+<hr />
+
+<h2 id="6-package-키워드">6. package 키워드</h2>
+
+<hr />
+
+<p><strong>package 키워드는 네임스페이스(이름공간)를 만들어주는 역할을 한다.</strong></p>
+
+<blockquote>
+  <p><strong>네임스페이스(이름공간)에 대한 예제</strong></p>
+
+  <p>회사의 서로 다른 사업부(고객 사업부, 마케팅 사업부)에서 이름이 동일한 Customer 클래스를 사용할 때 고객 사업부에서는 고객사업부.Customer를 사용하고 마케팅 사업부에서는 마케팅사업부.Customer로써 사용하면 Customer 클래스간에 구별이 가능해서 혼선을 없앨 수 있다 (<u>매우 유용</u>)</p>
+</blockquote>
+
+<hr />
+
+<h2 id="7-interface-키워드와-implements-키워드">7. interface 키워드와 implements 키워드</h2>
+
+<hr />
+
+<p><strong>인터페이스는 public 추상 메서드와 public 정적 상수만 가질 수 있다.</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">speakable</span> <span class="o">{</span>
+   <span class="kt">double</span> <span class="no">PI</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="o">;</span>
+   <span class="kd">final</span> <span class="kt">double</span> <span class="n">absoluteZeroPoint</span> <span class="o">=</span> <span class="o">-</span><span class="mf">275.15</span><span class="o">;</span>
+   
+   <span class="kt">void</span> <span class="nf">sayYes</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>그렇다면 위의 코드는 컴파일 에러를 발생시키는가? 그렇지 않다. <strong>인터페이스는 추상 메서드와 정적 상수만 가질 수 있기에 따로 메서드에 public과 abstract, 속성에 public과 static, final을 붙이지 않아도 자동으로 컴파일러가 붙여준다.</strong></p>
+
+<p>결국 위의 예제 코드는 다음의 예제 코드와 동일하다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Speakable</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="no">PI</span> <span class="o">=</span> <span class="mf">3.14159</span><span class="o">;</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">absoluteZeroPoint</span> <span class="o">=</span> <span class="o">-</span><span class="mf">275.15</span><span class="o">;</span>
+   
+   <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">sayYes</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>참고 :</strong> 자바 8 부터 <strong>인터페이스는</strong> <u>디폴트 메서드라고 하는 객체 구상 메서드와 정적 추상 메서드 또한 지원</u>할 수 있게 언어 스펙이 바뀌었다.</p>
+
+<blockquote>
+  <p>[자바 8 관련 추가 정보]</p>
+
+  <p><strong>람다(Lambda)</strong></p>
+
+  <p>2014년 오라클에서 빅데이터와 병렬성 지원을 강화한 자바 8의 기능 중 하나이다. 람다란 함수를 의미하고, 변수에 할당할 수있다. 함수는 로직이다. 이를 삼단 논법으로 전개해 보면 결국 <strong>람다는 변수에 저장할 수 있는 로직이다.</strong> 변수는 값을 저장할 수 있고, 메서드의 인자로 쓰일 수 있고, 메서드의 반환값으로 사용할 수 있다. <strong>결국 람다로 인해 변수에 로직을 저장할 수 있고, 로직을 메서드의 인자로 쓸 수 있고, 로직을 메서드의 반환값으로 사용할 수 있다는 결론</strong>에 도달한다.</p>
+
+  <p>이러한 특징들은 함수형 언어의 특징이기 때문에 자바 8이 함수형 언어의 특징 또한 추가했다는 것을 의미한다.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="8-this-키워드">8. this 키워드</h2>
+
+<p><strong>this는 객체가 자기 자신을 지칭할 때 쓰는 키워드이다.</strong></p>
+
+<p>예제 안에서 this가 어떻게 쓰이는지 참고 해 보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">This</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">펭귄</span> <span class="o">{</span>
+   <span class="kt">int</span> <span class="kt">var</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+   
+   <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
+      <span class="kt">int</span> <span class="kt">var</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>  <span class="c1">// 7번째 줄</span>
+      
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="kt">var</span><span class="o">);</span>   <span class="c1">// 9번째 줄</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">var</span><span class="o">);</span> <span class="c1">// 10번째 줄</span>
    <span class="o">}</span>
 <span class="o">}</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span> <span class="o">{</span>
    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-      <span class="nc">Animal</span> <span class="n">tom</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Cat</span><span class="o">();</span>
-      <span class="n">tom</span><span class="o">.</span><span class="na">cry</span><span class="o">();</span>
-      
-      <span class="nc">Anumal</span> <span class="n">savage</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Anumal</span><span class="o">();</span> 	<span class="c1">// 컴파일 에러 (인스턴스 생성 불가)</span>
+      <span class="n">펭귄</span> <span class="n">뽀로로</span> <span class="o">=</span> <span class="k">new</span> <span class="n">펭귄</span><span class="o">();</span>
+      <span class="n">뽀로로</span><span class="o">.</span><span class="na">test</span><span class="o">();</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>이러한 <strong>추상클래스와 추상 메서드는 다음과 같은 4가지의 문제를 해결</strong>해 준다.</p>
+<p>7번째 줄이 끝난 후의 T 메모리 스냅샷은 다음과 같다.</p>
 
-<ol>
-  <li>슈퍼 클래스 <u>객체가 생성</u>되는 것을 막아준다.</li>
-  <li>서브 클래스에서 오버라이딩 하는 슈퍼 클래스의 메소드를 정의하기 곤란했는데 추상 메소드로써 정의하면 보다 쉽게 정의할 수 있다. ( ex. cat 클래스의 cry() 메소드는 System.out.println(“야옹!!”) 으로 정의할 수 있지만 cat 클래스가 오버라이딩하는 animal 클래스의 cry() 메소드는 정의하기 참 곤란하다. =&gt; <u>abstract 메소드를 이용</u>하자)</li>
-  <li>슈퍼 클래스의 참조 변수 배열로 서브 클래스 객체들의 메소드를 호출하려면 <u>슈퍼 클래스에서 오버라이딩 되어지는 메서드를 정의</u>해야 하는데 이를 추상메서드로써 쉽게 가능하게 해준다.</li>
-  <li>서브 클래스가 슈퍼 클래스의 추상 메서드를 오버라이딩하지 않으면 <u>컴파일 시점에 에러</u>가 발생하기 때문에 런타임 시에 에러를 발생하는 경우보다 효율이 매우 증가한다!!</li>
-</ol>
+<p><img src="/assets/this.jpg" title="Check out the Falcon 9 from SpaceX" style="width:40%" /></p>
 
-<p><strong>추상 클래스 및 추상 메서드의 특징</strong></p>
+<p>9번째 줄에서는 test() <u>메서드 내부의 지역 변수 var에 우선권</u>이 있다. 하지만 지역 변수의 이름과 객체 변수의 이름이 같은 경우
+<strong>this.var라고 하면 객체 변수 var에 저장한 값을 사용</strong>하게 된다.</p>
 
+<p>이와 관련된 규칙은 다음과 같다 (꼭 기억하자!!)</p>
 <ul>
-  <li>추상 클래스는 인스턴스, 즉 <u>객체를 만들 수 없다.</u> 즉, new를 사용할 수 없다</li>
-  <li>추상 메서드는 하위 클래스에서 메서드 구현을 강제한다. <u>오버라이딩 강제</u>.</li>
-  <li>추상 메서드를 포함하는 클래스는 반드시 추상 클래스여야 한다,</li>
+  <li>
+    <p>지역 변수와 속성(객체 변수, 정적 변수)의 이름이 같은 경우 <u>지역 변수가 우선</u>한다.</p>
+  </li>
+  <li>
+    <p>객체 변수와 이름이 같은 지역 변수가 있는 경우 <u>객체 변수를 사용하려면 this를 접두사로 사용</u>한다.</p>
+  </li>
+  <li>
+    <p>정적 변수와 이름이 같은 지역 변수가 있는 경우 <u>정적 변수를 사용하려면 클래스명을 접두사로 사용</u>한다.</p>
+  </li>
 </ul>
 
 <hr />
 
-<h2 id="2-생성자-new">2. 생성자 (new)</h2>
-
-<p><strong>생성자(Constructor)</strong> : 반환값이 없고 클래스명과 같은 이름을 가진 메서드이다. <strong>객체 생성자 메서드</strong>라고도 한다.</p>
-
-<ul>
-  <li>
-    <p>생성자가 존재하지 않으면 자바 컴파일러가 알아서 <u>기본 생성자</u>를 자동으로 만들어준다.</p>
-  </li>
-  <li>
-    <p>필요하다면 개발자가 인자를 갖는 생성자를 만들어 줄 수도 있다. (이러한 경우에는 기본 생성자는 만들어지지 않음)</p>
-  </li>
-  <li>
-    <p>생성자 예제</p>
-  </li>
-</ul>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">동물</span> <span class="o">{</span>
-   <span class="kd">public</span> <span class="n">동물</span><span class="o">()</span> <span class="o">{}</span> 	<span class="c1">// 기본 생성자 (생성자가 없다면 컴파일러가 기본적으로 만들어준다)</span>
-   <span class="kd">public</span> <span class="n">동물</span><span class="o">(</span><span class="nc">Strng</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// 하나의 인자가있는 생성자</span>
-<span class="o">}</span>
-</code></pre></div></div>
+<h2 id="9-super-키워드">9. super 키워드</h2>
 
 <hr />
 
-<h2 id="3-클래스-생성-시의-실행-블록-static-블록">3. 클래스 생성 시의 실행 블록, static 블록</h2>
+<p><strong>단일 상속만 지원하는 자바에서 super는 바로 위 슈퍼 클래스의 인스턴스를 지칭하는 키워드이다.</strong></p>
 
-<p>객체 생성자가 있다면 클래스 생성자도 있을 거라고 기대해 볼 만하다. 하지만 자바는 그 기대의 절반만 부응해 준다.
-절반만 부응한다는 말은 도대체 어떤 말일까?? 아래의 내용에서 다루어보자!!</p>
+<p>서브 클래스의 인스턴스가 생성되면 슈퍼 클래스의 인스턴스 또한 생성되기 때문에 서브 클래스의 인스턴스를 참조할 때는 this,
+바로 위 슈퍼 클래스의 인스턴스를 참조할 때는 super를 사용하면 된다.</p>
 
-<p><strong>클래스 생성자는 존재하지 않는다. 하지만 클래스가 스태틱 영역에 배치될 때 실행되는 코드블록이 있다. 바로 static 블록이다.</strong>
-예제는 다음과 같다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">Super</span><span class="o">;</span>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">staticBlock</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">동물</span> <span class="o">{</span>
-   <span class="kd">static</span> <span class="o">{</span>
-      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"동물 클래스 레디 온!"</span><span class="o">);</span>
+<span class="kd">class</span> <span class="nc">동물</span> <span class="o">{</span>
+   <span class="kt">void</span> <span class="nf">method</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"동물"</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">staticBlock</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver02</span> <span class="o">{</span>
-   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
-      <span class="n">동물</span> <span class="n">뽀로로</span> <span class="o">=</span> <span class="k">new</span> <span class="n">동물</span><span class="o">();</span>
+<span class="kd">class</span> <span class="nc">조류</span> <span class="kd">extends</span> <span class="n">동물</span> <span class="o">{</span>
+   <span class="kt">void</span> <span class="nf">method</span><span class="o">()</span> <span class="o">{</span>
+      <span class="kd">super</span><span class="o">.</span><span class="na">method</span><span class="o">();</span>   <span class="c1">// 11번째 줄</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"조류"</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
-<span class="c1">// 실행 결과</span>
-<span class="n">동물</span> <span class="n">클래스</span> <span class="n">레디</span> <span class="n">온</span><span class="o">!</span>
-</code></pre></div></div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">staticBlock</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver02</span> <span class="o">{</span>
-   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
-      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main 메서드 시작!"</span><span class="o">);</span>
+<span class="kd">class</span> <span class="nc">펭귄</span> <span class="kd">extends</span> <span class="n">조류</span> <span class="o">{</span>
+   <span class="kt">void</span> <span class="nf">method</span><span class="o">()</span> <span class="o">{</span>
+      <span class="kd">super</span><span class="o">.</span><span class="na">method</span><span class="o">();</span>   <span class="c1">// 18번째 줄</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"펭귄"</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
-<span class="c1">// 실행 결과</span>
-<span class="n">main</span> <span class="n">메서드</span> <span class="n">시작</span><span class="o">!</span>
-</code></pre></div></div>
 
-<p>두 main 메소드의 실행 결과에 대한 이유를 알 수 있겠는가? 그렇다. <strong>자바는 사용하지 않는 클래스는 Static 영역에 배치조차 하지 않는다</strong>. 해당 패키지 또는 클래스가 처음으로 사용될때 Static 영역에 로딩되기 때문이다.</p>
-
-<p>이러한 말을 증명시켜줄 예제 코드를 살펴보자.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">staticBlock</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver03</span> <span class="o">{</span>
-   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
-      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main 메서드 시작!"</span><span class="o">);</span>
-      <span class="n">동물</span> <span class="n">뽀로로</span> <span class="o">=</span> <span class="k">new</span> <span class="n">동물</span><span class="o">();</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-<span class="c1">// 실행 결과</span>
-<span class="n">main</span> <span class="n">메서드</span> <span class="n">시작</span><span class="o">!</span>
-<span class="n">동물</span> <span class="n">클래스</span> <span class="n">레디</span> <span class="n">온</span><span class="o">!</span>
-</code></pre></div></div>
-
-<p>동물 클래스의 static 블록보다 main() 메서드의 실행문이 먼저 실행된 것을 볼 수 있다.(해당 클래스가 처음으로 사용 되어야만 Static 영역에 로딩된다.)</p>
-
-<p>Static 블록에서 사용할 수 있는 속성과 메서드는 당연히 <strong>static 멤버</strong> 뿐이다. (인스턴스 멤버에는 접근할 방법이 없다.)</p>
-
-<p><strong>이번에는 클래스의 인스턴스를 만드는 작업이 아닌 클래스의 정적 속성에 접근하는 경우에 대해서 예제를 통해 알아보자.</strong></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">staticBlock</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver05</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span> <span class="o">{</span>
    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"main 메서드 시작!"</span><span class="o">);</span>
-      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Animal</span><span class="o">.</span><span class="na">age</span><span class="o">);</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
-   <span class="kd">static</span> <span class="kt">int</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-   
-   <span class="kd">static</span> <span class="o">{</span>
-      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Animal class ready on!"</span><span class="o">);</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-<span class="cm">/* 실행 결과
-main 메서드 시작!
-Animal class ready on!
-0
-*/</span>
-</code></pre></div></div>
-
-<p><strong>위 예제를 통해서 클래스 생성시의 실행 블록과 static 블록에 대해서 정리해 보면.</strong></p>
-
-<ul>
-  <li>클래스 정보는 <strong>해당 클래스가 코드에서 맨 처음 사용될 때 메모리의 Static 영역에 로딩</strong>된다. 이때 단 한번 해당 클래스의 <strong>Static 블록이 실행</strong>된다.</li>
-  <li>클래스가 맨 처음 사용될 때의 경우는 다음과 같다.
-    <ol>
-      <li>클래스의 <u>정적 속성</u>을 사용할 때</li>
-      <li>클래스의 <u>정적 메서드</u>를 사용할 때</li>
-      <li>클래스의 <u>인스턴스를 최초로 생성</u>할 때</li>
-    </ol>
-  </li>
-</ul>
-
-<p>그렇다면 왜 프로그램이 실행될 때 바로 클래스들의 정보를 메모리의 Static 영역에 로딩하지 않고 해당 클래스가 처음 사용될 때 로딩할까?</p>
-
-<p>이러한 이유는 <strong>스태틱 영역도 메모리</strong>이기 때문이다. <strong>메모리는 최대한 늦게 사용을 시작하고 최대한 빨리 반환하는 것이 정석이다.</strong> 물론 자바는 클래스가 Static 영역에 한번 올라가면 프로그램이 종료되기 전까지는 해당 메모리를 반환할 수 없지만 그럼에도 <u>최대한 늦게 로딩함으로써 메모리 사용을 최대한 늦추기 위해서이다.</u></p>
-
-<p><strong>static 블록</strong>은 거의 사용할 일이 없지만 그래도 알아두면 한번은 요긴하게 써먹을 수 있다.</p>
-
-<blockquote>
-  <p>사실 static 블록과 유사하게 클래스의 인스턴스를 위한 <strong>인스턴스 블록</strong>도 존재한다. 아무런 표시없이 {} 블록을 사용하게 되면 인스턴스가 새성될 때마다 {} 블록이 실행된다. <strong>{} 블록은 객체 생성자가 실행되기 전에 먼저 실행된다.</strong></p>
-
-  <p>객체는 주로 생성자를 통해 초기화하기 때문에 사실 {} 블록을 거의 사용할 일은 없지만 종종 사용한다.</p>
-</blockquote>
-
-<hr />
-
-<h2 id="4-final-키워드">4. final 키워드</h2>
-
-<p><strong>final은 마지막, 최종</strong>이라는 의미를 가진 단어다. 
-<strong>final 키워드가 나타날 수 있는 곳은 <u>객체 지향 언어의 세가지 구성 요소인 클래스, 변수, 메소드</u>이다.</strong></p>
-
-<h3 id="fianl과-클래스">fianl과 클래스</h3>
-
-<p>클래스에 final이 붙었다면 어떤 의미가 될까? 예제를 통해 알아보자.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">finalClass</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">고양이</span> <span class="o">{</span> <span class="o">}</span>
-</code></pre></div></div>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">finalClass</span><span class="o">;</span>
-
-<span class="c1">// 컴파일 에러 : the type 길고양이 cannot subclass the final class 고양이</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">길고양이</span> <span class="kd">extends</span> <span class="n">고양이</span> <span class="o">{}</span>
-</code></pre></div></div>
-
-<p><strong>상속을 허락하지 않겠다는 의미이다.</strong>
-즉, 다음과 같은 서브 클래스를 만들면 <u>컴파일 에러</u>가 발생한다.</p>
-
-<h3 id="final과-변수">final과 변수</h3>
-
-<p>변수에 final이 붙었다면 그 의미는 뭘까? 예제를 통해 알아보자.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">finalVariable</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cat</span> <span class="o">{</span>
-   <span class="kd">final</span> <span class="kd">static</span> <span class="kt">int</span> <span class="no">STATIC_CONSTANT_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-   <span class="kd">final</span> <span class="kd">static</span> <span class="kt">int</span> <span class="no">STATIC_CONSTANT_2</span><span class="o">;</span>
-
-   <span class="kd">final</span> <span class="kt">int</span> <span class="no">INSTANCE_CONSTANT_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-   <span class="kd">final</span> <span class="kt">int</span> <span class="no">INSTANCE_CONSTANT_2</span><span class="o">;</span>
-
-   <span class="kd">static</span> <span class="o">{</span>
-      <span class="no">STATIC_CONSTANT_2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-      
-      <span class="c1">//STATIC_CONSTANT_2 = 4; 컴파일 에러 (상수(final)는 한 번 초기화되면 값을 변경할 수 없다.)</span>
-   <span class="o">}</span>
-
-   <span class="nc">Cat</span><span class="o">()</span> <span class="o">{</span>
-      <span class="no">INSTANCE_CONSTANT_2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
-      
-      <span class="c1">//INSTANCE_CONSTANT_2 = 4; 컴파일 에러 (상수(final)는 한 번 초기화되면 값을 변경할 수 없다.)</span>
-
-      <span class="kd">final</span> <span class="kt">int</span> <span class="no">LOCAL_CONSTANT_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-      <span class="kd">final</span> <span class="kt">int</span> <span class="no">LOCAL_CONSTANT_2</span><span class="o">;</span>
-
-      <span class="no">LOCAL_CONSTANT_2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+      <span class="n">펭귄</span> <span class="n">뽀로로</span> <span class="o">=</span> <span class="k">new</span> <span class="n">펭귄</span><span class="o">();</span>
+      <span class="n">뽀로로</span><span class="o">.</span><span class="na">method</span><span class="o">();</span>
    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>위의 코드에서 볼 수 있는 것 처럼 <strong>변수에 final이 붙으면 변경 불가능한 상수가 된다.</strong> 정적 상수는 선언 시에, 또는 정적 생성자에 해당하는 static 블록 내부에서 초기화가 가능하다. 객체 상수 역시 선언 시에, 또는 객체 생성자 또는 인스턴스 블록에서 초기화할 수 있다. 지역 상수 역시 선언 시에, 또는 최초 한 번만 초기화가 가능하다.</p>
+<p>11번째 줄과 18번째 줄에서 super 키워드를 이용해 바로 위 슈퍼 클래스의 인스턴스 메서드를 호출하고 있음을 볼 수 있다.</p>
 
-<p>다른 언어에서는 읽기 전용인 상수에 대해서 final 키워드 대신 const 키워드를 사용하기도 하는데 자바에서는 이런 혼동을 피하기 위해 const를 키워드로 등록해두고 쓰지 못하게 하고 있다.</p>
+<p>super를 사용할 때 한가지 주의해야 될 점은 super.super 형태로 상위의 상위 클래스의 인스턴스에 접근하는건 불가능하다는 점을 주의해야한다.</p>
 
-<h3 id="final과-메서드">final과 메서드</h3>
-
-<p><strong>메서드가 final이면 재정의, 즉 오버라이딩을 금지하게 된다.</strong></p>
-
-<p>다음의 예제를 통해서 살펴보자.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">finalMethod</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">동물</span> <span class="o">{</span>
-   <span class="kd">final</span> <span class="kt">void</span> <span class="n">숨쉬다</span><span class="o">()</span> <span class="o">{</span>
-      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"호흡 중"</span><span class="o">);</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">포유류</span> <span class="kd">extends</span> <span class="n">ehdanf</span> <span class="o">{</span>
-   
-   <span class="c1">// 컴파일 에러 : Cannot override the final method from 동물</span>
-   <span class="kt">void</span> <span class="n">숨쉬다</span><span class="o">()</span> <span class="o">{</span>
-      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"호흡 중"</span><span class="o">);</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
 
 </article>
 
