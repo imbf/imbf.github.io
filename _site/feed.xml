@@ -6,13 +6,13 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 12 Mar 2020 10:24:10 +0900</pubDate>
-    <lastBuildDate>Thu, 12 Mar 2020 10:24:10 +0900</lastBuildDate>
+    <pubDate>Thu, 12 Mar 2020 10:45:15 +0900</pubDate>
+    <lastBuildDate>Thu, 12 Mar 2020 10:45:15 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
-        <title>Java가 확장한 객체 지향 - (1)</title>
-        <description>&lt;h1 id=&quot;java가-확장한-객체지향---1&quot;&gt;Java가 확장한 객체지향 - (1)&lt;/h1&gt; &lt;p&gt;&lt;strong&gt;이 글은 자바가 객체 지향을 확장하기 위해 어떠한 방법을 사용했는지 키워드를 중심으로 살펴볼 것이다.&lt;/strong&gt;&lt;/p&gt; &lt;p&gt;이 포스팅은 &lt;strong&gt;스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자:...</description>
+        <title>Java가 확장한 객체 지향 - (2)</title>
+        <description>&lt;h1 id=&quot;java가-확장한-객체지향---2&quot;&gt;Java가 확장한 객체지향 - (2)&lt;/h1&gt; &lt;p&gt;&lt;strong&gt;이 글은 자바가 객체 지향을 확장하기 위해 어떠한 방법을 사용했는지 키워드를 중심으로 살펴볼 것이다.&lt;/strong&gt;&lt;/p&gt; &lt;p&gt;이 포스팅은 &lt;strong&gt;스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자:...</description>
         <pubDate>Thu, 12 Mar 2020 00:00:00 +0900</pubDate>
         <link>http://localhost:4000/java/2020/03/12/Java%EA%B0%80%ED%99%95%EC%9E%A5%ED%95%9C%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-(2).html</link>
         <guid isPermaLink="true">http://localhost:4000/java/2020/03/12/Java%EA%B0%80%ED%99%95%EC%9E%A5%ED%95%9C%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-(2).html</guid>
