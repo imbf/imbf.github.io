@@ -6,18 +6,26 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 11 Mar 2020 17:03:07 +0900</pubDate>
-    <lastBuildDate>Wed, 11 Mar 2020 17:03:07 +0900</lastBuildDate>
+    <pubDate>Wed, 11 Mar 2020 18:30:38 +0900</pubDate>
+    <lastBuildDate>Wed, 11 Mar 2020 18:30:38 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>Java가 확장한 객체 지향</title>
-        <description>&lt;p&gt;This is just a dummy post. Lorem ipsum and all the rest.&lt;/p&gt; &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna...</description>
-        <pubDate>Wed, 11 Mar 2020 16:25:00 +0900</pubDate>
+        <description>&lt;h1 id=&quot;java가-확장한-객체지향&quot;&gt;Java가 확장한 객체지향&lt;/h1&gt;
+
+&lt;p&gt;위 글은 &lt;strong&gt;스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)&lt;/strong&gt;를 공부하면서 작성한 글이다. 참고하자.&lt;/p&gt;
+
+&lt;h2 id=&quot;abstract-키워드---추상-메서드와-추상-클래스&quot;&gt;abstract 키워드 - 추상 메서드와 추상 클래스&lt;/h2&gt;
+
+</description>
+        <pubDate>Wed, 11 Mar 2020 00:00:00 +0900</pubDate>
         <link>http://localhost:4000/java/2020/03/11/Java%EA%B0%80%ED%99%95%EC%9E%A5%ED%95%9C%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5.html</link>
         <guid isPermaLink="true">http://localhost:4000/java/2020/03/11/Java%EA%B0%80%ED%99%95%EC%9E%A5%ED%95%9C%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5.html</guid>
         
-        <category>lorem</category>
+        <category>Java</category>
+        
+        <category>OOP</category>
         
         
         <category>Java</category>
