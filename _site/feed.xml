@@ -6,9 +6,28 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 12 Mar 2020 17:33:28 +0900</pubDate>
-    <lastBuildDate>Thu, 12 Mar 2020 17:33:28 +0900</lastBuildDate>
+    <pubDate>Fri, 13 Mar 2020 16:57:07 +0900</pubDate>
+    <lastBuildDate>Fri, 13 Mar 2020 16:57:07 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>객체 지향 설계 5원칙 - SOLID</title>
+        <description>&lt;h1 id=&quot;객체-지향-설계-5원칙---solid&quot;&gt;객체 지향 설계 5원칙 - SOLID&lt;/h1&gt;
+</description>
+        <pubDate>Fri, 13 Mar 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/java/2020/03/13/SOLID%EC%9B%90%EC%B9%99.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2020/03/13/SOLID%EC%9B%90%EC%B9%99.html</guid>
+        
+        <category>Java</category>
+        
+        <category>OOP</category>
+        
+        <category>SOLID</category>
+        
+        
+        <category>Java</category>
+        
+      </item>
     
       <item>
         <title>Java가 확장한 객체 지향 - (2)</title>
@@ -152,20 +171,6 @@
         <guid isPermaLink="true">http://localhost:4000/dummy/2015/04/19/dummy6.html</guid>
         
         <category>lorem</category>
-        
-        <category>ipsum</category>
-        
-        
-        <category>Dummy</category>
-        
-      </item>
-    
-      <item>
-        <title>Dummy Post 4</title>
-        <description>&lt;p&gt;This is just a dummy post. Lorem ipsum and all the rest.&lt;/p&gt; &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna...</description>
-        <pubDate>Sun, 19 Apr 2015 04:25:52 +0900</pubDate>
-        <link>http://localhost:4000/dummy/2015/04/19/dummy4.html</link>
-        <guid isPermaLink="true">http://localhost:4000/dummy/2015/04/19/dummy4.html</guid>
         
         <category>ipsum</category>
         
