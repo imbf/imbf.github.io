@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>객체 지향 설계 5원칙 - SOLID</title>
+  <meta name="description" content="객체 지향 설계 5원칙 - SOLID">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="객체 지향 설계 5원칙 - SOLID" />
+  <meta property="og:url" content="http://localhost:4000/java/2020/03/14/SOLID%EC%9B%90%EC%B9%99.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="객체 지향 설계 5원칙 - SOLID" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="객체 지향 설계 5원칙 - SOLID">
+  <meta name="twitter:description" content="객체 지향 설계 5원칙 - SOLID">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/java/2020/03/14/SOLID%EC%9B%90%EC%B9%99.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/java/2020/03/14/SOLID%EC%9B%90%EC%B9%99.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">객체 지향 설계 5원칙 - SOLID</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">March 14, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Java">Java</a> (default) -->
+    <a href="/category/Java">Java</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h1 id="객체-지향-설계-5원칙---solid">객체 지향 설계 5원칙 - SOLID</h1>
+
+<p>이 글에서는 객체 지향 프로그램을 올바르게 설계해 나가는 원칙인 <strong>객체 지향 설계 5원칙 SOLID</strong>에 대해서 <strong>Java</strong>를 기반으로 알아볼 것이다.</p>
+
+<p>SOLID는 로버튼 C. 마틴(Robert C. Martin)이 2000년대 초반 객체 지향 프로그래밍 및 설계의 다섯 가지 기본 원칙으로 제시한 것을
+마이클 페더스(Michael Feathers)가 두문자어로 소개한 것이다.</p>
+
+<p>SOLID란 아래 원칙의 앞 머리 알파벳을 따서 부르는 이름이다.</p>
+<ul>
+  <li><strong>SRP(Single Responsibility Principle) : 단일 책임 원칙</strong></li>
+  <li><strong>OCP(Open Closed Principle) : 개방 폐쇄 원칙</strong></li>
+  <li><strong>LSP(Liskov Substitution Principle) : 리스코프 치환 원칙</strong></li>
+  <li><strong>ISP(Interface Segregation Principle) : 인터페이스 분리 원칙</strong></li>
+  <li><strong>DIP(Dependency Inversion Principle) : 의존 역전 원칙</strong></li>
+</ul>
+
+<p>즉, SOLID 란 <strong>응집도는 높이고(High Cohesion), 결합도는 낮추는(Loose Coupling)</strong> 고전 원칙을 객체 지향의 관점에서 
+5가지 원칙으로 <strong>재정립</strong>한 것이라고 할 수 있다.</p>
+
+<blockquote>
+  <p><strong>결합도(Coupling)와 응집도(Cohesion)</strong></p>
+
+  <p>좋은 소프트웨어 설계를 위해서는 <strong>결합도는 낮추고 응집도는 높이는 것</strong>이 바람직하다.</p>
+
+  <p><u>결합도는 모듈(클래스)간의 상호 의존 정도</u>로서 결합도가 낮으면 모듈간의 상호 의존성이 줄어들어 <strong>객체의 재사용이나 수정, 유지보수가 용이</strong>하다.</p>
+
+  <p><u>응집도는 하나의 모듈 내부에 존재하는 구성 요소들의 기능적 관련성</u>으로, 응집도가 높은 모듈은 하나의 책임에 집중하고 독립성이 높아져 <strong>재사용이나 기능의 수정, 유지보수가
+용이</strong>하다.</p>
+
+  <p><strong>결합도 수준</strong> : 데이터 결합도, 스탬프 결합도, 컨트롤 결합도, 외부 결합도, 공유 결합도, 내용 결합도</p>
+
+  <p><strong>응집도 수준</strong> : 기능 응집도, 순차 응집도, 통신 응집도, 절차 응집도, 시간 응집도, 논리 응집도, 우연 응집도</p>
+</blockquote>
+
+<p>SOLID는 우리가 만든 소프트웨어에 녹여 내야 하는 <strong>개념</strong>이다. SOLID를 잘 녹여낸 소프트웨어는 그렇지 않은 소프트웨어에 비해 상대적으로 이해하기 쉽고, 리팩터링과 유지보수가 수월할 뿐만 아니라 논리적으로 정연하다.</p>
+
+<p>지금부터는 SOLID에 대해서 사례 기반으로 알아보도록 하겠다.</p>
+
+<hr />
+
+<h2 id="srpsingle-responsibility-principle---단일-책임-원칙">SRP(Single Responsibility Principle) - 단일 책임 원칙</h2>
+
+<hr />
+
+<p><strong>단일 책임 원칙</strong> : 모든 클래스는 하나의 책임만 가지며, 클래스는 그 책임을 완전히 캡슐화해야 함을 일컫는다</p>
+
+<p><strong>속성이 단일 책임 원칙을 지키지 못하는 경우</strong></p>
+
+<p>객체 지향 세계에서 남자는 반드시 군대를 가고, 여자는 절대로 군대를 가지 않는다고 가정해 보자. 그런데 사람 클래스에 군번 속성이 있다면 어떻게 될까?</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">사람</span> <span class="o">{</span>
+   <span class="nc">String</span> <span class="n">군번</span><span class="o">;</span>
+   <span class="c1">//...</span>
+<span class="o">}</span>
+
+<span class="n">사람</span> <span class="n">로미오</span> <span class="o">=</span> <span class="k">new</span> <span class="n">사람</span><span class="o">();</span>
+<span class="n">사람</span> <span class="n">줄리엣</span> <span class="o">=</span> <span class="k">new</span> <span class="n">사람</span><span class="o">();</span>
+
+<span class="n">줄리엣</span><span class="o">.</span><span class="na">군번</span> <span class="o">=</span> <span class="s">"1573042009"</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>사람형 참조 변수 줄리엣이 가진 군번 속성에 값을 할당하거나 읽어 오는 코드를 제제할 방법이 없다.</p>
+
+<p>위의 소스를 리팩터링하면, 사람 클래스를 남자 클래스와 여자 클래스로 분할하고 남자 클래스에만 군번 속성을 갖게 하면 된다. 즉, 바로 <strong>단일 책임 원칙(SRP)</strong>을 적용하는 것이다.</p>
+
+<p>이때 남자 클래스와 여자 클래스에 공통점이 없다면 사람 클래스를 제거하면 되고, 공통점이 많다면 <u>사람 클래스를 상위 클래스로</u>해서 공통점을 사람 클래스에 두고 남자 클래스와 여자 클래스는 사람 클래스를 상속하고 <u>각자의 차이점만 구현</u>하면 된다.</p>
+
+<p>독자의 이해를 더 수월하게끔 하기 위해서 강아지를 클래스를 통해 SRP를 지키지 않는 또 다른 예제를 알아보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">강아지</span> <span class="o">{</span>
+   <span class="kd">final</span> <span class="kd">static</span> <span class="nc">Boolean</span> <span class="n">수컷</span> <span class="o">=</span> <span class="n">ture</span><span class="o">;</span>
+   <span class="kd">final</span> <span class="kd">static</span> <span class="nc">Boolean</span> <span class="n">암컷</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+   <span class="nc">Boolean</span> <span class="n">성별</span><span class="o">;</span>
+
+   <span class="kt">void</span> <span class="n">소변보다</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">if</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">성별</span> <span class="o">==</span> <span class="n">수컷</span><span class="o">)</span> <span class="o">{</span>
+         <span class="c1">// 한쪽 다리를 들고 소변을 본다.</span>
+      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+         <span class="c1">// 뒷다리 두 개를 굽혀 앉은 잣로 소변을 본다.</span>
+      <span class="o">}</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>분기 처리를 위한 if문에서 강아지 클래스가 SRP를 지키지 못하는 것이 느껴지는가?</p>
+
+<p><strong>이와 같이 메서드가 단일 책임 원칙(SRP)을 지키지 않을 경우 나타나는 대표적인 징조가 바로 분기 처리를 위한 if문이다.</strong></p>
+
+<p>강아지 클래스에 SRP를 적용해 리팩터링을 하면 강아지 클래스를 상속하는 수컷강아지와 암컷강아지로 나누면 된다!!</p>
+
+<p>위의 예제들을 통해서 단일 책임의 원칙의 필요성이 느껴졌다면 <strong>애플리케이션의 경계를 정하고 추상화를 통해 클래스들을 선별하고 속성과 메서드를 설계하는 과정에서 SRP를 적용</strong>해보자.</p>
+
+<hr />
+
+<h2 id="ocpopen-closed-principle---개방-폐쇄-원칙">OCP(Open Closed Principle) - 개방 폐쇄 원칙</h2>
+
+<hr />
+
+<p><strong>개방 폐쇄 원칙</strong> : 소프트웨어 개체(클래스, 모듈, 함수 등등)는 확장에 대해 열려 있어야 하고, 변화(수정)에 대해서는 닫혀 있어야 한다.</p>
+
+<p>혹시 데이터베이스 프로그래밍을 경험한 적이 있다면 <strong>JDBC</strong>가 개방 폐쇄 원칙의 아주 좋은 예라는 것을 알고 있을 것이다.</p>
+
+<p>JDBC를 사용하는 클라이언트는 데이터베이스가 오라클에서 MySQL로 바뀌더라도 Connection을 설정하는 부분 외에는 따로 수정할 필요가 없다.
+<strong>즉, 데이터베이스를 교체할 때 자바 어플리케이션은 JDBC 인터페이스라고 하는 완충 장치로 인해 변화에 영향을 받지 않고 데이터베이스를 교체하는 자신의 확장에는 열려있다는 것을 의미한다.</strong></p>
+
+<p>JDBC 관련 그림은 다음과 같다.</p>
+
+<p><img src="/assets/Java/OCP_example.jpg" title="Check out the Falcon 9 from SpaceX" style="width:50%" /></p>
+
+<p>JDBC 뿐만 아니라 iBatis, MyBatis, 하이버네이트 등등 데이터베이스 프로그래밍을 지원하는 라이브러리와 프레임워크에서도 개방 폐쇄 원칙의 예를 볼 수 있다.</p>
+
+<p>이와 같이 개방 폐쇄 원칙을 따르면서 프로그램을 잘 작성하면 <strong>유연성, 재사용성, 유지보수성</strong>을 얻을 수 있다.</p>
+
+<p>추가적으로 개방 폐쇄 원칙을 아주 잘 따르는 프레임워크로는 <u>스프링 프레임워크</u>가 존재한다.</p>
+
+<hr />
+
+<h2 id="lspliskov-substitution-principle---리스코프-치환-원칙">LSP(Liskov Substitution Principle) - 리스코프 치환 원칙</h2>
+
+<hr />
+
+<p><strong>리스코프 치환 원칙</strong> : 서브 타입은 언제나 자신의 기반 타입(base type)으로 교체할 수 있어야 한다.</p>
+
+<p>쉽게 말하면 2가지 문장을 만족한 프로그램을 의미한다.</p>
+<ol>
+  <li>하위 클래스 is a kind of 상위 클래스 - 하위 분류는 상위 분류의 한 종류이다.
+    <ul>
+      <li>동물 뽀로로 = new 펭귄()</li>
+    </ul>
+  </li>
+  <li>구현 클래스 is able to 인터페이스 - 구현 분류는 인터페이스할 수 있어야 한다.</li>
+</ol>
+
+<p>위의 문장에서 알 수 있듯이 <strong>리스코프 치환 원칙은 객체 지향의 상속이라는 특성을 올바르게 활용하면 자연스럽게 얻게 되는 것이다.</strong></p>
+
+<hr />
+
+<h2 id="ispinterface-segregation-principle---인터페이스-분리-원칙">ISP(Interface Segregation Principle) - 인터페이스 분리 원칙</h2>
+
+<hr />
+
+<p><strong>인터페이스 분리 원칙</strong> : 클라이언트는 자신이 사용하지 않는 메서드에 의존 관계를 맺으면 안 된다.</p>
+
+<p><strong>단일 책임 원칙(SRP)</strong>을 이용해서 여러 책임을 가진 클래스를 여러 단일 책임 클래스로 분리할 수도 있지만 <strong>인터페이스 분할 원칙(ISP)</strong>을 이용해서 여러 인터페이스로 여러 책임을 가진 클래스를 단일 책임을 가진 클래스로 만들 수 있다.</p>
+
+<p>ISP를 적용한 여러 책임을 가진 클래스의 사용은 다음의 그림과 같다</p>
+
+<p><img src="/assets/Java/ISP_example.jpg" style="width:80%" /></p>
+
+<p>이와 같은 구조를 사용해서 여자친구를 만날 때는 남자친구의 역할만 할 수 있게 인터페이스로 제한하고, 어머니와 있을 때는 아들 인터페이스로 제한하고, 직장 상사 앞에서는 사원 인터페이스로 제한하고, 소대장 앞에서 소대원 인터페이스로 제한하는 것이 바로 <strong>인터페이스 분할 원칙의 핵심</strong>이다.</p>
+
+<p><strong>하지만 특별한 경우가 아니라면 ISP 보다는 SRP를 적용할 것을 추천한다.</strong></p>
+
+<p><strong>또한 ISP를 적용할 때 상위 클래스는 풍성할 수록 좋고, 인터페이스는 작을수록 좋다는 것을 기억하자!!</strong> (인터페이스 최소주의 원칙)</p>
+
+<p>인터페이스는 “~할 수 있는(is able to)” 이라는 기준으로 만드는 것이 정석이다.</p>
+
+<hr />
+
+<h2 id="dipdependency-inversion-principle---의존-역전-원칙">DIP(Dependency Inversion Principle) - 의존 역전 원칙</h2>
+
+<hr />
+
+<p><strong>의존 역전 원칙</strong> : 자신보다 변하기 쉬운 것에 의존하지 마라.</p>
+
+<p>의존 역전 원칙을 타이어의 예제로써 알아보자</p>
+
+<p>자동차와 스노우타이어 사이에는 다음 그림과 같은 의존관계가 있다. 자동차가 스노우타이어에 의존한다.</p>
+
+<p><img src="/assets/Java/DIP_example1.jpg" style="width:80%" /></p>
+
+<p>자동차는 한 번 사면 몇년은 타야 하는데 스노우타이어는 계절이 바뀌면 일반 타이어로 교체해야 한다. 이런 경우 스노우타이어를 일반타이어로 교체할 때 자동차는 그 영향에 노출돼 있음을 알 수 있다.</p>
+
+<p><strong>자동차 자신보다 더 자주 변하는 스노우타이어에 의존하는 것은 DIP원칙을 지키지 못한 것이다.</strong></p>
+
+<p>이러한 상황에 DIP 원칙을 적용하면 다음과 같은 구조를 설계할 수 있다.</p>
+
+<p><img src="/assets/Java/DIP_example2.jpg" style="width:80%" /></p>
+
+<p>이와같이 설계를 바꾼다면 자동차가 구체적인 타이어들(스노우타이어, 일반타이어, 광폭타이어)이 아닌 <strong>추상화된 타이어 인터페이스에만 의존하게 함으로써 스노우 타이어에서 일반타이어로, 또는 다른 구체적인 타이어로 변경되도 자동차는 이제 그 영향을 받지 않는 형태로 구성된다.</strong></p>
+
+<p>즉, 이러한 상황을 보면 기존에는 스노우타이어가 그 무엇에도 의존하지 않는 클래스였는데, <u>DIP설계 원칙을 적용후 추상적인 것인 타이어 인터페이스에 의존하게 됐다.</u> <strong>즉, 의존의 방향이 역전된 것이다.</strong></p>
+
+<p>위의 예제에서 볼 수 있듯이 <strong>자신보다 변하기 쉬운 것에 의존하던 것을 추상화된 인터페이스나 상위 클래스를 두어 변하기 쉬운 것의 변화에 영향을 받지 않게 하는 것이 의존 역전 원칙이다.</strong></p>
+
+<p>자바에서의 의존 역전 원칙(DIP)를 정확하게 서술하자면 <strong><u>상위 클래스일수록, 인터페이스일수록, 추상 클래스일수록 변하지 않을 가능성이 높기에 하위 클래스나 구체(concrete) 클래스가 아닌 상위 클래스, 인터페이스, 추상 클래스를 통해 의존하라는 것이 의존 역전 원칙(DIP)이다.</u></strong></p>
+
+<hr />
+
+<h2 id="solid-정리">SOLID 정리</h2>
+
+<hr />
+
+<p>SOLID 원칙을 적용하면 소스 파일의 개수는 더 많아지는 경향이 있다. 하지만 이렇게 많아진 파일이 논리를 더욱 잘 분할하고, 잘 표현하기에 이해하기 쉽고, 개발하기 쉬우며, 유지와 관리, 보수하기 쉬운 소스가 만들어진다. SOLID 원칙을 적용함으로써 얻는 혜택에 비하면 늘어나는 소스 파일 개수에 대한 부담은 충분히 감수하고도 남을 만하다.</p>
+
+<hr />
+
+<blockquote>
+  <p>참조 : 스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)</p>
+</blockquote>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Java">Java</a>,&nbsp;<a href="/tag/OOP">OOP</a>,&nbsp;<a href="/tag/SOLID">SOLID</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=%EA%B0%9D%EC%B2%B4+%EC%A7%80%ED%96%A5+%EC%84%A4%EA%B3%84+5%EC%9B%90%EC%B9%99+-+SOLID&url=http%3A%2F%2Flocalhost%3A4000%2Fjava%2F2020%2F03%2F14%2FSOLID%25EC%259B%2590%25EC%25B9%2599.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=%EA%B0%9D%EC%B2%B4+%EC%A7%80%ED%96%A5+%EC%84%A4%EA%B3%84+5%EC%9B%90%EC%B9%99+-+SOLID&u=http%3A%2F%2Flocalhost%3A4000%2Fjava%2F2020%2F03%2F14%2FSOLID%25EC%259B%2590%25EC%25B9%2599.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjava%2F2020%2F03%2F14%2FSOLID%25EC%259B%2590%25EC%25B9%2599.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=%EA%B0%9D%EC%B2%B4+%EC%A7%80%ED%96%A5+%EC%84%A4%EA%B3%84+5%EC%9B%90%EC%B9%99+-+SOLID&url=http%3A%2F%2Flocalhost%3A4000%2Fjava%2F2020%2F03%2F14%2FSOLID%25EC%259B%2590%25EC%25B9%2599.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=%EA%B0%9D%EC%B2%B4+%EC%A7%80%ED%96%A5+%EC%84%A4%EA%B3%84+5%EC%9B%90%EC%B9%99+-+SOLID&url=http%3A%2F%2Flocalhost%3A4000%2Fjava%2F2020%2F03%2F14%2FSOLID%25EC%259B%2590%25EC%25B9%2599.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/java/2020/03/14/SOLID%EC%9B%90%EC%B9%99.html') + '&title=객체 지향 설계 5원칙 - SOLID'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
