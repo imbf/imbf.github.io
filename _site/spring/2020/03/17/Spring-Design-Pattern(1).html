@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Adapter, Proxy and Decorator Pattern</title>
+  <meta name="description" content="Spring이 사랑하는 Design Pattern">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Spring이 사랑하는 Design Pattern" />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(1).html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="Adapter, Proxy and Decorator Pattern" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Adapter, Proxy and Decorator Pattern">
+  <meta name="twitter:description" content="Spring이 사랑하는 Design Pattern">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(1).html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(1).html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Adapter, Proxy and Decorator Pattern</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">March 17, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Spring">Spring</a> (default) -->
+    <a href="/category/Spring">Spring</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h1 id="spring이-사랑하는-design-pattern">Spring이 사랑하는 Design Pattern</h1>
+
+<p>이 글에서는 Spring이 사랑하고 Spring이 적용한 디자인 패턴중 <strong>Adapter, Proxy and Decorator Design Pattern</strong>에 대해서 알아볼 것이다.</p>
+
+<hr />
+
+<h2 id="adapter-pattern">Adapter Pattern</h2>
+
+<hr />
+
+<p>어댑터를 번역하면 <strong>변환기(Converter)</strong> 라고 할 수 있다. 변환기의 역할은 서로 다른 <u>두 인터페이스 사이에 통신</u>이 가능하게 하는 것이다.
+주변에서 가장 흔히 볼 수 있는 변환기로는 핸드폰과 전원 콘센트사이에서 둘을 연결해 주는 <strong>충전기</strong>가 있다.</p>
+
+<p>또 다른 예로는 데이터베이스 관련 프로그램을 작성해 본 사람이라면 <strong>ODBC/JDBC 인터페이스</strong>를 알고 있을것이다.
+바로 ODBC/JDBC가 <strong>어댑터 패턴을 이용</strong>해 다양한 데이터베이스 시스템을 단일한 인터페이스로 조작할 수 있게끔 해주는 대표적인 예이다.</p>
+
+<p>이제는 직접 예제 코드를 통해 어댑터 패턴을 이해해 보자.</p>
+
+<p><strong>&lt;어댑터 패턴이 적용되지 않은 코드&gt;</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ServiceA</span> <span class="o">{</span>
+   <span class="kt">void</span> <span class="nf">runServiceA</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ServiceA"</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">ServiceB</span> <span class="o">{</span>
+   <span class="kt">void</span> <span class="nf">runServiceB</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ServiceB"</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClientWithNoAdapter</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">Stirng</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">ServiceA</span> <span class="n">sa1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServiceA</span><span class="o">();</span>
+      <span class="nc">ServiceB</span> <span class="n">sb1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServiceB</span><span class="o">();</span>
+
+      <span class="n">sa1</span><span class="o">.</span><span class="na">runServiceA</span><span class="o">();</span>
+      <span class="n">sb1</span><span class="o">.</span><span class="na">runServiceB</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>클라이언트(ClientWithNoAdapter)를 살펴보면 <code class="highlighter-rouge">sa1</code> 참조 변수와 <code class="highlighter-rouge">sb1</code> 참조 변수를 통해 호출하는 각 메서드가 비슷한 일을 하지만 <u>메서드명이 다른 것</u>을 볼 수 있다. 
+<u>(추후 유지보수 및 확장에 중요한 문제를 일으킬 수 있다.)</u></p>
+
+<p><strong>&lt;어댑터 패턴이 적용된 코드&gt;</strong>  (ServiceA에 대한 변환기와 ServiceB에 대한 Adapter 추가)</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ServiceA</span> <span class="o">{</span>
+   <span class="kt">void</span> <span class="nf">runServiceA</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ServiceA"</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">ServiceB</span> <span class="o">{</span>
+   <span class="kt">void</span> <span class="nf">runServiceB</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ServiceB"</span><span class="o">);</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">AdapterServiceA</span> <span class="o">{</span>
+   <span class="nc">ServiceA</span> <span class="n">sa1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServiceA</span><span class="o">();</span>
+
+   <span class="kt">void</span> <span class="nf">runService</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">sa</span><span class="o">.</span><span class="na">runServiceA</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">AdapterServiceB</span> <span class="o">{</span>
+   <span class="nc">ServiceB</span> <span class="n">sb1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServiceB</span><span class="o">();</span>
+
+   <span class="kt">void</span> <span class="nf">runService</span><span class="o">()</span> <span class="o">{</span>
+      <span class="n">sb1</span><span class="o">.</span><span class="na">runServiceB</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClientWithAdapter</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">Stirng</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">AdapterServiceA</span> <span class="n">asa1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdapterServiceA</span><span class="o">();</span>
+      <span class="nc">AdapterServiceB</span> <span class="n">asb1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdapterServiceB</span><span class="o">();</span>
+
+      <span class="n">asa1</span><span class="o">.</span><span class="na">runService</span><span class="o">();</span>
+      <span class="n">asb1</span><span class="o">.</span><span class="na">runService</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>클라이언트(ClientWithAdapter)가 변환기(Adapter)를 통해 <code class="highlighter-rouge">runService()</code>라는 동일한 메서드명으로 두 객체의 메서드를 호출하는 것을 볼 수 있다.</p>
+
+<p>위의 두개 예제를 비교해 보니까 어댑터 패턴(Adapter Pattern)에 대해서 느낌이 오는가? 
+그렇다. 어댑터 패턴은 합성. <strong>즉 객체를 속성으로 만들어서 참조하는 디자인 패턴이다.</strong></p>
+
+<h4 id="어댑터-패턴이란-한마디로-호출당하는-쪽의-메서드를-호출하는-쪽의-코드에-대응하도록-중간에-변환기adapter를-통해-호출하는-패턴이다">어댑터 패턴이란 한마디로 호출당하는 쪽의 메서드를 호출하는 쪽의 코드에 대응하도록 중간에 변환기(Adapter)를 통해 호출하는 패턴이다.</h4>
+
+<hr />
+
+<h2 id="proxy-pattern">Proxy Pattern</h2>
+
+<hr />
+
+<p>프록시는 <strong>대리자, 대변인</strong>이라는 뜻을 가진 단어이다. 대리자/대변인이라고 하면 다른 누군가를 대신해서 그 역할을 수행하는 존재를 말한다.</p>
+
+<p>그렇다면 프록시(대리자, 대변인)가 어떻게 쓰이는지에 대해서 코드를 통해 알아보자.</p>
+
+<p><strong>&lt;프록시 패턴이 적용되지 않은 코드&gt;</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Service</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">runSomething</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="s">"서비스 짱!!!"</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClientWithNoProxy</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="c1">// 프록시를 이용하지 않는 호출</span>
+      <span class="nc">Service</span> <span class="n">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Service</span><span class="o">();</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">service</span><span class="o">.</span><span class="na">runSomething</span><span class="o">());</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 코드에서는 <code class="highlighter-rouge">ClientWithNoProxy</code>가 <code class="highlighter-rouge">Service</code>객체의 <code class="highlighter-rouge">runSomething()</code>메서드를 직접 호출하는 것을 볼 수 있다.</p>
+
+<p><strong>&lt;프록시 패턴이 적용된 코드&gt;</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">IService</span> <span class="o">{</span>
+   <span class="nc">String</span> <span class="nf">runSomething</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Service</span> <span class="kd">implements</span> <span class="nc">IService</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">runSomething</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="s">"서비스 짱!!!"</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Proxy</span> <span class="kd">implements</span> <span class="nc">IService</span> <span class="o">{</span>
+   <span class="nc">IService</span> <span class="n">service1</span><span class="o">;</span>
+
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">runSomething</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"호출에 대한 흐름 제어가 주목적, 반환 결과를 그대로 전달"</span><span class="o">)</span>
+
+      <span class="n">service1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Service</span><span class="o">();</span>
+      <span class="k">return</span> <span class="n">service1</span><span class="o">.</span><span class="na">runSomethig</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClientWithProxy</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="c1">// 프록시를 이용한 호출</span>
+      <span class="nc">Iservice</span> <span class="n">proxy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Proxy</span><span class="o">();</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">proxy</span><span class="o">.</span><span class="na">runSomething</span><span class="o">());</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위 예제의 프록시 패턴에 적용된 설계 패턴</p>
+<ol>
+  <li>개방 페쇄 원칙(OCP) : <code class="highlighter-rouge">Iservice</code> 인터페이스의 참조변수를 사용해 변화에는 닫혀있고 확장에는 열려 있다.</li>
+  <li>의존 역전 원칙(DIP) : <code class="highlighter-rouge">IService</code> 인터페이스에 의존</li>
+</ol>
+
+<p><strong>프록시 패턴의 경우 실제 서비스 객체가 가진 메서드와 같은 이름의 메서드를 사용하는데, 이를 위해 <u>인터페이스를 사용</u>한다.</strong></p>
+
+<p>인터페이스를 사용하면 서비스 객체가 들어갈 자리에 Proxy 객체를 대신 투입해 <u>클라이언트 쪽에서는</u> 실제 서비스 객체를 통해 메서드를 호출하고 반환값을 받는지, Proxy 객체를 통해 메서드를 호출하고 반환값을 받는지 전혀 모르게 처리할 수 있다.</p>
+
+<p><strong>프록시 패턴의 중요 포인트</strong></p>
+<ul>
+  <li>Proxy는 실제 서비스와 같은 이름의 메서드를 구현한다. 이 때 <strong>인터페이스</strong>를 사용한다.</li>
+  <li>Proxy는 실제 서비스에 대한 참조 변수를 갖는다.(합성)</li>
+  <li>Proxy는 실제 서비스의 같은 이름을 가진 메서드를 호출하고 그 값을 클라이언트에게 돌려준다.</li>
+  <li>Proxy는 실제 서비스의 메서드 호출 전후에 별도의 로직을 수행할 수도 있다.</li>
+</ul>
+
+<p>프록시 패턴은 실제 서비스 메서드의 반환값에 가감하는 것을 목적으로 하지 않고 <u>제어의 흐름을 변경하거나 다른 로직을 수행</u>하기 위해 사용한다.</p>
+
+<h4 id="즉-프록시-패턴이란-제어-흐름을-조정하기-위한-목적으로-중간에-대리자proxy를-두는-패턴이다">즉, 프록시 패턴이란 제어 흐름을 조정하기 위한 목적으로 중간에 대리자(Proxy)를 두는 패턴이다.</h4>
+
+<hr />
+
+<h2 id="decorator-pattern">Decorator Pattern</h2>
+
+<hr />
+
+<p>데코레이터는 <strong>도장/도배업자</strong>를 의미한다. 여기서는 <strong>장식자</strong>라는 뜻을 가지고 논리를 풀어보자!!</p>
+
+<p>데코레이터 패턴은 프록시 패턴과 구현 방법이 같다. 다만 프록시 패턴은 클라이언트가 최종적으로 돌려 받는 반환값을 조작하지 않고 그대로 전달하는 반면
+<strong>데코레이터 페턴은 클라이언트가 받는 반환값에 장식을 덧입힌다.</strong></p>
+
+<p><strong>&lt;데코레이터 패턴이 적용된 코드&gt;</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">IService</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">abstract</span> <span class="nc">String</span> <span class="nf">runSomething</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">service</span> <span class="kd">implements</span> <span class="nc">IService</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">runSomething</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="s">"서비스 짱!!!"</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Decorator</span> <span class="kd">implements</span> <span class="nc">IService</span> <span class="o">{</span>
+   <span class="nc">IService</span> <span class="n">service</span>
+
+   <span class="kd">public</span> <span class="nc">String</span> <span class="nf">runSomething</span><span class="o">()</span> <span class="o">{</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"호출에 대한 장식이 주목적, 클라이언트에게 반환 결과에 장식을 더하여 전달"</span><span class="o">);</span>
+
+      <span class="n">service</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Service</span><span class="o">();</span>
+      <span class="k">return</span> <span class="s">"정말"</span> <span class="o">+</span> <span class="n">service</span><span class="o">.</span><span class="na">runSomething</span><span class="o">();</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClientWithDecorator</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">Iservice</span> <span class="n">decorator</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Decorator</span><span class="o">();</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">decorator</span><span class="o">.</span><span class="na">runSomething</span><span class="o">());</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위 예제의 데코레이터 패턴에 적용된 설계 패턴</p>
+<ol>
+  <li>개방 페쇄 원칙(OCP) : <code class="highlighter-rouge">Iservice</code> 인터페이스의 참조변수를 사용해 변화에는 닫혀있고 확장에는 열려 있다.</li>
+  <li>의존 역전 원칙(DIP) : <code class="highlighter-rouge">IService</code> 인터페이스에 의존</li>
+</ol>
+
+<p><strong>Decorator Pattern의 중요 포인트는 다음과 같다.</strong></p>
+<ul>
+  <li>Decorator는 실제 서비스와 같은 이름의 메서드를 구현한다. 이때 <strong>인터페이스</strong>를 사용한다.</li>
+  <li>Decorator는 실제 서비스에 대한 참조 변수를 갖는다.(합성)</li>
+  <li>Decorator는 실제 서비스의 같은 이름을 가진 메서드를 호출하고, 그 반환값에 장식을 더해 클라이언트에게 돌려준다.</li>
+  <li>Decorator는 실제 서비스의 메서드 호출 전후에 별도의 로직을 수행할 수도 있다.</li>
+</ul>
+
+<h4 id="즉-데코레이터-패턴이란-메서드의-호출의-반환값에-변화를-주기-위해-중간에-장식자decorator를-두는-패턴이다">즉, 데코레이터 패턴이란 메서드의 호출의 반환값에 변화를 주기 위해 중간에 장식자(Decorator)를 두는 패턴이다.</h4>
+
+<hr />
+
+<blockquote>
+  <p>참조 : 스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)</p>
+</blockquote>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Java">Java</a>,&nbsp;<a href="/tag/OOP">OOP</a>,&nbsp;<a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/Design-Pattern">Design-Pattern</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Adapter%2C+Proxy+and+Decorator+Pattern&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F17%2FSpring-Design-Pattern%281%29.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Adapter%2C+Proxy+and+Decorator+Pattern&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F17%2FSpring-Design-Pattern%281%29.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F17%2FSpring-Design-Pattern%281%29.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=Adapter%2C+Proxy+and+Decorator+Pattern&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F17%2FSpring-Design-Pattern%281%29.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=Adapter%2C+Proxy+and+Decorator+Pattern&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F17%2FSpring-Design-Pattern%281%29.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(1).html') + '&title=Adapter, Proxy and Decorator Pattern'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
