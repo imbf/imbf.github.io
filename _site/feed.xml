@@ -6,9 +6,29 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 17 Mar 2020 15:35:31 +0900</pubDate>
-    <lastBuildDate>Tue, 17 Mar 2020 15:35:31 +0900</lastBuildDate>
+    <pubDate>Tue, 17 Mar 2020 19:49:28 +0900</pubDate>
+    <lastBuildDate>Tue, 17 Mar 2020 19:49:28 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Singleton, Template Method and Factory Method Pattern</title>
+        <description>&lt;h1 id=&quot;spring이-사랑하는-design-pattern&quot;&gt;Spring이 사랑하는 Design Pattern&lt;/h1&gt; &lt;p&gt;이 글에서는 Spring이 사랑하고 Spring이 적용한 디자인 패턴중 &lt;strong&gt;Singleton Pattern, Template Method Pattern, Factory Method Pattern&lt;/strong&gt;에 대해서 알아볼 것이다.&lt;/p&gt; &lt;hr /&gt; &lt;h2 id=&quot;signleton-pattern&quot;&gt;Signleton Pattern&lt;/h2&gt; &lt;hr...</description>
+        <pubDate>Tue, 17 Mar 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(2).html</link>
+        <guid isPermaLink="true">http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(2).html</guid>
+        
+        <category>Java</category>
+        
+        <category>OOP</category>
+        
+        <category>Spring</category>
+        
+        <category>Design-Pattern</category>
+        
+        
+        <category>Spring</category>
+        
+      </item>
     
       <item>
         <title>Adapter, Proxy and Decorator Pattern</title>
@@ -163,18 +183,6 @@
         
         
         <category>Jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>Dummy Post</title>
-        <description>&lt;p&gt;This is just a dummy post. Lorem ipsum and all the rest.&lt;/p&gt; &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna...</description>
-        <pubDate>Sun, 19 Apr 2015 04:25:52 +0900</pubDate>
-        <link>http://localhost:4000/spring/2015/04/19/dummy.html</link>
-        <guid isPermaLink="true">http://localhost:4000/spring/2015/04/19/dummy.html</guid>
-        
-        
-        <category>Spring</category>
         
       </item>
     

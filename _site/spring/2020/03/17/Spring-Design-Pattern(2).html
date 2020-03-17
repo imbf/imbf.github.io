@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Singleton, Template Method and Factory Method Pattern</title>
+  <meta name="description" content="Spring이 사랑하는 Design Pattern">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Spring이 사랑하는 Design Pattern" />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(2).html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="Singleton, Template Method and Factory Method Pattern" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Singleton, Template Method and Factory Method Pattern">
+  <meta name="twitter:description" content="Spring이 사랑하는 Design Pattern">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(2).html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(2).html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Singleton, Template Method and Factory Method Pattern</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">March 17, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Spring">Spring</a> (default) -->
+    <a href="/category/Spring">Spring</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h1 id="spring이-사랑하는-design-pattern">Spring이 사랑하는 Design Pattern</h1>
+
+<p>이 글에서는 Spring이 사랑하고 Spring이 적용한 디자인 패턴중 <strong>Singleton Pattern, Template Method Pattern, Factory Method Pattern</strong>에 대해서 알아볼 것이다.</p>
+
+<hr />
+
+<h2 id="signleton-pattern">Signleton Pattern</h2>
+
+<hr />
+
+<p><strong>Singleton Pattern이란 인스턴스를 하나만 만들어 사용하기 위한 패턴이다.</strong>  (ex. 커넥션 풀, 스레드 풀, 디바이스 설정 객체)</p>
+
+<p><strong>Singleton Pattern을 구현하려면 다음의 조건을 만족해야한다.</strong></p>
+<ul>
+  <li>new를 실행할 수 없도록 <u>생성자에 private 접근 제어자를 지정</u>한다.</li>
+  <li>유일한 단일 객체(Singleton Object)를 반환할 수 있는 정적 메서드가 필요하다.</li>
+  <li>유일한 단일 객체(Singleton Object)를 참조할 정적 참조 변수가 필요하다.</li>
+</ul>
+
+<p>예제를 통해 Singleton Pattern에 대해서 이해해 보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Singleton</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="nc">Singleton</span> <span class="n">singletonObject</span><span class="o">;</span> <span class="c1">// 정적 참조 변수 (Singleton 객체를 저장하기 위한 참조 변수)</span>
+
+    <span class="kd">private</span> <span class="nf">Singleton</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span> <span class="c1">// private 생성자 (new를 실행할 수 없도록 하기 위함)</span>
+
+    <span class="c1">// 객체 반환 정적 메서드 (Singleton Object를 반환할 수 있는 정적 메서드)</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Singleton</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">singletonObject</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">singletonObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Singleton</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="n">singletonObject</span><span class="o">;</span>     <span class="c1">// Singleton Object reference 반환</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">getInstance()</code> <u>정적 메서드를 보면 정적 참조 변수에 객체가 할당돼 있지 않은 경우에 new를 통해 객체를 만들고 정적 참조 변수에 할당한다.
+그렇지 않으면 정적 참조 변수에 할당돼 있는 유일한 객체의 참조를 반환한다.</u></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Client</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// private 생성자이므로 new를 통해 인스턴스를 생성할 수 없다.</span>
+        <span class="c1">// Singleton s = new Singleton();</span>
+
+        <span class="nc">Singleton</span> <span class="n">s1</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+        <span class="nc">Singleton</span> <span class="n">s2</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+        <span class="nc">Singleton</span> <span class="n">s3</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s1</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s2</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s3</span><span class="o">);</span>     <span class="c1">// 14번째 줄</span>
+
+        <span class="n">s1</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">s3</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>16번째 줄을 실행하기 직전의 <u>T 메모리 스냅샷</u>은 다음과 같다.</p>
+
+<p><img src="/assets/spring/Singleton-T-Memory.jpg" style="width:50%" /></p>
+
+<p>위 그림에서 4개의 참조 변수(<code class="highlighter-rouge">singletonObject</code>, <code class="highlighter-rouge">s1</code>, <code class="highlighter-rouge">s2</code>, <code class="highlighter-rouge">s3</code>)가 <strong>하나의 단일 객체(singleton Object)를 참조</strong>하는 것을 볼 수 잇다.</p>
+
+<p><u>단일 객체인 경우 결국 공유 객체로 사용되기 때문에 속성을 갖지 않게 하는 것이 정석이다.</u>
+그 이유는 단일 객체(Singleton Object)가 속성을 갖게 되면 하나의 참조 변수가 변경한 단일 객체의 속성이 다른 참조 변수에 영향을 미치기 때문이다. (static을 쓰지 말라는 것과 같은 논리)</p>
+
+<p><u>다만 읽기 전용 속성을 갖는 것은 문제가 되지 않는다.</u> 이와 더불어 단일 객체가 다른 단일 객체에 대한 참조를 속성으로 가진 것 또한 문제가 되지 않는다.(Singleton Bean 제약조건)</p>
+
+<p><strong>Singleton Pattern Feature</strong></p>
+<ul>
+  <li>private 생성자를 갖는다.</li>
+  <li>단일 객체 참조 변수를 정적 속성으로 갖는다.</li>
+  <li>단일 객체 참조 변수가 참조하는 단일 객체(Singleton Object)를 반환하는 getInstance() 정적 메서드를 갖는다.</li>
+  <li>단일 객체는 쓰기 가능한 속성을 갖지 않는 것이 정석이다. (읽기 전용 속성을 갖는 것은 괜찮다.)</li>
+</ul>
+
+<h4 id="singleton-pattern이란-클래스의-인스턴스-즉-객체를-하나만-만들어-사용하는-패턴이다">Singleton Pattern이란 클래스의 인스턴스, 즉 객체를 하나만 만들어 사용하는 패턴이다.</h4>
+
+<hr />
+
+<h2 id="template-method-pattern">Template Method Pattern</h2>
+
+<hr />
+
+<p>예제를 통해 Template Method Pattern이란 무엇인가에 대해서 알아보자!!</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
+    <span class="c1">// 템플릿 메서드</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">playWithOwner</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"귀염둥이 이리온..."</span><span class="o">);</span>
+        <span class="n">play</span><span class="o">();</span>
+        <span class="n">runSomething</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"잘했어"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 추상 메서드</span>
+    <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">play</span><span class="o">();</span>
+
+    <span class="c1">// Hook(갈고리) 메서드</span>
+    <span class="kt">void</span> <span class="nf">runSomething</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"꼬리 살랑 살랑~"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Dog</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="c1">// 추상 메서드 오버라이딩</span>
+    <span class="kt">void</span> <span class="nf">play</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"멍! 멍!"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span> <span class="c1">// Hook(갈고리) 메서드 오버라이딩</span>
+    <span class="kt">void</span> <span class="nf">runSomething</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"멍! 멍!~ 꼬리 살랑 살랑~"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Cat</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="o">{</span>
+    <span class="nd">@Override</span> <span class="c1">// 추상 메서드 오버라이딩</span>
+    <span class="kt">void</span> <span class="nf">play</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"야옹~ 야옹~"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span> <span class="c1">// Hook(갈고리) 메서드 오버라이딩</span>
+    <span class="kt">void</span> <span class="nf">runSomething</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"야옹~ 야옹~ 꼬리 살랑 살랑~"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Animal</span> <span class="n">bolt</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Dog</span><span class="o">();</span>
+        <span class="nc">Animal</span> <span class="n">kitty</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Cat</span><span class="o">();</span>
+
+        <span class="n">bolt</span><span class="o">.</span><span class="na">playWithOwner</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+        <span class="n">kitty</span><span class="o">.</span><span class="na">playWithOwner</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="cm">/* 실행결과
+귀염둥이 이리온..
+멍! 멍!
+멍! 멍!~ 꼬리 살랑 살랑~
+잘했어
+
+귀염둥이 이리온..
+야옹~ 야옹~
+야옹~ 야옹~ 꼬리 살랑 살랑~
+잘했어
+*/</span>
+</code></pre></div></div>
+
+<p>위 예제에서 상위 클래스인 Animal에는 템플릿(견본)을 제공하는 <code class="highlighter-rouge">playWithOwner()</code> 메서드와 하위 클래스에서 구현을 강제하는 <code class="highlighter-rouge">play()</code> 추상 메서드, 
+하위 클래스가 선택적으로 오버라이딩할 수 있는 <code class="highlighter-rouge">runSomething()</code> 메서드가 있다.</p>
+
+<p>하위 클래스인 Dog과 Cat은 상위 클래스인 Animal에서 구현을 강제하고 있는 <code class="highlighter-rouge">play()</code> 메서드를 반드시 구현해야 한다. <code class="highlighter-rouge">runSomething()</code> 메서드는 선택적으로 오버라이딩 할 수 있다.</p>
+
+<p>또한 위의 예제를 통해서 템플릿 메서드 패턴(Template Method Pattern)이 <strong>의존 역전 원칙(DIP)</strong>를 활용하고 있음을 알 수 있다. (<u>가변성이 더 낮은 추상클래스(Animal)에 의존</u>)</p>
+
+<h4 id="템플릿-메서드-패턴template-method-pattern이란-상위-클래스의-견본template-메서드에서-하위-클래스가-오버라이딩한-메서드를-호출하는-패턴이다">템플릿 메서드 패턴(Template Method Pattern)이란 상위 클래스의 견본(Template) 메서드에서 하위 클래스가 오버라이딩한 메서드를 호출하는 패턴이다.</h4>
+
+<hr />
+
+<h2 id="factory-method-pattern">Factory Method Pattern</h2>
+
+<hr />
+
+<p>팩터리는 공장을 의미한다. 공장은 물건을 생산하는데 객체 지향에서 팩터리는 객체를 생산한다.</p>
+
+<p><strong>즉, 팩터리 메서드(Factory Method)는 객체를 생성하고 반환하는 메서드를 말한다.</strong> 
+여기서 패턴(Pattern)이 붙으면 하위 클래스에서 팩터리 메서드를 오버라이딩해서 객체를 반환하게 하는 것을 의미한다.</p>
+
+<p>예제를 통해 Factory Method Pattern에 대해 알아보자</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Animal</span> <span class="o">{</span>
+    <span class="c1">// 추상 팩터리 메서드</span>
+    <span class="kd">abstract</span> <span class="nc">AnimalToy</span> <span class="nf">getToy</span><span class="o">();</span> 
+<span class="o">}</span>
+
+<span class="c1">// 팩터리 메서드가 생성할 객체의 상위 클래스 (팩터리 메서드가 반환하는 상위 타입)</span>
+<span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AnimalToy</span> <span class="o">{</span>
+    <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">identify</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="c1">// 팩터리 메서드가 생성할 객체</span>
+<span class="kd">class</span> <span class="nc">DogToy</span> <span class="kd">extends</span> <span class="nc">AnimalToy</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">identify</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"나는 테니스공! 강아지의 친구!"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Dog</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="o">{</span>
+    <span class="c1">// 추상 팩터리 메서드 오버라이딩</span>
+    <span class="nd">@Override</span>
+    <span class="nc">AnimalToy</span> <span class="nf">getToy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">DogToy</span><span class="o">();</span>    <span class="c1">// DogToy 클래스의 인스턴스 반환</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//팩터리 메서드가 생성할 객체</span>
+<span class="kd">class</span> <span class="nc">CatToy</span> <span class="kd">extends</span> <span class="nc">AnimalToy</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">identify</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"나는 캣타워! 고양이의 친구!"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Cat</span> <span class="kd">extends</span> <span class="nc">Animal</span> <span class="o">{</span>
+    <span class="c1">// 추상 팩터리 메서드 오버라이딩</span>
+    <span class="nd">@Override</span>
+    <span class="nc">AnimalToy</span> <span class="nf">getToy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">CatToy</span><span class="o">();</span>    <span class="c1">// CatToy 클래스의 인스턴스 반환</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Driver</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 팩터리 메서드를 보유한 객체들 생성</span>
+        <span class="nc">Animal</span> <span class="n">bolt</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Dog</span><span class="o">();</span>
+        <span class="nc">Animal</span> <span class="n">kitty</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Cat</span><span class="o">();</span>
+
+        <span class="c1">// 팩터리 메서드가 반환하는 객체들</span>
+        <span class="nc">AnimalToy</span> <span class="n">boltBall</span> <span class="o">=</span> <span class="n">bolt</span><span class="o">.</span><span class="na">getToy</span><span class="o">();</span>
+        <span class="nc">AnimalToy</span> <span class="n">kittyTower</span> <span class="o">=</span> <span class="n">kitty</span><span class="o">.</span><span class="na">getToy</span><span class="o">();</span>
+
+        <span class="c1">//팩터리 메서드가 반환한 객체들을 사용</span>
+        <span class="n">boltBall</span><span class="o">.</span><span class="na">identity</span><span class="o">();</span>
+        <span class="n">kittyTower</span><span class="o">.</span><span class="na">identify</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위 예제의 클래스 다이어그램은 다음과 같다.</p>
+
+<p><img src="/assets/spring/Factory-Method-Example-Class-Diagram.jpg" style="width:80%" /></p>
+
+<p>클래스 다이어그램을 위와 아래 반반씩 살펴보면 팩터리 메서드 패턴이 <strong>의존 역전 원칙(DIP)</strong>를 활용하고 있음을 알 수 있다. (<u>Animal, AnimalToy 추상클래스를 의존</u>)</p>
+
+<h4 id="즉-팩토리-메서드-패턴factory-method-pattern이란-오버라이드된-메서드가-객체를-생성하고-반환하는-패턴을-말한다">즉, 팩토리 메서드 패턴(Factory Method Pattern)이란 오버라이드된 메서드가 객체를 생성하고 반환하는 패턴을 말한다.</h4>
+
+<hr />
+
+<blockquote>
+  <p>참조 : 스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)</p>
+</blockquote>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Java">Java</a>,&nbsp;<a href="/tag/OOP">OOP</a>,&nbsp;<a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/Design-Pattern">Design-Pattern</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Singleton%2C+Template+Method+and+Factory+Method+Pattern&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F17%2FSpring-Design-Pattern%282%29.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Singleton%2C+Template+Method+and+Factory+Method+Pattern&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F17%2FSpring-Design-Pattern%282%29.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F17%2FSpring-Design-Pattern%282%29.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=Singleton%2C+Template+Method+and+Factory+Method+Pattern&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F17%2FSpring-Design-Pattern%282%29.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=Singleton%2C+Template+Method+and+Factory+Method+Pattern&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F17%2FSpring-Design-Pattern%282%29.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(2).html') + '&title=Singleton, Template Method and Factory Method Pattern'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
