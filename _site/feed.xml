@@ -6,9 +6,29 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 17 Mar 2020 19:49:28 +0900</pubDate>
-    <lastBuildDate>Tue, 17 Mar 2020 19:49:28 +0900</lastBuildDate>
+    <pubDate>Wed, 18 Mar 2020 10:20:19 +0900</pubDate>
+    <lastBuildDate>Wed, 18 Mar 2020 10:20:19 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Strategy Pattern and Template Callback Pattern</title>
+        <description>&lt;h1 id=&quot;spring이-사랑하는-design-pattern&quot;&gt;Spring이 사랑하는 Design Pattern&lt;/h1&gt; &lt;p&gt;이 글에서는 Spring이 사랑하고 Spring이 적용한 디자인 패턴중 &lt;strong&gt;Strategy Pattern, Template Callback Pattern&lt;/strong&gt;에 대해서 알아볼 것이다.&lt;/p&gt; &lt;hr /&gt; &lt;h2 id=&quot;strategy-pattern&quot;&gt;Strategy Pattern&lt;/h2&gt; &lt;hr /&gt; &lt;p&gt;&lt;strong&gt;전략 패턴(Strategy...</description>
+        <pubDate>Wed, 18 Mar 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/spring/2020/03/18/Spring-Design-Pattern(3).html</link>
+        <guid isPermaLink="true">http://localhost:4000/spring/2020/03/18/Spring-Design-Pattern(3).html</guid>
+        
+        <category>Java</category>
+        
+        <category>OOP</category>
+        
+        <category>Spring</category>
+        
+        <category>Design-Pattern</category>
+        
+        
+        <category>Spring</category>
+        
+      </item>
     
       <item>
         <title>Singleton, Template Method and Factory Method Pattern</title>
@@ -160,22 +180,6 @@
         <pubDate>Mon, 20 Apr 2015 17:43:59 +0900</pubDate>
         <link>http://localhost:4000/jekyll/2015/04/20/welcome-to-jekyll.html</link>
         <guid isPermaLink="true">http://localhost:4000/jekyll/2015/04/20/welcome-to-jekyll.html</guid>
-        
-        <category>jekyll</category>
-        
-        <category>welcome</category>
-        
-        
-        <category>Jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different...</description>
-        <pubDate>Sun, 19 Apr 2015 04:25:52 +0900</pubDate>
-        <link>http://localhost:4000/jekyll/2015/04/19/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/2015/04/19/welcome-to-jekyll.html</guid>
         
         <category>jekyll</category>
         
