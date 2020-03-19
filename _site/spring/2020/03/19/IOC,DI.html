@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>2020-03-07-TIL</title>
-  <meta name="description" content="모든 원시값과 문자열을 포장한다 Section : https://www.slipp.net/questions/562">
+  <title>IoC(Inversion Of Control) / DI(Dependency Injection)</title>
+  <meta name="description" content="이 글에서는 Spring이 사용하고 있는 IoC(Inversion of Control)와 DI(Dependency Injection)에 대해서 알아볼 것이다.">
   
   <meta name="author" content="배종진">
   <meta name="copyright" content="&copy; 배종진 2020">
@@ -41,12 +41,12 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="모든 원시값과 문자열을 포장한다 Section : https://www.slipp.net/questions/562" />
-  <meta property="og:url" content="http://localhost:4000/til/2020/03/07/TIL.html">
+  <meta property="og:description" content="이 글에서는 Spring이 사용하고 있는 IoC(Inversion of Control)와 DI(Dependency Injection)에 대해서 알아볼 것이다." />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/03/19/IOC,DI.html">
   <meta property="og:site_name" content="Green Frog Developer" />
-  <meta property="og:title" content="2020-03-07-TIL" />
+  <meta property="og:title" content="IoC(Inversion Of Control) / DI(Dependency Injection)" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://localhost:4000/assets/instacode.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -55,17 +55,17 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="2020-03-07-TIL">
-  <meta name="twitter:description" content="모든 원시값과 문자열을 포장한다 Section : https://www.slipp.net/questions/562">
-  <meta name="twitter:image" content="http://localhost:4000/assets/instacode.png">
-  <meta name="twitter:url" content="http://localhost:4000/til/2020/03/07/TIL.html">
+  <meta name="twitter:title" content="IoC(Inversion Of Control) / DI(Dependency Injection)">
+  <meta name="twitter:description" content="이 글에서는 Spring이 사용하고 있는 IoC(Inversion of Control)와 DI(Dependency Injection)에 대해서 알아볼 것이다.">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/03/19/IOC,DI.html">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/til/2020/03/07/TIL.html">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/03/19/IOC,DI.html">
 	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
 	
 	<!-- Tooltips -->
@@ -152,45 +152,78 @@
     <div class="page-content">
         <div class="post">
 
-<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
-  <div class="scrim has-cover">
+<div class="post-header-container " >
+  <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">2020-03-07-TIL</h1>
-      <p class="info">by <strong>Ben Centra</strong></p>
+      <h1 class="title">IoC(Inversion Of Control) / DI(Dependency Injection)</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
     </header>
   </div>
 </div>
 
 <div class="wrapper">
 
-
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
 
 <section class="post-meta">
-  <div class="post-date">March 7, 2020</div>
+  <div class="post-date">March 19, 2020</div>
   <div class="post-categories">
   in 
     
-    <!-- <a href="/category/TIL">Til</a> (default) -->
-    <a href="/category/TIL">TIL</a>
+    <!-- <a href="/category/Spring">Spring</a> (default) -->
+    <a href="/category/Spring">Spring</a>
     
   
   </div>
 </section>
 
 <article class="post-content">
-  <p>모든 원시값과 문자열을 포장한다 Section : https://www.slipp.net/questions/562</p>
+  <p>이 글에서는 Spring이 사용하고 있는 <strong>IoC(Inversion of Control)와 DI(Dependency Injection)</strong>에 대해서 알아볼 것이다.</p>
 
-<p>toString :</p>
+<p>IoC/DI에 대해 알아보기 전에 자바에서의 <strong>의존성</strong>이란 무엇을 의미하는지에 대해서 먼저 알아보자.</p>
 
-<p>nextxxx() 다음의 nextLine() 에러 : https://hashcode.co.kr/questions/2064/nextxxx-%EB%A9%94%EC%86%8C%EB%93%9C-%ED%9B%84%EC%97%90-nextline-%EB%A9%94%EC%86%8C%EB%93%9C%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%96%88%EC%9D%84-%EB%95%8C%EC%9D%98-scanner%EC%9D%98-%EB%AC%B8%EC%A0%9C</p>
+<hr />
 
+<h2 id="프로그래밍에서-의존성이란">프로그래밍에서 의존성이란?</h2>
+
+<hr />
+
+<p>자동차를 예로들어 의존성에 대해서 설명하겠다.</p>
+
+<p><strong>의사 코드</strong></p>
+<ul>
+  <li>운전자(Driver)가 자동차(Car)를 생산한다.</li>
+  <li>자동차(Car)는 내부적으로 타이어(Tire)를 생산한다.</li>
+</ul>
+
+<p><strong>자바로 표현</strong></p>
+<ul>
+  <li>new Car();  (Driver 클래스 내부)</li>
+  <li>Car 객체 생성자에서 new Tire();</li>
+</ul>
+
+<p><strong>의존성을 단순하게 정의하면 다음과 같다.</strong></p>
+<ul>
+  <li><u>의존성은 new이다.</u></li>
+  <li>new를 실행하는 Car와 Tire사이에 <u>Car가 Tire에 의존한다.</u></li>
+</ul>
+
+<hr />
+
+<blockquote>
+  <p>참조 : 스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)</p>
+</blockquote>
 
 </article>
 
 
 
 <section class="tags">
-  <strong>Tags:</strong> <a href="/tag/jekyll">jekyll</a>,&nbsp;<a href="/tag/welcome">welcome</a>
+  <strong>Tags:</strong> <a href="/tag/Java">Java</a>,&nbsp;<a href="/tag/OOP">OOP</a>,&nbsp;<a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/IOC">IOC</a>,&nbsp;<a href="/tag/DI">DI</a>
 </section>
 
 
@@ -204,7 +237,7 @@
   
     
     
-      <a href="//twitter.com/share?text=2020-03-07-TIL&url=http%3A%2F%2Flocalhost%3A4000%2Ftil%2F2020%2F03%2F07%2FTIL.html&via=TheBenCentra"
+      <a href="//twitter.com/share?text=IoC%28Inversion+Of+Control%29+%2F+DI%28Dependency+Injection%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F19%2FIOC%2CDI.html&via=TheBenCentra"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
         <i class="fa fa-twitter-square fa-lg"></i>
       </a>
@@ -219,7 +252,7 @@
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=2020-03-07-TIL&u=http%3A%2F%2Flocalhost%3A4000%2Ftil%2F2020%2F03%2F07%2FTIL.html"
+      <a href="//www.facebook.com/sharer.php?t=IoC%28Inversion+Of+Control%29+%2F+DI%28Dependency+Injection%29&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F19%2FIOC%2CDI.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -244,7 +277,7 @@
     
     
     
-      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Ftil%2F2020%2F03%2F07%2FTIL.html"
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F19%2FIOC%2CDI.html"
         onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
         <i class="fa fa-linkedin-square fa-lg"></i>
       </a>
@@ -257,7 +290,7 @@
     
     
     
-      <a href="//plus.google.com/share?title=2020-03-07-TIL&url=http%3A%2F%2Flocalhost%3A4000%2Ftil%2F2020%2F03%2F07%2FTIL.html"
+      <a href="//plus.google.com/share?title=IoC%28Inversion+Of+Control%29+%2F+DI%28Dependency+Injection%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F19%2FIOC%2CDI.html"
         onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
         <i class="fa fa-google-plus-square fa-lg"></i>
       </a>
@@ -291,7 +324,7 @@
     
     
     
-      <a href="//www.pinterest.com/pin/create/button/?description=2020-03-07-TIL&url=http%3A%2F%2Flocalhost%3A4000%2Ftil%2F2020%2F03%2F07%2FTIL.html&media=http://localhost:4000/assets/instacode.png"
+      <a href="//www.pinterest.com/pin/create/button/?description=IoC%28Inversion+Of+Control%29+%2F+DI%28Dependency+Injection%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F19%2FIOC%2CDI.html&media=http://localhost:4000/assets/header_image.jpg"
         onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
         <i class="fa fa-pinterest-square fa-lg"></i>
       </a>
@@ -360,7 +393,7 @@
     
     
     
-      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/til/2020/03/07/TIL.html') + '&title=2020-03-07-TIL'; return false">
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/03/19/IOC,DI.html') + '&title=IoC(Inversion Of Control) / DI(Dependency Injection)'; return false">
         <i class="fa fa-reddit-square fa-lg"></i>
       </a>
     
