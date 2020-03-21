@@ -192,29 +192,57 @@
 
 <hr />
 
-<p>자동차를 예로들어 의존성에 대해서 설명하겠다.</p>
+<p><u>자동차와 타이어</u>를 예로들어 의존성에 대해서 설명하겠다.</p>
 
 <p><strong>의사 코드</strong></p>
 <ul>
   <li>운전자(Driver)가 자동차(Car)를 생산한다.</li>
-  <li>자동차(Car)는 내부적으로 타이어(Tire)를 생산한다.</li>
+  <li>자동차(Car)는 내부적으로 타이어(Tire : 다양한 종류중 하나의 타이어)를 생산한다.</li>
 </ul>
 
 <p><strong>자바로 표현</strong></p>
 <ul>
   <li>new Car();  (Driver 클래스 내부)</li>
-  <li>Car 객체 생성자에서 new Tire();</li>
+  <li>Car 객체 생성자에서 new KoreaTire();   <strong>(의존 관계가 일어나고 있는 부분)</strong></li>
 </ul>
 
 <p><strong>의존성을 단순하게 정의하면 다음과 같다.</strong></p>
 <ul>
-  <li><u>의존성은 new이다.</u></li>
-  <li>new를 실행하는 Car와 Tire사이에 <u>Car가 Tire에 의존한다.</u></li>
+  <li><strong>의존성은 new이다.</strong></li>
+  <li>new를 실행하는 Car와 KoreaTire사이에 <u>Car가 KoreaTire에 의존한다.</u></li>
 </ul>
 
 <p><strong>결론적으로 전체가 부분에 의존한다고 표현할 수 있다.</strong>(더 깊이 들어가면 집합과 구성 관계로 구분할 수 있다.)</p>
 
-<p>이러한 요구사항을 통해서 먼저 스프링을 적용하지 않은 기존 방식으로 자바 코드를 작성해 보고, 점진적으로 스프링 Annotation 방식으로 변경해 보자.</p>
+<p>이러한 요구사항을 먼저 스프링을 적용하지 않은 기존 방식으로 자바 코드를 작성해 보고, 점진적으로 스프링 Annotation 방식으로 변경해 보자.</p>
+
+<hr />
+
+<h2 id="스프링-없이-의존성-주입하기">스프링 없이 의존성 주입하기</h2>
+
+<hr />
+
+<h3 id="1-생성자를-통한-의존성-주입">1. 생성자를 통한 의존성 주입</h3>
+
+<p><strong>의사 코드</strong></p>
+<ul>
+  <li>운전자가 타이어(다양한 종류중 하나)를 생산한다.</li>
+  <li>운전자가 자동차를 생산하면서 타이어를 장착한다.</li>
+</ul>
+
+<p><strong>자바로 표현 - 생성자 인자 이용</strong></p>
+<ul>
+  <li>Tire americaTire = new AmericaTire();</li>
+  <li>Car car = new Car(americaTire);</li>
+</ul>
+
+<p>이러한 구현 방식에는 어떤 장점이 있을까? 기존 코드에서는 Car의 생성자에서 구체적으로 어떤 Tire를 생산할지를 결정했었다.
+즉, Tire가 KoreaTire나 AmericaTire 또는 JapenTire로 바뀔 때마다 Car 생성자의 코드를 바꿔줘야 하기 때문에 개발자들은 이러한 코드를 <u>유연성이 떨어지는 코드</u>라고 말한다.</p>
+
+<p>변경된 코드에서는 운전자가 직접 AmericaTire를 생산해서 자동차에 장착하게 만들기 때문에 Car의 생성자는 어떤 타이어를 장착할까를 더는 고민하지 않아도 되기 때문에
+<u>코드의 유연성이 늘어난다.</u></p>
+
+<p><strong>즉, Tire 인터페이스를 상속한 클래스의 의존성을 주입하면 나중에 어떤 새로운 타이어 브랜드가 생겨도 각 타이어 브랜드들이 Tire 인터페이스를 구현한다면 Car.java 코드를 변경할 필요 없이 사용할 수 있기 때문에 코드의 확장성과 유지보수성이 좋아진다.</strong></p>
 
 <hr />
 
