@@ -6,9 +6,29 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 22 Mar 2020 12:42:43 +0900</pubDate>
-    <lastBuildDate>Sun, 22 Mar 2020 12:42:43 +0900</lastBuildDate>
+    <pubDate>Mon, 23 Mar 2020 18:15:24 +0900</pubDate>
+    <lastBuildDate>Mon, 23 Mar 2020 18:15:24 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Spring AOP (Aspect-Oriented Programming)</title>
+        <description>&lt;p&gt;이 글에서는 Spring이 사용하고 있는 &lt;strong&gt;AOP(Aspect-Oriented Programming)&lt;/strong&gt;에 대해서 알아볼 것이다.&lt;/p&gt; &lt;p&gt;Aspect-Oriented Programming을 번역하면 관점 지향 프로그래밍이다. 그렇다면 관점 지향 프로그래밍이란 무엇인지에 대해서 알아보자.&lt;/p&gt; &lt;hr /&gt; &lt;h2 id=&quot;aopaspect-oriented-programming&quot;&gt;AOP(Aspect-Oriented Programming)&lt;/h2&gt; &lt;hr /&gt;...</description>
+        <pubDate>Mon, 23 Mar 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/spring/2020/03/23/AOP.html</link>
+        <guid isPermaLink="true">http://localhost:4000/spring/2020/03/23/AOP.html</guid>
+        
+        <category>Java</category>
+        
+        <category>OOP</category>
+        
+        <category>Spring</category>
+        
+        <category>AOP</category>
+        
+        
+        <category>Spring</category>
+        
+      </item>
     
       <item>
         <title>IoC(Inversion Of Control) / DI(Dependency Injection)</title>
@@ -170,22 +190,6 @@
         <pubDate>Sat, 07 Mar 2020 17:43:59 +0900</pubDate>
         <link>http://localhost:4000/til/2020/03/07/TIL.html</link>
         <guid isPermaLink="true">http://localhost:4000/til/2020/03/07/TIL.html</guid>
-        
-        <category>jekyll</category>
-        
-        <category>welcome</category>
-        
-        
-        <category>TIL</category>
-        
-      </item>
-    
-      <item>
-        <title>2020-03-06-TIL(일급 컬렉션, 결합도, 응집도, Mock)</title>
-        <description>&lt;h2 id=&quot;일급-콜렉션&quot;&gt;일급 콜렉션&lt;/h2&gt; &lt;ul&gt; &lt;li&gt;콜렉션을 포함한 클래스는 반드시 다른 멤버 변수가 없어야 한다.&lt;/li&gt; &lt;li&gt;각 콜렉션은 그 자체로 포장되어 있으므로 이제 콜렉션과 관련된 동작은 근거지가 마련된셈이다.&lt;/li&gt; &lt;li&gt;필터가 일급 콜렉션의 일부가 됨을...</description>
-        <pubDate>Fri, 06 Mar 2020 17:43:59 +0900</pubDate>
-        <link>http://localhost:4000/til/2020/03/06/TILd.html</link>
-        <guid isPermaLink="true">http://localhost:4000/til/2020/03/06/TILd.html</guid>
         
         <category>jekyll</category>
         

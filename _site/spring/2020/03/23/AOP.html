@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Spring AOP (Aspect-Oriented Programming)</title>
+  <meta name="description" content="이 글에서는 Spring이 사용하고 있는 AOP(Aspect-Oriented Programming)에 대해서 알아볼 것이다.">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="이 글에서는 Spring이 사용하고 있는 AOP(Aspect-Oriented Programming)에 대해서 알아볼 것이다." />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/03/23/AOP.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="Spring AOP (Aspect-Oriented Programming)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Spring AOP (Aspect-Oriented Programming)">
+  <meta name="twitter:description" content="이 글에서는 Spring이 사용하고 있는 AOP(Aspect-Oriented Programming)에 대해서 알아볼 것이다.">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/03/23/AOP.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/03/23/AOP.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Spring AOP (Aspect-Oriented Programming)</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">March 23, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Spring">Spring</a> (default) -->
+    <a href="/category/Spring">Spring</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>이 글에서는 Spring이 사용하고 있는 <strong>AOP(Aspect-Oriented Programming)</strong>에 대해서 알아볼 것이다.</p>
+
+<p>Aspect-Oriented Programming을 번역하면 관점 지향 프로그래밍이다. 그렇다면 관점 지향 프로그래밍이란 무엇인지에 대해서 알아보자.</p>
+
+<hr />
+
+<h2 id="aopaspect-oriented-programming">AOP(Aspect-Oriented Programming)</h2>
+
+<hr />
+
+<p><strong>스프링 DI가 의존성(new)에 대한 주입</strong>이라면 <strong>스프링 AOP는 로직(code) 주입</strong>이라고 할 수 있다.</p>
+
+<p><img src="/assets/spring/Spring-AOP-Example-1.jpg" style="width:60%" /></p>
+
+<p>위의 그림을 보면 입금, 출금, 이체 모듈에서 로깅, 보안, 트랜잭션 기능이 반복적으로 나타나는 것을 볼 수 있다.
+프로그램을 작성하다 보면 이처럼 다수의 <u>모듈에 공통적으로 나타나는 부분</u>이 존재하는데, 바로 이것을 <strong>횡단 관심사(cross-cutting concern)</strong>라고 한다.</p>
+
+<p>데이터베이스 연동 프로그램을 작성한 적이 있다면 insert 연산이든, update, delete, select 연산이든 항상 반복해서 등장하는
+DB 커넥션 준비, Statement 객체 준비, DB 커넥션 연결, Statement 객체 세팅, 예외 처리, DB자원 반납등을 볼 수 있을 것이다.
+여기서 데이터베이스 코드는 2가지의 관심사로 나눌 수 있다.</p>
+<ul>
+  <li><strong>핵심 관심사</strong>: 특정한 연산 코드에서 중복되지 않는 코드(insert, update, delete, select 연산 코드, …)</li>
+  <li><strong>횡단 관심사</strong>: 특정한 연산 코드에서 공통적으로 나타나는 코드(DB 커넥션 준비, DB자원 반납, …)</li>
+</ul>
+
+<p>즉, 우리는 <strong>코드 = 핵심 관심사 + 횡단 관심사</strong> 라고 정의할 수 있다.</p>
+
+<p>AOP를 활용해서 남자와 여자의 삶을 프로그래밍 해보자.</p>
+
+<p><strong>남자용 의사 코드</strong></p>
+<ul>
+  <li>열쇠로 문을 열고 집에 들어간다.</li>
+  <li><u>컴퓨터로 게임을 한다.</u></li>
+  <li>소등하고 잔다.</li>
+  <li>자물쇠를 잠그고 집을 나선다.</li>
+</ul>
+
+<p><strong>여자용 의사 코드</strong></p>
+<ul>
+  <li>열쇠로 문을 열고 집에 들어간다.</li>
+  <li><u>요리를 한다.</u></li>
+  <li>소등하고 잔다.</li>
+  <li>자물쇠를 잠그고 집을 나선다.</li>
+</ul>
+
+<p>로직을 주입한다면 어디에 주입할 수 있을까? 그렇다. 객체 지향에서 로직(코드)이 있는 곳은 당연히 <strong>메서드 안쪽</strong>이다.
+그럼 메서드에서 코드를 주입할 수 있는 곳은 몇 군데일까? 그림을 통해 알아보자.</p>
+
+<p><img src="/assets/spring/Spring-AOP-Example-2.jpg" style="width:60%" /></p>
+
+<p>위의 그림에서 볼 수 있듯이 <strong>로직을 주입할 수 있는 곳은 Around, Before, After, AfterReturning, AfterThrowing으로 총 5군데이다.</strong></p>
+
+<p>스프링 AOP를 사용하기 위해 aop패키지를 만들고 Person이라는 인터페이스를 추가하자. <u>(스프링 AOP는 인터페이스 기반으로 작동한다.)</u></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">aop</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">runSomething</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Person 인터페이스를 구현하도록 Boy.java와 Girl.java를 추가하자. 그리고 <u>핵심 관심사 코드</u>만 위치시키자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">aop</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Boy</span> <span class="kd">implements</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">runSomething</span><span class="o">(){</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"컴퓨터로 게임을 한다."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">aop</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Girl</span> <span class="kd">implements</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">runSomething</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"요리를 한다."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이제 Spring Framework를 구동할 수 있는 Client클래스를 생성하자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">aop</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.context.ApplicationContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.support.ClassPathXmlApplicationContext</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Client</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ApplicationContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ClassPathXmlApplicationContext</span><span class="o">(</span><span class="s">"aop.xml"</span><span class="o">);</span>
+
+        <span class="nc">Person</span> <span class="n">romeo</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"boy"</span><span class="o">,</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="nc">Person</span> <span class="n">juliet</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getBean</span><span class="o">(</span><span class="s">"girl"</span><span class="o">,</span> <span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+        <span class="n">romeo</span><span class="o">.</span><span class="na">runSomething</span><span class="o">();</span>
+        <span class="n">juliet</span><span class="o">.</span><span class="na">runSomething</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>그리고 Spring Framework에서 AOP를 사용할 수 있도록 해주는 스프링 설정 파일(XML)을 추가하자.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
+       <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xmlns:aop=</span><span class="s">"http://www.springframework.org/schema/aop"</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;aop:aspectj-autoproxy/&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"myAspect"</span> <span class="na">class=</span><span class="s">"aop.MyAspect"</span><span class="nt">&gt;&lt;/bean&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"boy"</span> <span class="na">class=</span><span class="s">"aop.Boy"</span><span class="nt">&gt;&lt;/bean&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"girl"</span> <span class="na">class=</span><span class="s">"aop.Girl"</span><span class="nt">&gt;&lt;/bean&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+</code></pre></div></div>
+<p>boy와 girl Bean은 AOP 적용 대상이기 때문에 등록했고 myAspect Bean은 AOP의 Aspect이기에 등록 했다.</p>
+
+<p><code class="highlighter-rouge">&lt;aop:aspectj-autoproxy/&gt;</code>는 스프링 프레임워크에게 AOP 프록시를 자동으로 사용하라고 알려주는 지시자 이다.</p>
+
+<p><strong>스프링 AOP는 프록시를 사용한다.</strong> 그런데 스프링 AOP에서 재미있는 것은 호출하는 쪽(romeo.runSomething() 메서드 호출)에서나 호출당하는 쪽(romeo객체),
+그 누구도 프록시가 존재하는지 조차 모른다는 것이다. 오직 <strong>스프링 프레임워크만 프록시의 존재를 안다.</strong></p>
+
+<p>이제 Aspect를 활용하기 위한 MyAspect.java를 추가하자. 그리고 <u>횡단 관심사 코드</u>를 위치시키자.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">aop</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.JoinPoint</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.After</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Aspect</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Before</span><span class="o">;</span>
+
+<span class="nd">@Aspect</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAspect</span> <span class="o">{</span>
+    <span class="nd">@Before</span><span class="o">(</span><span class="s">"execution(* runSomething ())"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">(</span><span class="nc">JoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"열쇠로 문을 열고 집에 들어간다."</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@After</span><span class="o">(</span><span class="s">"execution(* runSomething ())"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">after</span><span class="o">(</span><span class="nc">JoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"소등하고 잔다."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"자물쇠를 잠그고 집을 나선다."</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="highlighter-rouge">@Aspect</code>는 해당 클래스를 AOP에서 사용하겠다는 의미이다.</li>
+  <li><code class="highlighter-rouge">@Before</code>는 런타임에 대상 메서드가 실행되기 전 이 메서드를 주입하겠다는 의미이다. 대상 메서드가 실행되기 전에 주입된 메서드를 먼저 실행한다.</li>
+  <li><code class="highlighter-rouge">@After</code>는 런타임에 대상 메서드가 실행되기 전 이 메서드를 주입하겠다는 의미이다. 대상 메서드가 실행되고 난 후 주입된 메서드가 실행한다.</li>
+</ul>
+
+<p>Boy.java 코드를 주목해서 보면 횡단 관심사는 존재하지 않고 핵심 관심사만 존재한다. 즉, 추가 개발과 유지 보수 관점에서 보면 무척이나 편한코드가 된 것을 알 수가 있다.
+<strong>AOP를 적용하면서 Boy.java에 단일 책임 원칙(SRP)을 자연스럽게 적용하게 된 것이다.</strong></p>
+
+<p>GGLiB 라이브러리를 사용하게 되면 인터페이스 없이도 AOP를 적용할 수 있지만 추천하는 방법은 아니다. GGLiB 라이브러리를 사용해야 할 경우는 코드를 변경할 수 없는
+서드 파티모듈 안에 final로 선언된 클래스에 AOP를 적용해야 하는 경우 정도이다.</p>
+
+<p><strong>스프링 AOP의 핵심은 아래 세 개의 문장으로 요약할 수 있다.</strong></p>
+<ul>
+  <li><strong>스프링 AOP는 인터페이스(interface) 기반이다.</strong></li>
+  <li><strong>스프링 AOP는 프록시(proxy) 기반이다.</strong></li>
+  <li><strong>스프링 AOP는 런타임(runtime) 기반이다.</strong></li>
+</ul>
+
+<hr />
+
+<h2 id="aopaspect-oriented-programming에서-사용하는-용어">AOP(Aspect-Oriented Programming)에서 사용하는 용어</h2>
+
+<hr />
+
+<p><strong>AOP 에서 사용하는 용어</strong>를 간단히 사전적 의미로 풀어보면 다음과 같다.</p>
+<ul>
+  <li><strong>Aspect</strong> : 관점, 측면, 양상</li>
+  <li><strong>Advisor</strong> : 조언자, 고문</li>
+  <li><strong>Advice</strong> : 조언, 충고</li>
+  <li><strong>JoinPoint</strong> : 결합점</li>
+  <li><strong>Pointcut</strong> : 자르는 점</li>
+</ul>
+
+<p>AOP에서 사용하는 용어의 사전적 의미를 알아 보았으니 이제 직접 어떻게 쓰이는지에 대해서 알아가 보자.</p>
+
+<h3 id="pointcut---aspect-적용-위치-지정자">Pointcut - Aspect 적용 위치 지정자!</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">aop</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.JoinPoint</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Aspect</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Before</span><span class="o">;</span>
+
+<span class="nd">@Aspect</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAspect</span> <span class="o">{</span>
+    <span class="nd">@Before</span><span class="o">(</span><span class="s">"execution(* runSomething ())"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">(</span><span class="nc">JoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"열쇠로 문을 열고 집에 들어간다."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위 코드에서 <code class="highlighter-rouge">* runSomething()</code>부분이 바로 <strong>Pointcut</strong>이다.</p>
+
+<p><code class="highlighter-rouge">@Before("execution(* runSomething())")</code>의 의미는 횡단 관심사를 실행하는 메서드(<code class="highlighter-rouge">public void before</code>)를
+ <strong>Pointcut</strong>이 가리키는 메서드가 실행되기 전(<code class="highlighter-rouge">@Before</code>)에 실행하라는 의미이다.</p>
+
+<h4 id="즉-pointcut은-aspect를-적용할-타깃-메서드-및-속성의-위치를-지시하는-지시자이다"><strong>즉, Pointcut은 Aspect를 적용할 타깃 메서드 및 속성의 위치를 지시하는 지시자이다.</strong></h4>
+
+<p><strong>Pointcut을 작성하는 방법은 다음과 같다.</strong></p>
+
+<ul>
+  <li>[접근제한자패턴] <strong>리턴타입패턴</strong> [패키지&amp;클래스패턴.]<strong>메서드이름패턴(파라미터패턴)</strong> [throws 예외패턴]</li>
+  <li>ex) <code class="highlighter-rouge">public void aop.Boy.runSomething()</code> -&gt; 접근제한자가 public이고 리턴타입은 void이며 aop 패키지 밑의 Boy 클래스 안에 
+파라미터가 없으며 던져지는 에러가 있든 없든 이름이 runSomething인 메서드를(들을) Pointcut으로 지정하라.</li>
+  <li>ex) <code class="highlighter-rouge">* runSomething()</code> -&gt; 접근제한자는 무엇이라도 좋으며(생략됨) 리턴타입도 무엇이라도 좋으며(*) 모든 패키지 밑의(생략됨) 모든 클래스 안의(생략됨)
+파라미터가 없으며 던져지는 에러가 있든 없든 이름이 runSomething인 메서드를(들을) Pointcut으로 지정하라.</li>
+</ul>
+
+<p>대괄호 [] 는 생략이 가능하다는 의미이다. 필수 요소는 리턴타입패턴, 메서드이름패턴, 파라미터패턴뿐이다.</p>
+
+<h3 id="joinpoint---연결-가능한-지점">JoinPoint - 연결 가능한 지점!</h3>
+
+<p>Pointcut의 후보가 되는 모든 메서드들이 JoinPoint이다. 즉 Aspect 적용이 가능한 지점이 된다.</p>
+
+<h4 id="한마디로-joinpoint란-aspect-적용이-가능한-모든-지점을-말한다">한마디로 JoinPoint란 Aspect 적용이 가능한 모든 지점을 말한다.</h4>
+
+<p>스프링 AOP에서 JoinPoint란 스프링 프레임워크가 관리하는 <u>Bean의 모든 메서드</u>에 해당한다. 이것이 <strong>광의의 JoinPoint</strong>이다.</p>
+
+<p><strong>협의의 JointPoint</strong>는 예제 코드를 통해서 알아보자.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">aop</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.JoinPoint</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Aspect</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Before</span><span class="o">;</span>
+
+<span class="nd">@Aspect</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAspect</span> <span class="o">{</span>
+    <span class="nd">@Before</span><span class="o">(</span><span class="s">"execution(* runSomething ())"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">(</span><span class="nc">JoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"열쇠로 문을 열고 집에 들어간다."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 코드에서 표시된 JoinPoint는 무엇일까? romeo.runSomething() 메서드를 호출한 상태라면 JoinPoint는 romeo 객체의 runSomething() 메서드가 되고
+juliet.runSomething() 메서드를 호출한 상태라면 JoinPoint는 juliet 객체의 runSomething() 메서드가 된다.</p>
+
+<p><strong>JointPoint에 대해서 정리하면 다음과 같다.</strong></p>
+<ul>
+  <li><strong>광의의 JoinPoint란 Aspect 적용이 가능한 모든 지점이다.</strong></li>
+  <li><strong>협의의 JoinPoint란 호출된 객체의 메서드이다.</strong></li>
+</ul>
+
+<h3 id="advice---언제-무엇을">Advice - 언제, 무엇을!</h3>
+
+<h4 id="advice란-pointcut에-언제-무엇을-적용할지-정의한-메서드이다">Advice란 Pointcut에 언제, 무엇을 적용할지 정의한 메서드이다.</h4>
+
+<p>예제를 통해 알아보자.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">aop</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.JoinPoint</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Aspect</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.aspectj.lang.annotation.Before</span><span class="o">;</span>
+
+<span class="nd">@Aspect</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyAspect</span> <span class="o">{</span>
+    <span class="nd">@Before</span><span class="o">(</span><span class="s">"execution(* runSomething ())"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">before</span><span class="o">(</span><span class="nc">JoinPoint</span> <span class="n">joinPoint</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"열쇠로 문을 열고 집에 들어간다."</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>위의 예제에서는 <u>@Before 애노테이션과 before() 메서드가 Advice</u>라고 할 수 있다.</p>
+
+<p>이러한 이유는 Pointcut인 <code class="highlighter-rouge">* runSomething ()</code>가 시작되기 전(@Before)에 before() 메서드를 실행하라고 정의되어 있기 때문입니다.</p>
+
+<h3 id="aspect---advisor의-집합체">Aspect - Advisor의 집합체!!</h3>
+
+<h4 id="aop에서-aspect는-여러-개의-advice와-여러-개의-pointcut의-결합체를-의미하는-용어이다">AOP에서 Aspect는 여러 개의 Advice와 여러 개의 Pointcut의 결합체를 의미하는 용어이다.</h4>
+
+<p>수식으로 표현하면 <strong>Aspect = Advice들 + Pointcut들</strong> 이다.</p>
+
+<p>Advice는 [언제(When), 무엇을(What)]를 의미하는 것이었다. Pointcut은 [어디에(Where)]를 의미하는 것이었다.
+결국 Aspect는 When + Where + What(언제, 어디서, 무엇을)이 된다.</p>
+
+<h3 id="advisor---어디서-언제-무엇을">Advisor - 어디서 언제 무엇을!</h3>
+
+<p>Advisor는 다음과 같은 수식으로 표현할 수 있다.</p>
+
+<p><strong>Advisor = 한 개의 Advice + 한 개의 Pointcut</strong></p>
+
+<p>Advisor는 스프링 AOP에서만 사용하는 용어이며 다른 AOP 프레임워크에서는 사용하지 않는다. 스프링이 발전하면서 다수의 Advice와 다수의 Pointcut을 다양하게 조합해서 사용할 수 있는 방법인
+Aspect가 나왔기 때문에 스프링은 Advisor를 사용하지 않을것을 권고한다.</p>
+
+<hr />
+
+<blockquote>
+  <p>참조 : 스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)</p>
+</blockquote>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Java">Java</a>,&nbsp;<a href="/tag/OOP">OOP</a>,&nbsp;<a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/AOP">AOP</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Spring+AOP+%28Aspect-Oriented+Programming%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F23%2FAOP.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Spring+AOP+%28Aspect-Oriented+Programming%29&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F23%2FAOP.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F23%2FAOP.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=Spring+AOP+%28Aspect-Oriented+Programming%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F23%2FAOP.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=Spring+AOP+%28Aspect-Oriented+Programming%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F23%2FAOP.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/03/23/AOP.html') + '&title=Spring AOP (Aspect-Oriented Programming)'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
