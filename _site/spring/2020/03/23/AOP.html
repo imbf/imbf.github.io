@@ -199,7 +199,7 @@
 <p><img src="/assets/spring/Spring-AOP-Example-1.jpg" style="width:60%" /></p>
 
 <p>위의 그림을 보면 입금, 출금, 이체 모듈에서 로깅, 보안, 트랜잭션 기능이 반복적으로 나타나는 것을 볼 수 있다.
-프로그램을 작성하다 보면 이처럼 다수의 <u>모듈에 공통적으로 나타나는 부분</u>이 존재하는데, 바로 이것을 <strong>횡단 관심사(cross-cutting concern)</strong>라고 한다.</p>
+프로그램을 작성하다 보면 이처럼 <u>다수의 모듈에 공통적으로 나타나는 부분</u>이 존재하는데, 바로 이것을 <strong>횡단 관심사(cross-cutting concern)</strong>라고 한다.</p>
 
 <p>데이터베이스 연동 프로그램을 작성한 적이 있다면 insert 연산이든, update, delete, select 연산이든 항상 반복해서 등장하는
 DB 커넥션 준비, Statement 객체 준비, DB 커넥션 연결, Statement 객체 세팅, 예외 처리, DB자원 반납등을 볼 수 있을 것이다.
@@ -299,12 +299,12 @@ DB 커넥션 준비, Statement 객체 준비, DB 커넥션 연결, Statement 객
     <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"girl"</span> <span class="na">class=</span><span class="s">"aop.Girl"</span><span class="nt">&gt;&lt;/bean&gt;</span>
 <span class="nt">&lt;/beans&gt;</span>
 </code></pre></div></div>
-<p>boy와 girl Bean은 AOP 적용 대상이기 때문에 등록했고 myAspect Bean은 AOP의 Aspect이기에 등록 했다.</p>
+<p>boy와 girl Bean은 AOP 적용 대상이기 때문에 등록했고 myAspect Bean은 AOP의 Aspect이기에 등록했다.</p>
 
 <p><code class="highlighter-rouge">&lt;aop:aspectj-autoproxy/&gt;</code>는 스프링 프레임워크에게 AOP 프록시를 자동으로 사용하라고 알려주는 지시자 이다.</p>
 
 <p><strong>스프링 AOP는 프록시를 사용한다.</strong> 그런데 스프링 AOP에서 재미있는 것은 호출하는 쪽(romeo.runSomething() 메서드 호출)에서나 호출당하는 쪽(romeo객체),
-그 누구도 프록시가 존재하는지 조차 모른다는 것이다. 오직 <strong>스프링 프레임워크만 프록시의 존재를 안다.</strong></p>
+<u>그 누구도 프록시가 존재하는지 조차 모른다는 것이다.</u> 오직 <strong>스프링 프레임워크만 프록시의 존재를 안다.</strong></p>
 
 <p>이제 Aspect를 활용하기 위한 MyAspect.java를 추가하자. 그리고 <u>횡단 관심사 코드</u>를 위치시키자.</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">aop</span><span class="o">;</span>
@@ -335,11 +335,11 @@ DB 커넥션 준비, Statement 객체 준비, DB 커넥션 연결, Statement 객
   <li><code class="highlighter-rouge">@After</code>는 런타임에 대상 메서드가 실행되기 전 이 메서드를 주입하겠다는 의미이다. 대상 메서드가 실행되고 난 후 주입된 메서드가 실행한다.</li>
 </ul>
 
-<p>Boy.java 코드를 주목해서 보면 횡단 관심사는 존재하지 않고 핵심 관심사만 존재한다. 즉, 추가 개발과 유지 보수 관점에서 보면 무척이나 편한코드가 된 것을 알 수가 있다.
+<p>Boy.java 코드를 주목해서 보면 횡단 관심사는 존재하지 않고 핵심 관심사만 존재한다. 즉, 확장과 유지 보수 관점에서 보면 무척이나 편한코드가 된 것을 알 수가 있다.
 <strong>AOP를 적용하면서 Boy.java에 단일 책임 원칙(SRP)을 자연스럽게 적용하게 된 것이다.</strong></p>
 
 <p>GGLiB 라이브러리를 사용하게 되면 인터페이스 없이도 AOP를 적용할 수 있지만 추천하는 방법은 아니다. GGLiB 라이브러리를 사용해야 할 경우는 코드를 변경할 수 없는
-서드 파티모듈 안에 final로 선언된 클래스에 AOP를 적용해야 하는 경우 정도이다.</p>
+서드 파티 모듈 안에 final로 선언된 클래스에 AOP를 적용해야 하는 경우 정도이다.</p>
 
 <p><strong>스프링 AOP의 핵심은 아래 세 개의 문장으로 요약할 수 있다.</strong></p>
 <ul>
@@ -363,7 +363,7 @@ DB 커넥션 준비, Statement 객체 준비, DB 커넥션 연결, Statement 객
   <li><strong>Pointcut</strong> : 자르는 점</li>
 </ul>
 
-<p>AOP에서 사용하는 용어의 사전적 의미를 알아 보았으니 이제 직접 어떻게 쓰이는지에 대해서 알아가 보자.</p>
+<p>AOP에서 사용하는 용어들의 사전적 의미를 알아 보았으니 이제 직접 어떻게 쓰이는지에 대해서 알아가 보자.</p>
 
 <h3 id="pointcut---aspect-적용-위치-지정자">Pointcut - Aspect 적용 위치 지정자!</h3>
 
