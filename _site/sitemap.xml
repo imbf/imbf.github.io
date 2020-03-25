@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/web/2020/03/25/Cloud-Computing.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/spring/2020/03/23/AOP.html</loc>
     </url>
     
@@ -176,6 +180,38 @@
     
     
     <url>
+        <loc>http://localhost:4000/tag/cloud/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/web/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/computing/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/server/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
         <loc>http://localhost:4000/category/jekyll/</loc>
     </url>
     
@@ -201,6 +237,14 @@
     
     <url>
         <loc>http://localhost:4000/category/spring/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/category/web/</loc>
     </url>
     
     
