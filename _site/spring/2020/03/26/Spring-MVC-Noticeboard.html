@@ -8,9 +8,8 @@
   <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
 
 
-  <title>jekyll</title>
-  <meta name="description" content="오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
-">
+  <title>Spring MVC를 활용한 게시판 구축하기</title>
+  <meta name="description" content="이 글은 Spring MVC를 활용한 게시판 구축하는 과정을 포스팅한 글이다.">
   
   <meta name="author" content="배종진">
   <meta name="copyright" content="&copy; 배종진 2020">
@@ -44,11 +43,10 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
-" />
-  <meta property="og:url" content="http://localhost:4000/tag/jekyll/">
+  <meta property="og:description" content="이 글은 Spring MVC를 활용한 게시판 구축하는 과정을 포스팅한 글이다." />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/03/26/Spring-MVC-Noticeboard.html">
   <meta property="og:site_name" content="Green Frog Developer" />
-  <meta property="og:title" content="jekyll" />
+  <meta property="og:title" content="Spring MVC를 활용한 게시판 구축하기" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -59,18 +57,17 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="jekyll">
-  <meta name="twitter:description" content="오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
-">
+  <meta name="twitter:title" content="Spring MVC를 활용한 게시판 구축하기">
+  <meta name="twitter:description" content="이 글은 Spring MVC를 활용한 게시판 구축하는 과정을 포스팅한 글이다.">
   <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
-  <meta name="twitter:url" content="http://localhost:4000/tag/jekyll/">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/03/26/Spring-MVC-Noticeboard.html">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/tag/jekyll/">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/03/26/Spring-MVC-Noticeboard.html">
 	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
 	
 	<!-- Tooltips -->
@@ -169,38 +166,274 @@
 
 
     <div class="page-content">
-        <div class="wrapper">
-<div class="page">
+        <div class="post">
 
-  <header class="post-header">
-    <h1 class="post-title">Posts in "Jekyll"</h1>
-  </header>
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Spring MVC를 활용한 게시판 구축하기</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
 
-  <span class="page-divider">
+<div class="wrapper">
+
+ <span class="page-divider">
   <span class="one"></span>
   <span class="two"></span>
 </span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">March 26, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Spring">Spring</a> (default) -->
+    <a href="/category/Spring">Spring</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>이 글은 Spring MVC를 활용한 게시판 구축하는 과정을 포스팅한 글이다.</p>
+
+<p>필자는 개발 툴으로써 Intellij Ultimate를 사용하였음을 알리고 포스팅을 시작하겠다.</p>
+
+<hr />
+
+<h2 id="spring-mvc의-request처리-방법">Spring MVC의 Request처리 방법</h2>
+
+<hr />
+
+<p>스프링 MVC에서는 <strong><code class="highlighter-rouge">@Controller</code> 어노테이션이 붙은 클래스 안에 <code class="highlighter-rouge">@RequestMapping</code> 어노테이션이 붙은 메서드에서 클라이언트 요청을 처리</strong>하게 된다.</p>
+
+<p>이를 그림으로 나타내면 다음과 같다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Noticeboard-1.jpg" style="width:70%" /></p>
+
+<p>이를 기반으로 게시판을 구현해보자.</p>
+
+<p>스프링 MVC의 특징을 중심으로 간단하게 만드는 게시판이기 때문에 페이징 기능과 검색 기능은 생략했다.</p>
+
+<hr />
+
+<h2 id="1-스프링-mvc-프로젝트-생성">1. 스프링 MVC 프로젝트 생성</h2>
+
+<hr />
+
+<ol>
+  <li>intellij를 실행해서 create New Project를 클릭한다.</li>
+  <li>프로젝트 관리 툴로써 Maven을 사용할 것이기 때문에 Maven을 클릭하고 Next를 누른다.</li>
+  <li>본인이 원하는 디렉토리에 원하는 이름의 프로젝트명을 입력하고 프로젝트를 생성한다.</li>
+  <li>Spring MVC 프레임워크를 프로젝트에 추가한다. (web 디렉토리가 자동 추가 될것이다.)</li>
+</ol>
+
+<hr />
+
+<blockquote>
+  <p>참조 : 스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)</p>
+</blockquote>
+
+</article>
 
 
-  <article class="post-content">
-    <ul class="posts-list">
-      
-      <li><strong><a class="post-link" href="/til/2020/03/08/TIL.html">2020-03-08-TIL</a></strong><span class="post-date"> - 2020-03-08 17:43:59 +0900</span></li>
-      
-      <li><strong><a class="post-link" href="/til/2020/03/07/TIL.html">2020-03-07-TIL</a></strong><span class="post-date"> - 2020-03-07 17:43:59 +0900</span></li>
-      
-      <li><strong><a class="post-link" href="/til/2020/03/06/TIL.html">2020-03-06-TIL(일급 컬렉션, 결합도, 응집도, Mock)</a></strong><span class="post-date"> - 2020-03-06 17:43:59 +0900</span></li>
-      
-      <li><strong><a class="post-link" href="/jekyll/2015/04/20/welcome-to-jekyll.html">Welcome to Jeksdfsyll!</a></strong><span class="post-date"> - 2015-04-20 17:43:59 +0900</span></li>
-      
-      <li><strong><a class="post-link" href="/jekyll/2015/04/19/welcome-to-jekyll.html">Welcome to Jekyll!</a></strong><span class="post-date"> - 2015-04-19 04:25:52 +0900</span></li>
-      
-    </ul>
-  </article>
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/Java">Java</a>,&nbsp;<a href="/tag/Project">Project</a>,&nbsp;<a href="/tag/MVC">MVC</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Spring+MVC%EB%A5%BC+%ED%99%9C%EC%9A%A9%ED%95%9C+%EA%B2%8C%EC%8B%9C%ED%8C%90+%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F26%2FSpring-MVC-Noticeboard.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Spring+MVC%EB%A5%BC+%ED%99%9C%EC%9A%A9%ED%95%9C+%EA%B2%8C%EC%8B%9C%ED%8C%90+%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F26%2FSpring-MVC-Noticeboard.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F26%2FSpring-MVC-Noticeboard.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=Spring+MVC%EB%A5%BC+%ED%99%9C%EC%9A%A9%ED%95%9C+%EA%B2%8C%EC%8B%9C%ED%8C%90+%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F26%2FSpring-MVC-Noticeboard.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=Spring+MVC%EB%A5%BC+%ED%99%9C%EC%9A%A9%ED%95%9C+%EA%B2%8C%EC%8B%9C%ED%8C%90+%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F26%2FSpring-MVC-Noticeboard.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/03/26/Spring-MVC-Noticeboard.html') + '&title=Spring MVC를 활용한 게시판 구축하기'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
 
 </div>
 </div>
-<br>
 
     </div>
 

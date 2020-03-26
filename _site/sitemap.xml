@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/spring/2020/03/26/Spring-MVC-Noticeboard.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/web/2020/03/25/Cloud-Computing.html</loc>
     </url>
     
@@ -205,6 +209,22 @@
     
     <url>
         <loc>http://localhost:4000/tag/server/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/project/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/mvc/</loc>
     </url>
     
     
