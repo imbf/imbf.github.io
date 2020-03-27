@@ -33,15 +33,6 @@ tags: Spring Java Project MVC
 
 ---
 
-1. intellij를 실행해서 create New Project를 클릭한다.
-2. 프로젝트 관리 툴로써 Maven을 사용할 것이기 때문에 Maven을 클릭하고 Next를 누른다.
-3. 본인이 원하는 디렉토리에 원하는 이름의 프로젝트명을 입력하고 프로젝트를 생성한다.
-4. Spring MVC 프레임워크를 프로젝트에 추가한다. (web 디렉토리가 자동 추가 될것이다.)
-
-
-
-
-
 
 
 
