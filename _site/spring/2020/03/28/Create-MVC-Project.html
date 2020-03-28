@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
+
+
+  <title>Intellij에서 스프링 MVC Project 생성하기</title>
+  <meta name="description" content="이 글에서는 Intellij를 활용해서 Spring MVC Project를 생성 및 설정하는 방법에 대해 소개할 것이다.">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="이 글에서는 Intellij를 활용해서 Spring MVC Project를 생성 및 설정하는 방법에 대해 소개할 것이다." />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/03/28/Create-MVC-Project.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="Intellij에서 스프링 MVC Project 생성하기" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Intellij에서 스프링 MVC Project 생성하기">
+  <meta name="twitter:description" content="이 글에서는 Intellij를 활용해서 Spring MVC Project를 생성 및 설정하는 방법에 대해 소개할 것이다.">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/03/28/Create-MVC-Project.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/03/28/Create-MVC-Project.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Intellij에서 스프링 MVC Project 생성하기</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">March 28, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Spring">Spring</a> (default) -->
+    <a href="/category/Spring">Spring</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>이 글에서는 <strong>Intellij를 활용해서 Spring MVC Project를 생성 및 설정</strong>하는 방법에 대해 소개할 것이다.</p>
+
+<blockquote>
+  <p><strong>[사용한 개발 환경]</strong></p>
+
+  <p>자바 : Java8</p>
+
+  <p>운영체제: macOS Catalina</p>
+
+  <p>개발 도구: IntelliJ IDEA ULTIMATE</p>
+
+  <p>프레임워크: Spring MVC + Maven</p>
+
+  <p>서버: Tomcat 8.5.53</p>
+</blockquote>
+
+<hr />
+
+<h2 id="1-project-생성하기">1. Project 생성하기</h2>
+
+<hr />
+
+<p>Intellij를 실행시켜서 가장 첫 번째 요소인 <strong>Create New Project</strong>를 클릭한다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-1.png" style="width:50%" /></p>
+
+<p><strong>Maven을 프로젝트 관리 도구</strong>로써 사용하기 위해 클릭하면 
+다음과 같은 화면이 나오는데 Project SDK에 <strong>프로젝트에서 사용할 자바 버전</strong>(필자는 자바8 사용)을 입력하고 Next를 누른다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-2.png" style="width:70%" /></p>
+
+<p><strong>자신의 프로젝트를 식별해주는 고유 아이디인 GroupId</strong>를 프로젝트에서 컨트롤하는 도메인 이름과 동일하게 입력.</p>
+
+<p><strong>버전 정보를 생략한 이름(jar)인 ArtifactId</strong>를 프로젝트 이름과 동일하게 입력.</p>
+
+<p>모든 정보를 입력 하였으면 Next를 클릭한다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-3.png" style="width:90%" /></p>
+
+<p>프로젝트가 생성되면 자동으로 Import를 활성화 해주는 기능인 <strong>Enable Auto-Import</strong>를 클릭한다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-4.png" style="width:90%" /></p>
+
+<hr />
+
+<h2 id="2-spring-mvc-설정하기">2. Spring MVC 설정하기</h2>
+
+<hr />
+
+<p>Spring MVC를 사용하기위해 루트 디렉토리에서 우클릭을 한 후 <strong>Add Framework Support…</strong>를 클릭한다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-5.png" style="width:90%" /></p>
+
+<p><strong>Spring MVC(5.2.3.RELEASE)</strong>를 선택하고 OK 클릭</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-6.png" style="width:80%" /></p>
+
+<p>그러면 다음과 같이 Web 디렉토리와 파일들이 자동으로 생긴 것을 볼 수 있다.</p>
+<ul>
+  <li><strong>applicationContext.xml</strong> : 빈(Bean) 설정</li>
+  <li><strong>dispatcher-servlet.xml</strong> : 내부 웹 관련 처리 설정</li>
+  <li><strong>web.xml</strong> : Web Application의 설정은 위한 deployment descriptor</li>
+</ul>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-7.png" style="width:50%" /></p>
+
+<hr />
+
+<h2 id="3-tomcat-설정하기">3. Tomcat 설정하기</h2>
+
+<hr />
+
+<p>SpringBoot에는 내장 Tomcat이 있지만 Spring에는 존재하지 않는다. 따라서 우리는 프로젝트 서버인 Tomcat을 설정해줘야 한다.</p>
+
+<p>우측 상단 툴바에서 <strong>Add Configuration…</strong> 클릭</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-8.png" style="width:90%" /></p>
+
+<p><strong>+</strong> 버튼을 눌러서 <strong>Local Tomcat Server</strong> 를 선택하고 생성한다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-9.png" style="width:90%" /></p>
+
+<p>상단에 <strong>적절한 이름</strong>을 입력한 후 <strong>톰캣 Fix 설정</strong>을 해주기 위해 Fix를 클릭한다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-10.png" style="width:90%" /></p>
+
+<p>Deployment 화면으로 이동되면 <strong>Application context</strong>를 <strong>/</strong>로 입력하면 톰캣 Fix 설정이 완료된다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-11.png" style="width:90%" /></p>
+
+<hr />
+
+<h2 id="4-library-설정하기">4. Library 설정하기</h2>
+
+<hr />
+
+<p>Spring MVC를 선택하여 프로젝트를 생성하였고 Tomcat 서버도 연동하였지만 서버를 시작하면 에러가 발생한다. 이유가 무엇일까?</p>
+
+<p>그렇다. <strong>Spring, Spring MVC library</strong>를 사용하기 위해서는 <u>추가적인 작업</u>이 필요하다.</p>
+
+<p><strong>Project Structure</strong> 창을 띄워서 <strong>Artifacts 탭</strong>을 클릭하면 아래와 같은 화면을 볼 수 있다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-12.png" style="width:90%" /></p>
+
+<p>우측에 <strong>Available Elements</strong> 위치한 것들이 <strong>이용 가능한 Library</strong> 들인데 사용하기 위해서는 
+double-click 클릭 혹은 drag-and-drop으로 <strong>좌측의 WEB-INF/lib/</strong> 위치로 다음과 같이 옮겨야 한다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-13.png" style="width:70%" /></p>
+
+<p>이제 라이브러리 설정도 완료 되었으니 Spring MVC 프로젝트를 시작할 준비는 끝났다!! 한번 서버를 시작 해 보자.</p>
+
+<p>실행결과는 다음과 같이 index.jsp 파일이 브라우저에 보여지는 것을 알수 있다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-14.png" style="width:100%" /></p>
+
+<hr />
+
+<h2 id="5-spring-mvc-프로젝트-활용">5. Spring MVC 프로젝트 활용</h2>
+
+<hr />
+
+<p>잘 구성된 Spring MVC 프로젝트를 간단하게 활용해 보자.</p>
+
+<h3 id="5-1-자바-컨트롤러-파일-생성">5-1. 자바 컨트롤러 파일 생성</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.text.DateFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Locale</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Controller</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.ui.Model</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.ResponseBody</span><span class="o">;</span>
+
+<span class="cm">/**
+ * Handles requests for the application home page.
+ */</span>
+<span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HomeController</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="nc">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="nc">HomeController</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+    <span class="cm">/**
+     * Simply selects the home view to render by returning its name.
+     */</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">home</span><span class="o">(</span><span class="nc">Locale</span> <span class="n">locale</span><span class="o">,</span> <span class="nc">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Welcome home! The client locale is {}."</span><span class="o">,</span> <span class="n">locale</span><span class="o">);</span>
+
+        <span class="nc">Date</span> <span class="n">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">();</span>
+        <span class="nc">DateFormat</span> <span class="n">dateFormat</span> <span class="o">=</span> <span class="nc">DateFormat</span><span class="o">.</span><span class="na">getDateTimeInstance</span><span class="o">(</span><span class="nc">DateFormat</span><span class="o">.</span><span class="na">LONG</span><span class="o">,</span> <span class="nc">DateFormat</span><span class="o">.</span><span class="na">LONG</span><span class="o">,</span> <span class="n">locale</span><span class="o">);</span>
+
+        <span class="nc">String</span> <span class="n">formattedDate</span> <span class="o">=</span> <span class="n">dateFormat</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">date</span><span class="o">);</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"serverTime"</span><span class="o">,</span> <span class="n">formattedDate</span> <span class="o">);</span>
+
+        <span class="k">return</span> <span class="s">"home"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/show"</span><span class="o">)</span>
+    <span class="nd">@ResponseBody</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">show</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"&lt;h1&gt;show&lt;/h1&gt;"</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="highlighter-rouge">@Controller</code> : 이 어노테이션을 붙이면 dispatcher-servlet.xml에서 이것을 인식하여 <strong>컨트롤러로 등록</strong>함.</li>
+  <li><code class="highlighter-rouge">@RequestMapping</code> : 스프링은 <strong>HandlerMppaing에 의해 컨트롤러가 결정</strong>된다. 이 <strong>컨트롤러에서 HandlerAdapter에 의해 실행 메서드가 결정</strong>되는 데 <strong>@RequestMapping 어노테이션이 그 정보를 제공해 준다.</strong> value에 해당하는 url이 GET 방식으로 요청이 들어올 때 해당 메서드를 실행한다.</li>
+  <li>home 메서드는 serverTime이라는 속성을 Model에 추가하고 이 값은 formattedDate 변수 안에 담긴 현재 날짜 정보를 담고있다. 이 정보는 <strong>JSP에서 클라이언트에게 전달할 HTML문서를 만들 때 쓰인다. 여기서 모델은 어떤 구조화된 데이터를 담는 객체</strong>라고 보면 된다.</li>
+  <li>마지막으로 “home” 문자열을 반환하는 데 이 문자열은 나중에 <strong>servlet-context.xml에 설정된 prefix와 suffix 정보를 참조하여 /WEB-INF/home.jsp 파일을 찾는 정보를 제공</strong>한다.</li>
+</ul>
+
+<h3 id="5-2-메이븐-설정-파일pomxml-설정">5-2. 메이븐 설정 파일(pom.xml) 설정</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span>
+         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+         <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+
+    <span class="nt">&lt;groupId&gt;</span>groupId<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>mvc<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>slf4j-api<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.7.30<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div></div>
+<ul>
+  <li>Java Logging API인 slf4j를 사용하기 위해 라이브러리 의존성을 추가해준다.</li>
+</ul>
+
+<h3 id="5-3-webxml-설정">5-3. web.xml 설정</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;web-app</span> <span class="na">xmlns=</span><span class="s">"http://xmlns.jcp.org/xml/ns/javaee"</span>
+         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+         <span class="na">xsi:schemaLocation=</span><span class="s">"http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"</span>
+         <span class="na">version=</span><span class="s">"4.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;context-param&gt;</span>
+        <span class="nt">&lt;param-name&gt;</span>contextConfigLocation<span class="nt">&lt;/param-name&gt;</span>
+        <span class="nt">&lt;param-value&gt;</span>/WEB-INF/applicationContext.xml<span class="nt">&lt;/param-value&gt;</span>
+    <span class="nt">&lt;/context-param&gt;</span>
+    <span class="nt">&lt;listener&gt;</span>
+        <span class="nt">&lt;listener-class&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="nt">&lt;/listener-class&gt;</span>
+    <span class="nt">&lt;/listener&gt;</span>
+    <span class="nt">&lt;servlet&gt;</span>
+        <span class="nt">&lt;servlet-name&gt;</span>dispatcher<span class="nt">&lt;/servlet-name&gt;</span>
+        <span class="nt">&lt;servlet-class&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="nt">&lt;/servlet-class&gt;</span>
+        <span class="nt">&lt;load-on-startup&gt;</span>1<span class="nt">&lt;/load-on-startup&gt;</span>
+    <span class="nt">&lt;/servlet&gt;</span>
+    <span class="nt">&lt;servlet-mapping&gt;</span>
+        <span class="nt">&lt;servlet-name&gt;</span>dispatcher<span class="nt">&lt;/servlet-name&gt;</span>
+        <span class="nt">&lt;url-pattern&gt;</span>/<span class="nt">&lt;/url-pattern&gt;</span>
+    <span class="nt">&lt;/servlet-mapping&gt;</span>
+<span class="nt">&lt;/web-app&gt;</span>
+</code></pre></div></div>
+<ul>
+  <li><strong>DispatcherServlet 클래스를 서블릿으로 정의</strong>하며 클라이언트가 <strong>/로 요청</strong>을 하면 모두 <strong>DispatcherServlet 클래스로 랩핑</strong>하도록 정의하고 있다.</li>
+  <li>ContextLoaderListener 클래스는 스프링 설정 파일(디폴트에서 파일명 applicationContext.xml)을 로드하면 ServletContextListener 인터페이스를 구현하고 있기 때문에 ServletContext 인스턴스 생성 시(톰켓으로 어플리케이션이 로드된 때)에 호출된다. <strong>즉, ContextLoaderListener 클래스는 DispatcherServlet 클래스의 로드보다 먼저 동작하여 비즈니스 로직층을 정의한 스프링 설정 파일을 로드한다.</strong></li>
+</ul>
+
+<h3 id="5-4-dispatcher-servletxml-설정">5-4. Dispatcher-servlet.xml 설정</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
+       <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xmlns:mvc=</span><span class="s">"http://www.springframework.org/schema/mvc"</span>
+       <span class="na">xmlns:context=</span><span class="s">"http://www.springframework.org/schema/context"</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;context:component-scan</span> <span class="na">base-package=</span><span class="s">"controller"</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"prefix"</span> <span class="na">value=</span><span class="s">"/WEB-INF"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"suffix"</span> <span class="na">value=</span><span class="s">".jsp"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+</code></pre></div></div>
+<ul>
+  <li>매번 스프링 설정 파일에 Bean으로 등록하기 어려우니까 base-package를 기준으로 @Component애노테이션을 가진 속성을 찾아서 Bean으로 등록해주기 위한 코드가 component-scan 태그이다.</li>
+  <li>이름으로부터 실제로 사용할 뷰 객체를 결정해 주는 ViewResolver가 필요하기 때문에 dispatcherServlet은 기본 뷰 리졸버인 InternalResourceViewResolver를 사용한다.
+InternalResourceViewResolver는 JSP를 뷰로 사용할 때 쓰인다. 컨트롤러에서 리턴하는 뷰 이름에 접두,접미어를 붙여서 JSP페이지의 경로를 찾는다.
+즉, 뷰 리졸버는 “/WEB-INF/”라는 위치의 이름.JSP 뷰를 참고해서 모델을 이용하여 페이지를 만든다.</li>
+</ul>
+
+<h3 id="5-5-jspview-페이지-작성">5-5. jsp(View) 페이지 작성</h3>
+
+<p>jsp란 Java 언어를 기반으로 하는 Server Side 스크립트 언어이다. 이 프로젝트에서 작성할 home.jsp는 다음과 같다.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&lt;</span>%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Home<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;h1&gt;</span>
+    Hello world!
+<span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;P&gt;</span>  The time on the server is ${serverTime}. <span class="nt">&lt;/P&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<ul>
+  <li>serverTime이라는 속성에서 값을 가져와 html페이지를 만들어서 client에게 전달한다.</li>
+</ul>
+
+<h3 id="5-6-실행-결과">5-6. 실행 결과</h3>
+
+<p>위의 프로젝트를 실행한 결과는 다음과 같다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-Basic-Project-15.png" style="width:100%" /></p>
+
+<hr />
+<blockquote>
+  <p>참조</p>
+  <ul>
+    <li>https://engkimbs.tistory.com/688</li>
+    <li>https://whitepaek.tistory.com/41</li>
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/Java">Java</a>,&nbsp;<a href="/tag/Project">Project</a>,&nbsp;<a href="/tag/MVC">MVC</a>,&nbsp;<a href="/tag/intellij">intellij</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Intellij%EC%97%90%EC%84%9C+%EC%8A%A4%ED%94%84%EB%A7%81+MVC+Project+%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F28%2FCreate-MVC-Project.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Intellij%EC%97%90%EC%84%9C+%EC%8A%A4%ED%94%84%EB%A7%81+MVC+Project+%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F28%2FCreate-MVC-Project.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F28%2FCreate-MVC-Project.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=Intellij%EC%97%90%EC%84%9C+%EC%8A%A4%ED%94%84%EB%A7%81+MVC+Project+%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F28%2FCreate-MVC-Project.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=Intellij%EC%97%90%EC%84%9C+%EC%8A%A4%ED%94%84%EB%A7%81+MVC+Project+%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F03%2F28%2FCreate-MVC-Project.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/03/28/Create-MVC-Project.html') + '&title=Intellij에서 스프링 MVC Project 생성하기'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
