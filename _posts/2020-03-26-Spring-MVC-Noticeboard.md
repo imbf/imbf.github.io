@@ -33,6 +33,7 @@ tags: Spring Java Project MVC
 
 ---
 
+스프링 MVC 프로젝트 생성하는 방법은 다음의 포스팅에서 참고해보자.
 
 
 
