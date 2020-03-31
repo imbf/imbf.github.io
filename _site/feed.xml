@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 28 Mar 2020 11:59:54 +0900</pubDate>
-    <lastBuildDate>Sat, 28 Mar 2020 11:59:54 +0900</lastBuildDate>
+    <pubDate>Wed, 01 Apr 2020 08:27:23 +0900</pubDate>
+    <lastBuildDate>Wed, 01 Apr 2020 08:27:23 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -73,7 +73,7 @@
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;applicationContext.xml&lt;/strong&gt; : 빈(Bean) 설정&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;dispatcher-servlet.xml&lt;/strong&gt; : 내부 웹 관련 처리 설정&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;web.xml&lt;/strong&gt; : Web Application의 설정은 위한 deployment descriptor&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;web.xml&lt;/strong&gt; : Web Application의 설정을 위한 deployment descriptor&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-7.png&quot; style=&quot;width:50%&quot; /&gt;&lt;/p&gt;
@@ -185,7 +185,14 @@ double-click 클릭 혹은 drag-and-drop으로 &lt;strong&gt;좌측의 WEB-INF/l
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@Controller&lt;/code&gt; : 이 어노테이션을 붙이면 dispatcher-servlet.xml에서 이것을 인식하여 &lt;strong&gt;컨트롤러로 등록&lt;/strong&gt;함.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@Controller&lt;/code&gt;&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@Component&lt;/code&gt;보다 더 전문화된 역할을 수행한다. (실제로 @Controller는 @Component 애노테이션을 포함한다.)&lt;/li&gt;
+      &lt;li&gt;이 어노테이션을 붙이면 dispatcher-servlet.xml에서 이것을 인식하여 &lt;strong&gt;컨트롤러로 등록&lt;/strong&gt;함.&lt;/li&gt;
+      &lt;li&gt;클래스 경로 스캔을 통해 구현 클래스를 autoscan 할 수 있습니다.&lt;/li&gt;
+      &lt;li&gt;일반적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestMapping&lt;/code&gt; 애노테이션을 기반으로 어노테이션이있는 Handler 메소드와 함께 사용됩니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestMapping&lt;/code&gt; : 스프링은 &lt;strong&gt;HandlerMppaing에 의해 컨트롤러가 결정&lt;/strong&gt;된다. 이 &lt;strong&gt;컨트롤러에서 HandlerAdapter에 의해 실행 메서드가 결정&lt;/strong&gt;되는 데 &lt;strong&gt;@RequestMapping 어노테이션이 그 정보를 제공해 준다.&lt;/strong&gt; value에 해당하는 url이 GET 방식으로 요청이 들어올 때 해당 메서드를 실행한다.&lt;/li&gt;
   &lt;li&gt;home 메서드는 serverTime이라는 속성을 Model에 추가하고 이 값은 formattedDate 변수 안에 담긴 현재 날짜 정보를 담고있다. 이 정보는 &lt;strong&gt;JSP에서 클라이언트에게 전달할 HTML문서를 만들 때 쓰인다. 여기서 모델은 어떤 구조화된 데이터를 담는 객체&lt;/strong&gt;라고 보면 된다.&lt;/li&gt;
   &lt;li&gt;마지막으로 “home” 문자열을 반환하는 데 이 문자열은 나중에 &lt;strong&gt;servlet-context.xml에 설정된 prefix와 suffix 정보를 참조하여 /WEB-INF/home.jsp 파일을 찾는 정보를 제공&lt;/strong&gt;한다.&lt;/li&gt;
@@ -244,7 +251,7 @@ double-click 클릭 혹은 drag-and-drop으로 &lt;strong&gt;좌측의 WEB-INF/l
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;DispatcherServlet 클래스를 서블릿으로 정의&lt;/strong&gt;하며 클라이언트가 &lt;strong&gt;/로 요청&lt;/strong&gt;을 하면 모두 &lt;strong&gt;DispatcherServlet 클래스로 랩핑&lt;/strong&gt;하도록 정의하고 있다.&lt;/li&gt;
-  &lt;li&gt;ContextLoaderListener 클래스는 스프링 설정 파일(디폴트에서 파일명 applicationContext.xml)을 로드하면 ServletContextListener 인터페이스를 구현하고 있기 때문에 ServletContext 인스턴스 생성 시(톰켓으로 어플리케이션이 로드된 때)에 호출된다. &lt;strong&gt;즉, ContextLoaderListener 클래스는 DispatcherServlet 클래스의 로드보다 먼저 동작하여 비즈니스 로직층을 정의한 스프링 설정 파일을 로드한다.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;ContextLoaderListener 클래스는 스프링 설정 파일(디폴트에서 파일명 applicationContext.xml)을 로드하면 ServletContextListener 인터페이스를 구현하고 있기 때문에 ServletContext 인스턴스 생성 시(톰켓으로 어플리케이션이 로드된 때)에 호출된다. &lt;strong&gt;즉, ContextLoaderListener 클래스는 DispatcherServlet 클래스의 로드보다 먼저 동작하여 &lt;u&gt;비즈니스 로직층을 정의한 스프링 설정 파일을 로드&lt;/u&gt;한다.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;5-4-dispatcher-servletxml-설정&quot;&gt;5-4. Dispatcher-servlet.xml 설정&lt;/h3&gt;
@@ -264,10 +271,10 @@ double-click 클릭 혹은 drag-and-drop으로 &lt;strong&gt;좌측의 WEB-INF/l
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;ul&gt;
-  &lt;li&gt;매번 스프링 설정 파일에 Bean으로 등록하기 어려우니까 base-package를 기준으로 @Component애노테이션을 가진 속성을 찾아서 Bean으로 등록해주기 위한 코드가 component-scan 태그이다.&lt;/li&gt;
-  &lt;li&gt;이름으로부터 실제로 사용할 뷰 객체를 결정해 주는 ViewResolver가 필요하기 때문에 dispatcherServlet은 기본 뷰 리졸버인 InternalResourceViewResolver를 사용한다.
+  &lt;li&gt;매번 스프링 설정 파일에 Bean으로 등록하기 어려우니까 base-package인 controller 패키지를 기준으로 &lt;strong&gt;@Component애노테이션을 가진 속성을 찾아서 Bean으로 등록&lt;/strong&gt;해주기 위한 코드가 component-scan 태그이다. ()&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;이름으로부터 실제로 사용할 뷰 객체를 결정해 주는 ViewResolver가 필요&lt;/strong&gt;하기 때문에 dispatcherServlet은 기본 뷰 리졸버인 InternalResourceViewResolver를 사용한다.
 InternalResourceViewResolver는 JSP를 뷰로 사용할 때 쓰인다. 컨트롤러에서 리턴하는 뷰 이름에 접두,접미어를 붙여서 JSP페이지의 경로를 찾는다.
-즉, 뷰 리졸버는 “/WEB-INF/”라는 위치의 이름.JSP 뷰를 참고해서 모델을 이용하여 페이지를 만든다.&lt;/li&gt;
+&lt;strong&gt;즉, 뷰 리졸버는 “/WEB-INF/”라는 위치의 이름.JSP 뷰를 참고해서 모델을 이용하여 페이지를 만든다.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;5-5-jspview-페이지-작성&quot;&gt;5-5. jsp(View) 페이지 작성&lt;/h3&gt;
@@ -353,6 +360,8 @@ InternalResourceViewResolver는 JSP를 뷰로 사용할 때 쓰인다. 컨트롤
 &lt;h2 id=&quot;1-스프링-mvc-프로젝트-생성&quot;&gt;1. 스프링 MVC 프로젝트 생성&lt;/h2&gt;
 
 &lt;hr /&gt;
+
+&lt;p&gt;스프링 MVC 프로젝트 생성하는 방법은 다음의 포스팅에서 참고해보자.&lt;/p&gt;
 
 &lt;hr /&gt;
 
