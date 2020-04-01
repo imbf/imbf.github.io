@@ -287,8 +287,8 @@ jsp란 Java 언어를 기반으로 하는 Server Side 스크립트 언어이다.
 
 위의 프로젝트를 실행한 결과는 다음과 같다.
 
-<img src="/assets/spring/Spring-MVC-Basic-Project-15.png" style="width:100%">
-
+<a href="/2020-03-26-Spring-MVC-Noticeboard.md" >
+</a>
 
 ---
 > 참조 
