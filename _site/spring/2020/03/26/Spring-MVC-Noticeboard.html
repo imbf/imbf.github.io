@@ -202,9 +202,19 @@
 </section>
 
 <article class="post-content">
-  <p>이 글은 Spring MVC를 활용한 게시판 구축하는 과정을 포스팅한 글이다.</p>
+  <p><strong>이 글은 Spring MVC를 활용한 게시판 구축하는 과정을 포스팅한 글이다.</strong></p>
 
-<p>필자는 개발 툴으로써 Intellij Ultimate를 사용하였음을 알리고 포스팅을 시작하겠다.</p>
+<blockquote>
+  <p><strong>[사용한 개발 환경]</strong></p>
+
+  <p>자바 : Java8</p>
+
+  <p>운영체제: macOS Catalina</p>
+
+  <p>개발 도구: IntelliJ IDEA ULTIMATE</p>
+
+  <p>서버: Tomcat 8.5.53</p>
+</blockquote>
 
 <hr />
 
@@ -218,7 +228,7 @@
 
 <p><img src="/assets/spring/Spring-MVC-Noticeboard-1.jpg" style="width:70%" /></p>
 
-<p>이를 기반으로 게시판을 구현해보자.</p>
+<p>이를 기반으로 게시판을 구축해보자.</p>
 
 <p>스프링 MVC의 특징을 중심으로 간단하게 만드는 게시판이기 때문에 페이징 기능과 검색 기능은 생략했다.</p>
 
@@ -228,7 +238,316 @@
 
 <hr />
 
-<p>스프링 MVC 프로젝트 생성하는 방법은 다음의 포스팅에서 참고해보자.</p>
+<p>스프링 MVC 프로젝트 생성을 위해 다음의 포스팅을 참고하자.</p>
+
+<p><a href="https://imbf.github.io/spring/2020/03/28/Create-MVC-Project.html"><strong>Intellij에서 스프링 MVC Project 생성하기</strong></a></p>
+
+<hr />
+
+<h2 id="2-인메모리-db-hsql-사용하기">2. 인메모리 DB HSQL 사용하기</h2>
+
+<hr />
+
+<p>게시판을 작성하려면 <strong>데이터를 저장할 데이터베이스</strong>가 필요하다. 이 프로젝트에서는 간단하게 사용해 볼 수 있는 <strong>인메모리(in-memory) DBMS중 HSQL(HyperSQL)</strong>을 사용할 것이다.</p>
+
+<p>이 프로젝트는 생성될 때 메이븐 기반으로 생성되기 때문에 라이브러리 관리는 간단하게 <strong>메이븐 설정 파일인 pom.xml에 HSQL에 대한 의존성만 추가</strong>하면 된다.</p>
+
+<p><strong>메이븐 설정 파일에 HSQL 의존성 추가하는 방법</strong></p>
+<ol>
+  <li>Maven Repository에 HyperSQL Database를 검색합니다.</li>
+  <li>pom.xml에 추가할 Maven용 텍스트 문자열을 복사합니다.</li>
+  <li>프로젝트의 pom.xml의 &lt;dependencies&gt;태그를 찾아 그 아래에 복사해둔 내용을 넣는다.</li>
+</ol>
+
+<p>다음으로는 HSQL을 사용하기 위해 <strong>스프링 프레임워크의 데이터베이스 지원 라이브러리의 의존성</strong>을 다음과 같이 추가한다.</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-jdbc<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${org.springframework-version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<p>HSQL을 Bean으로 등록하기 위해 다음의 태그를 applicationContext.xml에 추가해 준다. 추가적으로 태그의 속성으로 두 개의 SQL파일 정보를 추가한다.</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;jdbc:embedded-database</span> <span class="na">id=</span><span class="s">"dataSource"</span> <span class="na">type=</span><span class="s">"HSQL"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;jdbc:script</span> <span class="na">location=</span><span class="s">"classpath:BoardSchema.sql"</span><span class="nt">&gt;&lt;/jdbc:script&gt;</span>
+    <span class="nt">&lt;jdbc:script</span> <span class="na">location=</span><span class="s">"classpath:BoardData.sql"</span><span class="nt">&gt;&lt;/jdbc:script&gt;</span>
+<span class="nt">&lt;/jdbc:embedded-database&gt;</span>
+</code></pre></div></div>
+
+<p>두 개의 SQL파일 정보는 다음과 같다.</p>
+
+<p>/src/main/resources/BoardSchema.sql</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">BOARD</span> <span class="err">{</span>
+    <span class="n">seq</span> <span class="nb">INT</span> <span class="k">GENERATED</span> <span class="n">ALWAYS</span> <span class="k">AS</span> <span class="k">IDENTITY</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">,</span>
+    <span class="n">title</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+    <span class="n">content</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+    <span class="n">writer</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+    <span class="n">password</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+    <span class="n">regDate</span> <span class="nb">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+    <span class="n">cnt</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="err">}</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>/src/main/resources/BoardData.sql</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">BOARD</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">regDate</span><span class="p">,</span> <span class="n">cnt</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="s1">'t1'</span><span class="p">,</span> <span class="s1">'c1'</span><span class="p">,</span> <span class="s1">'w1'</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="s1">'2014-09-09 14:21:12'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">BOARD</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">regDate</span><span class="p">,</span> <span class="n">cnt</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="s1">'t2'</span><span class="p">,</span> <span class="s1">'c2'</span><span class="p">,</span> <span class="s1">'w1'</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="s1">'2014-09-09 14:21:12'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">BOARD</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">regDate</span><span class="p">,</span> <span class="n">cnt</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="s1">'t3'</span><span class="p">,</span> <span class="s1">'c3'</span><span class="p">,</span> <span class="s1">'w1'</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="s1">'2014-09-09 14:21:12'</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">BOARD</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">regDate</span><span class="p">,</span> <span class="n">cnt</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="s1">'t4'</span><span class="p">,</span> <span class="s1">'c4'</span><span class="p">,</span> <span class="s1">'w1'</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="s1">'2014-09-09 14:21:12'</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">BOARD</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">regDate</span><span class="p">,</span> <span class="n">cnt</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="s1">'t5'</span><span class="p">,</span> <span class="s1">'c5'</span><span class="p">,</span> <span class="s1">'w1'</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="s1">'2014-09-09 14:21:12'</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">BOARD</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">regDate</span><span class="p">,</span> <span class="n">cnt</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="s1">'t6'</span><span class="p">,</span> <span class="s1">'c5'</span><span class="p">,</span> <span class="s1">'w1'</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="s1">'2014-09-09 14:21:12'</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">BOARD</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">regDate</span><span class="p">,</span> <span class="n">cnt</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="s1">'t7'</span><span class="p">,</span> <span class="s1">'c5'</span><span class="p">,</span> <span class="s1">'w1'</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="s1">'2014-09-09 14:21:12'</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이로써 HSQL을 데이터베이스로 활용하기 위한 준비는 모두 끝났다.</p>
+
+<hr />
+
+<h2 id="3-dto와-mybatis를-이용한-dao-구현">3. DTO와 MyBatis를 이용한 DAO 구현</h2>
+
+<hr />
+
+<p>데이터베이스를 다루기 위해서 <strong>SQL Mapper인 MyBatis</strong>를 사용해 보자.</p>
+
+<p>중대형 프로젝트에서 스프링 프레임워크를 적용하는 경우 다음과 같이 모듈을 구성한다. 참고해서 DTO를 구현해 보자.</p>
+
+<p>참고로 <strong>DTO(Data Transfer Object)란 VO(Value Object)로 바꿔 말할 수 있는데 계층간 데이터 교환을 위한 Java Beans를 말합니다.</strong></p>
+
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-2.jpg" style="width:100%" /></p>
+
+<p>DTO는 일반적으로 <strong>데이터베이스의 테이블 구조를 그대로 반영</strong>한다. BoardDTO라는 이름으로 클래스를 생성하자.</p>
+
+<p><strong>BoardDTO.java</strong> (Data Transfer Object)</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">board.domain</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.apache.ibatis.type.Alias</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.sql.Timestamp</span><span class="o">;</span>
+
+<span class="nd">@Alias</span><span class="o">(</span><span class="s">"boardDTO"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BoardDTO</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">seq</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">content</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">writer</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">password</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">Timestamp</span> <span class="n">regDate</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">cnt</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">BoardDTO</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">BoardDTO</span><span class="o">(</span><span class="nc">String</span> <span class="n">title</span><span class="o">,</span> <span class="nc">String</span> <span class="n">content</span><span class="o">,</span> <span class="nc">String</span> <span class="n">writer</span><span class="o">,</span> <span class="kt">int</span> <span class="n">password</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">content</span> <span class="o">=</span> <span class="n">content</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">writer</span> <span class="o">=</span> <span class="n">writer</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">password</span> <span class="o">=</span> <span class="n">password</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// getter, setter 생략</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>이제 MyBatis를 사용하기 위해 MyBatis의 SqlMapClient에 PSA를 적용한 어댑터를 Bean으로 등록해보자.</p>
+
+<p>sqlSessionFactory Bean에 MyBatis 설정 파일, SQL 스크립트 파일을 속성으로 추가.</p>
+
+<p><strong>applicationContext.xml</strong> (스프링 설정 파일)</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">"http://www.springframework.org/schema/beans"</span>
+       <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xmlns:jdbc=</span><span class="s">"http://www.springframework.org/schema/jdbc"</span>
+       <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd"</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- java database connection --&gt;</span>
+    <span class="nt">&lt;jdbc:embedded-database</span> <span class="na">id=</span><span class="s">"dataSource"</span> <span class="na">type=</span><span class="s">"HSQL"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;jdbc:script</span> <span class="na">location=</span><span class="s">"classpath:BoardSchema.sql"</span><span class="nt">&gt;&lt;/jdbc:script&gt;</span>
+        <span class="nt">&lt;jdbc:script</span> <span class="na">location=</span><span class="s">"classpath:BoardData.sql"</span><span class="nt">&gt;&lt;/jdbc:script&gt;</span>
+    <span class="nt">&lt;/jdbc:embedded-database&gt;</span>
+
+    <span class="c">&lt;!-- sqlSessionFactory 인터페이스를 구현하는 sqlSessionFactoryBean클래스 Bean 생성 (다양한 속성을 채워서 생성)--&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"sqlSessionFactory"</span> <span class="na">class=</span><span class="s">"org.mybatis.spring.SqlSessionFactoryBean"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSource"</span> <span class="na">ref=</span><span class="s">"dataSource"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"configLocation"</span> <span class="na">value=</span><span class="s">"classpath:sqlmap/config/mybatis-config.xml"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"mapperLocations"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;list&gt;</span>
+                <span class="nt">&lt;value&gt;</span>classpath:sqlmap/sqlmap-board.xml<span class="nt">&lt;/value&gt;</span>
+            <span class="nt">&lt;/list&gt;</span>
+        <span class="nt">&lt;/property&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+
+    <span class="c">&lt;!-- sqlSessionTemplate을 Spring Bean으로 등록 --&gt;</span>
+    <span class="c">&lt;!-- sqlSessionTemplate객체 생성시 sqlSessionFactory속성에 sqlSessionFactoryBean객체로 채워진다. (Singleton) --&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"sqlSessionTemplate"</span> <span class="na">class=</span><span class="s">"org.mybatis.spring.SqlSessionTemplate"</span> <span class="na">destroy-method=</span><span class="s">"clearCache"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;constructor-arg</span> <span class="na">ref=</span><span class="s">"sqlSessionFactory"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+</code></pre></div></div>
+
+<p><strong>mybatis-config.xml</strong> (MyBatis 설정 파일)</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE configuration PUBLIC "-//mybatis.org//DTO config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span>
+
+<span class="nt">&lt;configuration&gt;</span>
+    <span class="c">&lt;!-- 마이바티스 작동 규칙 정의 --&gt;</span>
+    <span class="nt">&lt;settings&gt;</span>
+        <span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">"cacheEnabled"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">"useGeneratedKeys"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">"mapUnderscoreToCamelCase"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/settings&gt;</span>
+
+    <span class="nt">&lt;typeAliases&gt;</span>
+        <span class="nt">&lt;typeAlias</span> <span class="na">alias=</span><span class="s">"boardDTO"</span> <span class="na">type=</span><span class="s">"board.domain.BoardDTO"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/typeAliases&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div></div>
+
+<p><strong>sqlmap-board.xml</strong> (SQL 스크립트 파일)</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span>
+<span class="nt">&lt;mapper</span> <span class="na">namespace=</span><span class="s">"boardDAO"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"list"</span> <span class="na">resultType=</span><span class="s">"boardDTO"</span><span class="nt">&gt;</span>
+        SELECT * FROM BOARD
+        ORDER BY seq
+    <span class="nt">&lt;/select&gt;</span>
+
+    <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"select"</span> <span class="na">parameterType=</span><span class="s">"int"</span> <span class="na">resultType=</span><span class="s">"boardDTO"</span><span class="nt">&gt;</span>
+        SELECT * FROM
+        BOARD WHERE seq=#{seq}
+    <span class="nt">&lt;/select&gt;</span>
+
+    <span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">"insert"</span> <span class="na">parameterType=</span><span class="s">"boardDTO"</span><span class="nt">&gt;</span>
+        INSERT INTO BOARD(title, content, writer, password, regDate, cnt)
+        VALUES (${title}, ${content}, ${writer}, #{password}, SYSDATE, 0);
+        <span class="nt">&lt;selectKey</span> <span class="na">keyProperty=</span><span class="s">"seq"</span> <span class="na">resultType=</span><span class="s">"Integer"</span><span class="nt">&gt;</span>
+            SELECT NVL(MAX(seq), 0) FROM BOARD
+        <span class="nt">&lt;/selectKey&gt;</span>
+    <span class="nt">&lt;/insert&gt;</span>
+
+    <span class="nt">&lt;update</span> <span class="na">id=</span><span class="s">"update"</span> <span class="na">parameterType=</span><span class="s">"boardDTO"</span><span class="nt">&gt;</span>
+        UPDATE BOARD SET title = #{title}, content = #{content}, writer = ${writer}
+        WHERE seq = #{seq}
+        AND password = #{password}
+    <span class="nt">&lt;/update&gt;</span>
+
+    <span class="nt">&lt;update</span> <span class="na">id=</span><span class="s">"updateCount"</span> <span class="na">parameterType=</span><span class="s">"int"</span><span class="nt">&gt;</span>
+        UPDATE BOARD SET
+        cnt = cnt + 1
+        WHERE seq = #{seq}
+    <span class="nt">&lt;/update&gt;</span>
+
+    <span class="nt">&lt;delete</span> <span class="na">id=</span><span class="s">"delete"</span> <span class="na">parameterType=</span><span class="s">"boardDTO"</span><span class="nt">&gt;</span>
+        DELETE FROM BOARD
+        WHERE seq = #{seq}
+        AND password = #{password}
+    <span class="nt">&lt;/delete&gt;</span>
+
+    <span class="nt">&lt;delete</span> <span class="na">id=</span><span class="s">"deleteAll"</span><span class="nt">&gt;</span>
+        DELETE FROM BOARD
+    <span class="nt">&lt;/delete&gt;</span>
+<span class="nt">&lt;/mapper&gt;</span>
+</code></pre></div></div>
+
+<p>MyBatis에 관한 설정 파일 및 스크립트 파일을 완성했다면 <strong>database의 data에 접근하기 위한 DAO(Data Access Object)를 만들어 보자</strong>.</p>
+
+<p>확장성을 고려해 BoardDao 인터페이스와 이를 구현하는 BoardDaoMyBatis 클래스를 만들어 보자.</p>
+
+<p><strong>BoardDao.java</strong> (Data Access Object Interface) : 확장성을 위함</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">board.domain</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">BoardDao</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">BoardDTO</span><span class="o">&gt;</span> <span class="nf">list</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">delete</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">deleteAll</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">update</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">insert</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="nc">BoardDTO</span> <span class="nf">select</span><span class="o">(</span><span class="kt">int</span> <span class="n">seq</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">updateReadCount</span><span class="o">(</span><span class="kt">int</span> <span class="n">seq</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>BoardDaoMyBatis.java</strong> (Dao를 구현하는 클래스)</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">board.domain</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.mybatis.spring.SqlSessionTemplate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Repository</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="nd">@Repository</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BoardDaoMyBatis</span> <span class="kd">implements</span> <span class="nc">BoardDao</span><span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">SqlSessionTemplate</span> <span class="n">sqlSessionTemplate</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span> <span class="c1">// sqlSessionTemplate Bean주입 (Sql맵핑 클라이언트를 설정하는 주입 Setter이다.)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSqlMapClient</span><span class="o">(</span><span class="nc">SqlSessionTemplate</span> <span class="n">sqlSessionTemplate</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">sqlSessionTemplate</span> <span class="o">=</span> <span class="n">sqlSessionTemplate</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">BoardDTO</span><span class="o">&gt;</span> <span class="nf">list</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// 인자로써 SQL 스크립트 파일에 명시된 id를 준다.</span>
+        <span class="k">return</span> <span class="n">sqlSessionTemplate</span><span class="o">.</span><span class="na">selectList</span><span class="o">(</span><span class="s">"list"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">delete</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 인자로써 SQL 스크립트 파일에 명시된 id와 parameterType의 객체를 준다.</span>
+        <span class="k">return</span> <span class="n">sqlSessionTemplate</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="s">"delete"</span><span class="o">,</span> <span class="n">boardDTO</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">deleteAll</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">sqlSessionTemplate</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="s">"deleteAll"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">update</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">sqlSessionTemplate</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="s">"update"</span><span class="o">,</span> <span class="n">boardDTO</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">insert</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">sqlSessionTemplate</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="s">"insert"</span><span class="o">,</span> <span class="n">boardDTO</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">BoardDTO</span> <span class="nf">select</span><span class="o">(</span><span class="kt">int</span> <span class="n">seq</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">sqlSessionTemplate</span><span class="o">.</span><span class="na">selectOne</span><span class="o">(</span><span class="s">"select"</span><span class="o">,</span> <span class="n">seq</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">updateReadCount</span><span class="o">(</span><span class="kt">int</span> <span class="n">seq</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">sqlSessionTemplate</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="s">"updateCount"</span><span class="o">,</span> <span class="n">seq</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<hr />
+
+<h2 id="4서비스-구현">4.서비스 구현</h2>
+
+<hr />
 
 <hr />
 
