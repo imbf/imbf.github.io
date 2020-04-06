@@ -29,7 +29,7 @@ tags: Spring Java Project MVC
 
 이를 그림으로 나타내면 다음과 같다.
 
-<img src="/assets/spring/Spring-MVC-Noticeboard-1.jpg" style="width:70%">
+<img src="/assets/spring/Spring-MVC-NoticeBoard-1.jpg" style="width:70%">
 
 이를 기반으로 게시판을 구축해보자.
 
@@ -505,9 +505,73 @@ Controller를 작성하고 서버를 실행해 localhost:8080/board/list에 요�
 
 <img src="/assets/spring/Spring-MVC-NoticeBoard-4.png" style="width:100%">
 
-이것은 프로젝트 라이브러리의 의존성간의 충돌이니 pom.xml을 활용해서 라이브러리 의존성을 다음과 같이 설정해주면 정상 결과가 뜰것이다.
+이것은 **프로젝트 라이브러리의 의존성간의 충돌**이니 pom.xml을 활용해서 라이브러리 의존성을 다음과 같이 설정해주면 정상 결과가 뜰것이다.
 
-<img src="/assets/spring/Spring-MVC-NoticeBoard-5.png" style="width:100%">
+<img src="/assets/spring/Spring-MVC-NoticeBoard-5.png" style="width:70%">
+
+이제 MVC에서 모델(Model)에 해당하는 부분을 구현해 보자. **모델은 컨트롤러에서 뷰로 전달해주는 정보다.** 
+스프링 MVC에서 모델을 생성하는 것은 **DispatcherServlet**의 역할이다.
+
+DispatcherServlet이 생성한 모델에 대한 참조 변수는 **@RequestMapping 어노테이션이 붙은 메서드에서 인자를 선언하기만 하면 자동으로 받을 수 있다.**
+모델을 사용할 수 있도록 list() 메서드에 Model 타입 인자를 만들어 주고 MVC 모델의 마지막 요소인 뷰를 사용하도록 코드를 변경해 보자.
+
+**BoardController.java의 list 메서드에 추가할 코드**
+```java
+@RequestMapping(value = "/board/list")
+public String list(Model model) { // 모델에 대한 참조변수를 인자로써 추가
+    // 모델에 속성을 추가
+    model.addAttribute("boardList", boardService.list());
+    return "WEB-INF/board/list";   // DispatcherServlet이 뷰를 선정하는 힌트
+}
+```
+DispatcherServlet은 dispatcher-servlet.xml설정 파일을 참고하여 web/WEB-INF/board/list.jsp를 뷰로써 보여준다.
+
+이제 list.jsp를 생성하자.
+
+**web/WEB-INF/board/list.jsp**
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Insert title here</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>NO</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+        </tr>
+        <c:forEach var="board" items="${boardList}" varStatus="loop">
+            <tr>
+                <td>${board.seq}</td>
+                <td><a href="<c:url value="/board/read/${board.seq}" /> ">${board.title}</a></td>
+                <td>${board.writer}</td>
+                <td>${board.regDate}</td>
+                <td>${board.cnt}</td>
+            </tr>
+        </c:forEach>
+    </table>
+    <a href="<c:url value="/board/list"/> ">새글</a>
+</body>
+</html>
+```
+
+위의 코드에서 볼 수 있는 것처럼 컨트롤러에서 모델에 담아서 보내준 정보인 `boardList`는 **EL 표기법인** `${boardList}`를 이용해서 쉽게 사용할 수 있다.
+
+모든 내용을 저장하고 서버를 다시 시작해 /board/list로 요청을 보내면 다음과 같은 화면을 브라우저에서 볼 수 있다.
+
+<img src="/assets/spring/Spring-MVC-NoticeBoard-6.png" style="width:70%">
+
+---
+
+## 6. 읽기 구현
+
+---
+
 
 
 ---

@@ -236,7 +236,7 @@
 
 <p>이를 그림으로 나타내면 다음과 같다.</p>
 
-<p><img src="/assets/spring/Spring-MVC-Noticeboard-1.jpg" style="width:70%" /></p>
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-1.jpg" style="width:70%" /></p>
 
 <p>이를 기반으로 게시판을 구축해보자.</p>
 
@@ -701,9 +701,70 @@
 
 <p><img src="/assets/spring/Spring-MVC-NoticeBoard-4.png" style="width:100%" /></p>
 
-<p>이것은 프로젝트 라이브러리의 의존성간의 충돌이니 pom.xml을 활용해서 라이브러리 의존성을 다음과 같이 설정해주면 정상 결과가 뜰것이다.</p>
+<p>이것은 <strong>프로젝트 라이브러리의 의존성간의 충돌</strong>이니 pom.xml을 활용해서 라이브러리 의존성을 다음과 같이 설정해주면 정상 결과가 뜰것이다.</p>
 
-<p><img src="/assets/spring/Spring-MVC-NoticeBoard-5.png" style="width:100%" /></p>
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-5.png" style="width:70%" /></p>
+
+<p>이제 MVC에서 모델(Model)에 해당하는 부분을 구현해 보자. <strong>모델은 컨트롤러에서 뷰로 전달해주는 정보다.</strong> 
+스프링 MVC에서 모델을 생성하는 것은 <strong>DispatcherServlet</strong>의 역할이다.</p>
+
+<p>DispatcherServlet이 생성한 모델에 대한 참조 변수는 <strong>@RequestMapping 어노테이션이 붙은 메서드에서 인자를 선언하기만 하면 자동으로 받을 수 있다.</strong>
+모델을 사용할 수 있도록 list() 메서드에 Model 타입 인자를 만들어 주고 MVC 모델의 마지막 요소인 뷰를 사용하도록 코드를 변경해 보자.</p>
+
+<p><strong>BoardController.java의 list 메서드에 추가할 코드</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/board/list"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">list</span><span class="o">(</span><span class="nc">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// 모델에 대한 참조변수를 인자로써 추가</span>
+    <span class="c1">// 모델에 속성을 추가</span>
+    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"boardList"</span><span class="o">,</span> <span class="n">boardService</span><span class="o">.</span><span class="na">list</span><span class="o">());</span>
+    <span class="k">return</span> <span class="s">"WEB-INF/board/list"</span><span class="o">;</span>   <span class="c1">// DispatcherServlet이 뷰를 선정하는 힌트</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>DispatcherServlet은 dispatcher-servlet.xml설정 파일을 참고하여 web/WEB-INF/board/list.jsp를 뷰로써 보여준다.</p>
+
+<p>이제 list.jsp를 생성하자.</p>
+
+<p><strong>web/WEB-INF/board/list.jsp</strong></p>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">contentType=</span><span class="s">"text/html;charset=UTF-8"</span><span class="na"> language=</span><span class="s">"java"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;table</span> <span class="na">border=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th&gt;</span>NO<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>제목<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>작성자<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>작성일<span class="nt">&lt;/th&gt;</span>
+            <span class="nt">&lt;th&gt;</span>조회수<span class="nt">&lt;/th&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;c:forEach </span><span class="na">var=</span><span class="s">"board"</span><span class="na"> items=</span><span class="s">"</span><span class="si">${</span><span class="n">boardList</span><span class="si">}</span><span class="s">"</span><span class="na"> varStatus=</span><span class="s">"loop"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tr&gt;</span>
+                <span class="nt">&lt;td&gt;</span>${board.seq}<span class="nt">&lt;/td&gt;</span>
+                <span class="nt">&lt;td&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;c:url </span><span class="na">value=</span><span class="s">"/board/read/${board.seq}" </span><span class="nt">/&gt;</span><span class="s"> "</span><span class="nt">&gt;</span>${board.title}<span class="nt">&lt;/a&gt;&lt;/td&gt;</span>
+                <span class="nt">&lt;td&gt;</span>${board.writer}<span class="nt">&lt;/td&gt;</span>
+                <span class="nt">&lt;td&gt;</span>${board.regDate}<span class="nt">&lt;/td&gt;</span>
+                <span class="nt">&lt;td&gt;</span>${board.cnt}<span class="nt">&lt;/td&gt;</span>
+            <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;/c:forEach&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;c:url </span><span class="na">value=</span><span class="s">"/board/list"</span><span class="nt">/&gt;</span><span class="s"> "</span><span class="nt">&gt;</span>새글<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>위의 코드에서 볼 수 있는 것처럼 컨트롤러에서 모델에 담아서 보내준 정보인 <code class="highlighter-rouge">boardList</code>는 <strong>EL 표기법인</strong> <code class="highlighter-rouge">${boardList}</code>를 이용해서 쉽게 사용할 수 있다.</p>
+
+<p>모든 내용을 저장하고 서버를 다시 시작해 /board/list로 요청을 보내면 다음과 같은 화면을 브라우저에서 볼 수 있다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-6.png" style="width:70%" /></p>
+
+<hr />
+
+<h2 id="6-읽기-구현">6. 읽기 구현</h2>
+
+<hr />
 
 <hr />
 
