@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/git/2020/04/06/Understand-GitHub-Flow.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/spring/2020/03/28/Create-MVC-Project.html</loc>
     </url>
     
@@ -244,6 +248,38 @@
     
     
     <url>
+        <loc>http://localhost:4000/tag/git/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/github/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/flow/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/version/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
         <loc>http://localhost:4000/category/jekyll/</loc>
     </url>
     
@@ -277,6 +313,14 @@
     
     <url>
         <loc>http://localhost:4000/category/web/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/category/git/</loc>
     </url>
     
     

@@ -6,9 +6,130 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 06 Apr 2020 09:51:12 +0900</pubDate>
-    <lastBuildDate>Mon, 06 Apr 2020 09:51:12 +0900</lastBuildDate>
+    <pubDate>Mon, 06 Apr 2020 14:04:04 +0900</pubDate>
+    <lastBuildDate>Mon, 06 Apr 2020 14:04:04 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>GitHub Flow란?</title>
+        <description>&lt;p&gt;이 글은 GitHub Flow가 무엇인지에 대해 알기위해 &lt;a href=&quot;https://guides.github.com/introduction/flow/&quot;&gt;Github공식문서&lt;/a&gt;를 번역한 글이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;github-flow-이해하기&quot;&gt;GitHub flow 이해하기&lt;/h3&gt;
+
+&lt;p&gt;GitHub flow는 브랜치 기반의 가벼운 workflow 입니다. GitHub flow는 배포가 정기적으로 이루어지는 팀과 프로젝트를 지원합니다.&lt;/p&gt;
+
+&lt;p&gt;지금부터 GitHub flow를 어떻게 사용하는지에 대해서 설명 하겠습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;1-create-a-branch&quot;&gt;1. Create a branch&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Git/GitHub-Flow-1.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;프로젝트를 진행간에 사용자는 특정 시점에 진행중인 다양한 기능 또는 다양한 아이디어의 brnach를 가지고 있습니다. 그 중 일부는 준비가 되어 있기도 하고 아직 준비가 안된것이 있기도 합니다. 또한 branch를 나누는것은 사용자가 이러한 workflow를 관리하는데 도움을 줍니다.&lt;/p&gt;
+
+&lt;p&gt;사용자가 본인의 프로젝트에서 branch를 생성할 때, 사용자는 새로운 아이디어를 도전할 환경을 생성합니다. 이러한 브랜치를 만드는 변화는 &lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; branch에 영향을 주지 않기 때문에, 사용자는 자유롭게 실험하고, 공동 작업중인 누군가가 검토할 준비가 될 때까지 브랜치가 병합되지 않는다는 사실을 알고 변경 사항을 commit합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;protip&quot;&gt;ProTip&lt;/h3&gt;
+
+&lt;p&gt;Branch를 나누는것은 Git의 핵심 개념이고 전체 GitHub flow는 Branching에 기초합니다. 한가지의 가장 중요한 규칙은 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; branch에 있는 모든 것은 항상 배포할 수 있어야 한다는 것입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;이러한 규칙 때문에, 기능 또는 수정 작업시 새로운 branch는 마스터에서 생성하는 것이 매우 중요합니다. 다른 작업자들이 어떠한 작업들이 진행되는지 알 수 있도록 branch 이름은 &lt;strong&gt;descriptive&lt;/strong&gt;(설명적이어야 한다 ex. refactor-authentication, user-content-cache-key, make-retina-avatars) 이어야 한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;2-add-commits&quot;&gt;2. Add commits&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;branch가 생성이 되어지면, 변화를 시작해야 한다. 사용자는 파일을 추가, 삭제, 편집할 때마다 commit을 하고 brach에 변경사항을 추가합니다. 이러한 commit을 추가하는 과정은 기능 branch에서 작업 진행 상황을 추적합니다.&lt;/p&gt;
+
+&lt;p&gt;또한 Commit은 다른 사람이 수행한 작업과 이유를 이해하기 위해 따라갈 수 있는 투명한 작업 기록을 만듭니다. 각가의 Commit은 관련된 특정한 변화가 왜 만들어 졌는지에 대해 설명하는 Commit message를 가지고 있습니다. 게다가 각각의 Commit은 분리된 변화의 단위로써 고려되어집니다. 이러한 것들은 버그가 발견되었을 경우에 뒤로 후퇴할 수 있고, 다른 방향으로 머리를 돌릴 수 있도록 해줍니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;protip-1&quot;&gt;ProTip&lt;/h3&gt;
+
+&lt;p&gt;Commit Messages는 Git이 변화를 추적하고 서버로 push될 때 그들을 보여주기 때문에 특히 중요하다. Commit Message를 명확하게 작성함으로써, 개발자는 다른 사람들이 쉽게 따라하고 피드백을 제공할 수 있게 해줍니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;3-open-a-pull-request&quot;&gt;3. Open a Pull Request&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Pull Reqeusts는 Commits에 대한 토론을 시작합니다. Git Repository 기반에서 철처하게 통합이 되기 때문에, 요청을 수락하면 누구나 어떤 변경 내용이 병합되는지 정확하게 볼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;개발 프로세스동안에 어느 지점에서도 Pull Request를 열 수 있다. ex) 코드가 적거나 없어도 몇개의 스크린샷 또는 일반적인 아이디어를 팀원들과 공유하고 싶을때, 팀원들의 도움이나 조언이 필요할 때 또는 누군가가 작업을 검토 할 준비가 되었을 때&lt;/p&gt;
+
+&lt;p&gt;Pull Request message에서 GitHub의 @mention 시스템을 사용함으로써, 개발자는 특정한 사람 또는 팀으로 시간대에 상관없이 피드백을 요청할 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;protip-2&quot;&gt;ProTip&lt;/h3&gt;
+
+&lt;p&gt;Pull Request는 공유된 저장소에 변화를 관리하기 위해, 오픈 소스 프로젝트에 기여하기 위해 매우 유용하다. 만약 Fork &amp;amp; Pull Model을 사용한다면 Pull Request는 그것들에게 기여한 변화에 대해서 Project maintainers에게 알려줄 방법을 제공할 것이다. 만약 공유되어지는 Repository Model을 사용하고 있다면, Pull Requests는 master brnach에 머지되기전에 제안된 변화들에 대해서 대화와 코드리뷰를 할 수 있도록 도와준다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;4-discuss-and-review-your-code&quot;&gt;4. Discuss and review your code&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Pull Request가 열려지면, 너의 변화를 리뷰하는 사람 또는 팀은 아마 질문과 comments를 가지고 있을 것이다. 아마도 코딩 스타일이 프로젝트 지침에 따르지 않았거나, 변경 사항에 단위 테스트가 누락되었거나 모든 것이 멋지게 보이고 구성요소들이 순서대로 표시되었을 수 있습니다. Pull Requests는 이러한 유형의 대화를 장려하고 캡처하도록 설계되었습니다.&lt;/p&gt;
+
+&lt;p&gt;또한 커밋에 대한 토론과 피드백을 반영해 브랜치에 계쏙 푸시할 수도 있습니다. 만약 누군가가 당신에게 어떠한 것을 잊어버리셨다 또는 코드에 버그가 있다고 comments를 남기면, 당신은 본인의 브랜치에서 이러한 피드백들을 고치고 변화를 push할 수 있습니다. GitHub는 통합 Pull Requests View에서 새로운 Comiit과 다른 추가적인 피드백들을 보여줄 것이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;protip-3&quot;&gt;ProTip&lt;/h3&gt;
+
+&lt;p&gt;Pull Requests Comments는 마크다운에서 쓰여지며, 개발자는 이미지와 이모지, 다른 전처리되는 text blocks들을 사용해 삽입할 수 있습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;5-deploy&quot;&gt;5. Deploy&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;GitHub와 함께, 개발자는 branch로부터 마스터에 merge하기전에 구현체에 대해서 최종 테스트를 위해 배포할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;Pull Request요청이 검토되어지고, branch가 tests를 통과하면, 개발자는 프로덕션 환경에서 이러한 것들을 검증하기 위해 변화를 배포할 수 있습니다. 만약 branch가 이슈를 생성하면, 기존 마스터를 프로덕션에 배포하여 지점을 후퇴할 수 있습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;6-merge&quot;&gt;6. Merge&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;변화들이 프로덕션 환경에서 검증이 되어지면, 코드를 master branch로 통합할 때가 온것입니다.&lt;/p&gt;
+
+&lt;p&gt;한번 merge가 되어지면, Pull Requests는 코드 변화의 기록을 보존하고, 누구든지 왜 어떻게 이러한 결정이 만들어졌는지 이해하기 위해 직접 볼 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;protip-4&quot;&gt;ProTip&lt;/h3&gt;
+
+&lt;p&gt;Pull Requests 키워드의 텍스트에 특정 키워드를 통합하면 이슈를 코드와 연결할 수 있습니다. Pull Request이 merge되면 관련된 이슈들도 또한 닫힙니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;참조&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;https://guides.github.com/introduction/flow/&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Mon, 06 Apr 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/git/2020/04/06/Understand-GitHub-Flow.html</link>
+        <guid isPermaLink="true">http://localhost:4000/git/2020/04/06/Understand-GitHub-Flow.html</guid>
+        
+        <category>Git</category>
+        
+        <category>Github</category>
+        
+        <category>Flow</category>
+        
+        <category>Version</category>
+        
+        
+        <category>Git</category>
+        
+      </item>
     
       <item>
         <title>Intellij에서 스프링 MVC Project 생성하기</title>
@@ -2643,234 +2764,6 @@ http://www.springframework.org/schema/context http://www.springframework/schema/
         <category>OOP</category>
         
         <category>SOLID</category>
-        
-        
-        <category>Java</category>
-        
-      </item>
-    
-      <item>
-        <title>Java가 확장한 객체 지향 - (2)</title>
-        <description>&lt;h1 id=&quot;java가-확장한-객체지향---2&quot;&gt;Java가 확장한 객체지향 - (2)&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;이 글에서는 자바가 객체 지향을 확장하기 위해 어떠한 방법을 사용했는지 키워드 중심으로 살펴볼 것이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;이 포스팅은 &lt;strong&gt;스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)&lt;/strong&gt;를 공부하면서 작성한 글이다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;5-instanceof-연산자&quot;&gt;5. instanceof 연산자&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;instanceof 연산자 :&lt;/strong&gt; 만들어진 특정 객체가 특정 클래스의 인스턴스인지 물어보는 연산자이다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;리턴값 : true 또는 false를 리턴한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;사용법 : ( &lt;strong&gt;객체참조변수 instanceof 클래스명&lt;/strong&gt; )&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;다음은 instanceof의 예제이다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;instanceOf01&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;동물&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;조류&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;동물&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;펭귄&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;조류&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;동물&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;동물객체&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;동물&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;동물&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;조류객체&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;조류&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;동물&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;펭귄객체&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;펭귄&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;동물객체&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;동물&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;조류객체&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;동물&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;조류객체&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;조류&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-      
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;펭귄객체&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;동물&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;펭귄객체&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;조류&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;펭귄객체&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;펭귄&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-      
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;펭귄객체&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;실행 결과는 모두 true이다.&lt;/strong&gt; instanceof는 객체 참조 변수의 타입이 아닌 &lt;strong&gt;실제 객체 타입에 의해 처리&lt;/strong&gt;하기 때문이다.
-또한 instanceof를 자주 쓰는 코드는 좋지 않을 코드일 수 있기 때문에 리팩토링의 대상이 아닌지 점검 해봐야할 필요가 있다.&lt;/p&gt;
-
-&lt;p&gt;instanceof 연산자는 클래스들의 상속 관계 뿐만 아니라 &lt;strong&gt;인터페이스의 구현 관계에서도 동일하게 적용&lt;/strong&gt;된다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;6-package-키워드&quot;&gt;6. package 키워드&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;package 키워드는 네임스페이스(이름공간)를 만들어주는 역할을 한다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;네임스페이스(이름공간)에 대한 예제&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;p&gt;회사의 서로 다른 사업부(고객 사업부, 마케팅 사업부)에서 이름이 동일한 Customer 클래스를 사용할 때 고객 사업부에서는 고객사업부.Customer를 사용하고 마케팅 사업부에서는 마케팅사업부.Customer로써 사용하면 Customer 클래스간에 구별이 가능해서 혼선을 없앨 수 있다 (&lt;u&gt;매우 유용&lt;/u&gt;)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;7-interface-키워드와-implements-키워드&quot;&gt;7. interface 키워드와 implements 키워드&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;인터페이스는 public 추상 메서드와 public 정적 상수만 가질 수 있다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;speakable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;PI&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;3.14159&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;absoluteZeroPoint&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;275.15&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-   
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayYes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그렇다면 위의 코드는 컴파일 에러를 발생시키는가? 그렇지 않다. &lt;strong&gt;인터페이스는 추상 메서드와 정적 상수만 가질 수 있기에 따로 메서드에 public과 abstract, 속성에 public과 static, final을 붙이지 않아도 자동으로 컴파일러가 붙여준다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;결국 위의 예제 코드는 다음의 예제 코드와 동일하다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Speakable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;PI&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;3.14159&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;absoluteZeroPoint&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;275.15&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-   
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sayYes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;참고 :&lt;/strong&gt; 자바 8 부터 &lt;strong&gt;인터페이스는&lt;/strong&gt; &lt;u&gt;디폴트 메서드라고 하는 객체 구상 메서드와 정적 추상 메서드 또한 지원&lt;/u&gt;할 수 있게 언어 스펙이 바뀌었다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;[자바 8 관련 추가 정보]&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;람다(Lambda)&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;p&gt;2014년 오라클에서 빅데이터와 병렬성 지원을 강화한 자바 8의 기능 중 하나이다. 람다란 함수를 의미하고, 변수에 할당할 수있다. 함수는 로직이다. 이를 삼단 논법으로 전개해 보면 결국 &lt;strong&gt;람다는 변수에 저장할 수 있는 로직이다.&lt;/strong&gt; 변수는 값을 저장할 수 있고, 메서드의 인자로 쓰일 수 있고, 메서드의 반환값으로 사용할 수 있다. &lt;strong&gt;결국 람다로 인해 변수에 로직을 저장할 수 있고, 로직을 메서드의 인자로 쓸 수 있고, 로직을 메서드의 반환값으로 사용할 수 있다는 결론&lt;/strong&gt;에 도달한다.&lt;/p&gt;
-
-  &lt;p&gt;이러한 특징들은 함수형 언어의 특징이기 때문에 자바 8이 함수형 언어의 특징 또한 추가했다는 것을 의미한다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;8-this-키워드&quot;&gt;8. this 키워드&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;this는 객체가 자기 자신을 지칭할 때 쓰는 키워드이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;예제 안에서 this가 어떻게 쓰이는지 참고 해 보자.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;This&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;펭귄&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-   
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 7번째 줄&lt;/span&gt;
-      
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 9번째 줄&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 10번째 줄&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;펭귄&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;뽀로로&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;펭귄&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;뽀로로&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;7번째 줄이 끝난 후의 T 메모리 스냅샷은 다음과 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/this.jpg&quot; title=&quot;Check out the Falcon 9 from SpaceX&quot; style=&quot;width:40%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;9번째 줄에서는 test() &lt;u&gt;메서드 내부의 지역 변수 var에 우선권&lt;/u&gt;이 있다. 하지만 지역 변수의 이름과 객체 변수의 이름이 같은 경우
-&lt;strong&gt;this.var라고 하면 객체 변수 var에 저장한 값을 사용&lt;/strong&gt;하게 된다.&lt;/p&gt;
-
-&lt;p&gt;이와 관련된 규칙은 다음과 같다 (꼭 기억하자!!)&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;지역 변수와 속성(객체 변수, 정적 변수)의 이름이 같은 경우 &lt;u&gt;지역 변수가 우선&lt;/u&gt;한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;객체 변수와 이름이 같은 지역 변수가 있는 경우 &lt;u&gt;객체 변수를 사용하려면 this를 접두사로 사용&lt;/u&gt;한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;정적 변수와 이름이 같은 지역 변수가 있는 경우 &lt;u&gt;정적 변수를 사용하려면 클래스명을 접두사로 사용&lt;/u&gt;한다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;9-super-키워드&quot;&gt;9. super 키워드&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;단일 상속만 지원하는 자바에서 super는 바로 위 슈퍼 클래스의 인스턴스를 지칭하는 키워드이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;서브 클래스의 인스턴스가 생성되면 슈퍼 클래스의 인스턴스 또한 생성되기 때문에 서브 클래스의 인스턴스를 참조할 때는 this,
-바로 위 슈퍼 클래스의 인스턴스를 참조할 때는 super를 사용하면 된다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;동물&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;동물&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;조류&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;동물&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 11번째 줄&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;조류&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;펭귄&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;조류&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 18번째 줄&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;펭귄&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Driver&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;펭귄&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;뽀로로&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;펭귄&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;뽀로로&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;11번째 줄과 18번째 줄에서 super 키워드를 이용해 바로 위 슈퍼 클래스의 인스턴스 메서드를 호출하고 있음을 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;super를 사용할 때 한가지 주의해야 될 점은 super.super 형태로 상위의 상위 클래스의 인스턴스에 접근하는건 불가능하다는 점을 주의해야한다.&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 12 Mar 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/java/2020/03/12/Java%EA%B0%80%ED%99%95%EC%9E%A5%ED%95%9C%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-(2).html</link>
-        <guid isPermaLink="true">http://localhost:4000/java/2020/03/12/Java%EA%B0%80%ED%99%95%EC%9E%A5%ED%95%9C%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-(2).html</guid>
-        
-        <category>Java</category>
-        
-        <category>OOP</category>
         
         
         <category>Java</category>
