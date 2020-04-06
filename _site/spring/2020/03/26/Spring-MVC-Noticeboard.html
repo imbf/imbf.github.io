@@ -259,7 +259,7 @@
   <li>프로젝트의 pom.xml의 &lt;dependencies&gt;태그를 찾아 그 아래에 복사해둔 내용을 넣는다.</li>
 </ol>
 
-<p>다음으로는 HSQL을 사용하기 위해 <strong>스프링 프레임워크의 데이터베이스 지원 라이브러리의 의존성</strong>을 다음과 같이 추가한다.</p>
+<p>다음으로는 HSQL을 사용하기 위해 <strong>스프링 프레임워크의 데이터베이스 지원 라이브러리의(jdbc) 의존성</strong>을 다음과 같이 추가한다.</p>
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>spring-jdbc<span class="nt">&lt;/artifactId&gt;</span>
@@ -267,7 +267,8 @@
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></div>
 
-<p>HSQL을 Bean으로 등록하기 위해 다음의 태그를 applicationContext.xml에 추가해 준다. 추가적으로 태그의 속성으로 두 개의 SQL파일 정보를 추가한다.</p>
+<p>HSQL을 Bean으로 등록하기 위해 다음의 태그를 applicationContext.xml에 추가해 준다. 추가적으로 태그의 속성(jdbc:script)으로 두 개의 SQL파일(스키마 정보, 데이터 정보) 정보를 추가한다.
+(type=”HSQL”은 Default이기 때문에 생략해도 된다.)</p>
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;jdbc:embedded-database</span> <span class="na">id=</span><span class="s">"dataSource"</span> <span class="na">type=</span><span class="s">"HSQL"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;jdbc:script</span> <span class="na">location=</span><span class="s">"classpath:BoardSchema.sql"</span><span class="nt">&gt;&lt;/jdbc:script&gt;</span>
     <span class="nt">&lt;jdbc:script</span> <span class="na">location=</span><span class="s">"classpath:BoardData.sql"</span><span class="nt">&gt;&lt;/jdbc:script&gt;</span>
@@ -276,19 +277,19 @@
 
 <p>두 개의 SQL파일 정보는 다음과 같다.</p>
 
-<p>/src/main/resources/BoardSchema.sql</p>
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">BOARD</span> <span class="err">{</span>
-    <span class="n">seq</span> <span class="nb">INT</span> <span class="k">GENERATED</span> <span class="n">ALWAYS</span> <span class="k">AS</span> <span class="k">IDENTITY</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">,</span>
-    <span class="n">title</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
-    <span class="n">content</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
-    <span class="n">writer</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
-    <span class="n">password</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
-    <span class="n">regDate</span> <span class="nb">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
-    <span class="n">cnt</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span>
-<span class="err">}</span><span class="p">;</span>
+<p><strong>resources/BoardSchema.sql</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">BOARD</span> <span class="p">(</span>
+  <span class="n">seq</span> 		<span class="nb">INTEGER</span> <span class="k">IDENTITY</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+  <span class="n">title</span> 	<span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">content</span> 	<span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">writer</span> 	<span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">password</span>	<span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">regDate</span> 	<span class="nb">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="p">,</span>
+  <span class="n">cnt</span> 		<span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="p">);</span>
 </code></pre></div></div>
 
-<p>/src/main/resources/BoardData.sql</p>
+<p><strong>resources/BoardData.sql</strong></p>
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">BOARD</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">writer</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">regDate</span><span class="p">,</span> <span class="n">cnt</span><span class="p">)</span>
 <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'t1'</span><span class="p">,</span> <span class="s1">'c1'</span><span class="p">,</span> <span class="s1">'w1'</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="s1">'2014-09-09 14:21:12'</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
@@ -323,13 +324,13 @@
 
 <p>중대형 프로젝트에서 스프링 프레임워크를 적용하는 경우 다음과 같이 모듈을 구성한다. 참고해서 DTO를 구현해 보자.</p>
 
-<p>참고로 <strong>DTO(Data Transfer Object)란 VO(Value Object)로 바꿔 말할 수 있는데 계층간 데이터 교환을 위한 Java Beans를 말합니다.</strong></p>
-
 <p><img src="/assets/spring/Spring-MVC-NoticeBoard-2.jpg" style="width:100%" /></p>
+
+<p>참고로 <strong>DTO(Data Transfer Object)란 VO(Value Object)로 바꿔 말할 수 있는데 계층간 데이터 교환을 위한 Java Beans</strong>를 말합니다.</p>
 
 <p>DTO는 일반적으로 <strong>데이터베이스의 테이블 구조를 그대로 반영</strong>한다. BoardDTO라는 이름으로 클래스를 생성하자.</p>
 
-<p><strong>BoardDTO.java</strong> (Data Transfer Object)</p>
+<p><strong>BoardDTO.java</strong> (Data Transfer Object == Value Object)</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">board.domain</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">org.apache.ibatis.type.Alias</span><span class="o">;</span>
@@ -362,7 +363,7 @@
 <span class="o">}</span>
 </code></pre></div></div>
 
-<p>이제 MyBatis를 사용하기 위해 MyBatis의 SqlMapClient에 PSA를 적용한 어댑터를 Bean으로 등록해보자.</p>
+<p>이제 MyBatis를 사용하기 위해 <strong>MyBatis의 SqlMapClient에 PSA를 적용한 어댑터를 Bean으로 등록</strong>해보자.</p>
 
 <p>sqlSessionFactory Bean에 MyBatis 설정 파일, SQL 스크립트 파일을 속성으로 추가.</p>
 
@@ -372,15 +373,17 @@
        <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xmlns:jdbc=</span><span class="s">"http://www.springframework.org/schema/jdbc"</span>
        <span class="na">xsi:schemaLocation=</span><span class="s">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd"</span><span class="nt">&gt;</span>
 
-    <span class="c">&lt;!-- java database connection --&gt;</span>
+    <span class="c">&lt;!-- Java HSQL database connection --&gt;</span>
     <span class="nt">&lt;jdbc:embedded-database</span> <span class="na">id=</span><span class="s">"dataSource"</span> <span class="na">type=</span><span class="s">"HSQL"</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- SQL 파일 정보 추가 --&gt;</span>
         <span class="nt">&lt;jdbc:script</span> <span class="na">location=</span><span class="s">"classpath:BoardSchema.sql"</span><span class="nt">&gt;&lt;/jdbc:script&gt;</span>
         <span class="nt">&lt;jdbc:script</span> <span class="na">location=</span><span class="s">"classpath:BoardData.sql"</span><span class="nt">&gt;&lt;/jdbc:script&gt;</span>
     <span class="nt">&lt;/jdbc:embedded-database&gt;</span>
 
-    <span class="c">&lt;!-- sqlSessionFactory 인터페이스를 구현하는 sqlSessionFactoryBean클래스 Bean 생성 (다양한 속성을 채워서 생성)--&gt;</span>
+    <span class="c">&lt;!-- sqlSessionFactory 인터페이스를 구현하는 sqlSessionFactoryBean클래스 Bean 생성 --&gt;</span>
     <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"sqlSessionFactory"</span> <span class="na">class=</span><span class="s">"org.mybatis.spring.SqlSessionFactoryBean"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSource"</span> <span class="na">ref=</span><span class="s">"dataSource"</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- sqlSessionFactoryBean클래스 인스턴스 내의 속성들을 채운다. --&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"dataSource"</span> <span class="na">ref=</span><span class="s">"dataSource"</span><span class="nt">/&gt;</span>  
         <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"configLocation"</span> <span class="na">value=</span><span class="s">"classpath:sqlmap/config/mybatis-config.xml"</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"mapperLocations"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;list&gt;</span>
@@ -389,8 +392,8 @@
         <span class="nt">&lt;/property&gt;</span>
     <span class="nt">&lt;/bean&gt;</span>
 
-    <span class="c">&lt;!-- sqlSessionTemplate을 Spring Bean으로 등록 --&gt;</span>
-    <span class="c">&lt;!-- sqlSessionTemplate객체 생성시 sqlSessionFactory속성에 sqlSessionFactoryBean객체로 채워진다. (Singleton) --&gt;</span>
+    <span class="c">&lt;!-- sqlSessionTemplate을 Bean으로 등록 --&gt;</span>
+    <span class="c">&lt;!-- sqlSessionTemplate(SqlMapClient) 객체 생성시 sqlSessionFactory속성에 sqlSessionFactoryBean객체로 채워진다. (Singleton) --&gt;</span>
     <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"sqlSessionTemplate"</span> <span class="na">class=</span><span class="s">"org.mybatis.spring.SqlSessionTemplate"</span> <span class="na">destroy-method=</span><span class="s">"clearCache"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;constructor-arg</span> <span class="na">ref=</span><span class="s">"sqlSessionFactory"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/bean&gt;</span>
@@ -404,12 +407,17 @@
 <span class="nt">&lt;configuration&gt;</span>
     <span class="c">&lt;!-- 마이바티스 작동 규칙 정의 --&gt;</span>
     <span class="nt">&lt;settings&gt;</span>
+        <span class="c">&lt;!-- 설정에서 각 매퍼에 설정된 캐시를 전역적으로 사용할지 말지에 대한 여부 --&gt;</span>
         <span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">"cacheEnabled"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- 생성키에 대한 JDBC 지원을 허용. 지원하는 드라이버가 필요하다. true로 설정하면 생성키를 강제로 생성한다. --&gt;</span>
         <span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">"useGeneratedKeys"</span> <span class="na">value=</span><span class="s">"false"</span> <span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- 전통적인 데이터베이스 칼럼명 형태인 A_COLUMN을 CamelCase형태의 자바 프로퍼티명 형태인 aColumn으로 자동으로 매핑하도록 함 --&gt;</span>
         <span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">"mapUnderscoreToCamelCase"</span> <span class="na">value=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/settings&gt;</span>
 
+    <span class="c">&lt;!-- 타입 별칭은 자바 타입에 대한 짧은 이름이다. 오직 XML 설정에서만 사용되며, 타이핑을 줄이기 위해 존재한다.--&gt;</span>
     <span class="nt">&lt;typeAliases&gt;</span>
+        <span class="c">&lt;!-- 이 설정에서 “boardDTO”는 여러군데에서 “board.domain.BoardDTO” 대신 사용할 수 있다. --&gt;</span>
         <span class="nt">&lt;typeAlias</span> <span class="na">alias=</span><span class="s">"boardDTO"</span> <span class="na">type=</span><span class="s">"board.domain.BoardDTO"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/typeAliases&gt;</span>
 <span class="nt">&lt;/configuration&gt;</span>
@@ -424,11 +432,13 @@
         ORDER BY seq
     <span class="nt">&lt;/select&gt;</span>
 
+    <span class="c">&lt;!-- 해당 쿼리문은 int인자 타입을 받아서 boardDTO라는 별칭의 인자 타입을 리턴한다. --&gt;</span>
     <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">"select"</span> <span class="na">parameterType=</span><span class="s">"int"</span> <span class="na">resultType=</span><span class="s">"boardDTO"</span><span class="nt">&gt;</span>
         SELECT * FROM
         BOARD WHERE seq=#{seq}
     <span class="nt">&lt;/select&gt;</span>
 
+    <span class="c">&lt;!-- 들어오는 인자는 boardDTO라는 별칭을 가진 인자이다.  --&gt;</span>
     <span class="nt">&lt;insert</span> <span class="na">id=</span><span class="s">"insert"</span> <span class="na">parameterType=</span><span class="s">"boardDTO"</span><span class="nt">&gt;</span>
         INSERT INTO BOARD(title, content, writer, password, regDate, cnt)
         VALUES (${title}, ${content}, ${writer}, #{password}, SYSDATE, 0);
@@ -463,9 +473,13 @@
 
 <p>MyBatis에 관한 설정 파일 및 스크립트 파일을 완성했다면 <strong>database의 data에 접근하기 위한 DAO(Data Access Object)를 만들어 보자</strong>.</p>
 
+<p>다음의 그림을 다시 한번 참조 해 보자!!! ( 여러 번 반복 할 것이다. )</p>
+
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-2.jpg" style="width:100%" /></p>
+
 <p>확장성을 고려해 BoardDao 인터페이스와 이를 구현하는 BoardDaoMyBatis 클래스를 만들어 보자.</p>
 
-<p><strong>BoardDao.java</strong> (Data Access Object Interface) : 확장성을 위함</p>
+<p><strong>BoardDao.java</strong> (Data Access Object Interface)</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">board.domain</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
@@ -495,12 +509,17 @@
 <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Repository</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
-
+<span class="cm">/*
+@Repository 애노테이션은 DAO클래스를 Bean으로 등록하기 위해 사용 
+(DAO와 DDD 스타일 저장소의 차이점을 이해하고 사용해야 한다.) 
+@Repository가 달린 클래스는 PersistenceExceptionTranslationPostProcessor와 함께 사용
+되어질 때 Spring DataAccessException 변환에 적합하다. */</span>
 <span class="nd">@Repository</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BoardDaoMyBatis</span> <span class="kd">implements</span> <span class="nc">BoardDao</span><span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BoardDaoImpl</span> <span class="kd">implements</span> <span class="nc">BoardDao</span><span class="o">{</span>
+
     <span class="kd">private</span> <span class="nc">SqlSessionTemplate</span> <span class="n">sqlSessionTemplate</span><span class="o">;</span>
 
-    <span class="nd">@Autowired</span> <span class="c1">// sqlSessionTemplate Bean주입 (Sql맵핑 클라이언트를 설정하는 주입 Setter이다.)</span>
+    <span class="nd">@Autowired</span> <span class="c1">// sqlSessionTemplate 인스턴스 주입 (Sql맵핑 클라이언트를 설정하는 주입 Setter이다.)</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSqlMapClient</span><span class="o">(</span><span class="nc">SqlSessionTemplate</span> <span class="n">sqlSessionTemplate</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">this</span><span class="o">.</span><span class="na">sqlSessionTemplate</span> <span class="o">=</span> <span class="n">sqlSessionTemplate</span><span class="o">;</span>
     <span class="o">}</span>
@@ -519,6 +538,7 @@
 
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">deleteAll</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// 인자로써 SQL 스크립트 파일에 명시된 id와 parameterType의 객체를 준다.</span>
         <span class="k">return</span> <span class="n">sqlSessionTemplate</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="s">"deleteAll"</span><span class="o">);</span>
     <span class="o">}</span>
 
@@ -543,11 +563,137 @@
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
+
 <hr />
 
 <h2 id="4서비스-구현">4.서비스 구현</h2>
 
 <hr />
+
+<p>일반적으로 DAO는 데이터베이스 테이블당 하나를 만들게 된다. 하지만 사용자에게 제공되는 서비스는 <strong>여러 테이블의 정보를 조합해서 제공하는 경우</strong>가 많다. 따라서 하나의 서비스에서
+다수의 DAO를 사용하기도 하고 때로는 다수의 서비스가 하나의 DAO를 사용하기도 한다. 물론 대부분의 경우 하나의 서비스가 하나의 DAO와 관계를 맺는다. <u>게시판을 작성하다 보면
+서비스가 단순히 DAO에게 위임하는 형태로 구성된 경우가 많다.</u> 이런 경우 서비스의 필요성에 대해 의구심을 갖는 개발자들이 있는데, 확장성과 유연성을 고려하면 서비스를 작성하는
+것이 실보다 득이 더 많다. <strong>또한 서비스는 DAO와의 연동뿐만 아니라 서버 기술(웹, 클라이언트/서버)이나 각 벤더별 데이터베이스에 종속되지 않은 로직을 구현하는 곳이기도 하기에</strong>
+<strong>반드시 서비스를 작성하는 습관을 들이자.</strong></p>
+
+<p>다음의 그림을 참고해서 BoardService 인터페이스와 BoardServiceImpl 클래스를 만들어 보자.</p>
+
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-2.jpg" style="width:100%" /></p>
+
+<p><strong>BoardService.java</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">board.service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">board.domain.BoardDTO</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">BoardService</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">BoardDTO</span><span class="o">&gt;</span> <span class="nf">list</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">delete</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">edit</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">);</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="nc">BoardDTO</span> <span class="nf">read</span><span class="o">(</span><span class="kt">int</span> <span class="n">seq</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>BoardServiceImpl.java</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">board.service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">board.domain.BoardDTO</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">board.domain.BoardDao</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.annotation.Resource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BoardServiceImpl</span> <span class="kd">implements</span> <span class="nc">BoardService</span> <span class="o">{</span>
+    <span class="nd">@Resource</span>
+    <span class="kd">private</span> <span class="nc">BoardDao</span> <span class="n">boardDao</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nc">BoardDao</span> <span class="nf">getBoardDao</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">boardDao</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setBoardDao</span><span class="o">(</span><span class="nc">BoardDao</span> <span class="n">boardDao</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">boardDao</span> <span class="o">=</span> <span class="n">boardDao</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">BoardDTO</span><span class="o">&gt;</span> <span class="nf">list</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">boardDao</span><span class="o">.</span><span class="na">list</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">delete</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">boardDao</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">boardDTO</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">edit</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">boardDao</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">boardDTO</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">write</span><span class="o">(</span><span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">boardDao</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">boardDTO</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">BoardDTO</span> <span class="nf">read</span><span class="o">(</span><span class="kt">int</span> <span class="n">seq</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">boardDao</span><span class="o">.</span><span class="na">select</span><span class="o">(</span><span class="n">seq</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="5목록-구현-controller-구현">5.목록 구현 (Controller 구현)</h2>
+
+<hr />
+
+<p>다음의 그림을 참조해 사용자가 브라우저 주소창에 /board/list라고 하는 URL을 요청했을 때 이를 처리하는 메서드(RequestMapping Method)를 구현하자.</p>
+
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-2.jpg" style="width:100%" /></p>
+
+<p><strong>BoardController.java</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">board.controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">board.service.BoardService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Controller</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.ResponseBody</span><span class="o">;</span>
+
+<span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BoardController</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="nc">BoardService</span> <span class="n">boardService</span><span class="o">;</span>
+
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/board/list"</span><span class="o">)</span>
+    <span class="nd">@ResponseBody</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">list</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">boardService</span><span class="o">.</span><span class="na">list</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Controller를 작성하고 서버를 실행해 localhost:8080/board/list에 요청하면 다음과 같은 결과가 뜬다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-3.png" style="width:100%" /></p>
+
+<p>위의 결과가 실행되지 않고 다음과 같은 에러가 뜬다면</p>
+
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-4.png" style="width:100%" /></p>
+
+<p>이것은 프로젝트 라이브러리의 의존성간의 충돌이니 pom.xml을 활용해서 라이브러리 의존성을 다음과 같이 설정해주면 정상 결과가 뜰것이다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-5.png" style="width:100%" /></p>
 
 <hr />
 

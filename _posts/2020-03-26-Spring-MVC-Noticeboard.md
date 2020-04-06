@@ -60,7 +60,7 @@ tags: Spring Java Project MVC
 2. pom.xml에 추가할 Maven용 텍스트 문자열을 복사합니다.
 3. 프로젝트의 pom.xml의 \<dependencies>태그를 찾아 그 아래에 복사해둔 내용을 넣는다.
 
-다음으로는 HSQL을 사용하기 위해 **스프링 프레임워크의 데이터베이스 지원 라이브러리의 의존성**을 다음과 같이 추가한다.
+다음으로는 HSQL을 사용하기 위해 **스프링 프레임워크의 데이터베이스 지원 라이브러리의(jdbc) 의존성**을 다음과 같이 추가한다.
 ```xml
 <dependency>
     <groupId>org.springframework</groupId>
@@ -69,7 +69,8 @@ tags: Spring Java Project MVC
 </dependency>
 ```
 
-HSQL을 Bean으로 등록하기 위해 다음의 태그를 applicationContext.xml에 추가해 준다. 추가적으로 태그의 속성으로 두 개의 SQL파일 정보를 추가한다.
+HSQL을 Bean으로 등록하기 위해 다음의 태그를 applicationContext.xml에 추가해 준다. 추가적으로 태그의 속성(jdbc:script)으로 두 개의 SQL파일(스키마 정보, 데이터 정보) 정보를 추가한다.
+(type="HSQL"은 Default이기 때문에 생략해도 된다.)
 ```xml
 <jdbc:embedded-database id="dataSource" type="HSQL">
     <jdbc:script location="classpath:BoardSchema.sql"></jdbc:script>
@@ -79,20 +80,20 @@ HSQL을 Bean으로 등록하기 위해 다음의 태그를 applicationContext.xm
 
 두 개의 SQL파일 정보는 다음과 같다.
 
-/src/main/resources/BoardSchema.sql
+**resources/BoardSchema.sql**
 ```sql
-CREATE TABLE BOARD {
-    seq INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY ,
-    title VARCHAR(255) NOT NULL ,
-    content VARCHAR(1000) NOT NULL ,
-    writer VARCHAR(10) NOT NULL ,
-    password INT NOT NULL ,
-    regDate TIMESTAMP NOT NULL ,
-    cnt INT NOT NULL
-};
+CREATE TABLE BOARD (
+  seq 		INTEGER IDENTITY PRIMARY KEY,
+  title 	VARCHAR(255) NOT NULL ,
+  content 	VARCHAR(1000) NOT NULL ,
+  writer 	VARCHAR(10) NOT NULL ,
+  password	INT NOT NULL ,
+  regDate 	TIMESTAMP NOT NULL ,
+  cnt 		INT NOT NULL
+);
 ```
 
-/src/main/resources/BoardData.sql
+**resources/BoardData.sql**
 ```sql
 INSERT INTO BOARD(title, content, writer, password, regDate, cnt)
 VALUES ('t1', 'c1', 'w1', 1234, '2014-09-09 14:21:12', 0);
@@ -128,13 +129,13 @@ VALUES ('t7', 'c5', 'w1', 1234, '2014-09-09 14:21:12', 6);
 
 중대형 프로젝트에서 스프링 프레임워크를 적용하는 경우 다음과 같이 모듈을 구성한다. 참고해서 DTO를 구현해 보자.
 
-참고로 **DTO(Data Transfer Object)란 VO(Value Object)로 바꿔 말할 수 있는데 계층간 데이터 교환을 위한 Java Beans를 말합니다.**
-
 <img src="/assets/spring/Spring-MVC-NoticeBoard-2.jpg" style="width:100%">
+
+참고로 **DTO(Data Transfer Object)란 VO(Value Object)로 바꿔 말할 수 있는데 계층간 데이터 교환을 위한 Java Beans**를 말합니다.
 
 DTO는 일반적으로 **데이터베이스의 테이블 구조를 그대로 반영**한다. BoardDTO라는 이름으로 클래스를 생성하자.
 
-**BoardDTO.java** (Data Transfer Object)
+**BoardDTO.java** (Data Transfer Object == Value Object)
 ```java
 package board.domain;
 
@@ -168,7 +169,7 @@ public class BoardDTO {
 }
 ```
 
-이제 MyBatis를 사용하기 위해 MyBatis의 SqlMapClient에 PSA를 적용한 어댑터를 Bean으로 등록해보자.
+이제 MyBatis를 사용하기 위해 **MyBatis의 SqlMapClient에 PSA를 적용한 어댑터를 Bean으로 등록**해보자.
 
 sqlSessionFactory Bean에 MyBatis 설정 파일, SQL 스크립트 파일을 속성으로 추가.
 
@@ -179,15 +180,17 @@ sqlSessionFactory Bean에 MyBatis 설정 파일, SQL 스크립트 파일을 속�
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <!-- java database connection -->
+    <!-- Java HSQL database connection -->
     <jdbc:embedded-database id="dataSource" type="HSQL">
+        <!-- SQL 파일 정보 추가 -->
         <jdbc:script location="classpath:BoardSchema.sql"></jdbc:script>
         <jdbc:script location="classpath:BoardData.sql"></jdbc:script>
     </jdbc:embedded-database>
 
-    <!-- sqlSessionFactory 인터페이스를 구현하는 sqlSessionFactoryBean클래스 Bean 생성 (다양한 속성을 채워서 생성)-->
+    <!-- sqlSessionFactory 인터페이스를 구현하는 sqlSessionFactoryBean클래스 Bean 생성 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
+        <!-- sqlSessionFactoryBean클래스 인스턴스 내의 속성들을 채운다. -->
+        <property name="dataSource" ref="dataSource"/>  
         <property name="configLocation" value="classpath:sqlmap/config/mybatis-config.xml"/>
         <property name="mapperLocations">
             <list>
@@ -196,8 +199,8 @@ sqlSessionFactory Bean에 MyBatis 설정 파일, SQL 스크립트 파일을 속�
         </property>
     </bean>
 
-    <!-- sqlSessionTemplate을 Spring Bean으로 등록 -->
-    <!-- sqlSessionTemplate객체 생성시 sqlSessionFactory속성에 sqlSessionFactoryBean객체로 채워진다. (Singleton) -->
+    <!-- sqlSessionTemplate을 Bean으로 등록 -->
+    <!-- sqlSessionTemplate(SqlMapClient) 객체 생성시 sqlSessionFactory속성에 sqlSessionFactoryBean객체로 채워진다. (Singleton) -->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
         <constructor-arg ref="sqlSessionFactory"/>
     </bean>
@@ -212,12 +215,17 @@ sqlSessionFactory Bean에 MyBatis 설정 파일, SQL 스크립트 파일을 속�
 <configuration>
     <!-- 마이바티스 작동 규칙 정의 -->
     <settings>
+        <!-- 설정에서 각 매퍼에 설정된 캐시를 전역적으로 사용할지 말지에 대한 여부 -->
         <setting name="cacheEnabled" value="false" />
+        <!-- 생성키에 대한 JDBC 지원을 허용. 지원하는 드라이버가 필요하다. true로 설정하면 생성키를 강제로 생성한다. -->
         <setting name="useGeneratedKeys" value="false" />
+        <!-- 전통적인 데이터베이스 칼럼명 형태인 A_COLUMN을 CamelCase형태의 자바 프로퍼티명 형태인 aColumn으로 자동으로 매핑하도록 함 -->
         <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
 
+    <!-- 타입 별칭은 자바 타입에 대한 짧은 이름이다. 오직 XML 설정에서만 사용되며, 타이핑을 줄이기 위해 존재한다.-->
     <typeAliases>
+        <!-- 이 설정에서 “boardDTO”는 여러군데에서 “board.domain.BoardDTO” 대신 사용할 수 있다. -->
         <typeAlias alias="boardDTO" type="board.domain.BoardDTO"/>
     </typeAliases>
 </configuration>
@@ -233,11 +241,13 @@ sqlSessionFactory Bean에 MyBatis 설정 파일, SQL 스크립트 파일을 속�
         ORDER BY seq
     </select>
 
+    <!-- 해당 쿼리문은 int인자 타입을 받아서 boardDTO라는 별칭의 인자 타입을 리턴한다. -->
     <select id="select" parameterType="int" resultType="boardDTO">
         SELECT * FROM
         BOARD WHERE seq=#{seq}
     </select>
 
+    <!-- 들어오는 인자는 boardDTO라는 별칭을 가진 인자이다.  -->
     <insert id="insert" parameterType="boardDTO">
         INSERT INTO BOARD(title, content, writer, password, regDate, cnt)
         VALUES (${title}, ${content}, ${writer}, #{password}, SYSDATE, 0);
@@ -272,9 +282,13 @@ sqlSessionFactory Bean에 MyBatis 설정 파일, SQL 스크립트 파일을 속�
 
 MyBatis에 관한 설정 파일 및 스크립트 파일을 완성했다면 **database의 data에 접근하기 위한 DAO(Data Access Object)를 만들어 보자**.
 
+다음의 그림을 다시 한번 참조 해 보자!!! ( 여러 번 반복 할 것이다. )
+
+<img src="/assets/spring/Spring-MVC-NoticeBoard-2.jpg" style="width:100%">
+
 확장성을 고려해 BoardDao 인터페이스와 이를 구현하는 BoardDaoMyBatis 클래스를 만들어 보자.
 
-**BoardDao.java** (Data Access Object Interface) : 확장성을 위함
+**BoardDao.java** (Data Access Object Interface)
 ```java
 package board.domain;
 
@@ -306,12 +320,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+/*
+@Repository 애노테이션은 DAO클래스를 Bean으로 등록하기 위해 사용 
+(DAO와 DDD 스타일 저장소의 차이점을 이해하고 사용해야 한다.) 
+@Repository가 달린 클래스는 PersistenceExceptionTranslationPostProcessor와 함께 사용
+되어질 때 Spring DataAccessException 변환에 적합하다. */
 @Repository
-public class BoardDaoMyBatis implements BoardDao{
+public class BoardDaoImpl implements BoardDao{
+
     private SqlSessionTemplate sqlSessionTemplate;
 
-    @Autowired // sqlSessionTemplate Bean주입 (Sql맵핑 클라이언트를 설정하는 주입 Setter이다.)
+    @Autowired // sqlSessionTemplate 인스턴스 주입 (Sql맵핑 클라이언트를 설정하는 주입 Setter이다.)
     public void setSqlMapClient(SqlSessionTemplate sqlSessionTemplate) {
         this.sqlSessionTemplate = sqlSessionTemplate;
     }
@@ -330,6 +349,7 @@ public class BoardDaoMyBatis implements BoardDao{
 
     @Override
     public int deleteAll() {
+        // 인자로써 SQL 스크립트 파일에 명시된 id와 parameterType의 객체를 준다.
         return sqlSessionTemplate.delete("deleteAll");
     }
 
@@ -354,12 +374,140 @@ public class BoardDaoMyBatis implements BoardDao{
     }
 }
 ```
+
 ---
 
 ## 4.서비스 구현
 
 ---
 
+일반적으로 DAO는 데이터베이스 테이블당 하나를 만들게 된다. 하지만 사용자에게 제공되는 서비스는 **여러 테이블의 정보를 조합해서 제공하는 경우**가 많다. 따라서 하나의 서비스에서
+다수의 DAO를 사용하기도 하고 때로는 다수의 서비스가 하나의 DAO를 사용하기도 한다. 물론 대부분의 경우 하나의 서비스가 하나의 DAO와 관계를 맺는다. <u>게시판을 작성하다 보면
+서비스가 단순히 DAO에게 위임하는 형태로 구성된 경우가 많다.</u> 이런 경우 서비스의 필요성에 대해 의구심을 갖는 개발자들이 있는데, 확장성과 유연성을 고려하면 서비스를 작성하는
+것이 실보다 득이 더 많다. **또한 서비스는 DAO와의 연동뿐만 아니라 서버 기술(웹, 클라이언트/서버)이나 각 벤더별 데이터베이스에 종속되지 않은 로직을 구현하는 곳이기도 하기에**
+**반드시 서비스를 작성하는 습관을 들이자.**
+
+다음의 그림을 참고해서 BoardService 인터페이스와 BoardServiceImpl 클래스를 만들어 보자.
+
+<img src="/assets/spring/Spring-MVC-NoticeBoard-2.jpg" style="width:100%">
+
+**BoardService.java**
+```java
+package board.service;
+
+import board.domain.BoardDTO;
+
+import java.util.List;
+
+public interface BoardService {
+    public abstract List<BoardDTO> list();
+
+    public abstract int delete(BoardDTO boardDTO);
+
+    public abstract int edit(BoardDTO boardDTO);
+
+    public abstract void write(BoardDTO boardDTO);
+
+    public abstract BoardDTO read(int seq);
+}
+```
+
+**BoardServiceImpl.java**
+```java
+package board.service;
+
+import board.domain.BoardDTO;
+import board.domain.BoardDao;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@Service
+public class BoardServiceImpl implements BoardService {
+    @Resource
+    private BoardDao boardDao;
+
+    public BoardDao getBoardDao() {
+        return boardDao;
+    }
+
+    public void setBoardDao(BoardDao boardDao) {
+        this.boardDao = boardDao;
+    }
+
+    @Override
+    public List<BoardDTO> list() {
+        return boardDao.list();
+    }
+
+    @Override
+    public int delete(BoardDTO boardDTO) {
+        return boardDao.delete(boardDTO);
+    }
+
+    @Override
+    public int edit(BoardDTO boardDTO) {
+        return boardDao.update(boardDTO);
+    }
+
+    @Override
+    public void write(BoardDTO boardDTO) {
+        boardDao.insert(boardDTO);
+    }
+
+    @Override
+    public BoardDTO read(int seq) {
+        return boardDao.select(seq);
+    }
+}
+```
+
+---
+
+## 5.목록 구현 (Controller 구현)
+
+---
+
+다음의 그림을 참조해 사용자가 브라우저 주소창에 /board/list라고 하는 URL을 요청했을 때 이를 처리하는 메서드(RequestMapping Method)를 구현하자.
+
+<img src="/assets/spring/Spring-MVC-NoticeBoard-2.jpg" style="width:100%">
+
+**BoardController.java**
+```java
+package board.controller;
+
+import board.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class BoardController {
+
+    @Autowired
+    private BoardService boardService;
+
+    @RequestMapping(value = "/board/list")
+    @ResponseBody
+    public String list() {
+        return boardService.list().toString();
+    }
+}
+```
+
+Controller를 작성하고 서버를 실행해 localhost:8080/board/list에 요청하면 다음과 같은 결과가 뜬다.
+
+<img src="/assets/spring/Spring-MVC-NoticeBoard-3.png" style="width:100%">
+
+위의 결과가 실행되지 않고 다음과 같은 에러가 뜬다면
+
+<img src="/assets/spring/Spring-MVC-NoticeBoard-4.png" style="width:100%">
+
+이것은 프로젝트 라이브러리의 의존성간의 충돌이니 pom.xml을 활용해서 라이브러리 의존성을 다음과 같이 설정해주면 정상 결과가 뜰것이다.
+
+<img src="/assets/spring/Spring-MVC-NoticeBoard-5.png" style="width:100%">
 
 
 ---
