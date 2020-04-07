@@ -26,13 +26,13 @@ GitHub flow는 브랜치 기반의 가벼운 workflow 입니다. GitHub flow는 
 
 프로젝트를 진행간에 사용자는 특정 시점에 진행중인 다양한 기능 또는 다양한 아이디어를 가지고 있습니다. 그 중 일부는 준비가 되어 있기도 하고 아직 준비가 안된 것이 있기도 합니다. branch를 나누는것은 사용자가 이러한 workflow를 관리하는데 도움을 줍니다.
 
-**사용자가 본인의 프로젝트에서 branch를 생성할 때, 사용자는 새로운 아이디어를 도전할 환경을 생성합니다.** 브랜치에서의 변화는 `master` branch에 영향을 주지 않기 때문에, 사용자는 자유롭게 실험하고, 공동 작업중인 누군가가 검토할 준비가 될 때까지 브랜치가 병합되지 않는다는 사실을 알고 변경 사항을 commit합니다.
+**사용자가 본인의 프로젝트에서 branch를 생성할 때, 사용자는 새로운 아이디어를 도전할 환경을 생성합니다.** branch에서의 변화는 `master` branch에 영향을 주지 않기 때문에, 사용자는 자유롭게 실험하고, 공동 작업중인 누군가가 검토할 준비가 될 때까지 브랜치가 병합되지 않는다는 사실을 알고 변경 사항을 commit합니다.
 
 ### ProTip
 
-Branch를 나누는것은 Git의 핵심 개념이고 전체 GitHub flow는 Branching에 기초합니다. 한 가지의 가장 중요한 규칙은 **`master` branch에 있는 모든 것은 항상 배포할 수 있어야 한다는 것입니다.**
+Branch를 나누는 것은 Git의 핵심 개념이고 전체 GitHub flow는 Branching에 기초합니다. 한 가지의 가장 중요한 규칙은 **`master` branch에 있는 모든 것은 항상 배포할 수 있어야 한다는 것입니다.**
 
-이러한 규칙 때문에, 기능 또는 수정 작업시 새로운 branch는 마스터에서 생성하는 것이 매우 중요합니다. 다른 작업자들이 어떠한 작업들이 진행되는지 알 수 있도록 branch 이름은 **descriptive**(설명적이어야 한다 ex. refactor-authentication, user-content-cache-key, make-retina-avatars) 이어야 한다.
+이러한 규칙 때문에, **기능 또는 수정 작업시 새로운 branch는 마스터에서 생성하는 것이 매우 중요합니다.** 다른 작업자들이 어떠한 작업들이 진행되는지 알 수 있도록 branch 이름은 **descriptive**(설명적이어야 한다 ex. refactor-authentication, user-content-cache-key, make-retina-avatars) 이어야 한다.
 
 ---
 
@@ -61,9 +61,9 @@ Commit Messages는 Git이 변화를 추적하고 서버로 push될 때 그들을
 
 **Pull Reqeusts는 Commits에 대한 토론을 시작합니다.** Git Repository 기반에서 철처하게 통합이 되기 때문에, 요청을 수락하면 누구나 어떤 변경 내용이 병합되는지 정확하게 볼 수 있다.
 
-개발 프로세스동안에 어느 지점에서도 Pull Request를 열 수 있다. ex) 코드가 적거나 없어도 몇개의 스크린샷 또는 일반적인 아이디어를 팀원들과 공유하고 싶을때, 팀원들의 도움이나 조언이 필요할 때 또는 누군가가 작업을 검토 할 준비가 되었을 때
+개발 프로세스동안에 어느 지점에서도 Pull Request를 열 수 있다. ex) 코드가 적거나 없어도 몇개의 스크린샷 또는 일반적인 아이디어를 팀원들과 공유하고 싶을때, 팀원들의 도움이나 조언이 필요할 때, 누군가가 작업을 검토 할 준비가 되었을 때
 
-Pull Request message에서 GitHub의 @mention 시스템을 사용함으로써, 사용자는 특정한 사람 또는 팀에게 시간대에 상관없이 피드백을 요청할 수 있습니다.
+Pull Request message에서 GitHub의 **@mention 시스템**을 사용함으로써, 사용자는 특정한 사람 또는 팀에게 시간대에 상관없이 피드백을 요청할 수 있습니다.
 
 ### ProTip
 
