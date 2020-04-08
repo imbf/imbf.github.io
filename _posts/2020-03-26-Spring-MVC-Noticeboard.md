@@ -524,7 +524,7 @@ public String list(Model model) { // 모델에 대한 참조변수를 인자로�
     return "WEB-INF/board/list";   // DispatcherServlet이 뷰를 선정하는 힌트
 }
 ```
-DispatcherServlet은 dispatcher-servlet.xml설정 파일을 참고하여 web/WEB-INF/board/list.jsp를 뷰로써 보여준다.
+DispatcherServlet은 dispatcher-servlet.xml설정 파일을 참고하여 `web/WEB-INF/board/list.jsp`를 **뷰**로써 보여준다.
 
 이제 list.jsp를 생성하자.
 
@@ -555,14 +555,14 @@ DispatcherServlet은 dispatcher-servlet.xml설정 파일을 참고하여 web/WEB
             </tr>
         </c:forEach>
     </table>
-    <a href="<c:url value="/board/list"/> ">새글</a>
+    <a href="<c:url value="/board/write"/> ">새글</a>
 </body>
 </html>
 ```
 
 위의 코드에서 볼 수 있는 것처럼 컨트롤러에서 모델에 담아서 보내준 정보인 `boardList`는 **EL 표기법인** `${boardList}`를 이용해서 쉽게 사용할 수 있다.
 
-모든 내용을 저장하고 서버를 다시 시작해 /board/list로 요청을 보내면 다음과 같은 화면을 브라우저에서 볼 수 있다.
+모든 내용을 저장하고 서버를 다시 시작해 `/board/list`로 요청을 보내면 다음과 같은 화면을 브라우저에서 볼 수 있다.
 
 <img src="/assets/spring/Spring-MVC-NoticeBoard-6.png" style="width:70%">
 
@@ -571,6 +571,232 @@ DispatcherServlet은 dispatcher-servlet.xml설정 파일을 참고하여 web/WEB
 ## 6. 읽기 구현
 
 ---
+
+완성된 List 화면에 코드 보기를 하면 각 글의 읽기 페이지 링크가 `/board/read/글번호` 형식으로 돼 있음을 확인할 수 있다.
+
+스프링 MVC에서는 이처럼 SEO(Search Engine Optimization, 검색 엔진 최적화)에 최적화된 URL을 처리할 수 있는 메커니즘을 제공한다.
+이 때 `@PathVariable` 어노테이션을 사용한다.
+
+BoardController.java에 다음과 같은 메소드를 추가하자.
+```java
+@RequestMapping(value = "/board/read/{seq}") // {seq}는 경로 변수라고 한다.
+public String read(Model model, @PathVariable int seq) { //seq인자에는 @PathVariable 애노테이션으로 인하여 값이 자동 바인딩 된다.
+    model.addAttribute("boardDTO", boardService.read(seq));
+    return "/WEB-INF/board/read";
+}
+```
+
+**경로 변수({seq})를 메서드의 인자로 사용하려면 @PathVariable 애노테이션을 인자에 지정하면 된다.**
+
+위의 Request를 처리하기 위해 DispatcherServlet이 찾을 WEB-INF/board/read.jsp는 다음과 같다.
+
+**WEB-INF/board/read.jsp**
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Insert title here</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>제목</th>
+        <td>${boardDTO.title}</td>
+    </tr>
+    <tr>
+        <th>작성자</th>
+        <td>${boardDTO.writer}</td>
+    </tr>
+    <tr>
+        <th>작성일</th>
+        <td>${boardDTO.regDate}</td>
+    </tr>
+    <tr>
+        <th>조회수</th>
+        <td>${boardDTO.cnt}</td>
+    </tr>
+</table>
+<div>
+    <a href="<c:url value="/board/edit/${boardDTO.seq}"/>">수정</a>
+    <a href="<c:url value="/board/list"/>">목록</a>
+</div>
+</body>
+</html>
+```
+
+서버를 다시 실행해 해당 URL에 요청을 보내면 다음과 같은 결과를 화면에서 볼 수 있다.
+
+<img src="/assets/spring/Spring-MVC-NoticeBoard-7.png" style="width:50%">
+
+---
+
+## 7. 새 글 구현
+
+---
+**Controller 요구사항**
+1. `@RequestMapping`에서 호출 방식이 **GET 방식이냐 POST 방식이냐를 구분**해서 같은 URL로 요청이 들어와도 별개의 **메서드가 처리**할 수 있도록 지원하는 글쓰기 요청을 처리하는 메서드를 구현해 보자.
+2. `BindingResult` 클래스의 인스턴스를 이용해서 **바인딩 에러 처리** 코드를 메서드에 구현해 보자.
+3. 하이버네이트의 Validator를 사용해서 **유효성 검사**를 위한 `@Valid` 애노테이션을 사용해 보자.
+
+Controller 요구사항을 구현하기에 앞서 `dispatcher-servlet.xml`파일에 ViewResolver의 `prefix`속성을 다음과 같이 수정했고, `@Valid` 애노테이션을 사용하기 위해서 `<mvc:annotation-driven/>` 코드를 추가하였다.
+
+```xml
+<mvc:annotation-driven/>
+
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF"/>
+    <property name="suffix" value=".jsp"/>
+</bean>
+ 
+```
+
+요구사항을 구현하기 위해 다음과 같은 메서드를 BoardController.java 파일에 추가하고 중복된 메서드는 지우자.
+
+```java
+@RequestMapping(value = "/board/write", method = RequestMethod.GET)
+public String write(Model model) {
+    model.addAttribute("boardDTO", new BoardDTO());
+    return "/board/write";
+}
+
+@RequestMapping(value = "/board/write", method = RequestMethod.POST)
+public String write(@Valid BoardDTO boardDTO, BindingResult bindingResult) { // 바인딩 결과 인자
+    if (bindingResult.hasErrors()) { // 바인딩 에러 처리 코드
+        return "/board/write";
+    }
+    boardService.write(boardDTO);
+    return "redirect/board/list";   // PRG 패턴
+}
+```
+위의 코드에서 주목할 점은 **스프링 MVC는 form 태그에서 전송된 input 태그의 name 속성과 BoardDTO 인스턴스의 속성 이름을 비교해 자동으로 그 값을 바인딩해 준다.**
+
+스프링 MVC를 사용하지 않았다면 사용자가 입력 태그를 통해 입력한 내용을 HttpServletRequest의 인스턴스(request)에서 getParameter() 메서드를 이용해
+가져온 후 BoardDTO 인스턴스의 속성에 넣어주기 위해 형변환까지 해야 했을 것이다.
+
+> ### **PRG 패턴 (POST - Redirect - GET)**
+>
+> Post Request후 Redirect를 하지 않고 그냥 뷰만 바꾸어준다면 URL은 POST 요청했을 때와 동일하고 그냥 보여지는 View만 바뀔 것이다.
+>
+> 이러한 경우에 새로고침을 하게되면 이전의 POST Request가 다시 한번 서버로 요청되어서 데이터베이스에 중복된 값이 저장되는 사태가 발생한다.
+>
+> **그래서 꼭 POST Request 후에 Redirect를 이용해서 GET Request해야 한다.**
+
+실제 유효성 검증을 위해 BoardDTO를 다음과 같이 수정하자.
+```java
+package board.domain;
+
+import org.apache.ibatis.type.Alias;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import java.sql.Timestamp;
+
+@Alias("boardDTO")
+public class BoardDTO {
+    private int seq;
+
+    @Length(min = 2, max = 5, message = "제목은 2자 이상, 5자 미만 입력하세요.")
+    private String title;
+
+    @NotEmpty(message = "내용을 입력하세요.")
+    private String content;
+
+    @NotEmpty(message = "작성자를 입력하세요.")
+    private String writer;
+
+    private int password;
+    private Timestamp regDate;
+    private int cnt;
+
+    // 이하 생략
+```
+
+다음으로 뷰 역할을 할 JSP 파일을 구현하자.
+
+**/WEB-INF/board/write.jsp**
+
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Insert title here</title>
+</head>
+<body>
+
+<!-- form 태그에 action 정보가 없어도 Spring이 브라우저 창을 참고해서 자동으로 action정보를 설정 -->
+<form:form commandName="boardDTO" method="post">
+    <table border="1">
+        <tr>
+            <th><form:label path="title">제목</form:label></th>
+            <td><form:input path="title"/>
+                <form:errors path="title"/></td>
+        </tr>
+        <tr>
+            <th><form:label path="content">내용</form:label></th>
+            <td><form:input path="content"/>
+                <form:errors path="content"/></td>
+        </tr>
+        <tr>
+            <th><form:label path="writer">작성자</form:label></th>
+            <td><form:input path="writer"/>
+                <form:errors path="writer"/></td>
+        </tr>
+        <tr>
+            <th><form:label path="password">비밀번호</form:label></th>
+            <td><form:input path="password"/>
+                <form:errors path="password"/></td>
+        </tr>
+    </table>
+    <div>
+        <input type="submit" value="등록">
+        <a href="<c:url value="/board/list"/>">목록</a>
+    </div>
+</form:form>
+</body>
+</html>
+
+```
+
+
+
+모든 코드를 구현해서 새로운 글을 등록한 후 /board/list로 요청을 보낸 응답은 다음과 같다.
+
+<img src="/assets/spring/Spring-MVC-NoticeBoard-8.png" style="width:50%">
+
+---
+
+## 8. 수정 구현
+
+---
+
+글 수정 기능을 구현하기 위해 BoardController.java에 다음의 코드를 추가한다.
+
+```java
+@RequestMapping(value = "/board/edit/{seq}", method = RequestMethod.GET)
+public String edit(@PathVariable int seq, Model model) {
+    BoardDTO boardDTO = boardService.read(seq);
+    model.addAttribute("boardDTO", boardDTO);
+    return "/board/edit";
+}
+
+@RequestMapping(value = "/board/edit/{seq}", method = RequestMethod.POST)
+public String edit(@Valid BoardDTO boardDTO, BindingResult result, int pwd, Model model) {
+    if(result.hasErrors()) {
+        return "/board/edit";
+    } else {
+        if(boardDTO.getPassword() == pwd) {
+            boardService.edit(boardDTO);
+            return "/board/list";
+        }
+    }
+
+    model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+    return "/board/edit";
+}
+```
 
 
 
