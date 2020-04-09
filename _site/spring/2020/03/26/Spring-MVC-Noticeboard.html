@@ -918,7 +918,7 @@
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 
-<span class="c">&lt;!-- form 태그에 action 정보가 없어도 Spring이 브라우저 창을 참고해서 자동으로 action정보를 설정 --&gt;</span>
+<span class="c">&lt;%-- form 태그에 action 정보가 없어도 Spring이 브라우저 창을 참고해서 자동으로 action정보를 설정 --%&gt;</span>
 <span class="nt">&lt;form:form </span><span class="na">commandName=</span><span class="s">"boardDTO"</span><span class="na"> method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;table</span> <span class="na">border=</span><span class="s">"1"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;tr&gt;</span>
@@ -949,7 +949,6 @@
 <span class="nt">&lt;/form:form&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-
 </code></pre></div></div>
 
 <p>모든 코드를 구현해서 새로운 글을 등록한 후 /board/list로 요청을 보낸 응답은 다음과 같다.</p>
@@ -962,30 +961,181 @@
 
 <hr />
 
-<p>글 수정 기능을 구현하기 위해 BoardController.java에 다음의 코드를 추가한다.</p>
+<p>글 수정 기능을 구현하기 위해 <code class="highlighter-rouge">BoardController.java</code>에 다음의 코드를 추가하자.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/board/edit/{seq}"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nc">String</span> <span class="nf">edit</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">seq</span><span class="o">,</span> <span class="nc">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
-    <span class="nc">BoardDTO</span> <span class="n">boardDTO</span> <span class="o">=</span> <span class="n">boardService</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">seq</span><span class="o">);</span>
-    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"boardDTO"</span><span class="o">,</span> <span class="n">boardDTO</span><span class="o">);</span>
-    <span class="k">return</span> <span class="s">"/board/edit"</span><span class="o">;</span>
-<span class="o">}</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Controller</span>
+<span class="nd">@SessionAttributes</span><span class="o">(</span><span class="s">"boardDTO"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BoardController</span> <span class="o">{</span>
+    
+    <span class="c1">// 생략</span>
 
-<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/board/edit/{seq}"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
-<span class="kd">public</span> <span class="nc">String</span> <span class="nf">edit</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">,</span> <span class="nc">BindingResult</span> <span class="n">result</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pwd</span><span class="o">,</span> <span class="nc">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">hasErrors</span><span class="o">())</span> <span class="o">{</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/board/edit/{seq}"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">edit</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">seq</span><span class="o">,</span> <span class="nc">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">BoardDTO</span> <span class="n">boardDTO</span> <span class="o">=</span> <span class="n">boardService</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">seq</span><span class="o">);</span>
+        <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"boardDTO"</span><span class="o">,</span> <span class="n">boardDTO</span><span class="o">);</span>
         <span class="k">return</span> <span class="s">"/board/edit"</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="k">if</span><span class="o">(</span><span class="n">boardDTO</span><span class="o">.</span><span class="na">getPassword</span><span class="o">()</span> <span class="o">==</span> <span class="n">pwd</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">boardService</span><span class="o">.</span><span class="na">edit</span><span class="o">(</span><span class="n">boardDTO</span><span class="o">);</span>
-            <span class="k">return</span> <span class="s">"/board/list"</span><span class="o">;</span>
-        <span class="o">}</span>
     <span class="o">}</span>
 
-    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"msg"</span><span class="o">,</span> <span class="s">"비밀번호가 일치하지 않습니다."</span><span class="o">);</span>
-    <span class="k">return</span> <span class="s">"/board/edit"</span><span class="o">;</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/board/edit/{seq}"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">edit</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@ModelAttribute</span> <span class="nc">BoardDTO</span> <span class="n">boardDTO</span><span class="o">,</span> <span class="nc">BindingResult</span> <span class="n">result</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pwd</span><span class="o">,</span> <span class="nc">SessionStatus</span> <span class="n">sessionStatus</span><span class="o">,</span> <span class="nc">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">hasErrors</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="s">"/board/edit"</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// 스프링은 pwd라는 이름을 가진 input 태그의 값을 맵핑 메소드의 pwd인자로 자동바인딩 해준다.</span>
+            <span class="c1">// 자동 바인딩된 pwd값과 boardDTO가 가진 password 속성의 값을 비교</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">boardDTO</span><span class="o">.</span><span class="na">getPassword</span><span class="o">()</span> <span class="o">==</span> <span class="n">pwd</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">boardService</span><span class="o">.</span><span class="na">edit</span><span class="o">(</span><span class="n">boardDTO</span><span class="o">);</span>
+                <span class="k">return</span> <span class="s">"redirect:/board/list"</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"msg"</span><span class="o">,</span> <span class="s">"비밀번호가 일치하지 않습니다."</span><span class="o">);</span>
+        <span class="k">return</span> <span class="s">"/board/edit"</span><span class="o">;</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
+
+<p>위 코드에서는 <strong>세션을 사용해서 비밀번호 인증</strong>을 하였다.</p>
+
+<p><strong>Spring MVC 컨트롤러에서 세션을 활용하는 방법</strong></p>
+<ol>
+  <li>MVC 컨트롤러에 <code class="highlighter-rouge">@SessionAttributes("Session에 저장할 객체명")</code> 애노테이션을 지정한다.</li>
+  <li>세션에서 저장한 객체를 활용하는 <code class="highlighter-rouge">edit()</code>메서드의 인자에 <code class="highlighter-rouge">@ModelAttribute</code> 애노테이션을 지정한다.</li>
+  <li>더 이상 세션을 사용하지 않게 됐을 때 스프링 MVC가 제공하는 SessionStatus 객체의 <code class="highlighter-rouge">setComplete()</code> 메서드를 이용한다.</li>
+</ol>
+
+<p>세션을 사용을 위해 추가된 코드의 의미를 하나하나 파해쳐 보자.</p>
+<ul>
+  <li><strong>@SessionAttributes(“boardDTO”)</strong> : boardDTO라는 이름으로 객체가 MVC의 모델에 추가될 때 세션에도 boardDTO를 저장하라고 지정한다.</li>
+  <li><strong>model.addAttribute(“boardDTO”, boardDTO);</strong> : MVC 모델에 boardDTO라는 이름으로 객체를 추가하면 <code class="highlighter-rouge">@SessionAttributes</code>에 의해 자동으로 세션에도 추가된다.</li>
+  <li><strong>@ModelAttribute BoardDTO boardDTO</strong> : POST 요청을 처리하는 <code class="highlighter-rouge">edit()</code> 메서드의 인자인데, <code class="highlighter-rouge">HttpServletRequest</code>를 이용해 자동으로 바인딩될 것이다. <code class="highlighter-rouge">@SessionAttributes</code>에서 boardDTO가 지정된 경우 세션에 의한 바인딩이 먼저 실행되고, 그 후에 <code class="highlighter-rouge">HttpServletRequest</code>에 있는 정보로 갱신된다. 이때 <code class="highlighter-rouge">HttpServletRequest</code>에 존재하지 않는 속성은 세션에 있는 값을 유지하게 된다.</li>
+  <li><strong>SessionStatus sessionStatus</strong> : POST요청을 처리하는 <code class="highlighter-rouge">edit()</code>메서드의 인자인데, 세션에 대한 작업을 처리할 수 있는 객체이다.</li>
+  <li><strong>sessionStatus.setComplete();</strong> : <code class="highlighter-rouge">@SessionAttributes</code>에 의해 세션에 저장된 객체를 제거하는 코드이다.</li>
+</ul>
+
+<p>이를 그림으로 나타내면 다음과 같다.</p>
+
+<p><img src="/assets/spring/Spring-MVC-NoticeBoard-9.jpg" style="width:66%" /></p>
+
+<p><code class="highlighter-rouge">edit()</code> 메소드에서 사용하는 <code class="highlighter-rouge">edit.jsp</code>파일은 다음과 같다.</p>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"form"</span><span class="na"> uri=</span><span class="s">"http://www.springframework.org/tags/form"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">contentType=</span><span class="s">"text/html;charset=UTF-8"</span><span class="na"> language=</span><span class="s">"java"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Insert title here<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="c">&lt;%-- form 태그에 action 정보가 없어도 Spring이 브라우저 창을 참고해서 자동으로 action정보를 설정 --%&gt;</span>
+<span class="nt">&lt;form:form </span><span class="na">commandName=</span><span class="s">"boardDTO"</span><span class="na"> method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;table</span> <span class="na">border=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th&gt;&lt;form:label </span><span class="na">path=</span><span class="s">"title"</span><span class="nt">&gt;</span>제목<span class="nt">&lt;/form:label&gt;&lt;/th&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;form:input </span><span class="na">path=</span><span class="s">"title"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;form:errors </span><span class="na">path=</span><span class="s">"title"</span><span class="nt">/&gt;&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th&gt;&lt;form:label </span><span class="na">path=</span><span class="s">"content"</span><span class="nt">&gt;</span>내용<span class="nt">&lt;/form:label&gt;&lt;/th&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;form:input </span><span class="na">path=</span><span class="s">"content"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;form:errors </span><span class="na">path=</span><span class="s">"content"</span><span class="nt">/&gt;&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th&gt;&lt;form:label </span><span class="na">path=</span><span class="s">"writer"</span><span class="nt">&gt;</span>작성자<span class="nt">&lt;/form:label&gt;&lt;/th&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;form:input </span><span class="na">path=</span><span class="s">"writer"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;form:errors </span><span class="na">path=</span><span class="s">"writer"</span><span class="nt">/&gt;&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+        <span class="nt">&lt;tr&gt;</span>
+            <span class="nt">&lt;th&gt;&lt;label</span> <span class="na">for=</span><span class="s">"pwd"</span><span class="nt">&gt;</span>비밀번호<span class="nt">&lt;/label&gt;&lt;/th&gt;</span>
+            <span class="c">&lt;%-- form 태그를 사용하면 글을 등록할 때 입력했떤 비밀번호가 채워지기 때문에 input 태그를 사용 --%&gt;</span>
+            <span class="nt">&lt;td&gt;&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">id=</span><span class="s">"pwd"</span> <span class="na">name=</span><span class="s">"pwd"</span><span class="nt">/&gt;</span>${msg}<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"등록"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;c:url </span><span class="na">value=</span><span class="s">"/board/list"</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">&gt;</span>목록<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/form:form&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="9-삭제-구현">9. 삭제 구현</h2>
+
+<hr />
+
+<p>글을 삭제하기 위해서는 비밀번호를 입력받을 방법이 필요하다. 별도의 페이지를 띄워 비밀번호를 입력 받도록 하겠다.</p>
+
+<p>먼저 읽기 화면(read.jsp)에 글을 삭제하기 위해 비밀번호를 입력받을 페이지에 대한 링크를 만든다.</p>
+
+<p><strong>/board/read.jsp</strong></p>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;%-- ...생략... --%&gt;</span>
+
+<span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;c:url </span><span class="na">value=</span><span class="s">"/board/edit/${boardDTO.seq}"</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">&gt;</span>수정<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;c:url </span><span class="na">value=</span><span class="s">"/board/delete/${boardDTO.seq}"</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">&gt;</span>삭제<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;c:url </span><span class="na">value=</span><span class="s">"/board/list"</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">&gt;</span>목록<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>BoardController.java에 /board/delete URL 요청을 처리할 메서드를 추가한다.</p>
+
+<p><strong>BoardController.java</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/board/delete/{seq}"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">delete</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">seq</span><span class="o">,</span> <span class="nc">Model</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"seq"</span><span class="o">,</span> <span class="n">seq</span><span class="o">);</span>
+    <span class="k">return</span> <span class="s">"/board/delete"</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/board/delete"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">delete</span><span class="o">(</span><span class="kt">int</span> <span class="n">seq</span><span class="o">,</span> <span class="kt">int</span> <span class="n">pwd</span><span class="o">,</span> <span class="nc">Model</span> <span class="n">model</span><span class="o">,)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">rowCount</span><span class="o">;</span>
+
+    <span class="nc">BoardDTO</span> <span class="n">boardDTO</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BoardDTO</span><span class="o">();</span>
+    <span class="n">boardDTO</span><span class="o">.</span><span class="na">setSeq</span><span class="o">(</span><span class="n">seq</span><span class="o">);</span>
+    <span class="n">boardDTO</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">pwd</span><span class="o">);</span>
+
+    <span class="n">rowCount</span> <span class="o">=</span> <span class="n">boardService</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">boardDTO</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">rowCount</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"seq"</span><span class="o">,</span> <span class="n">seq</span><span class="o">);</span>
+        <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"msg"</span><span class="o">,</span> <span class="s">"비밀번호가 일치하지 않습니다."</span><span class="o">);</span>
+        <span class="k">return</span> <span class="s">"/board/delete"</span><span class="o">;</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"redirect:/board/list"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>그리고 비밀번호를 입력받을 delete.jsp파일을 만들자.</p>
+
+<p><strong>/board/delete.jsp</strong></p>
+<div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span> <span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ page </span><span class="na">contentType=</span><span class="s">"text/html;charset=UTF-8"</span><span class="na"> language=</span><span class="s">"java"</span> <span class="nt">%&gt;</span>
+
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Title<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;form</span> <span class="na">name=</span><span class="s">"deleteForm"</span> <span class="na">action=</span><span class="s">"</span><span class="nt">&lt;c:url </span><span class="na">value=</span><span class="s">"/board/delete"</span><span class="nt">/&gt;</span><span class="s">"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"seq"</span> <span class="na">value=</span><span class="s">"${seq}"</span><span class="nt">/&gt;</span>
+    비밀번호<span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">"pwd"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="nt">&lt;c:url </span><span class="na">value=</span><span class="s">"/board/read/"</span><span class="nt">/&gt;</span><span class="s">"</span><span class="nt">&gt;</span>취소<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;div&gt;</span>${msg}<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>이제 웹 서버를 재구동하고 글을 삭제해 보면, 잘 작동한다.</p>
+
+<p>이로써 Spring MVC를 활용한 게시판 구축하기에 대한 글은 마치고 독자는 Session을 활용해서 게시판을 더 간단히 리팩토링 할 수 있는 방법에 대해서 생각 해 보길 권한다.</p>
 
 <hr />
 

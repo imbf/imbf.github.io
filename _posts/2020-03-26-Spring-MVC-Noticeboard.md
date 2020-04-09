@@ -726,7 +726,7 @@ public class BoardDTO {
 </head>
 <body>
 
-<!-- form 태그에 action 정보가 없어도 Spring이 브라우저 창을 참고해서 자동으로 action정보를 설정 -->
+<%-- form 태그에 action 정보가 없어도 Spring이 브라우저 창을 참고해서 자동으로 action정보를 설정 --%>
 <form:form commandName="boardDTO" method="post">
     <table border="1">
         <tr>
@@ -757,10 +757,7 @@ public class BoardDTO {
 </form:form>
 </body>
 </html>
-
 ```
-
-
 
 모든 코드를 구현해서 새로운 글을 등록한 후 /board/list로 요청을 보낸 응답은 다음과 같다.
 
@@ -772,31 +769,182 @@ public class BoardDTO {
 
 ---
 
-글 수정 기능을 구현하기 위해 BoardController.java에 다음의 코드를 추가한다.
+글 수정 기능을 구현하기 위해 `BoardController.java`에 다음의 코드를 추가하자.
 
 ```java
-@RequestMapping(value = "/board/edit/{seq}", method = RequestMethod.GET)
-public String edit(@PathVariable int seq, Model model) {
-    BoardDTO boardDTO = boardService.read(seq);
-    model.addAttribute("boardDTO", boardDTO);
-    return "/board/edit";
-}
+@Controller
+@SessionAttributes("boardDTO")
+public class BoardController {
+    
+    // 생략
 
-@RequestMapping(value = "/board/edit/{seq}", method = RequestMethod.POST)
-public String edit(@Valid BoardDTO boardDTO, BindingResult result, int pwd, Model model) {
-    if(result.hasErrors()) {
+    @RequestMapping(value = "/board/edit/{seq}", method = RequestMethod.GET)
+    public String edit(@PathVariable int seq, Model model) {
+        BoardDTO boardDTO = boardService.read(seq);
+        model.addAttribute("boardDTO", boardDTO);
         return "/board/edit";
-    } else {
-        if(boardDTO.getPassword() == pwd) {
-            boardService.edit(boardDTO);
-            return "/board/list";
-        }
     }
 
-    model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
-    return "/board/edit";
+    @RequestMapping(value = "/board/edit/{seq}", method = RequestMethod.POST)
+    public String edit(@Valid @ModelAttribute BoardDTO boardDTO, BindingResult result, int pwd, SessionStatus sessionStatus, Model model) {
+        if(result.hasErrors()) {
+            return "/board/edit";
+        } else {
+            // 스프링은 pwd라는 이름을 가진 input 태그의 값을 맵핑 메소드의 pwd인자로 자동바인딩 해준다.
+            // 자동 바인딩된 pwd값과 boardDTO가 가진 password 속성의 값을 비교
+            if(boardDTO.getPassword() == pwd) {
+                boardService.edit(boardDTO);
+                return "redirect:/board/list";
+            }
+        }
+        model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+        return "/board/edit";
+    }
 }
 ```
+
+위 코드에서는 **세션을 사용해서 비밀번호 인증**을 하였다.
+
+**Spring MVC 컨트롤러에서 세션을 활용하는 방법**
+1. MVC 컨트롤러에 `@SessionAttributes("Session에 저장할 객체명")` 애노테이션을 지정한다.
+2. 세션에서 저장한 객체를 활용하는 `edit()`메서드의 인자에 `@ModelAttribute` 애노테이션을 지정한다.
+3. 더 이상 세션을 사용하지 않게 됐을 때 스프링 MVC가 제공하는 SessionStatus 객체의 `setComplete()` 메서드를 이용한다.
+
+세션을 사용을 위해 추가된 코드의 의미를 하나하나 파해쳐 보자.
+- **@SessionAttributes("boardDTO")** : boardDTO라는 이름으로 객체가 MVC의 모델에 추가될 때 세션에도 boardDTO를 저장하라고 지정한다.
+- **model.addAttribute("boardDTO", boardDTO);** : MVC 모델에 boardDTO라는 이름으로 객체를 추가하면 `@SessionAttributes`에 의해 자동으로 세션에도 추가된다.
+- **@ModelAttribute BoardDTO boardDTO** : POST 요청을 처리하는 `edit()` 메서드의 인자인데, `HttpServletRequest`를 이용해 자동으로 바인딩될 것이다. `@SessionAttributes`에서 boardDTO가 지정된 경우 세션에 의한 바인딩이 먼저 실행되고, 그 후에 `HttpServletRequest`에 있는 정보로 갱신된다. 이때 `HttpServletRequest`에 존재하지 않는 속성은 세션에 있는 값을 유지하게 된다.
+- **SessionStatus sessionStatus** : POST요청을 처리하는 `edit()`메서드의 인자인데, 세션에 대한 작업을 처리할 수 있는 객체이다.
+- **sessionStatus.setComplete();** : `@SessionAttributes`에 의해 세션에 저장된 객체를 제거하는 코드이다.
+
+이를 그림으로 나타내면 다음과 같다.
+
+<img src="/assets/spring/Spring-MVC-NoticeBoard-9.jpg" style="width:66%">
+
+`edit()` 메소드에서 사용하는 `edit.jsp`파일은 다음과 같다.
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Insert title here</title>
+</head>
+<body>
+
+<%-- form 태그에 action 정보가 없어도 Spring이 브라우저 창을 참고해서 자동으로 action정보를 설정 --%>
+<form:form commandName="boardDTO" method="post">
+    <table border="1">
+        <tr>
+            <th><form:label path="title">제목</form:label></th>
+            <td><form:input path="title"/>
+                <form:errors path="title"/></td>
+        </tr>
+        <tr>
+            <th><form:label path="content">내용</form:label></th>
+            <td><form:input path="content"/>
+                <form:errors path="content"/></td>
+        </tr>
+        <tr>
+            <th><form:label path="writer">작성자</form:label></th>
+            <td><form:input path="writer"/>
+                <form:errors path="writer"/></td>
+        </tr>
+        <tr>
+            <th><label for="pwd">비밀번호</label></th>
+            <%-- form 태그를 사용하면 글을 등록할 때 입력했떤 비밀번호가 채워지기 때문에 input 태그를 사용 --%>
+            <td><input type="password" id="pwd" name="pwd"/>${msg}</td>
+        </tr>
+    </table>
+    <div>
+        <input type="submit" value="등록">
+        <a href="<c:url value="/board/list"/>">목록</a>
+    </div>
+</form:form>
+</body>
+</html>
+```
+
+---
+
+## 9. 삭제 구현
+
+---
+
+글을 삭제하기 위해서는 비밀번호를 입력받을 방법이 필요하다. 별도의 페이지를 띄워 비밀번호를 입력 받도록 하겠다.
+
+먼저 읽기 화면(read.jsp)에 글을 삭제하기 위해 비밀번호를 입력받을 페이지에 대한 링크를 만든다.
+
+**/board/read.jsp**
+```jsp
+<%-- ...생략... --%>
+
+</table>
+<div>
+    <a href="<c:url value="/board/edit/${boardDTO.seq}"/>">수정</a>
+    <a href="<c:url value="/board/delete/${boardDTO.seq}"/>">삭제</a>
+    <a href="<c:url value="/board/list"/>">목록</a>
+</div>
+</body>
+</html>
+```
+
+BoardController.java에 /board/delete URL 요청을 처리할 메서드를 추가한다.
+
+**BoardController.java**
+```java
+@RequestMapping(value = "/board/delete/{seq}", method = RequestMethod.GET)
+public String delete(@PathVariable int seq, Model model) {
+    model.addAttribute("seq", seq);
+    return "/board/delete";
+}
+
+@RequestMapping(value = "/board/delete", method = RequestMethod.POST)
+public String delete(int seq, int pwd, Model model,) {
+    int rowCount;
+
+    BoardDTO boardDTO = new BoardDTO();
+    boardDTO.setSeq(seq);
+    boardDTO.setPassword(pwd);
+
+    rowCount = boardService.delete(boardDTO);
+
+    if (rowCount == 0) {
+        model.addAttribute("seq", seq);
+        model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+        return "/board/delete";
+    } else {
+        return "redirect:/board/list";
+    }
+}
+```
+
+그리고 비밀번호를 입력받을 delete.jsp파일을 만들자.
+
+**/board/delete.jsp**
+```jsp
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<form name="deleteForm" action="<c:url value="/board/delete"/>" method="post">
+    <input name="seq" value="${seq}"/>
+    비밀번호<input name="pwd"/>
+    <input type="submit">
+    <a href="<c:url value="/board/read/"/>">취소</a>
+</form>
+<div>${msg}</div>
+</body>
+</html>
+```
+
+이제 웹 서버를 재구동하고 글을 삭제해 보면, 잘 작동한다.
+
+이로써 Spring MVC를 활용한 게시판 구축하기에 대한 글은 마치고 독자는 Session을 활용해서 게시판을 더 간단히 리팩토링 할 수 있는 방법에 대해서 생각 해 보길 권한다.
 
 
 
