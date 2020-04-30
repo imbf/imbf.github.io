@@ -8,8 +8,8 @@
   <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
 
 
-  <title>Welcome to Jekyll!</title>
-  <meta name="description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...">
+  <title>Spring Data란 무엇인가?</title>
+  <meta name="description" content="이 글에서는 Spring Data란 무엇인지에 대해서 알아볼 것이다.">
   
   <meta name="author" content="배종진">
   <meta name="copyright" content="&copy; 배종진 2020">
@@ -43,12 +43,12 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa..." />
-  <meta property="og:url" content="http://localhost:4000/jekyll/2015/04/19/welcome-to-jekyll.html">
+  <meta property="og:description" content="이 글에서는 Spring Data란 무엇인지에 대해서 알아볼 것이다." />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/04/30/Spring-Data.html">
   <meta property="og:site_name" content="Green Frog Developer" />
-  <meta property="og:title" content="Welcome to Jekyll!" />
+  <meta property="og:title" content="Spring Data란 무엇인가?" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="http://localhost:4000/assets/instacode.png" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="612" />
   <meta property="og:image:height" content="605" />
@@ -57,17 +57,17 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Welcome to Jekyll!">
-  <meta name="twitter:description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...">
-  <meta name="twitter:image" content="http://localhost:4000/assets/instacode.png">
-  <meta name="twitter:url" content="http://localhost:4000/jekyll/2015/04/19/welcome-to-jekyll.html">
+  <meta name="twitter:title" content="Spring Data란 무엇인가?">
+  <meta name="twitter:description" content="이 글에서는 Spring Data란 무엇인지에 대해서 알아볼 것이다.">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/04/30/Spring-Data.html">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/jekyll/2015/04/19/welcome-to-jekyll.html">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/04/30/Spring-Data.html">
 	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
 	
 	<!-- Tooltips -->
@@ -182,93 +182,156 @@
     <div class="page-content">
         <div class="post">
 
-<div class="post-header-container has-cover" style="background-image: url(/assets/instacode.png);">
-  <div class="scrim has-cover">
+<div class="post-header-container " >
+  <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">Welcome to Jekyll!</h1>
-      <p class="info">by <strong>Ben Centra</strong></p>
+      <h1 class="title">Spring Data란 무엇인가?</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
     </header>
   </div>
 </div>
 
 <div class="wrapper">
 
-
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
 
 <section class="post-meta">
-  <div class="post-date">April 19, 2015</div>
+  <div class="post-date">April 30, 2020</div>
   <div class="post-categories">
   in 
     
-    <!-- <a href="/category/Jekyll">Jekyll</a> (default) -->
-    <a href="/category/Jekyll">Jekyll</a>
+    <!-- <a href="/category/Spring">Spring</a> (default) -->
+    <a href="/category/Spring">Spring</a>
     
   
   </div>
 </section>
 
 <article class="post-content">
-  <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+  <p>이 글에서는 <strong>Spring Data</strong>란 무엇인지에 대해서 알아볼 것이다.</p>
 
-<h2 id="adding-new-posts">Adding New Posts</h2>
+<hr />
 
-<p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<h2 id="1-spring-data">1. Spring Data</h2>
 
-<h3 id="tags-and-categories">Tags and Categories</h3>
+<hr />
 
-<p>If you list one or more categories or tags in the front matter of your post, they will be included with the post on the page as links. Clicking the link will bring you to an auto-generated archive page for the category or tag, created using the <a href="https://github.com/jekyll/jekyll-archives">jekyll-archive</a> gem.</p>
+<h3 id="spring-data란">Spring Data란?</h3>
 
-<h3 id="cover-images">Cover Images</h3>
+<ul>
+  <li>
+    <p>Spring Data의 목적은 기본 데이터 저장소의 특수한 특성을 유지하면서 <strong>데이터 접근을 위한 친숙하고 일관된 Spring 기반의 프로그래밍 모델을 제공</strong>하는 프로젝트이다.</p>
+  </li>
+  <li>
+    <p>Spring Data는 <strong>데이터 접근 기술, relational and non-relational database, map-reduce 프레임워크, 클라우드 기반의 서비스</strong>를 쉽게 사용할 수 있도록 해준다.</p>
+  </li>
+  <li>
+    <p>Spring Data는 데이터베이스와 관련된 많은 하위 프로젝트(Spring Data JPA, Spring Data REST, …)를 포함하는 포괄적인 프로젝트이다.</p>
+  </li>
+</ul>
 
-<p>To add a cover image to your post, set the “cover” property in the front matter with the relative URL of the image (i.e. <code>cover: "/assets/cover_image.jpg"</code>).</p>
+<h3 id="spring-data의-특징">Spring Data의 특징</h3>
 
-<h3 id="code-snippets">Code Snippets</h3>
+<ul>
+  <li>
+    <p>강력한 저장소 및 사용자 정의 객체 맵핑 추상화</p>
+  </li>
+  <li>
+    <p>저장소 메소드 이름으로부터 동적 쿼리 파생</p>
+  </li>
+  <li>
+    <p>기본 속성을 제공하는 Implementation domain 기본 클래스</p>
+  </li>
+  <li>
+    <p>transparent auditing을 위한 지원 (created, last changed)</p>
+  </li>
+  <li>
+    <p>사용자 정의 저장소 코드를 통합할 수 있는 가능성</p>
+  </li>
+  <li>
+    <p>JavaConfig 및 custom XML namespaces를 통한 손쉬운 Spring과의 통합</p>
+  </li>
+  <li>
+    <p>Spring MVC 컨트롤러와의 향상된 통합</p>
+  </li>
+  <li>
+    <p>cross-store persistence에 대한 실험적 지원</p>
+  </li>
+</ul>
 
-<p>You can use <a href="https://highlightjs.org/">highlight.js</a> to add syntax highlight code snippets:</p>
+<h3 id="주요-모듈">주요 모듈</h3>
 
-<p>Use the <a href="https://github.com/Shopify/liquid/wiki/Liquid-for-Designers">Liquid</a> <code class="highlighter-rouge">{% highlight &lt;language&gt; %}</code> tag to add syntax highlighting to code snippets.</p>
+<ul>
+  <li>
+    <p><strong>Spring Data Commons :</strong> 모든 Spring Module을 뒷받침하는 핵심 Spring 개념 (CrudRepository, PagingAndSortingRepository 인터페이스)</p>
+  </li>
+  <li>
+    <p><strong>Spring Data JDBC :</strong> spring-jdbc에 대한 Spring Data 추상화를 제공하는 모듈 (CrudRepository를 구현하는 SimpleJdbcRepository 클래스)</p>
+  </li>
+  <li>
+    <p><strong>Spring Data JPA :</strong> JPA를 위한 스프링 데이터 저장소 지원 (JpaRepository 인터페이스, SimpleJpaRepository 클래스)</p>
+  </li>
+  <li>
+    <p><strong>Spring Data MongoDB :</strong> MongoDB를 위한 스프링 기반 객체 문서 지원 및 저장소</p>
+  </li>
+  <li>
+    <p><strong>Spring Data REST :</strong> 스프링 데이터 저장소들을 hypermedia 기반의 Restful 리소스로 export 해주는 모듈</p>
+  </li>
+  <li>
+    <p><strong>Spring Data Redis :</strong> Spring Application에서 Redis를 손쉽게 구성 및 접근할 수 있도록 하는 모듈</p>
+  </li>
+  <li>
+    <p>…</p>
+  </li>
+</ul>
 
-<p>For instance, this template…</p>
+<h3 id="community-module">Community Module</h3>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html">{% highlight javascript %}    
-function demo(string, times) {    
-  for (var i = 0; i <span class="nt">&lt;</span> <span class="nt">times</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>    
-    <span class="na">console</span><span class="err">.</span><span class="na">log</span><span class="err">(</span><span class="na">string</span><span class="err">);</span>    
-  <span class="err">}</span>    
-<span class="err">}</span>    
-<span class="na">demo</span><span class="err">("</span><span class="na">hello</span><span class="err">,</span> <span class="na">world</span><span class="err">!",</span> <span class="na">10</span><span class="err">);</span>
-<span class="err">{%</span> <span class="na">endhighlight</span> <span class="err">%}</span></code></pre></figure>
+<ul>
+  <li>
+    <p>Spring Data Aerospike</p>
+  </li>
+  <li>
+    <p>Spring Data ArangoDB</p>
+  </li>
+  <li>
+    <p>Spring Data Couchbase</p>
+  </li>
+  <li>
+    <p>Spring Data Azure Cosmos DB</p>
+  </li>
+  <li>
+    <p>Spring Data Cloud Datastore</p>
+  </li>
+  <li>
+    <p>Spring Data Cloud Spanner</p>
+  </li>
+  <li>
+    <p>Spring Data DynamoDB</p>
+  </li>
+  <li>
+    <p>…</p>
+  </li>
+</ul>
 
-<p>…will come out looking like this:</p>
-
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">demo</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">times</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">times</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">string</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-<span class="nx">demo</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello, world!</span><span class="dl">"</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span></code></pre></figure>
-
-<p>Syntax highlighting is done using <a href="https://highlightjs.org/">highlight.js</a>. You can change the active theme in <a href="https://github.com/bencentra/centrarium/blob/2dcd73d09e104c3798202b0e14c1db9fa6e77bc7/_includes/head.html#L15">head.html</a>.</p>
-
-<h3 id="images">Images</h3>
-
-<p>Lightbox has been enabled for images. To create the link that’ll launch the lightbox, add <code>data-lightbox</code> and <code>data-title</code> attributes to an <code>&lt;a&gt;</code> tag around your <code>&lt;img&gt;</code> tag. The result is:</p>
-
-<p><a href="//bencentra.com/assets/images/falcon9_large.jpg" data-lightbox="falcon9-large" data-title="Check out the Falcon 9 from SpaceX">
-  <img src="//bencentra.com/assets/images/falcon9_small.jpg" title="Check out the Falcon 9 from SpaceX" />
-</a></p>
-
-<p>For more information, check out the <a href="http://lokeshdhakar.com/projects/lightbox2/">Lightbox</a> website.</p>
-
-<p>Check out the <a href="http://jekyllrb.com">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://github.com/jekyll/jekyll-help">Jekyll’s dedicated Help repository</a>.</p>
-
+<hr />
+<blockquote>
+  <p>참조</p>
+  <ul>
+    <li>Spring Reference</li>
+  </ul>
+</blockquote>
 
 </article>
 
 
 
 <section class="tags">
-  <strong>Tags:</strong> <a href="/tag/jekyll">jekyll</a>,&nbsp;<a href="/tag/welcome">welcome</a>
+  <strong>Tags:</strong> <a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/Data">Data</a>
 </section>
 
 
@@ -282,7 +345,7 @@ function demo(string, times) {
   
     
     
-      <a href="//twitter.com/share?text=Welcome+to+Jekyll%21&url=http%3A%2F%2Flocalhost%3A4000%2Fjekyll%2F2015%2F04%2F19%2Fwelcome-to-jekyll.html&via=TheBenCentra"
+      <a href="//twitter.com/share?text=Spring+Data%EB%9E%80+%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%3F&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F04%2F30%2FSpring-Data.html&via=TheBenCentra"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
         <i class="fa fa-twitter-square fa-lg"></i>
       </a>
@@ -297,7 +360,7 @@ function demo(string, times) {
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=Welcome+to+Jekyll%21&u=http%3A%2F%2Flocalhost%3A4000%2Fjekyll%2F2015%2F04%2F19%2Fwelcome-to-jekyll.html"
+      <a href="//www.facebook.com/sharer.php?t=Spring+Data%EB%9E%80+%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%3F&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F04%2F30%2FSpring-Data.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -322,7 +385,7 @@ function demo(string, times) {
     
     
     
-      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fjekyll%2F2015%2F04%2F19%2Fwelcome-to-jekyll.html"
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F04%2F30%2FSpring-Data.html"
         onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
         <i class="fa fa-linkedin-square fa-lg"></i>
       </a>
@@ -335,7 +398,7 @@ function demo(string, times) {
     
     
     
-      <a href="//plus.google.com/share?title=Welcome+to+Jekyll%21&url=http%3A%2F%2Flocalhost%3A4000%2Fjekyll%2F2015%2F04%2F19%2Fwelcome-to-jekyll.html"
+      <a href="//plus.google.com/share?title=Spring+Data%EB%9E%80+%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%3F&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F04%2F30%2FSpring-Data.html"
         onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
         <i class="fa fa-google-plus-square fa-lg"></i>
       </a>
@@ -369,7 +432,7 @@ function demo(string, times) {
     
     
     
-      <a href="//www.pinterest.com/pin/create/button/?description=Welcome+to+Jekyll%21&url=http%3A%2F%2Flocalhost%3A4000%2Fjekyll%2F2015%2F04%2F19%2Fwelcome-to-jekyll.html&media=http://localhost:4000/assets/instacode.png"
+      <a href="//www.pinterest.com/pin/create/button/?description=Spring+Data%EB%9E%80+%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%3F&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F04%2F30%2FSpring-Data.html&media=http://localhost:4000/assets/header_image.jpg"
         onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
         <i class="fa fa-pinterest-square fa-lg"></i>
       </a>
@@ -438,7 +501,7 @@ function demo(string, times) {
     
     
     
-      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/jekyll/2015/04/19/welcome-to-jekyll.html') + '&title=Welcome to Jekyll!'; return false">
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/04/30/Spring-Data.html') + '&title=Spring Data란 무엇인가?'; return false">
         <i class="fa fa-reddit-square fa-lg"></i>
       </a>
     
