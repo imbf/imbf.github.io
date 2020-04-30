@@ -11,7 +11,7 @@ tags: Spring Data
 
 ---
 
-## 1. Spring Data
+## Spring Data
 
 ---
 
