@@ -36,13 +36,13 @@ HTML Form에서는 GET과 POST방식의 Methods만 지원한다. HTML Form이 �
 
 사용자의 정보를 수정하기 위해서 클라이언트는 수정할 데이터를 **PUT 형식으로 서버에 요청**해야 한다.
 
-하지만 PUT형식을 제공해 주지 않는 HTML 때문에 우리는 나름 꼼수(?)를 사용해서 Spring이 알아먹ㄴ을 수 있도록 `<input type="hidden" name="_method" value="put"/>`를 다음과 같이 폼 태그 내부에 위치시켜야 한다.
+하지만 PUT형식을 제공해 주지 않는 HTML 때문에 우리는 나름 꼼수(?)를 사용해서 Spring이 알아먹을 수 있도록 `<input type="hidden" name="_method" value="put"/>`를 다음과 같이 폼 태그 내부에 위치시켜야 한다.
 
 나는 이렇게만 하면 Controller의 `@PutMapping("/users/{id}/update")`애노테이션을 갖은 핸들러 메서드가 해당 요청에 대해서 잘 처리할 줄 알았다.
 
 하지만 누가 알았을까..? 정말 이제 시작이란것을..
 
-다음은 위의 폼의 요청에 따른 서버에서 보내는 응답이다.
+다음은 위의 폼의 요청에 따라 서버에서 보여지는 로그이다.
 
 <img src="/assets/spring/Spring-HiddenHttpMethodFilter-1.png" style="width:100%">
 
@@ -66,7 +66,7 @@ HTML Form에서는 GET과 POST방식의 Methods만 지원한다. HTML Form이 �
 
 > 정확히 말해서 HiddenHttpMethodFilter는 Hidden 타입의 input 태그의 속성들을 읽어서 HttpServletRequestWrapper.getMethod() 반환 값을 변경해 요청된 HTTP 메소드의 타입을 PUT, DELETE, PATCH로 변경해주는 필터이다.
 
-**HiddenHttpMethodFilter**클래스를 Bean으로 등록하면 위의 이슈(문제는) 해결된다.
+그래서 **HiddenHttpMethodFilter**클래스를 Bean으로 등록하면 위의 이슈(문제는) 해결된다.
 
 다음의 코드는 HiddenHttpMethodFilter를 Bean으로 등록하는 코드이다.
 
