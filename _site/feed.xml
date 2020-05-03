@@ -6,9 +6,112 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 30 Apr 2020 14:07:35 +0900</pubDate>
-    <lastBuildDate>Thu, 30 Apr 2020 14:07:35 +0900</lastBuildDate>
+    <pubDate>Sun, 03 May 2020 21:27:42 +0900</pubDate>
+    <lastBuildDate>Sun, 03 May 2020 21:27:42 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Spring의 HiddenHttpMethodFilter에 관한 이슈</title>
+        <description>&lt;p&gt;이 포스팅에서는 &lt;strong&gt;HTTP Method의 처리 프로세스&lt;/strong&gt;에 대한 서버단의 이슈에 관해서 설명하고자 한다.&lt;/p&gt;
+
+&lt;p&gt;HTML Form에서는 GET과 POST방식의 Methods만 지원한다. HTML Form이 다른 Methods를 지원하지 않는 이유는 &lt;strong&gt;Form의 역할과는 거리가 멀기 때문&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;p&gt;왜 HTML Form이 GET과 POST방식의 Methods만 지원하는지에 대해서 궁금한 독자는 다음의 블로그&lt;a href=&quot;http://haah.kr/2017/05/23/rest-http-method-in-html-form/&quot;&gt;(http://haah.kr/2017/05/23/rest-http-method-in-html-form/)&lt;/a&gt; 를 읽어보자.&lt;/p&gt;
+
+&lt;p&gt;이제부터 HTTP Method에 관해서 나에게 어떠한 &lt;strong&gt;이슈&lt;/strong&gt;가 있었고 어떻게 해결했는지에 대해서 알려줄 것이다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;이슈에러-발생&quot;&gt;이슈(에러) 발생&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;아래의 폼은 사용자를 id로 식별하여 정보를 수정하기 위해 수정할 정보를 서버로 전송하는 폼이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;updateForm.html&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- ... --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;question&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;post&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/users/{user.id}/update&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hidden&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;_method&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;put&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;form-group&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;label&amp;gt;&lt;/span&gt;사용자 아이디 : {user.userId}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- ... --&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;사용자의 정보를 수정하기 위해서 클라이언트는 수정할 데이터를 &lt;strong&gt;PUT 형식으로 서버에 요청&lt;/strong&gt;해야 한다.&lt;/p&gt;
+
+&lt;p&gt;하지만 PUT형식을 제공해 주지 않는 HTML 때문에 우리는 나름 꼼수(?)를 사용해서 Spring이 알아먹ㄴ을 수 있도록 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;put&quot;/&amp;gt;&lt;/code&gt;를 다음과 같이 폼 태그 내부에 위치시켜야 한다.&lt;/p&gt;
+
+&lt;p&gt;나는 이렇게만 하면 Controller의 &lt;code class=&quot;highlighter-rouge&quot;&gt;@PutMapping(&quot;/users/{id}/update&quot;)&lt;/code&gt;애노테이션을 갖은 핸들러 메서드가 해당 요청에 대해서 잘 처리할 줄 알았다.&lt;/p&gt;
+
+&lt;p&gt;하지만 누가 알았을까..? 정말 이제 시작이란것을..&lt;/p&gt;
+
+&lt;p&gt;다음은 위의 폼의 요청에 따른 서버에서 보내는 응답이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-HiddenHttpMethodFilter-1.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;보이는가..? 서버는 이 요청을 POST로 해석하고 있다… 어찌된 일인가 도통 모르겠다… 일단 해결해 보자!!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;해결-방안&quot;&gt;해결 방안&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;정말 이 이슈를 해결하는데 생각보다 오래걸렸고, 생각보다 힘들었다.&lt;/p&gt;
+
+&lt;p&gt;이제와서 생각이 드는 거지만, 이러한 &lt;strong&gt;이슈들을 해결하는데 오래걸리고 힘든 이유&lt;/strong&gt;는 기존 &lt;strong&gt;내 머리속의 지식 안에서만 문제를 해결&lt;/strong&gt;하려고 하니까 힘들고 오래걸리는 듯 하다.&lt;/p&gt;
+
+&lt;p&gt;말이 길었다. 어떻게 이러한 문제를 해결할 수 있었는지에 대해서 설명하겠다. (Spring Web MVC Document에 친절하게 나와있다.)&lt;/p&gt;
+
+&lt;p&gt;아까 Spring에서 지원해주는 꼼수라는 말을 기억하는가??? 그렇다. Spring Web MVC는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;put&quot;/&amp;gt;&lt;/code&gt;를 사용해서 POST를 PUT으로 해석한다.&lt;/p&gt;
+
+&lt;p&gt;하지만, Spring은 신이 아니다… 당연히 이러한 역할을 해주는 Filter가 Bean으로 등록되어야 한다. 이러한 역할을 해주는 Filter는 &lt;strong&gt;HiddenHttpMethodFilter&lt;/strong&gt;이다. 이름 그대로 숨겨진 HTTP Method를 필터하는 클래스이다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;정확히 말해서 HiddenHttpMethodFilter는 Hidden 타입의 input 태그의 속성들을 읽어서 HttpServletRequestWrapper.getMethod() 반환 값을 변경해 요청된 HTTP 메소드의 타입을 PUT, DELETE, PATCH로 변경해주는 필터이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;HiddenHttpMethodFilter&lt;/strong&gt;클래스를 Bean으로 등록하면 위의 이슈(문제는) 해결된다.&lt;/p&gt;
+
+&lt;p&gt;다음의 코드는 HiddenHttpMethodFilter를 Bean으로 등록하는 코드이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MvcConfig&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebMvcConfigurationSupport&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HiddenHttpMethodFilter&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;httpMethodFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;HiddenHttpMethodFilter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hiddenHttpMethodFilter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HiddenHttpMethodFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hiddenHttpMethodFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이로써 이번 포스팅은 마친다.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;참조&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html&quot;&gt;Spring Web MVC Document&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/filter/HiddenHttpMethodFilter.html&quot;&gt;Spring API&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/spring/2020/05/03/Spring-HiddenHttpMethodFilter.html</link>
+        <guid isPermaLink="true">http://localhost:4000/spring/2020/05/03/Spring-HiddenHttpMethodFilter.html</guid>
+        
+        <category>Spring</category>
+        
+        <category>Data</category>
+        
+        
+        <category>Spring</category>
+        
+      </item>
     
       <item>
         <title>Spring Data란 무엇인가?</title>
@@ -16,7 +119,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;1-spring-data&quot;&gt;1. Spring Data&lt;/h2&gt;
+&lt;h2 id=&quot;spring-data&quot;&gt;Spring Data&lt;/h2&gt;
 
 &lt;hr /&gt;
 
@@ -2853,261 +2956,6 @@ http://www.springframework.org/schema/context http://www.springframework/schema/
         <pubDate>Tue, 17 Mar 2020 00:00:00 +0900</pubDate>
         <link>http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(2).html</link>
         <guid isPermaLink="true">http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(2).html</guid>
-        
-        <category>Java</category>
-        
-        <category>OOP</category>
-        
-        <category>Spring</category>
-        
-        <category>Design-Pattern</category>
-        
-        
-        <category>Spring</category>
-        
-      </item>
-    
-      <item>
-        <title>Adapter, Proxy and Decorator Pattern</title>
-        <description>&lt;h1 id=&quot;spring이-사랑하는-design-pattern&quot;&gt;Spring이 사랑하는 Design Pattern&lt;/h1&gt;
-
-&lt;p&gt;이 글에서는 Spring이 사랑하고 Spring이 적용한 디자인 패턴중 &lt;strong&gt;Adapter, Proxy and Decorator Design Pattern&lt;/strong&gt;에 대해서 알아볼 것이다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;adapter-pattern&quot;&gt;Adapter Pattern&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;어댑터를 번역하면 &lt;strong&gt;변환기(Converter)&lt;/strong&gt; 라고 할 수 있다. 변환기의 역할은 서로 다른 &lt;u&gt;두 인터페이스 사이에 통신&lt;/u&gt;이 가능하게 하는 것이다.
-주변에서 가장 흔히 볼 수 있는 변환기로는 핸드폰과 전원 콘센트사이에서 둘을 연결해 주는 &lt;strong&gt;충전기&lt;/strong&gt;가 있다.&lt;/p&gt;
-
-&lt;p&gt;또 다른 예로는 데이터베이스 관련 프로그램을 작성해 본 사람이라면 &lt;strong&gt;ODBC/JDBC 인터페이스&lt;/strong&gt;를 알고 있을것이다.
-바로 ODBC/JDBC가 &lt;strong&gt;어댑터 패턴을 이용&lt;/strong&gt;해 다양한 데이터베이스 시스템을 단일한 인터페이스로 조작할 수 있게끔 해주는 대표적인 예이다.&lt;/p&gt;
-
-&lt;p&gt;이제는 직접 예제 코드를 통해 어댑터 패턴을 이해해 보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&amp;lt;어댑터 패턴이 적용되지 않은 코드&amp;gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ServiceA&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ServiceB&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClientWithNoAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Stirng&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;ServiceA&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sa1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;ServiceB&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sb1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-      &lt;span class=&quot;n&quot;&gt;sa1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;sb1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;클라이언트(ClientWithNoAdapter)를 살펴보면 &lt;code class=&quot;highlighter-rouge&quot;&gt;sa1&lt;/code&gt; 참조 변수와 &lt;code class=&quot;highlighter-rouge&quot;&gt;sb1&lt;/code&gt; 참조 변수를 통해 호출하는 각 메서드가 비슷한 일을 하지만 &lt;u&gt;메서드명이 다른 것&lt;/u&gt;을 볼 수 있다. 
-&lt;u&gt;(추후 유지보수 및 확장에 중요한 문제를 일으킬 수 있다.)&lt;/u&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&amp;lt;어댑터 패턴이 적용된 코드&amp;gt;&lt;/strong&gt;  (ServiceA에 대한 변환기와 ServiceB에 대한 Adapter 추가)&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ServiceA&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ServiceB&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterServiceA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;nc&quot;&gt;ServiceA&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sa1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;sa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterServiceB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;nc&quot;&gt;ServiceB&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sb1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-   &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;sb1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClientWithAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Stirng&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;AdapterServiceA&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asa1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;AdapterServiceB&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asb1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-      &lt;span class=&quot;n&quot;&gt;asa1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;asb1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;클라이언트(ClientWithAdapter)가 변환기(Adapter)를 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;runService()&lt;/code&gt;라는 동일한 메서드명으로 두 객체의 메서드를 호출하는 것을 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;위의 두개 예제를 비교해 보니까 어댑터 패턴(Adapter Pattern)에 대해서 느낌이 오는가? 
-그렇다. 어댑터 패턴은 합성. &lt;strong&gt;즉 객체를 속성으로 만들어서 참조하는 디자인 패턴이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;어댑터-패턴이란-한마디로-호출당하는-쪽의-메서드를-호출하는-쪽의-코드에-대응하도록-중간에-변환기adapter를-통해-호출하는-패턴이다&quot;&gt;어댑터 패턴이란 한마디로 호출당하는 쪽의 메서드를 호출하는 쪽의 코드에 대응하도록 중간에 변환기(Adapter)를 통해 호출하는 패턴이다.&lt;/h4&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;proxy-pattern&quot;&gt;Proxy Pattern&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;프록시는 &lt;strong&gt;대리자, 대변인&lt;/strong&gt;이라는 뜻을 가진 단어이다. 대리자/대변인이라고 하면 다른 누군가를 대신해서 그 역할을 수행하는 존재를 말한다.&lt;/p&gt;
-
-&lt;p&gt;그렇다면 프록시(대리자, 대변인)가 어떻게 쓰이는지에 대해서 코드를 통해 알아보자.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&amp;lt;프록시 패턴이 적용되지 않은 코드&amp;gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;서비스 짱!!!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClientWithNoProxy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;// 프록시를 이용하지 않는 호출&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;Service&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위의 코드에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientWithNoProxy&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;Service&lt;/code&gt;객체의 &lt;code class=&quot;highlighter-rouge&quot;&gt;runSomething()&lt;/code&gt;메서드를 직접 호출하는 것을 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&amp;lt;프록시 패턴이 적용된 코드&amp;gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Service&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;서비스 짱!!!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Proxy&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;nc&quot;&gt;IService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;호출에 대한 흐름 제어가 주목적, 반환 결과를 그대로 전달&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-      &lt;span class=&quot;n&quot;&gt;service1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runSomethig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClientWithProxy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;// 프록시를 이용한 호출&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;Iservice&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;위 예제의 프록시 패턴에 적용된 설계 패턴&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;개방 페쇄 원칙(OCP) : &lt;code class=&quot;highlighter-rouge&quot;&gt;Iservice&lt;/code&gt; 인터페이스의 참조변수를 사용해 변화에는 닫혀있고 확장에는 열려 있다.&lt;/li&gt;
-  &lt;li&gt;의존 역전 원칙(DIP) : &lt;code class=&quot;highlighter-rouge&quot;&gt;IService&lt;/code&gt; 인터페이스에 의존&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;프록시 패턴의 경우 실제 서비스 객체가 가진 메서드와 같은 이름의 메서드를 사용하는데, 이를 위해 &lt;u&gt;인터페이스를 사용&lt;/u&gt;한다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;인터페이스를 사용하면 서비스 객체가 들어갈 자리에 Proxy 객체를 대신 투입해 &lt;u&gt;클라이언트 쪽에서는&lt;/u&gt; 실제 서비스 객체를 통해 메서드를 호출하고 반환값을 받는지, Proxy 객체를 통해 메서드를 호출하고 반환값을 받는지 전혀 모르게 처리할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;프록시 패턴의 중요 포인트&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Proxy는 실제 서비스와 같은 이름의 메서드를 구현한다. 이 때 &lt;strong&gt;인터페이스&lt;/strong&gt;를 사용한다.&lt;/li&gt;
-  &lt;li&gt;Proxy는 실제 서비스에 대한 참조 변수를 갖는다.(합성)&lt;/li&gt;
-  &lt;li&gt;Proxy는 실제 서비스의 같은 이름을 가진 메서드를 호출하고 그 값을 클라이언트에게 돌려준다.&lt;/li&gt;
-  &lt;li&gt;Proxy는 실제 서비스의 메서드 호출 전후에 별도의 로직을 수행할 수도 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;프록시 패턴은 실제 서비스 메서드의 반환값에 가감하는 것을 목적으로 하지 않고 &lt;u&gt;제어의 흐름을 변경하거나 다른 로직을 수행&lt;/u&gt;하기 위해 사용한다.&lt;/p&gt;
-
-&lt;h4 id=&quot;즉-프록시-패턴이란-제어-흐름을-조정하기-위한-목적으로-중간에-대리자proxy를-두는-패턴이다&quot;&gt;즉, 프록시 패턴이란 제어 흐름을 조정하기 위한 목적으로 중간에 대리자(Proxy)를 두는 패턴이다.&lt;/h4&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;decorator-pattern&quot;&gt;Decorator Pattern&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;데코레이터는 &lt;strong&gt;도장/도배업자&lt;/strong&gt;를 의미한다. 여기서는 &lt;strong&gt;장식자&lt;/strong&gt;라는 뜻을 가지고 논리를 풀어보자!!&lt;/p&gt;
-
-&lt;p&gt;데코레이터 패턴은 프록시 패턴과 구현 방법이 같다. 다만 프록시 패턴은 클라이언트가 최종적으로 돌려 받는 반환값을 조작하지 않고 그대로 전달하는 반면
-&lt;strong&gt;데코레이터 페턴은 클라이언트가 받는 반환값에 장식을 덧입힌다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&amp;lt;데코레이터 패턴이 적용된 코드&amp;gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;서비스 짱!!!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Decorator&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;nc&quot;&gt;IService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;
-
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;호출에 대한 장식이 주목적, 클라이언트에게 반환 결과에 장식을 더하여 전달&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;정말&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClientWithDecorator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;Iservice&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decorator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Decorator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decorator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runSomething&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;위 예제의 데코레이터 패턴에 적용된 설계 패턴&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;개방 페쇄 원칙(OCP) : &lt;code class=&quot;highlighter-rouge&quot;&gt;Iservice&lt;/code&gt; 인터페이스의 참조변수를 사용해 변화에는 닫혀있고 확장에는 열려 있다.&lt;/li&gt;
-  &lt;li&gt;의존 역전 원칙(DIP) : &lt;code class=&quot;highlighter-rouge&quot;&gt;IService&lt;/code&gt; 인터페이스에 의존&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;Decorator Pattern의 중요 포인트는 다음과 같다.&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Decorator는 실제 서비스와 같은 이름의 메서드를 구현한다. 이때 &lt;strong&gt;인터페이스&lt;/strong&gt;를 사용한다.&lt;/li&gt;
-  &lt;li&gt;Decorator는 실제 서비스에 대한 참조 변수를 갖는다.(합성)&lt;/li&gt;
-  &lt;li&gt;Decorator는 실제 서비스의 같은 이름을 가진 메서드를 호출하고, 그 반환값에 장식을 더해 클라이언트에게 돌려준다.&lt;/li&gt;
-  &lt;li&gt;Decorator는 실제 서비스의 메서드 호출 전후에 별도의 로직을 수행할 수도 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;즉-데코레이터-패턴이란-메서드의-호출의-반환값에-변화를-주기-위해-중간에-장식자decorator를-두는-패턴이다&quot;&gt;즉, 데코레이터 패턴이란 메서드의 호출의 반환값에 변화를 주기 위해 중간에 장식자(Decorator)를 두는 패턴이다.&lt;/h4&gt;
-
-&lt;hr /&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;참조 : 스프링 입문을 위한 자바 객체 지향의 원리와 이해(저자: 김종민)&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Tue, 17 Mar 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(1).html</link>
-        <guid isPermaLink="true">http://localhost:4000/spring/2020/03/17/Spring-Design-Pattern(1).html</guid>
         
         <category>Java</category>
         
