@@ -46,7 +46,11 @@ HTML Form에서는 GET과 POST방식의 Methods만 지원한다. HTML Form이 �
 
 <img src="/assets/spring/Spring-HiddenHttpMethodFilter-1.png" style="width:100%">
 
-보이는가..? 서버는 이 요청을 POST로 해석하고 있다... 어찌된 일인가 도통 모르겠다... 일단 해결해 보자!!
+보이는가..? 서버는 이 요청을 POST로 해석해 해당 URL의 Post 요청에 해당하는 핸들러 메서드를 찾고 있다.
+
+될리가 있는가.. 우리는 해당 URL이 Put 요청으로 들어왔을 때 처리할 수 있는 핸들러 메서드만 가지고 있는데...
+
+어찌된 일인가 도통 모르겠다... 일단 해결해 보자!!
 
 ---
 

@@ -240,17 +240,21 @@
 
 <p>사용자의 정보를 수정하기 위해서 클라이언트는 수정할 데이터를 <strong>PUT 형식으로 서버에 요청</strong>해야 한다.</p>
 
-<p>하지만 PUT형식을 제공해 주지 않는 HTML 때문에 우리는 나름 꼼수(?)를 사용해서 Spring이 알아먹ㄴ을 수 있도록 <code class="highlighter-rouge">&lt;input type="hidden" name="_method" value="put"/&gt;</code>를 다음과 같이 폼 태그 내부에 위치시켜야 한다.</p>
+<p>하지만 PUT형식을 제공해 주지 않는 HTML 때문에 우리는 나름 꼼수(?)를 사용해서 Spring이 알아먹을 수 있도록 <code class="highlighter-rouge">&lt;input type="hidden" name="_method" value="put"/&gt;</code>를 다음과 같이 폼 태그 내부에 위치시켜야 한다.</p>
 
 <p>나는 이렇게만 하면 Controller의 <code class="highlighter-rouge">@PutMapping("/users/{id}/update")</code>애노테이션을 갖은 핸들러 메서드가 해당 요청에 대해서 잘 처리할 줄 알았다.</p>
 
 <p>하지만 누가 알았을까..? 정말 이제 시작이란것을..</p>
 
-<p>다음은 위의 폼의 요청에 따른 서버에서 보내는 응답이다.</p>
+<p>다음은 위의 폼의 요청에 따라 서버에서 보여지는 로그이다.</p>
 
 <p><img src="/assets/spring/Spring-HiddenHttpMethodFilter-1.png" style="width:100%" /></p>
 
-<p>보이는가..? 서버는 이 요청을 POST로 해석하고 있다… 어찌된 일인가 도통 모르겠다… 일단 해결해 보자!!</p>
+<p>보이는가..? 서버는 이 요청을 POST로 해석해 해당 URL의 Post 요청에 해당하는 핸들러 메서드를 찾고 있다.</p>
+
+<p>될리가 있는가.. 우리는 해당 URL이 Put 요청으로 들어왔을 때 처리할 수 있는 핸들러 메서드만 가지고 있는데…</p>
+
+<p>어찌된 일인가 도통 모르겠다… 일단 해결해 보자!!</p>
 
 <hr />
 
@@ -272,7 +276,7 @@
   <p>정확히 말해서 HiddenHttpMethodFilter는 Hidden 타입의 input 태그의 속성들을 읽어서 HttpServletRequestWrapper.getMethod() 반환 값을 변경해 요청된 HTTP 메소드의 타입을 PUT, DELETE, PATCH로 변경해주는 필터이다.</p>
 </blockquote>
 
-<p><strong>HiddenHttpMethodFilter</strong>클래스를 Bean으로 등록하면 위의 이슈(문제는) 해결된다.</p>
+<p>그래서 <strong>HiddenHttpMethodFilter</strong>클래스를 Bean으로 등록하면 위의 이슈(문제는) 해결된다.</p>
 
 <p>다음의 코드는 HiddenHttpMethodFilter를 Bean으로 등록하는 코드이다.</p>
 
