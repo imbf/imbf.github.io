@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
+
+
+  <title>@RequestParam, @RequestBody에 관한 이슈 (Conversion 관점)</title>
+  <meta name="description" content="Conversion관점의 @RequestParam와 @RequestBody에 관한 이슈에 대해서 다루어 보도록 하겠다.">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="Conversion관점의 @RequestParam와 @RequestBody에 관한 이슈에 대해서 다루어 보도록 하겠다." />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/05/08/RequestParam-RequestBody-(Conversion).html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="@RequestParam, @RequestBody에 관한 이슈 (Conversion 관점)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="@RequestParam, @RequestBody에 관한 이슈 (Conversion 관점)">
+  <meta name="twitter:description" content="Conversion관점의 @RequestParam와 @RequestBody에 관한 이슈에 대해서 다루어 보도록 하겠다.">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/05/08/RequestParam-RequestBody-(Conversion).html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/05/08/RequestParam-RequestBody-(Conversion).html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">@RequestParam, @RequestBody에 관한 이슈 (Conversion 관점)</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">May 8, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Spring">Spring</a> (default) -->
+    <a href="/category/Spring">Spring</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p><strong>Conversion관점의 @RequestParam와 @RequestBody에 관한 이슈</strong>에 대해서 다루어 보도록 하겠다.</p>
+
+<blockquote>
+  <p><strong>이 이슈는 서버로 Form Data를 보내서 Request handler 메소드의 인자로서 setter가 없는 클래스의 객체를 받고 싶은 욕구에서 시작 되었다.</strong></p>
+</blockquote>
+
+<p><strong>Form Data</strong></p>
+<blockquote>
+  <p>writer=abc&amp;title=Spring&amp;contents=Johnson</p>
+</blockquote>
+
+<p><strong>domain</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Getter</span>
+<span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Question</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span><span class="o">(</span><span class="n">strategy</span> <span class="o">=</span> <span class="nc">GenerationType</span><span class="o">.</span><span class="na">IDENTITY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">writer</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">contents</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">createTime</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">update</span><span class="o">(</span><span class="nc">QuestionUpdateDTO</span> <span class="n">questionUpdateDTO</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">writer</span> <span class="o">=</span> <span class="n">questionUpdateDTO</span><span class="o">.</span><span class="na">getWriter</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">title</span> <span class="o">=</span> <span class="n">questionUpdateDTO</span><span class="o">.</span><span class="na">getTitle</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">contents</span> <span class="o">=</span> <span class="n">questionUpdateDTO</span><span class="o">.</span><span class="na">getContents</span><span class="o">();</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>controller 코드 일부</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/questions"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">registerQuestion</span><span class="o">(</span><span class="nc">Question</span> <span class="n">question</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">questionService</span><span class="o">.</span><span class="na">registerQuestion</span><span class="o">(</span><span class="n">question</span><span class="o">);</span>
+    <span class="k">return</span> <span class="s">"redirect:/"</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>적절한 Form Data를 가진 요청을 <code class="highlighter-rouge">/questions</code>에게 보내니 Question 클래스에 setter가 없어 <u>기본 생성자에 의해 Question객체</u>가 생성된 것을 볼 수 있었다.</p>
+
+<p>나는 예상치 못한 결과에 다음과 같은 <strong>궁금증</strong>을 가지게 되었다.</p>
+
+<ol>
+  <li>우리가 원하는건 요청한 Form 데이터를 가진 객체가 생성되길 원하는데 안되는 이유가 뭘까?</li>
+  <li>분명히 Form에 적절히 값을 채워서 요청을 보냈는데?</li>
+  <li>왜 기본 생성자에 의해서만 객체가 생성되는 걸까?</li>
+  <li>Form의 요청 파라미터에 맞는 인자를 가진 생성자를 만든다면 생성자에 의해서 적절한 객체가 잘 생성될 수 있을것인가?</li>
+</ol>
+
+<p>위의 궁금증을 해결하기 위해서 나는 정말 헤매고 헤매다가 <strong>@RequestParam</strong> 이라는 애노테이션을 키워드로 찾을 수 있었다.</p>
+
+<blockquote>
+  <p><strong>@RequestParam이란?</strong></p>
+
+  <ul>
+    <li>
+      <p>HTTP Request 파라미터를 Handler메소드의 파라미터 타입에 전달받을 때 사용하는 애노테이션이다.</p>
+    </li>
+    <li>
+      <p>Handler 메소드의 파라미터 타입이 Simple Type이고, 지원하는 인자 타입이 아닌 경우 @RequestParam으로 먼저 resolve되고 이후에 @ModelAttribute로 resolve된다.</p>
+    </li>
+    <li>
+      <p>@RequestParam이 붙여진 인자의 타입이 String이 아닌 경우 <a href="https://docs.spring.io/spring/docs/5.2.3.RELEASE/spring-framework-reference/web.html#mvc-ann-typeconversion">Type Conversion</a>이 자동으로 적용된다. (사용자 정의 가능)</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>@RequestParam가 붙여진 인자의 타입이 String이 아닌 경우 Type Conversion이 자동으로 적용된다는데… <strong>이 Type Conversion의 로직 때문에 setter없이 생성자로써 객체를 생성할 수 없는게 아닐까?</strong> 라는 생각이 들었다.</p>
+
+<p>그렇다. <strong>Type Conversion에서 제공해주는 DataBinder가 이슈의 시작점 이었다!!!</strong> (DataBinder를 이용해서 Type Conversion을 수행)</p>
+
+<p>요청시 WebDataBinder클래스 내의 doBind()메소드의 braeak point에 걸리는 사진.
+<img src="/assets/spring/RequestParam-RequestBody-Conversion.png" style="width:100%" /></p>
+
+<p><strong>@RequestParam이 String이 아닐 경우 Object로 변경 해주는건 Formatter도 아니고 Converter도 아니고 <u>DataBinder</u>이었다. 이 DataBinder가 사용하는 <u>PropertyEditor가 Java Bean spec</u>을 따르기 때문에 이를 사용해서 바인딩을 하려는 클래스는 무조건 Java Bean spec을 충족했어야만 했고 즉, <u>setter가 존재</u>해야했다.</strong></p>
+
+<blockquote>
+  <p><strong>Java Bean</strong> : Java Bean API 명세를 따르는 클래스를 의미한다.</p>
+  <ol>
+    <li>기본 생성자를 가지고 있어야 한다.</li>
+    <li>인스턴스 변수는 private 접근 지정자여야 한다.</li>
+    <li>public의 getter와 setter를 가지고 있어야 한다.</li>
+    <li>Serializable 인터페이스를 구현해야 한다. (선택사항)</li>
+  </ol>
+</blockquote>
+
+<p>그렇다면 DataBinder를 이용해서 Binding되는 객체는 무조건 setter를 필요로 하는가??</p>
+
+<p><strong>아니다. 다음의 코드를 컨트롤러 내부에 위치시키면 DataBinder가 Reflection을 사용해서 필드에 직접 Access할 수 있도록 만들어 준다.</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@InitBinder</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">initBinder</span><span class="o">(</span><span class="nc">WebDataBinder</span> <span class="n">binder</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">binder</span><span class="o">.</span><span class="na">initDirectFieldAccess</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="requestbody를-이용하는-방법">@RequestBody를 이용하는 방법</h4>
+
+<p>Form Data가 아닌 JSON 형식의 데이터를 가진 요청이 들어왔을 경우 Handler method는 <strong>@RequestBody</strong>애노테이션이 붙여진 인자를 <strong>JSON 형태의 데이터에서 setter없는 클래스의 객체로 만들어 준다.</strong></p>
+
+<blockquote>
+  <h4 id="requestbody란"><strong>@RequestBody란?</strong></h4>
+  <ul>
+    <li>
+      <p>@RequestBody애노테이션은 HTTP Request body를 읽고 <a href="https://docs.spring.io/spring/docs/5.2.3.RELEASE/spring-framework-reference/web.html#mvc-config-message-converters">HttpMessageConverter</a>를 통해서 deserialized시켜 Handler 메소드의 특정 인자 타입의 객체로 변환하기 위한 애노테이션이다.</p>
+    </li>
+    <li>
+      <p>MVC Config의 Message Converters 옵션을 사용함으로써 message conversion을 설정 및 customizing할 수 있다.</p>
+    </li>
+    <li>
+      <p>javax의 @valid, spring의 @validated 애노테이션을 사용함으로써 유효성 검사를 할 수 있다.</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p><strong>JSON Data</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+	</span><span class="nl">"writer"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"abc"</span><span class="p">,</span><span class="w">
+	</span><span class="nl">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Spring"</span><span class="p">,</span><span class="w">
+	</span><span class="nl">"contents"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Johnson"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Handler Method</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/questions"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">registerQuestion</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">Question</span> <span class="n">question</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">questionService</span><span class="o">.</span><span class="na">registerQuestion</span><span class="o">(</span><span class="n">question</span><span class="o">);</span>
+    <span class="k">return</span> <span class="s">"redirect:/"</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>왜 @RequestBody는 아무런 설정 없이 JSON 형식의 데이터에서 setter가 존재하지 않는 클래스의 객체로 변환할 수 잇었을까?</p>
+
+<p>이에 대한 답은 <strong>MappingJackson2HttpMessageConverter</strong>에 있다.</p>
+
+<p><strong>MappingJackson2HttpMessageConverter는 ObjectMapper를 사용해서 Setter가 존재하지 않아도 객체의 필드 자체에 데이터를 전달할 수 있기 때문에 위와 같은 빈 객체가 생성되는 이슈가 발생하지 않는것이다.</strong></p>
+
+<p>기본적으로 동작하는 DataBinder와 MappingJackson2HttpMessageConvert가 맘에 들지 않는다면 커스터마이징 하는것도 아주 좋은 선택이다.
+커스터마이징 하는 방법과 등록하는 방법은 Doc에 아주 친절히 나와 있으니 참고 바란다.</p>
+
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/Jackson">Jackson</a>,&nbsp;<a href="/tag/Formatter">Formatter</a>,&nbsp;<a href="/tag/converter">converter</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=%40RequestParam%2C+%40RequestBody%EC%97%90+%EA%B4%80%ED%95%9C+%EC%9D%B4%EC%8A%88+%28Conversion+%EA%B4%80%EC%A0%90%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F05%2F08%2FRequestParam-RequestBody-%28Conversion%29.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=%40RequestParam%2C+%40RequestBody%EC%97%90+%EA%B4%80%ED%95%9C+%EC%9D%B4%EC%8A%88+%28Conversion+%EA%B4%80%EC%A0%90%29&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F05%2F08%2FRequestParam-RequestBody-%28Conversion%29.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F05%2F08%2FRequestParam-RequestBody-%28Conversion%29.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=%40RequestParam%2C+%40RequestBody%EC%97%90+%EA%B4%80%ED%95%9C+%EC%9D%B4%EC%8A%88+%28Conversion+%EA%B4%80%EC%A0%90%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F05%2F08%2FRequestParam-RequestBody-%28Conversion%29.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=%40RequestParam%2C+%40RequestBody%EC%97%90+%EA%B4%80%ED%95%9C+%EC%9D%B4%EC%8A%88+%28Conversion+%EA%B4%80%EC%A0%90%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F05%2F08%2FRequestParam-RequestBody-%28Conversion%29.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/05/08/RequestParam-RequestBody-(Conversion).html') + '&title=@RequestParam, @RequestBody에 관한 이슈 (Conversion 관점)'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
