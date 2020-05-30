@@ -38,7 +38,7 @@ public class GoogleLoginController {
 ```
 위 코드에 대해서 간략히 설명하자면
 
-`/login/google` 앤드포인트로 구글 인증서버에서 받은 Access_Token을 넘겨주면 핸들러 메소드가 `GoogleLoginService`를 사용해서 해당 Access_Token이 유효한지 아닌지를 체크하는 코드이다.<u>(Access_Token이 유효한지 아닌지에 대한 검증은 GoogleLoginService의 RestTemplate이 구글 인증 서버에 요청을 보내 진행)</u>
+클라이언트가 `/login/google` 앤드포인트로 구글 인증서버에서 받은 Access_Token을 넘겨주면 핸들러 메소드가 `GoogleLoginService`를 사용해서 해당 Access_Token이 유효한지 아닌지를 체크하는 코드이다.<u>(Access_Token이 유효한지 아닌지에 대한 검증은 GoogleLoginService의 RestTemplate이 구글 인증 서버에 요청을 보내 진행)</u>
 
 위의 컨트롤러를 테스트하기 위해 **2가지의 경우의 수**를 나누었다.
 1. 유효하지 않은 Access_Token을 가진 요청을 보내 4xx 상태코드를 가진 응답 테스트
