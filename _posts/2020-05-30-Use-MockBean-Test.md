@@ -76,7 +76,7 @@ public void GoogleLoginWithWrongAccessToken() throws Exception {
 
 ## 2. 유효한 Access_Token을 가진 요청을 보내 2xx 상태코드를 가진 응답 테스트
 
-유효한 Access_Token을 가진 요청을 테스트 하기 위해서는 유효한 Access_Token을 구글 인증 서버로부터 받아야 하는데 매번 테스트 할 때마다 유효한 Access_Token을 받아올 수는 없는 노릇이었다. 
+유효한 Access_Token을 가진 요청을 테스트 하기 위해서는 유효한 Access_Token을 구글 인증 서버로부터 받아야 하는데 매번 테스트 할 때마다 유효한 Access_Token을 받아올 수는 없는 노릇이었다. <u>(또한 구글 인증 서버로부터 Access_Token을 가져오는 로직이 간단하지 않아 어쩌면 배보다 배꼽이 더 큰 격이다..)</u>
 
 그렇다면 이전에 사용해 보았던 **Mock객체를 활용해 GoogleLoginService의 메소드 return 값을 내가 설정해 보면 어떨까??** 라는 생각이 들었다.
 
