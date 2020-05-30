@@ -46,7 +46,7 @@ public class GoogleLoginController {
 
 ---
 
-### 유효하지 않은 Access_Token을 가진 요청을 보내 4xx 상태코드를 가진 응답 테스트
+## 1. 유효하지 않은 Access_Token을 가진 요청을 보내 4xx 상태코드를 가진 응답 테스트
 
 유효하지 않은 Access_Token을 테스트하는 작업은 매우 수월했다.
 
@@ -74,7 +74,7 @@ public void GoogleLoginWithWrongAccessToken() throws Exception {
 
 ---
 
-### 유효한 Access_Token을 가진 요청을 보내 2xx 상태코드를 가진 응답 테스트
+## 2. 유효한 Access_Token을 가진 요청을 보내 2xx 상태코드를 가진 응답 테스트
 
 유효한 Access_Token을 가진 요청을 테스트 하기 위해서는 유효한 Access_Token을 구글 인증 서버로부터 받아야 하는데 매번 테스트 할 때마다 유효한 Access_Token을 받아올 수는 없는 노릇이었다. 
 
