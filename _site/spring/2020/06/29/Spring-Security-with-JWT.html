@@ -8,8 +8,8 @@
   <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
 
 
-  <title>Spring Data란 무엇인가?</title>
-  <meta name="description" content="이 글에서는 Spring Data란 무엇인지에 대해서 알아볼 것이다.">
+  <title>Spring Security + JWT를 통해 프로젝트에 인증 구현하기</title>
+  <meta name="description" content="Spring Security와 JWT를 활용해서 프로젝트에 인증을 어떻게 구현했는지에 대해서 포스팅 하려고 한다.">
   
   <meta name="author" content="배종진">
   <meta name="copyright" content="&copy; 배종진 2020">
@@ -43,10 +43,10 @@
 
   
   <!-- Facebook OGP cards -->
-  <meta property="og:description" content="이 글에서는 Spring Data란 무엇인지에 대해서 알아볼 것이다." />
-  <meta property="og:url" content="http://localhost:4000/spring/2020/04/30/Spring-Data.html">
+  <meta property="og:description" content="Spring Security와 JWT를 활용해서 프로젝트에 인증을 어떻게 구현했는지에 대해서 포스팅 하려고 한다." />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/06/29/Spring-Security-with-JWT.html">
   <meta property="og:site_name" content="Green Frog Developer" />
-  <meta property="og:title" content="Spring Data란 무엇인가?" />
+  <meta property="og:title" content="Spring Security + JWT를 통해 프로젝트에 인증 구현하기" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -57,17 +57,17 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Spring Data란 무엇인가?">
-  <meta name="twitter:description" content="이 글에서는 Spring Data란 무엇인지에 대해서 알아볼 것이다.">
+  <meta name="twitter:title" content="Spring Security + JWT를 통해 프로젝트에 인증 구현하기">
+  <meta name="twitter:description" content="Spring Security와 JWT를 활용해서 프로젝트에 인증을 어떻게 구현했는지에 대해서 포스팅 하려고 한다.">
   <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
-  <meta name="twitter:url" content="http://localhost:4000/spring/2020/04/30/Spring-Data.html">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/06/29/Spring-Security-with-JWT.html">
   
 
   
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/spring/2020/04/30/Spring-Data.html">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/06/29/Spring-Security-with-JWT.html">
 	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
 	
 	<!-- Tooltips -->
@@ -203,7 +203,7 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">Spring Data란 무엇인가?</h1>
+      <h1 class="title">Spring Security + JWT를 통해 프로젝트에 인증 구현하기</h1>
       <p class="info">by <strong>Green Frog Developer</strong></p>
     </header>
   </div>
@@ -218,7 +218,7 @@
  
 
 <section class="post-meta">
-  <div class="post-date">April 30, 2020</div>
+  <div class="post-date">June 29, 2020</div>
   <div class="post-categories">
   in 
     
@@ -230,126 +230,96 @@
 </section>
 
 <article class="post-content">
-  <p>이 글에서는 <strong>Spring Data</strong>란 무엇인지에 대해서 알아볼 것이다.</p>
+  <p>Spring Security와 JWT를 활용해서 프로젝트에 인증을 어떻게 구현했는지에 대해서 포스팅 하려고 한다.</p>
+
+<p>토큰을 사용한 인증은 처음이기도 하고, Google OAuth를 함께 사용하는 바람에… 개념이 해깔려 며칠간 계속 해맸던 것 같다.</p>
+
+<p>이제서야 조금 감을 잡으며 프로젝트에 인증 구현을 마쳤는데.. 아직 구현되지 않은 기능들이 매우 많다 ㅎㅎ 언능 구현해야 겠다!!!</p>
+
+<p><strong>서론이 길었다!!! 지금부터 Spring Security란 무엇이고, Spring Security와 JWT를 사용해서 어떻게 인증을 구현했는지에 대해서 포스팅 하겠다.</strong></p>
 
 <hr />
 
-<h2 id="spring-data">Spring Data</h2>
+<h2 id="spring-security란">Spring Security란?</h2>
 
 <hr />
 
-<h3 id="spring-data란">Spring Data란?</h3>
+<p><strong>Spring Security란 인증과, 권한부여, 일반적인 공격에 대한 보호의 기능을 제공하는 프레임워크이다.</strong> 즉, Spring Security를 사용하면 보안 관련 처리를 자체적으로 구현 할
+필요 없이 쉽고 안전하게 필요한 기능을 구현할 수 있다.</p>
 
-<ul>
-  <li>
-    <p>Spring Data의 목적은 기본 데이터 저장소의 특수한 특성을 유지하면서 <strong>데이터 접근을 위한 친숙하고 일관된 Spring 기반의 프로그래밍 모델을 제공</strong>하는 프로젝트이다.</p>
-  </li>
-  <li>
-    <p>Spring Data는 <strong>데이터 접근 기술, relational and non-relational database, map-reduce 프레임워크, 클라우드 기반의 서비스</strong>를 쉽게 사용할 수 있도록 해준다.</p>
-  </li>
-  <li>
-    <p>Spring Data는 데이터베이스와 관련된 많은 하위 프로젝트(Spring Data JPA, Spring Data REST, …)를 포함하는 포괄적인 프로젝트이다.</p>
-  </li>
-</ul>
+<p>Spring Security의 Servlet 보안 지원은 <strong>Servlet Filter(이하 Filter)</strong>를 기반으로 한다. 클라이언트가 어플리케이션으로 request를 보내면, Container는 요청 URI의 경로에 따라 어떤 Filter와 어떤 Servlet을 적용할 것인지 결정한다.</p>
 
-<h3 id="spring-data의-특징">Spring Data의 특징</h3>
+<p>Spring은 여러 Filter중 Servlet Container lifecycle과 ApplicationContext사이에 bridging할 수 있는 <code class="highlighter-rouge">DelegatingFilterProxy</code>라는 Filter를 제공한다.</p>
 
-<ul>
-  <li>
-    <p>강력한 저장소 및 사용자 정의 객체 맵핑 추상화</p>
-  </li>
-  <li>
-    <p>저장소 메소드 이름으로부터 동적 쿼리 파생</p>
-  </li>
-  <li>
-    <p>기본 속성을 제공하는 Implementation domain 기본 클래스</p>
-  </li>
-  <li>
-    <p>transparent auditing을 위한 지원 (created, last changed)</p>
-  </li>
-  <li>
-    <p>사용자 정의 저장소 코드를 통합할 수 있는 가능성</p>
-  </li>
-  <li>
-    <p>JavaConfig 및 custom XML namespaces를 통한 손쉬운 Spring과의 통합</p>
-  </li>
-  <li>
-    <p>Spring MVC 컨트롤러와의 향상된 통합</p>
-  </li>
-  <li>
-    <p>cross-store persistence에 대한 실험적 지원</p>
-  </li>
-</ul>
+<p>Spring Security의 Servlet 보안 지원은 <code class="highlighter-rouge">DelegatingFilterProxy</code>가 감싸고 있는 <strong><code class="highlighter-rouge">FilterChainProxy</code></strong>에 의해 수행되며, <code class="highlighter-rouge">FilterChainproxy</code>는 <strong><code class="highlighter-rouge">SecurityFilterChain</code></strong>을 통해 많은 쟉업을 <strong>Security Filter</strong> 인스턴스에 위임한다.</p>
 
-<h3 id="주요-모듈">주요 모듈</h3>
+<p>위 과정을 그림으로 나타내면 다음과 같다.</p>
 
-<ul>
-  <li>
-    <p><strong>Spring Data Commons :</strong> 모든 Spring Module을 뒷받침하는 핵심 Spring 개념 (CrudRepository, PagingAndSortingRepository 인터페이스)</p>
-  </li>
-  <li>
-    <p><strong>Spring Data JDBC :</strong> spring-jdbc에 대한 Spring Data 추상화를 제공하는 모듈 (CrudRepository를 구현하는 SimpleJdbcRepository 클래스)</p>
-  </li>
-  <li>
-    <p><strong>Spring Data JPA :</strong> JPA를 위한 스프링 데이터 저장소 지원 (JpaRepository 인터페이스, SimpleJpaRepository 클래스)</p>
-  </li>
-  <li>
-    <p><strong>Spring Data MongoDB :</strong> MongoDB를 위한 스프링 기반 객체 문서 지원 및 저장소</p>
-  </li>
-  <li>
-    <p><strong>Spring Data REST :</strong> 스프링 데이터 저장소들을 hypermedia 기반의 Restful 리소스로 export 해주는 모듈</p>
-  </li>
-  <li>
-    <p><strong>Spring Data Redis :</strong> Spring Application에서 Redis를 손쉽게 구성 및 접근할 수 있도록 하는 모듈</p>
-  </li>
-  <li>
-    <p>…</p>
-  </li>
-</ul>
+<p><img src="/assets/spring/Spring-Security-With-JWT-1.png" style="width:70%" /></p>
 
-<h3 id="community-module">Community Module</h3>
+<p>SecurityFilterChain은 스프링에서 보안과 관련된 여러 Security Filter List를 갖고 있는 객체로 Security Filter List를 순회하면서 필터링을 실시한다.</p>
 
-<ul>
-  <li>
-    <p>Spring Data Aerospike</p>
-  </li>
-  <li>
-    <p>Spring Data ArangoDB</p>
-  </li>
-  <li>
-    <p>Spring Data Couchbase</p>
-  </li>
-  <li>
-    <p>Spring Data Azure Cosmos DB</p>
-  </li>
-  <li>
-    <p>Spring Data Cloud Datastore</p>
-  </li>
-  <li>
-    <p>Spring Data Cloud Spanner</p>
-  </li>
-  <li>
-    <p>Spring Data DynamoDB</p>
-  </li>
-  <li>
-    <p>…</p>
-  </li>
-</ul>
+<p>SecurityFilterChain에 존재하는 Security Filter순서는 다음과 같다.</p>
+
+<ol>
+  <li>ChannelProcessingFilter</li>
+  <li>ConcurrentSessionFilter</li>
+  <li>WebAsyncManageIntegrationFilter</li>
+  <li>SecurityContextPersistenceFilter</li>
+  <li>HeaderWriterFilter</li>
+  <li>CorsFilter</li>
+  <li>CsrfFilter</li>
+  <li>LogoutFilter</li>
+  <li>OAuth2AuthorizationRequestRedirectFilter</li>
+  <li>Saml2WebSsoAuthenticationRequestFilter</li>
+  <li>X509AuthenticationFilter</li>
+  <li>AbstractPreAuthenticatedProcessingFilter</li>
+  <li>CasAuthenticationFilter</li>
+  <li>OAuth2LoginAuthenticationFilter</li>
+  <li>Saml2WebSsoAuthenticationFilter</li>
+  <li><strong>UsernamePasswordAuthenticationFilter</strong></li>
+  <li>ConcurrentSessionFilter</li>
+</ol>
+
+<p><strong>… (총 33개의 Spring Security Filter가 존재한다.)</strong></p>
+
+<p>위의 Security Filter중 Security Authentication Filter는 <code class="highlighter-rouge">AuthenticationManager</code>를 통해 인증을 수행한다. <strong>AuthenticationManager는 어떻게 Spring Security의 필터들이 인증을 수행하는지에 대한 명세를 정의해 놓은 인터페이스이다.</strong></p>
+
+<p>이 <code class="highlighter-rouge">AuthenticationManager</code>는 일반적으로 <strong><code class="highlighter-rouge">ProviderManager</code></strong>로 구현되며, <code class="highlighter-rouge">ProviderManager</code>는 여러 <code class="highlighter-rouge">AuthenticationProvider</code>에 인증을 위임한다.</p>
+
+<p><code class="highlighter-rouge">ProviderManager</code>에 설정된 <code class="highlighter-rouge">AuthenticationProvider</code>중 어느 것도 성공적으로 인증을 수행할 수 없다면, 인증은 실패할 것이고 알맞는 예외가 ProviderManager에 건내질 것이다.</p>
+
+<p><strong>여러 <code class="highlighter-rouge">AuthenticationProvider</code>중 하나라도 인증에 성공한다면 <code class="highlighter-rouge">ProviderManager</code>에게 인증된 <code class="highlighter-rouge">Authentication</code>객체를 반환하고 이는 event로 <code class="highlighter-rouge">AuthenticationFilter</code>에 전송된다.</strong></p>
+
+<p><strong><code class="highlighter-rouge">AuthenticationFilter</code>는 <code class="highlighter-rouge">SecuritycontextHolder</code>의 <code class="highlighter-rouge">SecurityContext</code>에 인증된 Authentication을 저장할 수 있도록 한다.</strong></p>
+
+<p>아래의 그림은 <strong>Username and Password 인증 방식의 아키텍처</strong>이다.</p>
+
+<p><img src="/assets/spring/Spring-Security-With-JWT-2.png" style="width:100%" /></p>
+
+<p>위 그림의 <code class="highlighter-rouge">AuthenticationFilter</code>의 역할은 <code class="highlighter-rouge">UsernamePasswordAuthenticationFilter</code>가 수행한다.</p>
+
+<p>Spring Security를 전체적으로 설명하기에는 한 포스팅으로 부족하기 때문에 여기까지만 설명하도록 하고, 이제 나의 프로젝트에 어떻게 Spring Security + JWT를 적용했는지에 대해서 알아보도록 하겠다.</p>
 
 <hr />
-<blockquote>
-  <p>참조</p>
-  <ul>
-    <li>Spring Reference</li>
-  </ul>
-</blockquote>
+
+<h2 id="spring-security--jwt를-프로젝트에-어떻게-적용-했는가">Spring Security + JWT를 프로젝트에 어떻게 적용 했는가?</h2>
+
+<hr />
+
+<!-- ---
+
+**새로운 Spring Security Filter를 만들고 등록하는 방법을 포스팅 한 블로그(Baeldung)**
+
+- https://www.baeldung.com/spring-security-custom-filter -->
+
 
 </article>
 
 
 
 <section class="tags">
-  <strong>Tags:</strong> <a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/Data">Data</a>
+  <strong>Tags:</strong> <a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/Security">Security</a>,&nbsp;<a href="/tag/JWT">JWT</a>
 </section>
 
 
@@ -363,7 +333,7 @@
   
     
     
-      <a href="//twitter.com/share?text=Spring+Data%EB%9E%80+%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%3F&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F04%2F30%2FSpring-Data.html&via=TheBenCentra"
+      <a href="//twitter.com/share?text=Spring+Security+%2B+JWT%EB%A5%BC+%ED%86%B5%ED%95%B4+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90+%EC%9D%B8%EC%A6%9D+%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F06%2F29%2FSpring-Security-with-JWT.html&via=TheBenCentra"
         onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
         <i class="fa fa-twitter-square fa-lg"></i>
       </a>
@@ -378,7 +348,7 @@
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=Spring+Data%EB%9E%80+%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%3F&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F04%2F30%2FSpring-Data.html"
+      <a href="//www.facebook.com/sharer.php?t=Spring+Security+%2B+JWT%EB%A5%BC+%ED%86%B5%ED%95%B4+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90+%EC%9D%B8%EC%A6%9D+%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F06%2F29%2FSpring-Security-with-JWT.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -403,7 +373,7 @@
     
     
     
-      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F04%2F30%2FSpring-Data.html"
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F06%2F29%2FSpring-Security-with-JWT.html"
         onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
         <i class="fa fa-linkedin-square fa-lg"></i>
       </a>
@@ -416,7 +386,7 @@
     
     
     
-      <a href="//plus.google.com/share?title=Spring+Data%EB%9E%80+%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%3F&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F04%2F30%2FSpring-Data.html"
+      <a href="//plus.google.com/share?title=Spring+Security+%2B+JWT%EB%A5%BC+%ED%86%B5%ED%95%B4+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90+%EC%9D%B8%EC%A6%9D+%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F06%2F29%2FSpring-Security-with-JWT.html"
         onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
         <i class="fa fa-google-plus-square fa-lg"></i>
       </a>
@@ -450,7 +420,7 @@
     
     
     
-      <a href="//www.pinterest.com/pin/create/button/?description=Spring+Data%EB%9E%80+%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%3F&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F04%2F30%2FSpring-Data.html&media=http://localhost:4000/assets/header_image.jpg"
+      <a href="//www.pinterest.com/pin/create/button/?description=Spring+Security+%2B+JWT%EB%A5%BC+%ED%86%B5%ED%95%B4+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90+%EC%9D%B8%EC%A6%9D+%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F06%2F29%2FSpring-Security-with-JWT.html&media=http://localhost:4000/assets/header_image.jpg"
         onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
         <i class="fa fa-pinterest-square fa-lg"></i>
       </a>
@@ -519,7 +489,7 @@
     
     
     
-      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/04/30/Spring-Data.html') + '&title=Spring Data란 무엇인가?'; return false">
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/06/29/Spring-Security-with-JWT.html') + '&title=Spring Security + JWT를 통해 프로젝트에 인증 구현하기'; return false">
         <i class="fa fa-reddit-square fa-lg"></i>
       </a>
     
