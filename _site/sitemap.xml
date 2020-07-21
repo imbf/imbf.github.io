@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/spring/2020/07/20/Jackson-Infinite-Recursion-Issue-With-JPA-Entity.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/spring/2020/06/29/Spring-Security-with-JWT.html</loc>
     </url>
     
@@ -365,6 +369,38 @@
     
     <url>
         <loc>http://localhost:4000/tag/jwt/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/jpa/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/serialize/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/infinite/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/recursion/</loc>
     </url>
     
     

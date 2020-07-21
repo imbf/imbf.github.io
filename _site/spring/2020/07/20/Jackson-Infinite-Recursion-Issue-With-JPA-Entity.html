@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
+
+
+  <title>Jackson Infinite Recursion Issue With JPA Entity</title>
+  <meta name="description" content="이번 포스팅에서는 프로젝트 진행 중 JPA Entity 객체를 JSON으로 Serialize시킬 때 발생하는 Jackson Infinite Recursion Issue에 대해서 알아보고 이를 어떻게 해결했는지에 대해서 포스팅 하도록 하겠다.">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="이번 포스팅에서는 프로젝트 진행 중 JPA Entity 객체를 JSON으로 Serialize시킬 때 발생하는 Jackson Infinite Recursion Issue에 대해서 알아보고 이를 어떻게 해결했는지에 대해서 포스팅 하도록 하겠다." />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/07/20/Jackson-Infinite-Recursion-Issue-With-JPA-Entity.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="Jackson Infinite Recursion Issue With JPA Entity" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Jackson Infinite Recursion Issue With JPA Entity">
+  <meta name="twitter:description" content="이번 포스팅에서는 프로젝트 진행 중 JPA Entity 객체를 JSON으로 Serialize시킬 때 발생하는 Jackson Infinite Recursion Issue에 대해서 알아보고 이를 어떻게 해결했는지에 대해서 포스팅 하도록 하겠다.">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/07/20/Jackson-Infinite-Recursion-Issue-With-JPA-Entity.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/07/20/Jackson-Infinite-Recursion-Issue-With-JPA-Entity.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">Jackson Infinite Recursion Issue With JPA Entity</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">July 20, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Spring">Spring</a> (default) -->
+    <a href="/category/Spring">Spring</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>이번 포스팅에서는 프로젝트 진행 중 <strong>JPA Entity 객체를 JSON으로 Serialize시킬 때 발생하는 Jackson Infinite Recursion Issue</strong>에 대해서 알아보고 이를 어떻게 해결했는지에 대해서 포스팅 하도록 하겠다.</p>
+
+<hr />
+
+<h2 id="jpa-entity-json-serialize">JPA Entity JSON Serialize</h2>
+
+<hr />
+
+<p>JSON으로 Serialize하고 싶은 JPA Entity Class는 다음과 같다. <strong>[Self Reference]</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span> <span class="nd">@Builder</span> <span class="nd">@Getter</span>
+<span class="nd">@NoArgsConstructor</span> <span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Directory</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span>
+    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="kd">private</span> <span class="nc">DirectoryCategory</span> <span class="n">category</span><span class="o">;</span>
+
+    <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Directory</span> <span class="n">parentDirectory</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">)</span>
+    <span class="nd">@Builder</span><span class="o">.</span><span class="na">Default</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Directory</span><span class="o">&gt;</span> <span class="n">childDirectories</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">)</span>
+    <span class="nd">@Builder</span><span class="o">.</span><span class="na">Default</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Component</span><span class="o">&gt;</span> <span class="n">components</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Spring MVC Handler Method에서 ResponseEntity를 사용해 위의 Entity 객체를 JSON으로 Serialize하는 중에 다음과 같은 예외<u>(Infinite Recursion : StackOverflowError)</u>가 발생했다.</strong></p>
+
+<p>로그(log)는 다음과 같다.</p>
+
+<blockquote>
+  <p><strong>org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: Infinite recursion (StackOverflowError); nested exception is com.fasterxml.jackson.databind.JsonMappingException: Infinite recursion (StackOverflowError) (through reference chain</strong>: econo.webper.server.directory.Directory[“childDirectories”]-&gt;org.hibernate.collection.internal.PersistentBag[0]-&gt;econo.webper.server.directory.Directory[“parentDirectory”]-&gt;econo.webper.server.directory.Directory[“childDirectories”]-&gt;org.hibernate.collection.internal.PersistentBag[0]-&gt;econo.webper.server.directory.Directory[“parentDirectory”]-&gt;econo.webper.server.directory.Directory[“childDirectories”]-&gt;org.hibernate.collection.internal.PersistentBag[0]-&gt;econo.webper.server.directory.Directory[“parentDirectory”]-&gt;econo.webper.server.directory.Directory[“childDirectories”]-&gt; ….<strong>(계속 반복)</strong></p>
+</blockquote>
+
+<p>위의 로그(log)를 간단히 설명하면!! <strong>ResponseEntity는 기본적으로 Jackson 라이브러리를 사용해서 Object를 JSON데이터로 변환해주는데, 위의 Directory 클래스의 객체를 JSON데이터로 변환하기 위해 <u>해당 객체의 childDirectories필드를 참조</u>하게 되고 이는 <u>Hibernate가 제공하는 원본 컬렉션을 감싼 래퍼 컬렉션인 PersistentBag</u>을 가리킨다. -&gt; 다음으로는 첫 번째 원소인 <u>PersistentBag[0](Directory 클래스를 감싼 래퍼 클래스 객체)를 참조</u>하고 -&gt; 이후 래퍼 클래스 객체인 <u>PersistentBag[0](Directory 클래스 객체)의 필드인 ParentDirectory(Directory 클래스 객체)를 참조</u>하게 된다. -&gt; 다시 <u>parentDirectory(Directory 객체)의 childDirectores필드를 참조</u>하게 되며 -&gt; 로그에서 보여진 것처럼 위의 프로세스가 <u>무한루프</u>의 형태로 발생해 StackOverflowError가 발생한다..</strong></p>
+
+<h4 id="jpa-entity-간에-양방향-관계가-존재할-때만-infinite-recursion이-생기는-줄-알았는데-위의-entity-클래스와-같이-jpa-entity가-self-reference를-하는-경우도-infinite-recursion이-발생할-수-있다는-사실을-알게-되었다">JPA Entity 간에 양방향 관계가 존재할 때만 Infinite Recursion이 생기는 줄 알았는데, 위의 Entity 클래스와 같이 JPA Entity가 Self Reference를 하는 경우도 Infinite Recursion이 발생할 수 있다는 사실을 알게 되었다.</h4>
+
+<p>우리는 위의 <strong>Infinite Recursion 이슈를 해결하기 위해 <u>3가지 방법</u></strong>을 사용할 수 있다.</p>
+<ol>
+  <li><strong>[사용] JPA Entity 클래스 내에 Jackson 애노테이션을 위치시키는 방법.</strong>
+    <ul>
+      <li>@JsonIgnore, @JsonManagedReference, @JsonBackReference, @JsonIdentityInfo, …</li>
+    </ul>
+  </li>
+  <li><strong>ResponseDTO를 만들어 Persistent Object의 데이터를 주입시키는 방법</strong>
+    <ul>
+      <li>Self Reference하는 Persistent Object를 JSON으로 Serialize할 때 Infinite Recursion이 발생하는 것이기 때문에 이를 해결하기 위해 Response용 DTO를 생성</li>
+    </ul>
+  </li>
+  <li><strong>Custom Serializer를 만들어 사용하는 방법.</strong>
+    <ul>
+      <li>ResponseEntity에 기본으로 제공되는 Jackson 라이브러리의 Databinding을 사용하지 않고 직접 Serializer를 만들어 Infinite Recursion이 일어나지 않도록 Serialize하는 방법</li>
+    </ul>
+  </li>
+</ol>
+
+<p>위의 방법 이외에도 다양한 방법들이 많겠지만, 나는 <strong>1번<u>(JPA Entity 클래스 내에 Jackson 애노테이션을 위치시키는 방법)</u>을 사용</strong>했다.</p>
+
+<p>이번 포스팅에서는 내가 사용한 방법인 JPA Entity 클래스 내에 Jackson 애노테이션을 위치시켜 Infinite Recursion을 해결하는 방법에 대해서 주로 설명하겠다.</p>
+
+<hr />
+
+<h3 id="jpa-entity내에-jackson-애노테이션을-위치시켜-infinite-recursion-issue를-해결하는-방법">JPA Entity내에 Jackson 애노테이션을 위치시켜 Infinite Recursion Issue를 해결하는 방법</h3>
+
+<hr />
+
+<h3 id="1-jsonignore를-사용해서-infinite-recursion-해결하는-방법">1. @JsonIgnore를 사용해서 Infinite Recursion 해결하는 방법</h3>
+
+<p><strong>@JsonIgnore 란?</strong></p>
+
+<ul>
+  <li>Serialization(Object -&gt; JSON) 및 Deserialization(JSON -&gt; Object)에 사용되는 논리적 속성을 무시하는데 사용된다.</li>
+  <li>보통 field, getter, setter에 사용하는 애노테이션이다.</li>
+  <li>@JsonIgnore를 활성화시킬 수 있는 Value를 속성으로 가지고 있으며, Default는 true이고 false일 시 @JsonIgnore가 비활성화 된다.</li>
+</ul>
+
+<p><code class="highlighter-rouge">@JsonIgnore</code>를 Directory 클래스의 <strong>parentDirectory 또는 childDirectories필드에 다음과 같이 적용</strong>하면 Infinite Recursion을 끊을 수 있다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span> <span class="nd">@Builder</span> <span class="nd">@Getter</span>
+<span class="nd">@NoArgsConstructor</span> <span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Directory</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span>
+    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="kd">private</span> <span class="nc">DirectoryCategory</span> <span class="n">category</span><span class="o">;</span>
+
+    <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+    <span class="nd">@JsonIgnore</span>
+    <span class="kd">private</span> <span class="nc">Directory</span> <span class="n">parentDirectory</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">)</span>
+    <span class="nd">@Builder</span><span class="o">.</span><span class="na">Default</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Directory</span><span class="o">&gt;</span> <span class="n">childDirectories</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">)</span>
+    <span class="nd">@Builder</span><span class="o">.</span><span class="na">Default</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Component</span><span class="o">&gt;</span> <span class="n">components</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Directory Test Object를 생성해 JSON Serialize한 결과는 다음과 같다.</p>
+
+<p><img src="/assets/spring/Jackson-Infinite-Recursion-Issue With-JPA-Entity-1.png" style="width:40%" /></p>
+
+<p><strong>이 애노테이션은 Infinite Recursion 문제를 쉽게 해결하지만, Directory 객체의 parentDirectory라는 필드를 Serialize 및 Deserialize하지 않기 때문에 parentDirectory필드 데이터를 Client가 요구할 시 응답할 수 없다.</strong></p>
+
+<h3 id="2-jsonmanagedreference-jsonbackreference를-사용해서-infinite-recursion-해결하는-방법">2. @JsonManagedReference, @JsonBackReference를 사용해서 Infinite Recursion 해결하는 방법</h3>
+
+<p><strong>@JsonManagedReference, @JsonBackReference란?</strong></p>
+
+<ul>
+  <li>
+    <p>서로 대응되는 엔티티간의 match되는 properties 쌍의 부모/자식 관계를 표현하고 처리하기위해 사용되어지는 <strong>Pair of Annotation</strong>이다.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">@JsonManagedReference</code> 애노테이션이 붙여진 필드는 <strong>the forward part of the reference(parent)</strong>라고 하며 JSON으로 Serialize되고, <code class="highlighter-rouge">@JsonBackReference</code> 애노테이션이 붙여진 필드는 <strong>the back part of the reference(child)</strong>라고 하며 JSON으로 Selialize되지 않습니다. <strong>즉, the back part of the reference가 Serialize되지 않음으로 Infinite Recursion이 발생하지 않습니다.</strong></p>
+  </li>
+</ul>
+
+<p><code class="highlighter-rouge">@JsonManagedReference, @JsonBackReference</code>를 Directory 클래스의 <strong>parentDirectory 또는 childDirectories필드에 다음과 같이 적용</strong>하면 Infinite Recursion을 끊을 수 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span> <span class="nd">@Builder</span> <span class="nd">@Getter</span>
+<span class="nd">@NoArgsConstructor</span> <span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Directory</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span>
+    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="kd">private</span> <span class="nc">DirectoryCategory</span> <span class="n">category</span><span class="o">;</span>
+    
+    <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+    <span class="nd">@JsonBackReference</span>
+    <span class="kd">private</span> <span class="nc">Directory</span> <span class="n">parentDirectory</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">)</span>
+    <span class="nd">@JsonManagedReference</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Directory</span><span class="o">&gt;</span> <span class="n">childDirectories</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">)</span>
+    <span class="nd">@Builder</span><span class="o">.</span><span class="na">Default</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Component</span><span class="o">&gt;</span> <span class="n">components</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Directory Test Object를 생성해 JSON Serialize한 결과는 다음과 같다.</p>
+
+<p><img src="/assets/spring/Jackson-Infinite-Recursion-Issue With-JPA-Entity-1.png" style="width:40%" /></p>
+
+<p>Directory Entity가 양방향 관계라면 2개의 Entity의 모든 필드 중에서 하나의 필드만 Serialize되지 않겠지만, 우리는 하나의 Entity내에 Self Reference가 존재하기 때문에 <code class="highlighter-rouge">@JsonBackReference</code>와 <code class="highlighter-rouge">@JsonManagedReference</code>의 조합이 Serialize측면에서 <code class="highlighter-rouge">@JsonIgnore</code>과 동일한 역할을 하게된다. <strong>(즉 Entity내의 하나의 필드는 무조건 Serialize되지 않는다.)</strong></p>
+
+<p>따라서 <code class="highlighter-rouge">@JsonBackReference</code>가 붙여진 필드(parentDirectory)의 데이터가 필요한 Client의 입장에서는 데이터를 사용할 수 없음으로 제한이 걸린다.</p>
+
+<h3 id="3-jsonidentifyinfo를-사용해서-infinite-recursion을-해결하는-방법">3. @JsonIdentifyInfo를 사용해서 Infinite Recursion을 해결하는 방법</h3>
+
+<p><strong>@JsonIdentifyInfo 란?</strong></p>
+
+<ul>
+  <li>
+    <p>Serialize / Deserialize 할 때 객체 대신 객체 ID가 사용됨을 나타내는데 사용되어지는 class/property 애노테이션이다.</p>
+  </li>
+  <li>
+    <p>이 애노테이션은 cyclic object graphs와 directed-acyclic graphs를 올바르게 처리하는데 사용되어질 수 있다.</p>
+  </li>
+</ul>
+
+<p><code class="highlighter-rouge">@JsonIdentifyInfo</code>를 Directory 클래스에 다음과 같이 적용하면 Infinite Recursion을 끊을 수 있다.</p>
+
+<p>object identifier를 property에 대한 id값을 사용해서 생성하고 싶다면, 다음과 같이 generator속성 값에 ObjectIdGenerators.PropertyGenerator.class를 주어야하고, property속성 값에 id를 주어야 한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span> <span class="nd">@Builder</span> <span class="nd">@Getter</span>
+<span class="nd">@NoArgsConstructor</span> <span class="nd">@AllArgsConstructor</span>
+<span class="nd">@JsonIdentityInfo</span><span class="o">(</span><span class="n">generator</span> <span class="o">=</span> <span class="nc">ObjectIdGenerators</span><span class="o">.</span><span class="na">PropertyGenerator</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">property</span> <span class="o">=</span> <span class="s">"id"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Directory</span> <span class="o">{</span>
+
+    <span class="nd">@Id</span>
+    <span class="nd">@GeneratedValue</span>
+    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">title</span><span class="o">;</span>
+
+    <span class="nd">@NotNull</span>
+    <span class="kd">private</span> <span class="nc">DirectoryCategory</span> <span class="n">category</span><span class="o">;</span>
+    
+    <span class="nd">@ManyToOne</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">Directory</span> <span class="n">parentDirectory</span><span class="o">;</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">)</span>
+    <span class="nd">@Builder</span><span class="o">.</span><span class="na">Default</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Directory</span><span class="o">&gt;</span> <span class="n">childDirectories</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="nd">@OneToMany</span><span class="o">(</span><span class="n">fetch</span> <span class="o">=</span> <span class="nc">FetchType</span><span class="o">.</span><span class="na">LAZY</span><span class="o">,</span> <span class="n">cascade</span> <span class="o">=</span> <span class="nc">CascadeType</span><span class="o">.</span><span class="na">ALL</span><span class="o">)</span>
+    <span class="nd">@Builder</span><span class="o">.</span><span class="na">Default</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Component</span><span class="o">&gt;</span> <span class="n">components</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Directory Test Object를 생성해 JSON Serialize한 결과는 다음과 같다.</p>
+
+<p><img src="/assets/spring/Jackson-Infinite-Recursion-Issue With-JPA-Entity-3.png" style="width:40%" /></p>
+
+<p>Infinite Recursion Issue가 해결 되었고, parentDirectory는 해당 객체의 Id Property값을 통해서 Directory와의 연결관계도 식별 가능하다!!!</p>
+
+<p><strong>ParentDirectory의 Field 전부를 Json으로 Serialize해서 사용할 이유가 없기 때문에 @JsonIdentifyInfo 애노테이션이 가장 적합하고, 추가적으로 ParentDirectory의 필드 전부를 JSON Serialize해서 사용할 필요가 있다면, Response DTO를 만들어줘도 좋을 것 같다.</strong></p>
+
+<h4 id="entity를-json으로-serialize하는데-생기는-infinite-recursion-이슈를-해결하는-더-많은-방법이-궁금하다면-httpswwwbaeldungcomjackson-bidirectional-relationships-and-infinite-recursion-를-참조하면-더-많은-키워드-및-설명을-얻을-수-있다">Entity를 JSON으로 Serialize하는데 생기는 Infinite Recursion 이슈를 해결하는 더 많은 방법이 궁금하다면 <a href="https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion">https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion</a> 를 참조하면 더 많은 키워드 및 설명을 얻을 수 있다.</h4>
+
+<p>이상 글을 마치며, 부족한 글임에도 끝까지 봐준 독자들에게 감사를 표한다.</p>
+
+<hr />
+
+<p><strong>참조 사이트</strong></p>
+
+<ul>
+  <li><a href="http://keenformatics.blogspot.com/2013/08/how-to-solve-json-infinite-recursion.html">http://keenformatics.blogspot.com/2013/08/how-to-solve-json-infinite-recursion.html</a></li>
+  <li><a href="https://docs.spring.io/spring/docs/5.2.3.RELEASE/spring-framework-reference/web.html">https://docs.spring.io/spring/docs/5.2.3.RELEASE/spring-framework-reference/web.html</a></li>
+  <li><a href="https://github.com/FasterXML/jackson-annotations/wiki/Jackson-Annotations">https://github.com/FasterXML/jackson-annotations/wiki/Jackson-Annotations</a></li>
+</ul>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/Jpa">Jpa</a>,&nbsp;<a href="/tag/Serialize">Serialize</a>,&nbsp;<a href="/tag/Infinite">Infinite</a>,&nbsp;<a href="/tag/Recursion">Recursion</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=Jackson+Infinite+Recursion+Issue+With+JPA+Entity&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F07%2F20%2FJackson-Infinite-Recursion-Issue-With-JPA-Entity.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=Jackson+Infinite+Recursion+Issue+With+JPA+Entity&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F07%2F20%2FJackson-Infinite-Recursion-Issue-With-JPA-Entity.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F07%2F20%2FJackson-Infinite-Recursion-Issue-With-JPA-Entity.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=Jackson+Infinite+Recursion+Issue+With+JPA+Entity&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F07%2F20%2FJackson-Infinite-Recursion-Issue-With-JPA-Entity.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=Jackson+Infinite+Recursion+Issue+With+JPA+Entity&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F07%2F20%2FJackson-Infinite-Recursion-Issue-With-JPA-Entity.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/07/20/Jackson-Infinite-Recursion-Issue-With-JPA-Entity.html') + '&title=Jackson Infinite Recursion Issue With JPA Entity'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
