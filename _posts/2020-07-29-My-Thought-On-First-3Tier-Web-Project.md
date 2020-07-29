@@ -11,7 +11,7 @@ tags: Spring JPA Hibernate OOP CleanCode
 
 ---
 
-2020년도 4월 초부터 진행한 **webper 프로젝트**[(Github저장소)](https://github.com/JNU-econovation/webper/tree/develop/backend)는 **Api 서버로 spring boot**를 사용하고 있고, **View 서버로 React에서 제공해주는 기본 서버**를 사용하고 있다.
+2020년도 4월 초부터 진행한 **webper 프로젝트**[(Github저장소)](https://github.com/JNU-econovation/webper)는 **Api 서버로 spring boot**를 사용하고 있고, **View 서버로 React에서 제공해주는 기본 서버**를 사용하고 있다.
 
 우리 팀은 <u>프론트 앤드 개발자 2명과 백 앤드 개발자 1명</u>으로 구성되어 있는데, 프론트 앤드 개발자 중 한명은 휴학생 이다.
 
@@ -37,7 +37,7 @@ A가 돌아오고 난 후, 우리 팀은 프로젝트를 마무리 짓기 위해
 
 프론트 앤드에서 서버의 특정 api 사용시 나름 고정된 프로세스가 있는 것 같아 보였지만(Redux 패턴 때문?), A가 서울 가기 전에 보내준 데이터 명세에는 이러한 내용이 존재하지 않았기 때문에 나는 이러한 프로세스를 전혀 고려하지 않고 Api 서버를 구축했다.
 
-**발생한 이슈 중 가장 큰 문제는 Java의 ORM 명세인 JPA를 구현하는 Hibernate를 사용하는 Spring api 서버의 특정 api에 A가 원하는 응답을 제공하기 위해서는 아주 더러운 코드를 짜거나, 도메인 내부 설계를 변경하지 않으면 불가능 하다는 것이었다...**
+**발생한 이슈 중 가장 큰 문제는 Java의 ORM 명세인 JPA를 구현하는 Hibernate를 사용하는 Spring api 서버의 특정 api에서 A가 원하는 응답을 제공하기 위해서는 아주 더러운 코드를 짜거나, 도메인 내부 설계를 변경하지 않으면 불가능 하다는 것이었다...**
 
 그래서 나는 선택 해야 했다.... 
 
