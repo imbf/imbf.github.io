@@ -7,11 +7,11 @@ categories: CleanCode
 tags: Spring JPA Hibernate OOP CleanCode
 ---
 
-오늘은 **첫 3계층 웹 프로젝트(View Server - Api Server - Database)**를 진행하면서 느낀 **클린 코드에 관한 나의 생각**을 공유하고자 포스팅 하게 되었다.
+오늘은 **첫 3계층 웹 프로젝트(Static Server - Api Server - Database)**를 진행하면서 느낀 **클린 코드에 관한 나의 생각**을 공유하고자 포스팅 하게 되었다.
 
 ---
 
-2020년도 4월 초부터 진행한 **webper 프로젝트**[(Github저장소)](https://github.com/JNU-econovation/webper)는 **Api 서버로 spring boot**를 사용하고 있고, **View 서버로 React에서 제공해주는 기본 서버**를 사용하고 있다.
+2020년도 4월 초부터 진행한 **webper 프로젝트**[(Github저장소)](https://github.com/JNU-econovation/webper)는 **Api 서버로 spring boot**를 사용하고 있고, **클라이언트에게는 React기반의 View를 서비스할 Static Server를 두고 있다.**
 
 우리 팀은 <u>프론트 앤드 개발자 2명과 백 앤드 개발자 1명</u>으로 구성되어 있는데, 프론트 앤드 개발자 중 한명은 휴학생 이다.
 
@@ -31,7 +31,7 @@ tags: Spring JPA Hibernate OOP CleanCode
 
 A가 없는 3주의 시간동안 나름 객체 지향적으로 api서버를 구축하였고, 문서화 및 CI/CD도 진행하였다.
 
-A가 돌아오고 난 후, 우리 팀은 프로젝트를 마무리 짓기 위해 백(Api Server) 과 프론트(React Own Server) 사이에 통신을 주고 받았고 이 과정에서 정말 자잘한 이슈가 계속 생겼다.
+A가 돌아오고 난 후, 우리 팀은 프로젝트를 마무리 짓기 위해 백과 프론트 사이에 통신을 주고 받았고 이 과정에서 정말 자잘한 이슈가 계속 생겼다.
 
 **대부분의 이슈는 프론트 단에서 특정 api를 사용하기 위해 A가 원하는 요청과 응답이 내가 api서버를 구현하면서 생각했던 요청과 응답이 아닌 것이다...**
 

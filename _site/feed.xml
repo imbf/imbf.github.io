@@ -6,17 +6,17 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Jul 2020 14:50:11 +0900</pubDate>
-    <lastBuildDate>Wed, 29 Jul 2020 14:50:11 +0900</lastBuildDate>
+    <pubDate>Wed, 29 Jul 2020 19:23:14 +0900</pubDate>
+    <lastBuildDate>Wed, 29 Jul 2020 19:23:14 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>첫 3계층 웹 프로젝트를 진행하면서 느낀 클린 코드에 관한 생각</title>
-        <description>&lt;p&gt;오늘은 &lt;strong&gt;첫 3계층 웹 프로젝트(View Server - Api Server - Database)&lt;/strong&gt;를 진행하면서 느낀 &lt;strong&gt;클린 코드에 관한 나의 생각&lt;/strong&gt;을 공유하고자 포스팅 하게 되었다.&lt;/p&gt;
+        <description>&lt;p&gt;오늘은 &lt;strong&gt;첫 3계층 웹 프로젝트(Static Server - Api Server - Database)&lt;/strong&gt;를 진행하면서 느낀 &lt;strong&gt;클린 코드에 관한 나의 생각&lt;/strong&gt;을 공유하고자 포스팅 하게 되었다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;2020년도 4월 초부터 진행한 &lt;strong&gt;webper 프로젝트&lt;/strong&gt;&lt;a href=&quot;https://github.com/JNU-econovation/webper/tree/develop/backend&quot;&gt;(Github저장소)&lt;/a&gt;는 &lt;strong&gt;Api 서버로 spring boot&lt;/strong&gt;를 사용하고 있고, &lt;strong&gt;View 서버로 React에서 제공해주는 기본 서버&lt;/strong&gt;를 사용하고 있다.&lt;/p&gt;
+&lt;p&gt;2020년도 4월 초부터 진행한 &lt;strong&gt;webper 프로젝트&lt;/strong&gt;&lt;a href=&quot;https://github.com/JNU-econovation/webper&quot;&gt;(Github저장소)&lt;/a&gt;는 &lt;strong&gt;Api 서버로 spring boot&lt;/strong&gt;를 사용하고 있고, &lt;strong&gt;클라이언트에게는 React기반의 View를 서비스할 Static Server를 두고 있다.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;우리 팀은 &lt;u&gt;프론트 앤드 개발자 2명과 백 앤드 개발자 1명&lt;/u&gt;으로 구성되어 있는데, 프론트 앤드 개발자 중 한명은 휴학생 이다.&lt;/p&gt;
 
@@ -36,13 +36,13 @@
 
 &lt;p&gt;A가 없는 3주의 시간동안 나름 객체 지향적으로 api서버를 구축하였고, 문서화 및 CI/CD도 진행하였다.&lt;/p&gt;
 
-&lt;p&gt;A가 돌아오고 난 후, 우리 팀은 프로젝트를 마무리 짓기 위해 백(Api Server) 과 프론트(React Own Server) 사이에 통신을 주고 받았고 이 과정에서 정말 자잘한 이슈가 계속 생겼다.&lt;/p&gt;
+&lt;p&gt;A가 돌아오고 난 후, 우리 팀은 프로젝트를 마무리 짓기 위해 백과 프론트 사이에 통신을 주고 받았고 이 과정에서 정말 자잘한 이슈가 계속 생겼다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;대부분의 이슈는 프론트 단에서 특정 api를 사용하기 위해 A가 원하는 요청과 응답이 내가 api서버를 구현하면서 생각했던 요청과 응답이 아닌 것이다…&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;프론트 앤드에서 서버의 특정 api 사용시 나름 고정된 프로세스가 있는 것 같아 보였지만(Redux 패턴 때문?), A가 서울 가기 전에 보내준 데이터 명세에는 이러한 내용이 존재하지 않았기 때문에 나는 이러한 프로세스를 전혀 고려하지 않고 Api 서버를 구축했다.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;발생한 이슈 중 가장 큰 문제는 Java의 ORM 명세인 JPA를 구현하는 Hibernate를 사용하는 Spring api 서버의 특정 api에 A가 원하는 응답을 제공하기 위해서는 아주 더러운 코드를 짜거나, 도메인 내부 설계를 변경하지 않으면 불가능 하다는 것이었다…&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;발생한 이슈 중 가장 큰 문제는 Java의 ORM 명세인 JPA를 구현하는 Hibernate를 사용하는 Spring api 서버의 특정 api에서 A가 원하는 응답을 제공하기 위해서는 아주 더러운 코드를 짜거나, 도메인 내부 설계를 변경하지 않으면 불가능 하다는 것이었다…&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;그래서 나는 선택 해야 했다….&lt;/p&gt;
 
