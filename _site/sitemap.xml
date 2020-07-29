@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/cleancode/2020/07/29/My-Thought-On-First-3Tier-Web-Project.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/spring/2020/07/20/Jackson-Infinite-Recursion-Issue-With-JPA-Entity.html</loc>
     </url>
     
@@ -75,10 +79,6 @@
     
     <url>
         <loc>http://localhost:4000/til/2020/03/08/TIL.html</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/til/2020/03/07/TIL.html</loc>
     </url>
     
     <url>
@@ -408,6 +408,30 @@
     
     
     <url>
+        <loc>http://localhost:4000/tag/jpa/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/hibernate/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/cleancode/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
         <loc>http://localhost:4000/category/til/</loc>
     </url>
     
@@ -441,6 +465,14 @@
     
     <url>
         <loc>http://localhost:4000/category/git/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/category/cleancode/</loc>
     </url>
     
     

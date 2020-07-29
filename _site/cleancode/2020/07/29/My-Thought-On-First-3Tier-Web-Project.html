@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
+
+
+  <title>첫 3계층 웹 프로젝트를 진행하면서 느낀 클린 코드에 관한 생각</title>
+  <meta name="description" content="오늘은 첫 3계층 웹 프로젝트(View Server - Api Server - Database)를 진행하면서 느낀 클린 코드에 관한 나의 생각을 공유하고자 포스팅 하게 되었다.">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="오늘은 첫 3계층 웹 프로젝트(View Server - Api Server - Database)를 진행하면서 느낀 클린 코드에 관한 나의 생각을 공유하고자 포스팅 하게 되었다." />
+  <meta property="og:url" content="http://localhost:4000/cleancode/2020/07/29/My-Thought-On-First-3Tier-Web-Project.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="첫 3계층 웹 프로젝트를 진행하면서 느낀 클린 코드에 관한 생각" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="첫 3계층 웹 프로젝트를 진행하면서 느낀 클린 코드에 관한 생각">
+  <meta name="twitter:description" content="오늘은 첫 3계층 웹 프로젝트(View Server - Api Server - Database)를 진행하면서 느낀 클린 코드에 관한 나의 생각을 공유하고자 포스팅 하게 되었다.">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/cleancode/2020/07/29/My-Thought-On-First-3Tier-Web-Project.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/cleancode/2020/07/29/My-Thought-On-First-3Tier-Web-Project.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">첫 3계층 웹 프로젝트를 진행하면서 느낀 클린 코드에 관한 생각</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">July 29, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/CleanCode">Cleancode</a> (default) -->
+    <a href="/category/CleanCode">CleanCode</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>오늘은 <strong>첫 3계층 웹 프로젝트(View Server - Api Server - Database)</strong>를 진행하면서 느낀 <strong>클린 코드에 관한 나의 생각</strong>을 공유하고자 포스팅 하게 되었다.</p>
+
+<hr />
+
+<p>2020년도 4월 초부터 진행한 <strong>webper 프로젝트</strong><a href="https://github.com/JNU-econovation/webper/tree/develop/backend">(Github저장소)</a>는 <strong>Api 서버로 spring boot</strong>를 사용하고 있고, <strong>View 서버로 React에서 제공해주는 기본 서버</strong>를 사용하고 있다.</p>
+
+<p>우리 팀은 <u>프론트 앤드 개발자 2명과 백 앤드 개발자 1명</u>으로 구성되어 있는데, 프론트 앤드 개발자 중 한명은 휴학생 이다.</p>
+
+<p>휴학을 하신 프론트 앤드 개발자 분(이하 A)께서는 휴학을 하시다 보니, 학기 중에 다른 팀원에 비해서 상대적으로 시간이 많았다.</p>
+
+<p>클라이언트의 개발 속도가 Api서버의 개발 속도보다 훨씬 빨랏고 결국, <strong>A는 테스트 서버(데이터만 주고 받을)를 직접 만들어 나름 데이터를 정의해 개발을 진행</strong>했다.</p>
+
+<p>학기가 끝난 후, A는 잠깐 서울에 가게 되고, 백앤드 개발자(이하 ‘나’) 와 또 다른 프론트 개발자(이하 B)만 남게 되었다.</p>
+
+<p>나는 Api서버에 Spring Security를 사용해 인증 까지는 구현했으나, 그 이후로는 진행이 많이 되지는 않은 상황이었다.</p>
+
+<p><strong>나는 A가 서울에 가기전에 적어주고 떠난 데이터 명세 ppt를 보고 클라이언트 쪽 프로세스를 유추해 가면서 객체 지향적으로 api 서버를 구축 하기 위해 노력하였다.</strong></p>
+
+<p>아래 그림은 A가 건내준 데이터 명세 ppt의 일부이다.</p>
+
+<p><img src="/assets/spring/My-Thought-On-First-3Tier-Web-Project-1.png" style="width:50%" /></p>
+
+<p>A가 없는 3주의 시간동안 나름 객체 지향적으로 api서버를 구축하였고, 문서화 및 CI/CD도 진행하였다.</p>
+
+<p>A가 돌아오고 난 후, 우리 팀은 프로젝트를 마무리 짓기 위해 백(Api Server) 과 프론트(React Own Server) 사이에 통신을 주고 받았고 이 과정에서 정말 자잘한 이슈가 계속 생겼다.</p>
+
+<p><strong>대부분의 이슈는 프론트 단에서 특정 api를 사용하기 위해 A가 원하는 요청과 응답이 내가 api서버를 구현하면서 생각했던 요청과 응답이 아닌 것이다…</strong></p>
+
+<p>프론트 앤드에서 서버의 특정 api 사용시 나름 고정된 프로세스가 있는 것 같아 보였지만(Redux 패턴 때문?), A가 서울 가기 전에 보내준 데이터 명세에는 이러한 내용이 존재하지 않았기 때문에 나는 이러한 프로세스를 전혀 고려하지 않고 Api 서버를 구축했다.</p>
+
+<p><strong>발생한 이슈 중 가장 큰 문제는 Java의 ORM 명세인 JPA를 구현하는 Hibernate를 사용하는 Spring api 서버의 특정 api에 A가 원하는 응답을 제공하기 위해서는 아주 더러운 코드를 짜거나, 도메인 내부 설계를 변경하지 않으면 불가능 하다는 것이었다…</strong></p>
+
+<p>그래서 나는 선택 해야 했다….</p>
+
+<ol>
+  <li><strong>도메인 설계를 변경하면 전체적으로 엄청난 코드 변화를 유발할 텐데.. 프로젝트 마감이 3일 남은 이 시점에서 위와 같은 수고로움 에도 불구하고 객체 지향적인 코드를 작성할 건지..</strong></li>
+  <li><strong>많은 시간과 노력이 드는 객체 지향적인 코드는 좀 미뤄두고… 일단 프론트가 원하는 api 응답을 구현을 위해서 더러운 코드를 작성할 것인지…</strong></li>
+</ol>
+
+<p>결국에 나는 2번을 선택했지만, <strong>왜 현업에서 클린코드를 강조하지만, 정작 클린코드를 실현하지 못하는지 알 것 같다….</strong></p>
+
+<p><strong>매일 변경되는 요구사항 속에 우리는 객체 지향적인 코드를 선택할 것인지 아니면 빠른 기능 구현을 선택하고 다른 부분에 더 집중할 것인지… 동아리 선배가 말한 것처럼 개발은 매 순간 trade-off 관계 인 것 같다.</strong></p>
+
+<h4 id="객체-지향에-있어서-가장-중요한-것은-기존의-요구사항을-만족하면서-미래에-변화될지도-모르는-요구사항에-유연하게-대처하고-적응할-수-있는-설계를-구현하는-것이-매우-중요한-것-같다">객체 지향에 있어서 가장 중요한 것은, 기존의 요구사항을 만족하면서 미래에 변화될지도 모르는 요구사항에 유연하게 대처하고, 적응할 수 있는 설계를 구현하는 것이 매우 중요한 것 같다.</h4>
+
+<blockquote>
+  <p>동아리 선배님의 조언 (현 11번가 개발자)</p>
+
+  <p><a href="https://github.com/citerus/dddsample-core">https://github.com/citerus/dddsample-core</a></p>
+
+  <p>시간 날 때 Import 받아서 쭉 읽어보자!! (DDD 관련 내용)</p>
+</blockquote>
+
+<p><strong>이번 프로젝트 마감(동아리 성과발표)을 끝내고 webper 프로젝트를 다시 TDD 기반으로 리팩토링 해봐야 겠다.</strong></p>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/JPA">JPA</a>,&nbsp;<a href="/tag/Hibernate">Hibernate</a>,&nbsp;<a href="/tag/OOP">OOP</a>,&nbsp;<a href="/tag/CleanCode">CleanCode</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=%EC%B2%AB+3%EA%B3%84%EC%B8%B5+%EC%9B%B9+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC+%EC%A7%84%ED%96%89%ED%95%98%EB%A9%B4%EC%84%9C+%EB%8A%90%EB%82%80+%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C%EC%97%90+%EA%B4%80%ED%95%9C+%EC%83%9D%EA%B0%81&url=http%3A%2F%2Flocalhost%3A4000%2Fcleancode%2F2020%2F07%2F29%2FMy-Thought-On-First-3Tier-Web-Project.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=%EC%B2%AB+3%EA%B3%84%EC%B8%B5+%EC%9B%B9+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC+%EC%A7%84%ED%96%89%ED%95%98%EB%A9%B4%EC%84%9C+%EB%8A%90%EB%82%80+%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C%EC%97%90+%EA%B4%80%ED%95%9C+%EC%83%9D%EA%B0%81&u=http%3A%2F%2Flocalhost%3A4000%2Fcleancode%2F2020%2F07%2F29%2FMy-Thought-On-First-3Tier-Web-Project.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcleancode%2F2020%2F07%2F29%2FMy-Thought-On-First-3Tier-Web-Project.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=%EC%B2%AB+3%EA%B3%84%EC%B8%B5+%EC%9B%B9+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC+%EC%A7%84%ED%96%89%ED%95%98%EB%A9%B4%EC%84%9C+%EB%8A%90%EB%82%80+%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C%EC%97%90+%EA%B4%80%ED%95%9C+%EC%83%9D%EA%B0%81&url=http%3A%2F%2Flocalhost%3A4000%2Fcleancode%2F2020%2F07%2F29%2FMy-Thought-On-First-3Tier-Web-Project.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=%EC%B2%AB+3%EA%B3%84%EC%B8%B5+%EC%9B%B9+%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC+%EC%A7%84%ED%96%89%ED%95%98%EB%A9%B4%EC%84%9C+%EB%8A%90%EB%82%80+%ED%81%B4%EB%A6%B0+%EC%BD%94%EB%93%9C%EC%97%90+%EA%B4%80%ED%95%9C+%EC%83%9D%EA%B0%81&url=http%3A%2F%2Flocalhost%3A4000%2Fcleancode%2F2020%2F07%2F29%2FMy-Thought-On-First-3Tier-Web-Project.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/cleancode/2020/07/29/My-Thought-On-First-3Tier-Web-Project.html') + '&title=첫 3계층 웹 프로젝트를 진행하면서 느낀 클린 코드에 관한 생각'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
