@@ -3,7 +3,7 @@ layout: post
 title:  "클라우드 컴퓨팅(Cloud Computing)이란 무엇인가?"
 date:   2020-03-25
 author: Green Frog Developer
-categories: Web
+categories: Computer-Science(CS)
 tags: Cloud Web Computing Server 
 ---
 
