@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/computer-science(cs)/2020/08/21/What-is-The-Operating-System.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/spring/2020/08/18/Test-Spring-MVC-Controller-Applying-Spring-Security.html</loc>
     </url>
     
@@ -445,6 +449,38 @@
     
     <url>
         <loc>http://localhost:4000/tag/unit/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/operating-system/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/os/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/cs/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/computer/</loc>
     </url>
     
     

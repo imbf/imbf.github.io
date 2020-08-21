@@ -6,9 +6,51 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 20 Aug 2020 10:45:44 +0900</pubDate>
-    <lastBuildDate>Thu, 20 Aug 2020 10:45:44 +0900</lastBuildDate>
+    <pubDate>Fri, 21 Aug 2020 22:20:01 +0900</pubDate>
+    <lastBuildDate>Fri, 21 Aug 2020 22:20:01 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>[Operating System - Chapter 1] 운영체제란 무엇인가?</title>
+        <description>&lt;p&gt;이 포스팅은 공룡책 알려진 Operating System Concepts의 1장을 공부하면서 정리한 포스팅이다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;운영체제란-무엇인가&quot;&gt;운영체제란 무엇인가?&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;운영체제가-할-일-what-operating-systems-do&quot;&gt;운영체제가 할 일 (What Operating Systems Do)&lt;/h3&gt;
+
+&lt;p&gt;컴퓨터 시스템은 다음 그림처럼 대게 네 가지 구성요소인 &lt;strong&gt;하드웨어, 운영체제, 응용 프로그램, 사용자&lt;/strong&gt;로 구분할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/what-is-the-operating-system-1.png&quot; style=&quot;width:30%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;운영체제는 다양한 사용자를 위해 다양한 응용 프로그램 간의 하드웨어 사용을 제어하고 조종한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;운영체제는 항상 실행 중인 &lt;strong&gt;커널(Kernel)&lt;/strong&gt;과 응용 프로그램 개발을 쉽게 하고 기능을 제공하는 미들웨어 프레임워크 및 시스템 실행 중에 시스템 관리하는데 도움이 되는 &lt;strong&gt;시스템 프로그램(System Program)&lt;/strong&gt;이 포함된다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;일반적으로 항상 실행되는 프로그램을 &lt;strong&gt;커널(Kernel)&lt;/strong&gt;이라고 한다,&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Fri, 21 Aug 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/computer-science(cs)/2020/08/21/What-is-The-Operating-System.html</link>
+        <guid isPermaLink="true">http://localhost:4000/computer-science(cs)/2020/08/21/What-is-The-Operating-System.html</guid>
+        
+        <category>Operating-System</category>
+        
+        <category>OS</category>
+        
+        <category>CS</category>
+        
+        <category>Computer</category>
+        
+        
+        <category>Computer-Science(CS)</category>
+        
+      </item>
     
       <item>
         <title>Spring Security를 적용한 Spring MVC Controller 단위 테스트 </title>
@@ -1787,329 +1829,6 @@
         
         
         <category>Git</category>
-        
-      </item>
-    
-      <item>
-        <title>Intellij에서 스프링 MVC Project 생성하기</title>
-        <description>&lt;p&gt;이 글에서는 &lt;strong&gt;Intellij를 활용해서 Spring MVC Project를 생성 및 설정&lt;/strong&gt;하는 방법에 대해 소개할 것이다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;[사용한 개발 환경]&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;p&gt;자바 : Java8&lt;/p&gt;
-
-  &lt;p&gt;운영체제: macOS Catalina&lt;/p&gt;
-
-  &lt;p&gt;개발 도구: IntelliJ IDEA ULTIMATE&lt;/p&gt;
-
-  &lt;p&gt;프레임워크: Spring MVC + Maven&lt;/p&gt;
-
-  &lt;p&gt;서버: Tomcat 8.5.53&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;1-project-생성하기&quot;&gt;1. Project 생성하기&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Intellij를 실행시켜서 가장 첫 번째 요소인 &lt;strong&gt;Create New Project&lt;/strong&gt;를 클릭한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-1.png&quot; style=&quot;width:50%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Maven을 프로젝트 관리 도구&lt;/strong&gt;로써 사용하기 위해 클릭하면 
-다음과 같은 화면이 나오는데 Project SDK에 &lt;strong&gt;프로젝트에서 사용할 자바 버전&lt;/strong&gt;(필자는 자바8 사용)을 입력하고 Next를 누른다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-2.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;자신의 프로젝트를 식별해주는 고유 아이디인 GroupId&lt;/strong&gt;를 프로젝트에서 컨트롤하는 도메인 이름과 동일하게 입력.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;버전 정보를 생략한 이름(jar)인 ArtifactId&lt;/strong&gt;를 프로젝트 이름과 동일하게 입력.&lt;/p&gt;
-
-&lt;p&gt;모든 정보를 입력 하였으면 Next를 클릭한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-3.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;프로젝트가 생성되면 자동으로 Import를 활성화 해주는 기능인 &lt;strong&gt;Enable Auto-Import&lt;/strong&gt;를 클릭한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-4.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;2-spring-mvc-설정하기&quot;&gt;2. Spring MVC 설정하기&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Spring MVC를 사용하기위해 루트 디렉토리에서 우클릭을 한 후 &lt;strong&gt;Add Framework Support…&lt;/strong&gt;를 클릭한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-5.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Spring MVC(5.2.3.RELEASE)&lt;/strong&gt;를 선택하고 OK 클릭&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-6.png&quot; style=&quot;width:80%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그러면 다음과 같이 Web 디렉토리와 파일들이 자동으로 생긴 것을 볼 수 있다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;applicationContext.xml&lt;/strong&gt; : 빈(Bean) 설정&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;dispatcher-servlet.xml&lt;/strong&gt; : 내부 웹 관련 처리 설정&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;web.xml&lt;/strong&gt; : Web Application의 설정을 위한 deployment descriptor&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-7.png&quot; style=&quot;width:50%&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;3-tomcat-설정하기&quot;&gt;3. Tomcat 설정하기&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;SpringBoot에는 내장 Tomcat이 있지만 Spring에는 존재하지 않는다. 따라서 우리는 프로젝트 서버인 Tomcat을 설정해줘야 한다.&lt;/p&gt;
-
-&lt;p&gt;우측 상단 툴바에서 &lt;strong&gt;Add Configuration…&lt;/strong&gt; 클릭&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-8.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;+&lt;/strong&gt; 버튼을 눌러서 &lt;strong&gt;Local Tomcat Server&lt;/strong&gt; 를 선택하고 생성한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-9.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;상단에 &lt;strong&gt;적절한 이름&lt;/strong&gt;을 입력한 후 &lt;strong&gt;톰캣 Fix 설정&lt;/strong&gt;을 해주기 위해 Fix를 클릭한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-10.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Deployment 화면으로 이동되면 &lt;strong&gt;Application context&lt;/strong&gt;를 &lt;strong&gt;/&lt;/strong&gt;로 입력하면 톰캣 Fix 설정이 완료된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-11.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;4-library-설정하기&quot;&gt;4. Library 설정하기&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Spring MVC를 선택하여 프로젝트를 생성하였고 Tomcat 서버도 연동하였지만 서버를 시작하면 에러가 발생한다. 이유가 무엇일까?&lt;/p&gt;
-
-&lt;p&gt;그렇다. &lt;strong&gt;Spring, Spring MVC library&lt;/strong&gt;를 사용하기 위해서는 &lt;u&gt;추가적인 작업&lt;/u&gt;이 필요하다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Project Structure&lt;/strong&gt; 창을 띄워서 &lt;strong&gt;Artifacts 탭&lt;/strong&gt;을 클릭하면 아래와 같은 화면을 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-12.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;우측에 &lt;strong&gt;Available Elements&lt;/strong&gt; 위치한 것들이 &lt;strong&gt;이용 가능한 Library&lt;/strong&gt; 들인데 사용하기 위해서는 
-double-click 클릭 혹은 drag-and-drop으로 &lt;strong&gt;좌측의 WEB-INF/lib/&lt;/strong&gt; 위치로 다음과 같이 옮겨야 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-13.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 라이브러리 설정도 완료 되었으니 Spring MVC 프로젝트를 시작할 준비는 끝났다!! 한번 서버를 시작 해 보자.&lt;/p&gt;
-
-&lt;p&gt;실행결과는 다음과 같이 index.jsp 파일이 브라우저에 보여지는 것을 알수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-14.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;5-spring-mvc-프로젝트-활용&quot;&gt;5. Spring MVC 프로젝트 활용&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;잘 구성된 Spring MVC 프로젝트를 간단하게 활용해 보자.&lt;/p&gt;
-
-&lt;h3 id=&quot;5-1-자바-컨트롤러-파일-생성&quot;&gt;5-1. 자바 컨트롤러 파일 생성&lt;/h3&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.text.DateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.slf4j.Logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.slf4j.LoggerFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.stereotype.Controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.ui.Model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.web.bind.annotation.RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.web.bind.annotation.RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.web.bind.annotation.ResponseBody&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;cm&quot;&gt;/**
- * Handles requests for the application home page.
- */&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@Controller&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HomeController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Logger&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LoggerFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getLogger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HomeController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;cm&quot;&gt;/**
-     * Simply selects the home view to render by returning its name.
-     */&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Locale&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Model&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Welcome home! The client locale is {}.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;DateFormat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getDateTimeInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;DateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;LONG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;LONG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;formattedDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dateFormat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;serverTime&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;formattedDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;home&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/show&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@ResponseBody&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&amp;lt;h1&amp;gt;show&amp;lt;/h1&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@Controller&lt;/code&gt;&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@Component&lt;/code&gt;보다 더 전문화된 역할을 수행한다. (실제로 @Controller는 @Component 애노테이션을 포함한다.)&lt;/li&gt;
-      &lt;li&gt;이 어노테이션을 붙이면 dispatcher-servlet.xml에서 이것을 인식하여 &lt;strong&gt;컨트롤러로 등록&lt;/strong&gt;함.&lt;/li&gt;
-      &lt;li&gt;클래스 경로 스캔을 통해 구현 클래스를 autoscan 할 수 있습니다.&lt;/li&gt;
-      &lt;li&gt;일반적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestMapping&lt;/code&gt; 애노테이션을 기반으로 어노테이션이있는 Handler 메소드와 함께 사용됩니다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestMapping&lt;/code&gt; : 스프링은 &lt;strong&gt;HandlerMppaing에 의해 컨트롤러가 결정&lt;/strong&gt;된다. 이 &lt;strong&gt;컨트롤러에서 HandlerAdapter에 의해 실행 메서드가 결정&lt;/strong&gt;되는 데 &lt;strong&gt;@RequestMapping 어노테이션이 그 정보를 제공해 준다.&lt;/strong&gt; value에 해당하는 url이 GET 방식으로 요청이 들어올 때 해당 메서드를 실행한다.&lt;/li&gt;
-  &lt;li&gt;home 메서드는 serverTime이라는 속성을 Model에 추가하고 이 값은 formattedDate 변수 안에 담긴 현재 날짜 정보를 담고있다. 이 정보는 &lt;strong&gt;JSP에서 클라이언트에게 전달할 HTML문서를 만들 때 쓰인다. 여기서 모델은 어떤 구조화된 데이터를 담는 객체&lt;/strong&gt;라고 보면 된다.&lt;/li&gt;
-  &lt;li&gt;마지막으로 “home” 문자열을 반환하는 데 이 문자열은 나중에 &lt;strong&gt;servlet-context.xml에 설정된 prefix와 suffix 정보를 참조하여 /WEB-INF/home.jsp 파일을 찾는 정보를 제공&lt;/strong&gt;한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;5-2-메이븐-설정-파일pomxml-설정&quot;&gt;5-2. 메이븐 설정 파일(pom.xml) 설정&lt;/h3&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;project&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://maven.apache.org/POM/4.0.0&quot;&lt;/span&gt;
-         &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
-         &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;groupId&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;mvc&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0-SNAPSHOT&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.slf4j&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;slf4j-api&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.7.30&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;Java Logging API인 slf4j를 사용하기 위해 라이브러리 의존성을 추가해준다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;5-3-webxml-설정&quot;&gt;5-3. web.xml 설정&lt;/h3&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;web-app&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;&lt;/span&gt;
-         &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;
-         &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;&lt;/span&gt;
-         &lt;span class=&quot;na&quot;&gt;version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;4.0&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;context-param&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;param-name&amp;gt;&lt;/span&gt;contextConfigLocation&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-name&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;param-value&amp;gt;&lt;/span&gt;/WEB-INF/applicationContext.xml&lt;span class=&quot;nt&quot;&gt;&amp;lt;/param-value&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/context-param&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;listener&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;listener-class&amp;gt;&lt;/span&gt;org.springframework.web.context.ContextLoaderListener&lt;span class=&quot;nt&quot;&gt;&amp;lt;/listener-class&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/listener&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-name&amp;gt;&lt;/span&gt;dispatcher&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-name&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-class&amp;gt;&lt;/span&gt;org.springframework.web.servlet.DispatcherServlet&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-class&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;load-on-startup&amp;gt;&lt;/span&gt;1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/load-on-startup&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-mapping&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;servlet-name&amp;gt;&lt;/span&gt;dispatcher&lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-name&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;url-pattern&amp;gt;&lt;/span&gt;/&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url-pattern&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/servlet-mapping&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/web-app&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;DispatcherServlet 클래스를 서블릿으로 정의&lt;/strong&gt;하며 클라이언트가 &lt;strong&gt;/로 요청&lt;/strong&gt;을 하면 모두 &lt;strong&gt;DispatcherServlet 클래스로 랩핑&lt;/strong&gt;하도록 정의하고 있다.&lt;/li&gt;
-  &lt;li&gt;ContextLoaderListener 클래스는 스프링 설정 파일(디폴트에서 파일명 applicationContext.xml)을 로드하면 ServletContextListener 인터페이스를 구현하고 있기 때문에 ServletContext 인스턴스 생성 시(톰켓으로 어플리케이션이 로드된 때)에 호출된다. &lt;strong&gt;즉, ContextLoaderListener 클래스는 DispatcherServlet 클래스의 로드보다 먼저 동작하여 &lt;u&gt;비즈니스 로직층을 정의한 스프링 설정 파일을 로드&lt;/u&gt;한다.&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;5-4-dispatcher-servletxml-설정&quot;&gt;5-4. Dispatcher-servlet.xml 설정&lt;/h3&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;beans&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:mvc=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/mvc&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xmlns:context=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/context&quot;&lt;/span&gt;
-       &lt;span class=&quot;na&quot;&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;context:component-scan&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;base-package=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;controller&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;prefix&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/WEB-INF&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;suffix&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.jsp&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/beans&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;매번 스프링 설정 파일에 Bean으로 등록하기 어려우니까 base-package인 controller 패키지를 기준으로 &lt;strong&gt;@Component애노테이션을 가진 속성을 찾아서 Bean으로 등록&lt;/strong&gt;해주기 위한 코드가 component-scan 태그이다. ()&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;이름으로부터 실제로 사용할 뷰 객체를 결정해 주는 ViewResolver가 필요&lt;/strong&gt;하기 때문에 dispatcherServlet은 기본 뷰 리졸버인 InternalResourceViewResolver를 사용한다.
-InternalResourceViewResolver는 JSP를 뷰로 사용할 때 쓰인다. 컨트롤러에서 리턴하는 뷰 이름에 접두,접미어를 붙여서 JSP페이지의 경로를 찾는다.
-&lt;strong&gt;즉, 뷰 리졸버는 “/WEB-INF/”라는 위치의 이름.JSP 뷰를 참고해서 모델을 이용하여 페이지를 만든다.&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;5-5-jspview-페이지-작성&quot;&gt;5-5. jsp(View) 페이지 작성&lt;/h3&gt;
-
-&lt;p&gt;jsp란 Java 언어를 기반으로 하는 Server Side 스크립트 언어이다. 이 프로젝트에서 작성할 home.jsp는 다음과 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&amp;gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Home&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;
-    Hello world!
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;P&amp;gt;&lt;/span&gt;  The time on the server is ${serverTime}. &lt;span class=&quot;nt&quot;&gt;&amp;lt;/P&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;serverTime이라는 속성에서 값을 가져와 html페이지를 만들어서 client에게 전달한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;5-6-실행-결과&quot;&gt;5-6. 실행 결과&lt;/h3&gt;
-
-&lt;p&gt;위의 프로젝트를 실행한 결과는 다음과 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-MVC-Basic-Project-15.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;참조&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;https://engkimbs.tistory.com/688&lt;/li&gt;
-    &lt;li&gt;https://whitepaek.tistory.com/41&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Sat, 28 Mar 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/spring/2020/03/28/Create-MVC-Project.html</link>
-        <guid isPermaLink="true">http://localhost:4000/spring/2020/03/28/Create-MVC-Project.html</guid>
-        
-        <category>Spring</category>
-        
-        <category>Java</category>
-        
-        <category>Project</category>
-        
-        <category>MVC</category>
-        
-        <category>intellij</category>
-        
-        
-        <category>Spring</category>
         
       </item>
     
