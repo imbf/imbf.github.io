@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 02 Sep 2020 18:37:56 +0900</pubDate>
-    <lastBuildDate>Wed, 02 Sep 2020 18:37:56 +0900</lastBuildDate>
+    <pubDate>Wed, 02 Sep 2020 18:50:37 +0900</pubDate>
+    <lastBuildDate>Wed, 02 Sep 2020 18:50:37 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -572,6 +572,21 @@
 &lt;hr /&gt;
 
 &lt;h3 id=&quot;111-무료-및-공개-소스-운영체제-free-and-open-source-operating-systems&quot;&gt;1.11 무료 및 공개 소스 운영체제 (Free and Open Source Operating Systems)&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;UNIX&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;유닉스(영어: Unix)는 교육 및 연구 기관에서 즐겨 사용되는 범용 다중 사용자 방식의 시분할 운영 체제이다. 1970년대 초반 벨 연구소 직원인 켄 톰슨, 데니스  리치 등이 처음 개발하였다. 오늘날의 유닉스 시스템은 여러 회사들과 비영리 단체들이 이 커널로 활용하여 다양한 운영체제를 개발하고 있다.&lt;/p&gt;
+
+  &lt;p&gt;유닉스는 처음부터 다양한 시스템 사이에서 서로 이식할 수 있고, 멀티 태스킹과 다중 사용자를 지원하도록 설계되었다. 유닉스 시스템은 다음과 같은 개념을 가지고 있다.&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;일반 텍스트 파일, 명령행 인터프리터, 계층적인 파일 시스템, 장치 및 특정한 형식의 프로세스 간 통신을 파일로 취급 등.&lt;/li&gt;
+    &lt;li&gt;소프트웨어 공학 측면에서, 유닉스는 C의 사용과 유닉스 철학이라는 부분이 특징이다.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;유닉스(UNIX) 상표권은 오픈 그룹이 갖고 있으며, 유닉스 소스 코드에 대한 저작권은 노벨이 소유하고 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h4 id=&quot;1112-무료-운영체제-free-operating-systems&quot;&gt;1.11.2 무료 운영체제 (Free Operating Systems)&lt;/h4&gt;
 
