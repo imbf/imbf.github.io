@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/computer-science(cs)/2020/09/03/Operating-System-Structures.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/computer-science(cs)/2020/08/21/What-is-The-Operating-System.html</loc>
     </url>
     
@@ -561,6 +565,14 @@
     
     <url>
         <loc>http://localhost:4000/page5/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/page6/</loc>
     </url>
     
     

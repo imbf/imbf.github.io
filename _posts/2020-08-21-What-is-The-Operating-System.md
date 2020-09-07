@@ -7,7 +7,7 @@ categories: Computer-Science(CS)
 tags: Operating-System OS CS Computer
 ---
 
-이 포스팅은 공룡책 알려진 Operating System Concepts의 1장을 공부하면서 정리한 포스팅이다.
+이 포스팅은 공룡책으로 알려진 Operating System Concepts의 1장을 공부하면서 정리한 포스팅이다.
 
 ---
 
