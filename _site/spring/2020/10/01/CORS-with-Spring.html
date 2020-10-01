@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
+
+
+  <title>CORS with Spring (MVC, Security)</title>
+  <meta name="description" content="이번 포스팅에서는 CORS with Spring (MVC, Security)에 대해서 다루어 보도록 하겠다.">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="이번 포스팅에서는 CORS with Spring (MVC, Security)에 대해서 다루어 보도록 하겠다." />
+  <meta property="og:url" content="http://localhost:4000/spring/2020/10/01/CORS-with-Spring.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="CORS with Spring (MVC, Security)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CORS with Spring (MVC, Security)">
+  <meta name="twitter:description" content="이번 포스팅에서는 CORS with Spring (MVC, Security)에 대해서 다루어 보도록 하겠다.">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/spring/2020/10/01/CORS-with-Spring.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/spring/2020/10/01/CORS-with-Spring.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">CORS with Spring (MVC, Security)</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">October 1, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Spring">Spring</a> (default) -->
+    <a href="/category/Spring">Spring</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>이번 포스팅에서는 <strong>CORS with Spring (MVC, Security)</strong>에 대해서 다루어 보도록 하겠다.</p>
+
+<p>프로젝트 진행간에 CORS(Cross-Origin Resource Sharing) 이슈를 경험하고 대략 두달이 지나서야 이 포스팅을 작성한다. 다른 일들에 밀려 이제 이 글을 작성하는 것이 조금 못마땅하기도 하지만 블로깅을 놓지 않고 열심히 하고 있는 내 모습이 대견하기도 하다.</p>
+
+<p>어쨋든 이 포스팅의 목적은 <strong>Spring에서 CORS이슈를 해결하는 방법</strong>에 대해서 알아보기로 한 것이니 CORS란 무엇이고, 왜 나왔는지에 대해서 먼저 알아보도록 하자~</p>
+
+<hr />
+
+<h2 id="cors란-무엇인가">CORS란 무엇인가?</h2>
+
+<p><strong>CORS란 Cross-Origin Resource Sharing의 약자이다. 영어 그대로를 해석해 보면 교차 출처 리소스 공유이다. 즉, 한 출처에서 실행중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 정책이다.</strong></p>
+
+<blockquote>
+  <p><strong>그렇다면 출처(Origin)이란 무엇일까?</strong></p>
+
+  <p>도메인 + 프로토콜 + 포트를 통틀어 출처(Origin)이라고 한다. 이 글에서는 출처를 오리진 or Origin이라고 부르도록 하겠다.</p>
+
+  <p><strong>즉, 프로토콜, 포트, 호스트(도메인) 중 하나라도 다를 경우 Cross Origin이라고 이해하면 된다.</strong></p>
+
+  <p>ex) http://localhost:8080/api 와 https://localhost:8080/api 은 Cross Origin이다. (프로토콜이 다르기 때문)</p>
+</blockquote>
+
+<p>이제 CORS가 무엇인지에 대해서 알아보았음으로, 왜 CORS가 나오게 되었는지에 대해서 알아보도록 하자.</p>
+
+<hr />
+
+<h2 id="cors는-왜-필요한가">CORS는 왜 필요한가?</h2>
+
+<p><strong>보안 상의 이유로, 브라우저는 스크립트에서 시작한 Cross Origin HTTP Request를 제한합니다.</strong> ex) <code class="highlighter-rouge">XMLHttpRequest</code>와 <code class="highlighter-rouge">Fetch API</code>는 <strong>동일 출처 정책(SOP)</strong>을 따릅니다. 즉, 이 API를 사용하는 웹 애플리케이션은 자신의 출처와 동일한 리소스만 불러올 수 있으며, <strong>다른 Origin의 리소스를 불러오려면 그 Origin에서 올바른 CORS 헤더를 포함한 응답을 반환해야 합니다.</strong></p>
+
+<blockquote>
+  <p><strong>동일 출처 정책 (Same-Origin Policy)</strong></p>
+
+  <p>불러온 문서나 스크립트가 다른 출처(Origin)에서 가져온 리소스와 상호작용하는 것을 제한하는 중요한 보안 방식입니다. 이것은 잠재적 악성 문서를 격리하여, 공격 경로를 
+줄이는데 도움이 됩니다.</p>
+</blockquote>
+
+<p>결국 대부분의 웹 어플리케이션의 Web API Client는 XMLHttpRequest 또는 Fetch API를 사용하기 떄문에 Cross Origin HTTP Request를 위해선 CORS 정책을 따라야만 한다.</p>
+
+<p>CORS란 무엇이고, 왜 필요한지에 대해서 알아보았으니, 우리는 Cross-Origin HTTP Request 간에 발생하는 여러 시나리오에 대해서 알아보도록 하자.</p>
+
+<hr />
+
+<h2 id="접근-제어-시나리오">접근 제어 시나리오</h2>
+
+<ol>
+  <li><strong>Simple Request (단순 요청)</strong>
+    <ul>
+      <li>Simple Request 조건을 모두 충족하는 요청을 Preflight request 없이 보내 서버는 이에 대한 응답으로 Access-Control-Allow-Origin 헤더를 응답하는 방식</li>
+      <li><strong>Access-Control-Allow-Origin : &lt;origin&gt; | *</strong>
+        <ul>
+          <li>Origin을 지정하여 브라우저가 해당 Origin이 리소스에 접근하도록 허용합니다. Credential이 없는 요청의 경우 "*" 와일드 카드는 브라우저의 origin에 상관없이 모든 리소스에 접근하도록 허용합니다.</li>
+        </ul>
+      </li>
+      <li>The Communication between client and server using simple request 
+ <img src="/assets/spring/cors-with-spring-2.png" style="width:100%" /></li>
+    </ul>
+  </li>
+  <li><strong>preflighted request (프리플라이트 요청)</strong>
+    <ul>
+      <li>먼저 <code class="highlighter-rouge">OPTIONS</code> 메서드를 통해 다른 도메인의 리소스로 HTTP request를 보내 실제 요청이 전송하기에 안전한지 확인합니다. Cross-site request는 유저 데이터에 영향을 줄 수 있기 때문에 이와 같이 미리 전송(preflighted)합니다.</li>
+      <li>The Communication between client and server using preflighted request
+ <img src="/assets/spring/cors-with-spring-3.png" style="width:100%" /></li>
+      <li><strong>Access-Control-Request-Method: &lt;method&gt;</strong>
+        <ul>
+          <li>Access-Control-Request-Method 헤더는 실제 요청에서 어떤 HTTP 메서드를 사용할지 서버에게 알려주기 위해, preflight request 할 때에 사용됩니다.</li>
+        </ul>
+      </li>
+      <li><strong>Access-Control-Allow-Methods: &lt;method&gt;[, &lt;method&gt;]*</strong>
+        <ul>
+          <li>Access-Control-Allow-Methods 헤더는 리소스에 접근할 때 허용되는 메서드를 지정합니다. 이 헤더는 preflight request에 대한 응답으로 사용됩니다. 요청이 preflighted 되는 조건은 위에 설명되어 있습니다.</li>
+        </ul>
+      </li>
+      <li><strong>Access-Control-Request-Headers: &lt;header-name&gt;[, &lt;header-name&gt;]*</strong>
+        <ul>
+          <li>Access-Control-Request-Headers 헤더는 실제 요청에서 어떤 HTTP 헤더를 사용할지 서버에게 알려주기 위해, preflight request 할 때에 사용됩니다.</li>
+        </ul>
+      </li>
+      <li><strong>Access-Control-Allow-Headers: &lt;header-name&gt;[, &lt;header-name&gt;]*</strong>
+        <ul>
+          <li>preflight request 에 대한 응답으로 Access-Control-Allow-Headers 헤더가 사용됩니다. 실제 요청시 사용할 수 있는 HTTP 헤더를 나타냅니다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>credentialed request (인증정보를 포함한 요청)</strong>
+    <ul>
+      <li>credentialed requests는 HTTP cookies 와 HTTP Authentication 정보를 인식합니다. 기본적으로 cross-site <code class="highlighter-rouge">XMLHttpRequest</code> 나 Fetch 호출에서 브라우저는 자격 증명을 보내지 않습니다. XMLHttpRequest 객체나 Request 생성자가 호출될 때 특정 플래그를 설정해야 합니다.</li>
+      <li>Access-Control-Allow-Credentials: true 로 응답하지 않으면, 응답은 무시되고 웹 컨텐츠는 제공되지 않습니다.</li>
+      <li>The Communication between client and server using credentialed request
+ <img src="/assets/spring/cors-with-spring-4.png" style="width:100%" /></li>
+      <li><strong>Access-Control-Allow-Credentials: true</strong>
+        <ul>
+          <li>Access-Control-Allow-Credentials 헤더는 credentials 플래그가 true일 때 요청에 대한 응답을 표시할 수 있는지를 나타냅니다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p>CORS에서 발생할수 있는 접근 제어 시나리오에 대해서 알아보았다. 이제는 스프링에서 어떻게 이러한 접근 제어 시나리오를 적절히 활용하는지에 대해서 알아보자!</p>
+
+<hr />
+
+<h2 id="cors-configuration-in-spring">CORS Configuration in Spring</h2>
+
+<p>Spring에서 CORS 정책을 따르기 위한 설정에 대해서 알아보도록 하자!!</p>
+
+<p>내 프로젝트에서는 Sprint Security와 MVC 모두 사용하였음으로 CORS를 위해서 Security와 MVC 설정이 모두 필요하였다.</p>
+
+<h3 id="cors-with-spring-security">CORS with Spring Security</h3>
+
+<p><strong>Spring Security에서 CORS를 다루는 가장 확실하고 쉬운 방법은 CorsFilter를 사용하는 것이다.</strong> 사용자는 다음과 같이 CorsConfigurationSource를 제공하여 CorsFilter를 Spring Security와 통합 할 수 있습니다.</p>
+
+<p>Spring Security 사용시 CORS에 걸리지 않으려면 Authentication Filter 인증 보다 앞단계의 필터/인터셉터에서 path 검증로직을 일어나야합니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@EnableWebSecurity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebSecurityConfig</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span> <span class="o">{</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+		<span class="n">http</span>
+            <span class="c1">// by default uses a Bean by the name of corsConfigurationSource</span>
+			<span class="o">.</span><span class="na">cors</span><span class="o">().</span><span class="na">and</span><span class="o">()</span>
+			<span class="o">...</span>
+	
+    <span class="c1">// You can configure allowed Origin, Method, Header and Credential </span>
+    <span class="c1">// and how long, as a duration, the response from a pre-flight request can be eached by clients</span>
+	<span class="nd">@Bean</span>
+	<span class="nc">CorsConfigurationSource</span> <span class="nf">corsConfigurationSource</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">CorsConfiguration</span> <span class="n">configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CorsConfiguration</span><span class="o">();</span>
+		<span class="n">configuration</span><span class="o">.</span><span class="na">setAllowedOrigins</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"https://example.com"</span><span class="o">));</span>
+		<span class="n">configuration</span><span class="o">.</span><span class="na">setAllowedMethods</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"GET"</span><span class="o">,</span><span class="s">"POST"</span><span class="o">));</span>
+        <span class="c1">// you can configure many allowed CORS headers</span>
+
+		<span class="nc">UrlBasedCorsConfigurationSource</span> <span class="n">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UrlBasedCorsConfigurationSource</span><span class="o">();</span>
+		<span class="n">source</span><span class="o">.</span><span class="na">registerCorsConfiguration</span><span class="o">(</span><span class="s">"/**"</span><span class="o">,</span> <span class="n">configuration</span><span class="o">);</span>
+		<span class="k">return</span> <span class="n">source</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="cors-with-spring-mvc">CORS with Spring MVC</h3>
+
+<p>Spring MVC에서 CORS를 적용하는 방법은 크게 총 2가지로 나뉜다.</p>
+<ol>
+  <li>컨트롤러에서 부분적으로 CORS 설정하는 방법 (애노테이션 활용)</li>
+  <li>Spring MVC 설정에서 전역적으로 CORS를 설정하는 방법</li>
+</ol>
+
+<h4 id="컨트롤러에서-부분적으로-cors를-설정하는-방법">컨트롤러에서 부분적으로 CORS를 설정하는 방법</h4>
+
+<p><strong>Handler 메소드에 @CrossOrigin 애노테이션을 붙이는 방법</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/account"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccountController</span> <span class="o">{</span>
+ 
+    <span class="nd">@CrossOrigin</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Account</span> <span class="nf">retrieve</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// ...</span>
+    <span class="o">}</span>
+ 
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// ...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>모든 Origin이 허용되고</li>
+  <li>@RequestMapping 애노테이션에서 명시되어진 HTTP 메소드들이 허용된다.</li>
+  <li>preflight 응답이 캐시되어지는 시간은 30분이다.</li>
+</ul>
+
+<p><strong>Controller에 @CrossOrigin 애노테이션을 붙이는 방법</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@CrossOrigin</span><span class="o">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">"http://example.com"</span><span class="o">,</span> <span class="n">maxAge</span> <span class="o">=</span> <span class="mi">3600</span><span class="o">)</span>
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/account"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccountController</span> <span class="o">{</span>
+ 
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Account</span> <span class="nf">retrieve</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// ...</span>
+    <span class="o">}</span>
+ 
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// ...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>클래스 레벨에 @CrossOrigin 애노테이션을 추가 했고, 해당 컨트롤러에 속해있는 두 핸들러 메소드 모두에게 클래스 레벨에서 설정한 CORS정책이 적용된다.</p>
+
+<p>@CorssOrigin 애노테이션을 통해 origins, methods, allowedHeaders, exposedHeaders, allowCredentials, maxAge 모두 설정할 수 있습니다.</p>
+
+<p><strong>클래스 레벨과 메소드 레벨 모두에게 @CrossOrigin 애노테이션을 붙이는 방법</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@CrossOrigin</span><span class="o">(</span><span class="n">maxAge</span> <span class="o">=</span> <span class="mi">3600</span><span class="o">)</span>
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/account"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AccountController</span> <span class="o">{</span>
+ 
+    <span class="nd">@CrossOrigin</span><span class="o">(</span><span class="s">"http://example.com"</span><span class="o">)</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="s">"/{id}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Account</span> <span class="nf">retrieve</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// ...</span>
+    <span class="o">}</span>
+ 
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">method</span> <span class="o">=</span> <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">DELETE</span><span class="o">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"/{id}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// ...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>클래스 레벨의 @CorssOrigin 애노테이션이 기본으로 적용되고 핸들러 메소드의 @CrossOrigin 애노테이션이 추가로 적용된다.</p>
+
+<h4 id="spring-mvc-설정에서-전역적으로-cors를-설정하는-방법">Spring MVC 설정에서 전역적으로 CORS를 설정하는 방법</h4>
+
+<p>애노테이션 기반 설정의 대안으로 Spring은 컨트롤러 외부에서 전역으로 CORS 설정을 할 수 있게 해준다. 이는 필터 기반 솔루션을 사용하는 것과 유사하지만 Spring MVC 내에서 선언하고 @CrossOrigin 설정과 결합할 수 있습니다.</p>
+
+<p><strong>JavaConfig를 통해 CORS 전역 설정</strong></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Configuration</span>
+<span class="nd">@EnableWebMvc</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebConfig</span> <span class="kd">implements</span> <span class="nc">WebMvcConfigurer</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addCorsMappings</span><span class="o">(</span><span class="nc">CorsRegistry</span> <span class="n">registry</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">registry</span><span class="o">.</span><span class="na">addMapping</span><span class="o">(</span><span class="s">"/**"</span><span class="o">);</span>
+                <span class="o">.</span><span class="na">allowedOrigins</span><span class="o">(</span><span class="s">"http://www.example.com"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">allowedMethods</span><span class="o">(</span><span class="s">"*"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">allowCredentials</span><span class="o">(</span><span class="kc">false</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">maxAge</span><span class="o">(</span><span class="mi">3000</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>위의 JavaConfig를 통해 paths, origins, methods, allowedHeaders, exposedHeaders, allowCredentials, maxAge 모두 설정할 수 있습니다.</p>
+
+<p><strong>XML을 통해 CORS 전역 설정</strong></p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;mvc:cors&gt;</span>
+    <span class="nt">&lt;mvc:mapping</span> <span class="na">path=</span><span class="s">"/api/**"</span>
+        <span class="na">allowed-origins=</span><span class="s">"http://domain1.com, http://domain2.com"</span>
+        <span class="na">allowed-methods=</span><span class="s">"GET, PUT"</span>
+        <span class="na">allowed-headers=</span><span class="s">"header1, header2, header3"</span>
+        <span class="na">exposed-headers=</span><span class="s">"header1, header2"</span> <span class="na">allow-credentials=</span><span class="s">"false"</span>
+        <span class="na">max-age=</span><span class="s">"123"</span> <span class="nt">/&gt;</span>
+ 
+    <span class="nt">&lt;mvc:mapping</span> <span class="na">path=</span><span class="s">"/resources/**"</span>
+        <span class="na">allowed-origins=</span><span class="s">"http://domain1.com"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/mvc:cors&gt;</span>
+</code></pre></div></div>
+
+<p>위의 XML Config를 통해 paths, origins, methods, allowedHeaders, exposedHeaders, allowCredentials, maxAge 모두 설정할 수 있습니다.</p>
+
+<h3 id="integration-cors-configuration-with-spring-mvc-and-security">Integration CORS configuration with Spring MVC and Security</h3>
+
+<p>만약 Spring MVC의 CORS 지원을 사용한다면, <code class="highlighter-rouge">CorsConfigurationSource</code> 설정을 생략(omit)할 수 있습니다. Spring Security는 Spring MVC에서 제공되어지는 CORS 설정을 활용(leverage)할 것입니다.</p>
+
+<hr />
+
+<p>여기 까지 CORS에 대해서 많이 알아 보았다!!! 아래의 자료는 이 포스팅을 작성하면서 참고한 참고 문서이니 독자 여러분들도 참고 바란다.</p>
+
+<hr />
+
+<blockquote>
+  <p><a href="https://www.baeldung.com/spring-cors">https://www.baeldung.com/spring-cors</a></p>
+
+  <p><a href="https://docs.spring.io/spring-security/site/docs/4.2.x/reference/html/cors.html">https://docs.spring.io/spring-security/site/docs/4.2.x/reference/html/cors.html</a></p>
+
+  <p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/CORS">https://developer.mozilla.org/ko/docs/Web/HTTP/CORS</a></p>
+
+</blockquote>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/CORS">CORS</a>,&nbsp;<a href="/tag/MVC">MVC</a>,&nbsp;<a href="/tag/Security">Security</a>,&nbsp;<a href="/tag/Spring">Spring</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=CORS+with+Spring+%28MVC%2C+Security%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F10%2F01%2FCORS-with-Spring.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=CORS+with+Spring+%28MVC%2C+Security%29&u=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F10%2F01%2FCORS-with-Spring.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F10%2F01%2FCORS-with-Spring.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=CORS+with+Spring+%28MVC%2C+Security%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F10%2F01%2FCORS-with-Spring.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=CORS+with+Spring+%28MVC%2C+Security%29&url=http%3A%2F%2Flocalhost%3A4000%2Fspring%2F2020%2F10%2F01%2FCORS-with-Spring.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/spring/2020/10/01/CORS-with-Spring.html') + '&title=CORS with Spring (MVC, Security)'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

@@ -6,9 +6,304 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 16 Sep 2020 23:49:29 +0900</pubDate>
-    <lastBuildDate>Wed, 16 Sep 2020 23:49:29 +0900</lastBuildDate>
+    <pubDate>Thu, 01 Oct 2020 23:18:08 +0900</pubDate>
+    <lastBuildDate>Thu, 01 Oct 2020 23:18:08 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>CORS with Spring (MVC, Security)</title>
+        <description>&lt;p&gt;이번 포스팅에서는 &lt;strong&gt;CORS with Spring (MVC, Security)&lt;/strong&gt;에 대해서 다루어 보도록 하겠다.&lt;/p&gt;
+
+&lt;p&gt;프로젝트 진행간에 CORS(Cross-Origin Resource Sharing) 이슈를 경험하고 대략 두달이 지나서야 이 포스팅을 작성한다. 다른 일들에 밀려 이제 이 글을 작성하는 것이 조금 못마땅하기도 하지만 블로깅을 놓지 않고 열심히 하고 있는 내 모습이 대견하기도 하다.&lt;/p&gt;
+
+&lt;p&gt;어쨋든 이 포스팅의 목적은 &lt;strong&gt;Spring에서 CORS이슈를 해결하는 방법&lt;/strong&gt;에 대해서 알아보기로 한 것이니 CORS란 무엇이고, 왜 나왔는지에 대해서 먼저 알아보도록 하자~&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;cors란-무엇인가&quot;&gt;CORS란 무엇인가?&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;CORS란 Cross-Origin Resource Sharing의 약자이다. 영어 그대로를 해석해 보면 교차 출처 리소스 공유이다. 즉, 한 출처에서 실행중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 정책이다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;그렇다면 출처(Origin)이란 무엇일까?&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;도메인 + 프로토콜 + 포트를 통틀어 출처(Origin)이라고 한다. 이 글에서는 출처를 오리진 or Origin이라고 부르도록 하겠다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;즉, 프로토콜, 포트, 호스트(도메인) 중 하나라도 다를 경우 Cross Origin이라고 이해하면 된다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;ex) http://localhost:8080/api 와 https://localhost:8080/api 은 Cross Origin이다. (프로토콜이 다르기 때문)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;이제 CORS가 무엇인지에 대해서 알아보았음으로, 왜 CORS가 나오게 되었는지에 대해서 알아보도록 하자.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;cors는-왜-필요한가&quot;&gt;CORS는 왜 필요한가?&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;보안 상의 이유로, 브라우저는 스크립트에서 시작한 Cross Origin HTTP Request를 제한합니다.&lt;/strong&gt; ex) &lt;code class=&quot;highlighter-rouge&quot;&gt;XMLHttpRequest&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;Fetch API&lt;/code&gt;는 &lt;strong&gt;동일 출처 정책(SOP)&lt;/strong&gt;을 따릅니다. 즉, 이 API를 사용하는 웹 애플리케이션은 자신의 출처와 동일한 리소스만 불러올 수 있으며, &lt;strong&gt;다른 Origin의 리소스를 불러오려면 그 Origin에서 올바른 CORS 헤더를 포함한 응답을 반환해야 합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;동일 출처 정책 (Same-Origin Policy)&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;불러온 문서나 스크립트가 다른 출처(Origin)에서 가져온 리소스와 상호작용하는 것을 제한하는 중요한 보안 방식입니다. 이것은 잠재적 악성 문서를 격리하여, 공격 경로를 
+줄이는데 도움이 됩니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;결국 대부분의 웹 어플리케이션의 Web API Client는 XMLHttpRequest 또는 Fetch API를 사용하기 떄문에 Cross Origin HTTP Request를 위해선 CORS 정책을 따라야만 한다.&lt;/p&gt;
+
+&lt;p&gt;CORS란 무엇이고, 왜 필요한지에 대해서 알아보았으니, 우리는 Cross-Origin HTTP Request 간에 발생하는 여러 시나리오에 대해서 알아보도록 하자.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;접근-제어-시나리오&quot;&gt;접근 제어 시나리오&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Simple Request (단순 요청)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Simple Request 조건을 모두 충족하는 요청을 Preflight request 없이 보내 서버는 이에 대한 응답으로 Access-Control-Allow-Origin 헤더를 응답하는 방식&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Access-Control-Allow-Origin : &amp;lt;origin&amp;gt; | *&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Origin을 지정하여 브라우저가 해당 Origin이 리소스에 접근하도록 허용합니다. Credential이 없는 요청의 경우 &quot;*&quot; 와일드 카드는 브라우저의 origin에 상관없이 모든 리소스에 접근하도록 허용합니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;The Communication between client and server using simple request 
+ &lt;img src=&quot;/assets/spring/cors-with-spring-2.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;preflighted request (프리플라이트 요청)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;먼저 &lt;code class=&quot;highlighter-rouge&quot;&gt;OPTIONS&lt;/code&gt; 메서드를 통해 다른 도메인의 리소스로 HTTP request를 보내 실제 요청이 전송하기에 안전한지 확인합니다. Cross-site request는 유저 데이터에 영향을 줄 수 있기 때문에 이와 같이 미리 전송(preflighted)합니다.&lt;/li&gt;
+      &lt;li&gt;The Communication between client and server using preflighted request
+ &lt;img src=&quot;/assets/spring/cors-with-spring-3.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Access-Control-Request-Method: &amp;lt;method&amp;gt;&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Access-Control-Request-Method 헤더는 실제 요청에서 어떤 HTTP 메서드를 사용할지 서버에게 알려주기 위해, preflight request 할 때에 사용됩니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Access-Control-Allow-Methods: &amp;lt;method&amp;gt;[, &amp;lt;method&amp;gt;]*&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Access-Control-Allow-Methods 헤더는 리소스에 접근할 때 허용되는 메서드를 지정합니다. 이 헤더는 preflight request에 대한 응답으로 사용됩니다. 요청이 preflighted 되는 조건은 위에 설명되어 있습니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Access-Control-Request-Headers: &amp;lt;header-name&amp;gt;[, &amp;lt;header-name&amp;gt;]*&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Access-Control-Request-Headers 헤더는 실제 요청에서 어떤 HTTP 헤더를 사용할지 서버에게 알려주기 위해, preflight request 할 때에 사용됩니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Access-Control-Allow-Headers: &amp;lt;header-name&amp;gt;[, &amp;lt;header-name&amp;gt;]*&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;preflight request 에 대한 응답으로 Access-Control-Allow-Headers 헤더가 사용됩니다. 실제 요청시 사용할 수 있는 HTTP 헤더를 나타냅니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;credentialed request (인증정보를 포함한 요청)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;credentialed requests는 HTTP cookies 와 HTTP Authentication 정보를 인식합니다. 기본적으로 cross-site &lt;code class=&quot;highlighter-rouge&quot;&gt;XMLHttpRequest&lt;/code&gt; 나 Fetch 호출에서 브라우저는 자격 증명을 보내지 않습니다. XMLHttpRequest 객체나 Request 생성자가 호출될 때 특정 플래그를 설정해야 합니다.&lt;/li&gt;
+      &lt;li&gt;Access-Control-Allow-Credentials: true 로 응답하지 않으면, 응답은 무시되고 웹 컨텐츠는 제공되지 않습니다.&lt;/li&gt;
+      &lt;li&gt;The Communication between client and server using credentialed request
+ &lt;img src=&quot;/assets/spring/cors-with-spring-4.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Access-Control-Allow-Credentials: true&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Access-Control-Allow-Credentials 헤더는 credentials 플래그가 true일 때 요청에 대한 응답을 표시할 수 있는지를 나타냅니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;CORS에서 발생할수 있는 접근 제어 시나리오에 대해서 알아보았다. 이제는 스프링에서 어떻게 이러한 접근 제어 시나리오를 적절히 활용하는지에 대해서 알아보자!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;cors-configuration-in-spring&quot;&gt;CORS Configuration in Spring&lt;/h2&gt;
+
+&lt;p&gt;Spring에서 CORS 정책을 따르기 위한 설정에 대해서 알아보도록 하자!!&lt;/p&gt;
+
+&lt;p&gt;내 프로젝트에서는 Sprint Security와 MVC 모두 사용하였음으로 CORS를 위해서 Security와 MVC 설정이 모두 필요하였다.&lt;/p&gt;
+
+&lt;h3 id=&quot;cors-with-spring-security&quot;&gt;CORS with Spring Security&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Spring Security에서 CORS를 다루는 가장 확실하고 쉬운 방법은 CorsFilter를 사용하는 것이다.&lt;/strong&gt; 사용자는 다음과 같이 CorsConfigurationSource를 제공하여 CorsFilter를 Spring Security와 통합 할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;Spring Security 사용시 CORS에 걸리지 않으려면 Authentication Filter 인증 보다 앞단계의 필터/인터셉터에서 path 검증로직을 일어나야합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@EnableWebSecurity&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebSecurityConfig&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebSecurityConfigurerAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpSecurity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// by default uses a Bean by the name of corsConfigurationSource&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;cors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+	
+    &lt;span class=&quot;c1&quot;&gt;// You can configure allowed Origin, Method, Header and Credential &lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// and how long, as a duration, the response from a pre-flight request can be eached by clients&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+	&lt;span class=&quot;nc&quot;&gt;CorsConfigurationSource&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;corsConfigurationSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;nc&quot;&gt;CorsConfiguration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CorsConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAllowedOrigins&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://example.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAllowedMethods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GET&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;POST&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// you can configure many allowed CORS headers&lt;/span&gt;
+
+		&lt;span class=&quot;nc&quot;&gt;UrlBasedCorsConfigurationSource&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UrlBasedCorsConfigurationSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerCorsConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;cors-with-spring-mvc&quot;&gt;CORS with Spring MVC&lt;/h3&gt;
+
+&lt;p&gt;Spring MVC에서 CORS를 적용하는 방법은 크게 총 2가지로 나뉜다.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;컨트롤러에서 부분적으로 CORS 설정하는 방법 (애노테이션 활용)&lt;/li&gt;
+  &lt;li&gt;Spring MVC 설정에서 전역적으로 CORS를 설정하는 방법&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;컨트롤러에서-부분적으로-cors를-설정하는-방법&quot;&gt;컨트롤러에서 부분적으로 CORS를 설정하는 방법&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Handler 메소드에 @CrossOrigin 애노테이션을 붙이는 방법&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/account&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AccountController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ 
+    &lt;span class=&quot;nd&quot;&gt;@CrossOrigin&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Account&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;retrieve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ 
+    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DELETE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;모든 Origin이 허용되고&lt;/li&gt;
+  &lt;li&gt;@RequestMapping 애노테이션에서 명시되어진 HTTP 메소드들이 허용된다.&lt;/li&gt;
+  &lt;li&gt;preflight 응답이 캐시되어지는 시간은 30분이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Controller에 @CrossOrigin 애노테이션을 붙이는 방법&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@CrossOrigin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;origins&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://example.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;maxAge&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3600&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/account&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AccountController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ 
+    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Account&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;retrieve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ 
+    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DELETE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;클래스 레벨에 @CrossOrigin 애노테이션을 추가 했고, 해당 컨트롤러에 속해있는 두 핸들러 메소드 모두에게 클래스 레벨에서 설정한 CORS정책이 적용된다.&lt;/p&gt;
+
+&lt;p&gt;@CorssOrigin 애노테이션을 통해 origins, methods, allowedHeaders, exposedHeaders, allowCredentials, maxAge 모두 설정할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;클래스 레벨과 메소드 레벨 모두에게 @CrossOrigin 애노테이션을 붙이는 방법&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@CrossOrigin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxAge&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3600&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/account&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AccountController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ 
+    &lt;span class=&quot;nd&quot;&gt;@CrossOrigin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://example.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Account&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;retrieve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ 
+    &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RequestMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DELETE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;클래스 레벨의 @CorssOrigin 애노테이션이 기본으로 적용되고 핸들러 메소드의 @CrossOrigin 애노테이션이 추가로 적용된다.&lt;/p&gt;
+
+&lt;h4 id=&quot;spring-mvc-설정에서-전역적으로-cors를-설정하는-방법&quot;&gt;Spring MVC 설정에서 전역적으로 CORS를 설정하는 방법&lt;/h4&gt;
+
+&lt;p&gt;애노테이션 기반 설정의 대안으로 Spring은 컨트롤러 외부에서 전역으로 CORS 설정을 할 수 있게 해준다. 이는 필터 기반 솔루션을 사용하는 것과 유사하지만 Spring MVC 내에서 선언하고 @CrossOrigin 설정과 결합할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;JavaConfig를 통해 CORS 전역 설정&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableWebMvc&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebConfig&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebMvcConfigurer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addCorsMappings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;CorsRegistry&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;allowedOrigins&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.example.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;allowedMethods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;allowCredentials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;maxAge&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;위의 JavaConfig를 통해 paths, origins, methods, allowedHeaders, exposedHeaders, allowCredentials, maxAge 모두 설정할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;XML을 통해 CORS 전역 설정&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;mvc:cors&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;mvc:mapping&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;path=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/api/**&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;allowed-origins=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://domain1.com, http://domain2.com&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;allowed-methods=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GET, PUT&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;allowed-headers=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;header1, header2, header3&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;exposed-headers=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;header1, header2&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;allow-credentials=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;max-age=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;123&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+ 
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;mvc:mapping&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;path=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/resources/**&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;allowed-origins=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://domain1.com&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/mvc:cors&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위의 XML Config를 통해 paths, origins, methods, allowedHeaders, exposedHeaders, allowCredentials, maxAge 모두 설정할 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;integration-cors-configuration-with-spring-mvc-and-security&quot;&gt;Integration CORS configuration with Spring MVC and Security&lt;/h3&gt;
+
+&lt;p&gt;만약 Spring MVC의 CORS 지원을 사용한다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;CorsConfigurationSource&lt;/code&gt; 설정을 생략(omit)할 수 있습니다. Spring Security는 Spring MVC에서 제공되어지는 CORS 설정을 활용(leverage)할 것입니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;여기 까지 CORS에 대해서 많이 알아 보았다!!! 아래의 자료는 이 포스팅을 작성하면서 참고한 참고 문서이니 독자 여러분들도 참고 바란다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://www.baeldung.com/spring-cors&quot;&gt;https://www.baeldung.com/spring-cors&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://docs.spring.io/spring-security/site/docs/4.2.x/reference/html/cors.html&quot;&gt;https://docs.spring.io/spring-security/site/docs/4.2.x/reference/html/cors.html&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/ko/docs/Web/HTTP/CORS&quot;&gt;https://developer.mozilla.org/ko/docs/Web/HTTP/CORS&lt;/a&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Thu, 01 Oct 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/spring/2020/10/01/CORS-with-Spring.html</link>
+        <guid isPermaLink="true">http://localhost:4000/spring/2020/10/01/CORS-with-Spring.html</guid>
+        
+        <category>CORS</category>
+        
+        <category>MVC</category>
+        
+        <category>Security</category>
+        
+        <category>Spring</category>
+        
+        
+        <category>Spring</category>
+        
+      </item>
     
       <item>
         <title>[Operating System - Chapter 2] 운영체제 구조</title>
@@ -2663,135 +2958,6 @@
         <pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate>
         <link>http://localhost:4000/spring/2020/05/03/Spring-HiddenHttpMethodFilter.html</link>
         <guid isPermaLink="true">http://localhost:4000/spring/2020/05/03/Spring-HiddenHttpMethodFilter.html</guid>
-        
-        <category>Spring</category>
-        
-        <category>Data</category>
-        
-        
-        <category>Spring</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring Data란 무엇인가?</title>
-        <description>&lt;p&gt;이 글에서는 &lt;strong&gt;Spring Data&lt;/strong&gt;란 무엇인지에 대해서 알아볼 것이다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;spring-data&quot;&gt;Spring Data&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;spring-data란&quot;&gt;Spring Data란?&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring Data의 목적은 기본 데이터 저장소의 특수한 특성을 유지하면서 &lt;strong&gt;데이터 접근을 위한 친숙하고 일관된 Spring 기반의 프로그래밍 모델을 제공&lt;/strong&gt;하는 프로젝트이다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring Data는 &lt;strong&gt;데이터 접근 기술, relational and non-relational database, map-reduce 프레임워크, 클라우드 기반의 서비스&lt;/strong&gt;를 쉽게 사용할 수 있도록 해준다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring Data는 데이터베이스와 관련된 많은 하위 프로젝트(Spring Data JPA, Spring Data REST, …)를 포함하는 포괄적인 프로젝트이다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;spring-data의-특징&quot;&gt;Spring Data의 특징&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;강력한 저장소 및 사용자 정의 객체 맵핑 추상화&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;저장소 메소드 이름으로부터 동적 쿼리 파생&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;기본 속성을 제공하는 Implementation domain 기본 클래스&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;transparent auditing을 위한 지원 (created, last changed)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;사용자 정의 저장소 코드를 통합할 수 있는 가능성&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;JavaConfig 및 custom XML namespaces를 통한 손쉬운 Spring과의 통합&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring MVC 컨트롤러와의 향상된 통합&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;cross-store persistence에 대한 실험적 지원&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;주요-모듈&quot;&gt;주요 모듈&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Spring Data Commons :&lt;/strong&gt; 모든 Spring Module을 뒷받침하는 핵심 Spring 개념 (CrudRepository, PagingAndSortingRepository 인터페이스)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Spring Data JDBC :&lt;/strong&gt; spring-jdbc에 대한 Spring Data 추상화를 제공하는 모듈 (CrudRepository를 구현하는 SimpleJdbcRepository 클래스)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Spring Data JPA :&lt;/strong&gt; JPA를 위한 스프링 데이터 저장소 지원 (JpaRepository 인터페이스, SimpleJpaRepository 클래스)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Spring Data MongoDB :&lt;/strong&gt; MongoDB를 위한 스프링 기반 객체 문서 지원 및 저장소&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Spring Data REST :&lt;/strong&gt; 스프링 데이터 저장소들을 hypermedia 기반의 Restful 리소스로 export 해주는 모듈&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Spring Data Redis :&lt;/strong&gt; Spring Application에서 Redis를 손쉽게 구성 및 접근할 수 있도록 하는 모듈&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;…&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;community-module&quot;&gt;Community Module&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring Data Aerospike&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring Data ArangoDB&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring Data Couchbase&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring Data Azure Cosmos DB&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring Data Cloud Datastore&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring Data Cloud Spanner&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Spring Data DynamoDB&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;…&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;참조&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Spring Reference&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-</description>
-        <pubDate>Thu, 30 Apr 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/spring/2020/04/30/Spring-Data.html</link>
-        <guid isPermaLink="true">http://localhost:4000/spring/2020/04/30/Spring-Data.html</guid>
         
         <category>Spring</category>
         
