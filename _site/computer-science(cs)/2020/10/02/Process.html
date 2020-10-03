@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
+
+
+  <title>[Operating System - Chapter 3] 프로세스</title>
+  <meta name="description" content="이 포스팅은 공룡책으로 알려진 Operating System Concepts의 3장인 Process를 공부하면서 정리한 포스팅이다.">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="이 포스팅은 공룡책으로 알려진 Operating System Concepts의 3장인 Process를 공부하면서 정리한 포스팅이다." />
+  <meta property="og:url" content="http://localhost:4000/computer-science(cs)/2020/10/02/Process.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="[Operating System - Chapter 3] 프로세스" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Operating System - Chapter 3] 프로세스">
+  <meta name="twitter:description" content="이 포스팅은 공룡책으로 알려진 Operating System Concepts의 3장인 Process를 공부하면서 정리한 포스팅이다.">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/computer-science(cs)/2020/10/02/Process.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/computer-science(cs)/2020/10/02/Process.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">[Operating System - Chapter 3] 프로세스</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">October 2, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Computer-Science(CS)">Computer-science(cs)</a> (default) -->
+    <a href="/category/Computer-Science(CS)">Computer-Science(CS)</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>이 포스팅은 공룡책으로 알려진 Operating System Concepts의 3장인 Process를 공부하면서 정리한 포스팅이다.</p>
+
+<hr />
+
+<h2 id="3-프로세스-process">3. 프로세스 (Process)</h2>
+
+<hr />
+
+<p><strong>프로세스</strong> : 실행 중인 프로그램을 말한다. 프로세스는 현대의 컴퓨팅 시스템에서의 작업의 단위이다.</p>
+
+<p>시스템은 사용자 코드를 실행하는 프로세스와 운영체제 코드를 실행하는 프로세스들의 집합이다. 이들 모든 프로세스는 잠재적으로 병행 실행이 가능하고 CPU는 이들 프로세스 가운데서 <strong>다중화(multiplex)</strong> 된다.</p>
+
+<hr />
+
+<h3 id="31-프로세스-개념-process-concept">3.1 프로세스 개념 (Process Concept)</h3>
+
+<h4 id="311-프로세스-the-process">3.1.1 프로세스 (The Process)</h4>
+
+<p>비공식적으로, 프로세스란 실행 중인 프로그램이다. 프로세스의 현재 활동의 상태는 <strong>프로그램 카운터(PC) 값</strong>과 <strong>프로세서 레지스터의 내용</strong>으로 나타낸다.</p>
+
+<p>프로세스의 메모리는 아래의 그림과 같이 배치되어 있다.</p>
+
+<p><img src="/assets/computer-science/process-1.png" style="width:40%" /></p>
+
+<ul>
+  <li><strong>text :</strong> 실행 코드</li>
+  <li><strong>data :</strong> 전역 변수</li>
+  <li><strong>heap :</strong> 프로그램 실행 중에 동적으로 할당되는 메모리</li>
+  <li><strong>stack :</strong> 함수를 호출할 때 임시 데이터 저장장소 (ex. 함수 매개변수, 복귀 주소, 지역변수, …)</li>
+</ul>
+
+<p>stack 및 heap 섹션은 Runtime에 서로의 방향으로 더 커질 수 있음으로 운영체제는 서로 겹치지 않도록 해야 한다.</p>
+
+<p><strong>프로그램(Program)은 명령어 리스트를 내용으로 가진 디스크에 저장된 파일(실행 파일이라고 불림)과 같은 수동적인 존재(passive entity)이다.</strong></p>
+
+<p><strong>프로세스(Process)는 다음에 실행할 명령어를 지정하는 프로그램 카운터(PC)와 관련 자원의 집합을 가진 능동적인 존재(active entity)이다. 실행 파일이 메모리에 적재될 때 프로그램은 프로세스가 된다.</strong></p>
+
+<p>프로세스 자체가 다른 개체를 위한 실행 환경으로 동작할 수 있다는 사실에 주목해야 한다. (ex. JVM)</p>
+
+<blockquote>
+  <p>JVM은 적재된 Java 코드를 해석하고 그 코드를 대신하여 원 기계어를 이용하여 행동을 취하는 프로세스로서 프로그램을 실행한다.</p>
+
+  <p>java 명령어는 JVM을 보통의 프로세스처럼 실행시키고, JVM은 Java 프로그램을 가상기계 안에서 실행한다.</p>
+</blockquote>
+
+<h4 id="312-프로세스-상태-process-state">3.1.2 프로세스 상태 (Process State)</h4>
+
+<p><strong>프로세스는 실행되면서 그 상태가 변한다.</strong> 프로세스의 상태는 부분적으로 그 프로세스의 현재의 활동에 따라서 정의된다.</p>
+
+<p>아래의 Status Diagram을 참고해 프로세스의 상태에 대해서 알아보자.</p>
+
+<p><img src="/assets/computer-science/process-2.png" style="width:70%" /></p>
+
+<ul>
+  <li><strong>new :</strong> 프로세스가 생성 중이다.</li>
+  <li><strong>running :</strong> 명령어들이 실행되고 있다.</li>
+  <li><strong>waiting :</strong> 프로세스가 어떤 이벤트(입출력 완료 또는 신호의 수신 같은)가 일어나기를 기다린다.</li>
+  <li><strong>ready :</strong> 프로세스가 처리기에 할당되기를 기다린다.</li>
+  <li><strong>terminated :</strong> 프로세스의 실행이 종료되었다.</li>
+</ul>
+
+<p><strong>어느 한 순간에 한 Processor의 코어에서는 오직 하나의 프로세스만이 실행된다는 것을 인식하는 것이 중요하다.</strong> 그렇지만 많은 프로세스가 ready or waiting 상태에 있을 수 있다.</p>
+
+<h4 id="313-프로세스-제어-블록-process-control-block">3.1.3 프로세스 제어 블록 (Process Control Block)</h4>
+
+<p><strong>각 프로세스는 운영체제에서 프로세스 제어 블록(process control block, PCB)에 의해 표현된다.</strong></p>
+
+<p>아래의 그림은 PCB를 나타내며 이를 통해 PCB에 대해서 알아보자.</p>
+
+<p><img src="/assets/computer-science/process-3.png" style="width:40%" /></p>
+
+<ul>
+  <li><strong>프로세스 상태 :</strong> 프로세스의 상태(new, ready, running, waiting, …)를 나타낸다.</li>
+  <li><strong>프로그램 카운터 :</strong> 프로그램 카운터는 이 프로세스가 다음에 실행할 명령어의 주소를 가리킨다.</li>
+  <li><strong>CPU 레지스터들 :</strong> 레지스터들과 상태 코드에 대한 정보가 포함된다.</li>
+  <li><strong>CPU-스케줄링 정보 :</strong> 프로세스 우선순위, 스케줄 큐에 대한 포인터와 다른 스케줄 매개변수를 포함한다.</li>
+  <li><strong>메모리 관리 정보 :</strong> 운영체제에 의해 사용되는 메모리 시스템에 따라 기준 레지스터와 한계 레지스터의 값, 운영체제가 사용하는 메모리 시스템에 따라 페이지 테이블 또는 세그먼트 테이블 등과 같은 정보를 포함한다.</li>
+  <li><strong>회계 정보 :</strong> CPU 사용 시간과 경과된 실시간, 시간 제한, 계정 번호, 잡 또는 프로세스 번호 등을 포함한다.</li>
+  <li><strong>입출력 상태 정보 :</strong> 프로세스에 할당된 입출력 장치들과 열린 파일의 목록 등을 포함한다.</li>
+</ul>
+
+<p><strong>요약하면 PCB는 약간의 회계 데이터와 함께 프로세스를 시작시키거나 다시 시작시키는데 필요한 모든 데이터를 위한 저장소의 역할을 한다.</strong></p>
+
+<h4 id="314-스레드-threads">3.1.4 스레드 (Threads)</h4>
+
+<p><strong>프로세스의 개념을 확장하여 한 프로세스가 다수의 실행 스레드를 가질 수 있도록 허용한다. 그들은 따라서 프로세스가 한 번에 하나 이상의 일을 수행할 수 있도록 허용한다.</strong></p>
+
+<blockquote>
+  <p>ex) 다중 스레드 워드 프로세서는 하나의 스레드에 사용자 입력 관리를 맡기는 동안 다른 스레드가 철자 검사기를 수행하도록 만들 수 있다.</p>
+</blockquote>
+
+<hr />
+
+<h3 id="32-프로세스-스케줄링-process-scheduling">3.2 프로세스 스케줄링 (Process Scheduling)</h3>
+
+<p>다중 프로그래밍의 목적은 <strong>CPU 이용을 최대화</strong>하기 위하여 항상 어떤 프로세스가 실행되도록 하는 데 있다.</p>
+
+<p>시분할의 목적은 각 프로그램이 실행되는 동안 <strong>사용자가 상호 작용할 수 있도록 프로세스들 사이에서 CPU코어를 빈번하게 교체</strong>하는 것이다.</p>
+
+<p><strong>위의 목적을 달성하기 위해 프로세스 스케줄러(Process Scheduler)는 코어에서 실행 가능한 여러 프로세스 중에서 하나의 프로세스를 선택한다.</strong> 다중 코어 시스템은 한 번에 여러 프로세스를 실행할 수 있다.</p>
+
+<p>현재 메모리에 있는 프로세스 수를 <strong>다중 프로그래밍 정도</strong>라고 한다.</p>
+
+<h4 id="321-스케줄링-큐-scheduling-queue">3.2.1 스케줄링 큐 (Scheduling Queue)</h4>
+
+<p>프로세스가 시스템에 들어가면 <strong>준비 큐(Ready Queue)</strong>에 들어가서 준비 상태가 되어 CPU 코어에서 실행되기를 기다린다.</p>
+
+<p>I/O 완료와 같은 특정 이벤트가 발생하기를 기다리는 프로세스는 <strong>대기 큐(Wait Queue)</strong>에 삽입된다.</p>
+
+<p>프로세스 스케줄링의 일반적인 표현은 아래와 같은 <strong>큐잉 다이어그램</strong>이다.</p>
+
+<p><img src="/assets/computer-science/process-4.png" style="width:70%" /></p>
+
+<p>원은 큐에 서비스를 제공하는 자원을 나타내고 화살표는 시스템의 프로세스의 흐름을 나타낸다. 이 다이어그램을 통해서 말하고 싶은 것은 3가지이다.</p>
+
+<ol>
+  <li>프로세스가 I/O 요청을 공표한 다음 I/O 대기 큐에 놓일 수 있따.</li>
+  <li>프로세스는 새 자식 프로세스를 만든 다음 자식의 종료를 기다리는 동안 대기 큐에 놓일 수 있따.</li>
+  <li>인터럽트 또는 타임슬라이스가 만료되어 프로세스가 코어에서 강제로 제거되어 준비 큐로 돌아갈 수 있다.</li>
+</ol>
+
+<h4 id="322-cpu-스케줄링-cpu-scheduling">3.2.2 CPU 스케줄링 (CPU Scheduling)</h4>
+
+<p><strong>CPU 스케줄러의 역할은 준비 큐에 있는 프로세스 중에서 선택된 하나의 프로세스에 CPU 코어를 할당하는 것이다.</strong> CPU 스케줄러는 CPU를 할당하기 위한 새 프로세스를 자주 선택해야 한다.</p>
+
+<h4 id="323-문맥-교환-context-switch">3.2.3 문맥 교환 (Context Switch)</h4>
+
+<p>인터럽트는 운영체제가 CPU 코어를 현재 작업에서 뺏어 내어 <strong>커널 루틴</strong>을 실행할 수 있게 한다. 이러한 연산은 범용 시스템에서는 자주 발생한다. <strong>인터럽트가 발생하면 시스템은 인터럽트 처리가 끝난 후에 <u>문맥(Context)</u>을 복구할 수 있도록 현재 실행 중인 프로세스의 문맥을 저장할 필요가 있다. 이는 PCB에 저장된다.</strong></p>
+
+<p>문맥(Context)은 CPU 레지스터의 값, 프로세스 상태, 메모리 관리 정보 등을 포함한다.</p>
+
+<p>CPU 코어를 다른 프로세스로 교환하려면 이전의 프로세스의 상태를 보관하고 새로운 프로세스의 보관된 상태를 복구하는 작업이 필요하다. 이 작업은 <strong>문맥 교환(context switch)</strong>이라고 하고 아래의 그림에 묘사되어 있다.</p>
+
+<p><img src="/assets/computer-science/process-5.png" style="width:70%" /></p>
+
+<p>운영체제가 복잡할수록, 문맥 교환 시 해야만 하는 작업의 양이 더 많아진다.</p>
+
+<hr />
+
+<h3 id="33-프로세스에-대한-연산-operation-on-processes">3.3 프로세스에 대한 연산 (Operation on Processes)</h3>
+
+<p>대부분 시스템 내의 프로세스들은 병행 실행될 수 있으며, 반드시 동적으로 생성되고, 제거되어야 한다. 그러므로 운영체제는 프로세스 생성 및 종료를 위한 기법을 제공해야 한다.</p>
+
+<h4 id="331-프로세스-생성-process-creation">3.3.1 프로세스 생성 (Process Creation)</h4>
+
+<p>프로세스가 실행되는 동안 프로세스는 여러 개의 새로운 프로세스들을 생성할 수 있다.</p>
+
+<p>생성하는 프로세스를 <strong>부모 프로세스</strong>라고 부르고, 새로운 프로세스는 <strong>자식 프로세스</strong>라고 부른다. 이 새로운 프로세스들은 각각 다시 다른 프로세스들을 생성할 수 있으며 그 결과 <strong>프로세스의 트리</strong>를 형성한다.</p>
+
+<p>현대 운영체제들은 유일한 <strong>프로세스 식별자(pid)</strong>를 사용하여 프로세스를 구분하는데 이 식별자는 보통 정수이다.</p>
+
+<p>아래의 그림은 Linux 운영체제의 전형적인 프로세스 트리이다.</p>
+
+<p><img src="/assets/computer-science/process-6.png" style="width:70%" /></p>
+
+<p><u>언제나 pid가 1인 systemd 프로세스가 모든 사용자 프로세스의 루트 부모 프로세스 역할을 수행하고 시스템이 부트될 때 생성되는 첫 번째 사용자 프로세스이다.</u> 시스템이 부팅되면 systemd프로세스는 다양한 사용자 프로세스를 생성한다.</p>
+
+<p>일반적으로 프로세스가 자식 프로세스를 생성할 때, 그 <strong>자식 프로세스는 자신의 임무를 달성하기 위하여 어떤 자원(CPU 시간, 메모리, 파일, 입출력 장치)이 필요</strong>하다. 이 자원은 운영체제로부터 직접 얻을 수도 있고, 부모 프로세스가 가진 자원의 부분 집합만을 사용하도록 제한(시스템 과부하 방지)할 수도 있다.</p>
+
+<p>물리적, 논리적 자원을 제공하는 것 이외에 부모 프로세스는 자식 프로세스에 <strong>초기화 데이터(입력)를 전달</strong>할 수 있다.</p>
+
+<p><strong>프로세스가 새로운 프로세스를 생성할 때, <u>두 프로세스를 실행시키는 데 두 가지 가능한 방법</u>이 존재한다.</strong></p>
+<ol>
+  <li>부모와 자식과 병행하게 실행을 계속한다.</li>
+  <li>부모는 일부 또는 모든 자식이 실행을 종료할 때까지 기다린다.</li>
+</ol>
+
+<p><strong><u>새로운 프로세스들의 주소 공간 측면</u>에서 볼 때 다음과 같은 두 가지 가능성이 있다.</strong></p>
+<ol>
+  <li>자식 프로세스는 부모와 똑같은 프로그램과 데이터를 가진다.</li>
+  <li>자식 프로세스가 자신에게 적재될 새로운 프로그램을 가지고 있다.</li>
+</ol>
+
+<p><strong>UNIX 운영체제에서 새로운 프로세스의 생성</strong></p>
+
+<p><img src="/assets/computer-science/process-7.png" style="width:90%" /></p>
+
+<ul>
+  <li>새로운 프로세스는 fork() 시스템 콜로 생성되고, 원래 프로세스의 주소 공간의 복사본으로 구성된다.</li>
+  <li>exec() 시스템 콜은 이진 파일을 메로리로 적재(load)하고 그 프로그램을 실행을 시작한다.
+    <ul>
+      <li>원래의 프로그램의 메모리 이미지를 파괴한다.</li>
+    </ul>
+  </li>
+  <li>부모 프로세스는 자식 프로세스가 실행되는 동안 할 일이 없으면 자식이 종료될 때까지 준비 큐에서 자신을 제거하기 위해 wait() 시스템 콜을 한다.</li>
+</ul>
+
+<p><strong>Windows 운영체제에서 새로운 프로세스의 생성</strong></p>
+
+<ul>
+  <li>Windows API의 CreateProcess() 함수를 이용하여 새로운 프로세스를 생성한다.
+    <ul>
+      <li>CreateProcess() API는 자식 프로세스가 생성될 때 주소 공간에 명시된 프로그램을 적재한다. (10개 이상의 매개변수를 요구)</li>
+    </ul>
+  </li>
+  <li>WaitForSingleObject() 함수는 자식 프로세스의 핸들을 전달받고 이 프로세스가 종료되기를 기다린다.</li>
+</ul>
+
+<h4 id="332-프로세스-종료-process-termination">3.3.2 프로세스 종료 (Process Termination)</h4>
+
+<p><strong>프로세스가 마지막 문장의 실행을 끝내고, exit 시스템 콜을 사용하여 운영체제에 자신의 삭제를 요청하면 종료한다.</strong> 물리 메모리와 가상 메모리, 열린 파일, 입출력 버퍼를 포함한 프로세스의 모든 자원이 할당 해제되고 운영체제로 반납된다.</p>
+
+<p>다른 방법으로 한 프로세스는 적당한 시스템 콜(ex. TerminateProcess())을 통해서 다른 프로세스의 종료를 유발할 수 있다. 통상적으로 그런 시스템 콜은 단지 종료될 프로세스의 부모만이 호출할 수 있다.</p>
+
+<p><strong>부모 프로세스는 다음과 같이 여러가지 이유로 자식 중 하나의 실행을 종료할 수 있다.</strong></p>
+
+<ul>
+  <li>자식이 자신에게 할당된 자원을 초과하여 사용할 때</li>
+  <li>자식에게 할당된 태스트가 더이상 필요 없을 때</li>
+  <li>부모가 exit를 하는데, 운영체제는 부모가 exit 한 후에 자식이 실행을 계속하는 것을 허용하지 않는 경우</li>
+</ul>
+
+<p>프로세스가 종료하면 사용하던 자원은 운영체제가 되찾아 간다. <strong>종료되었지만 부모 프로세스가 아직 wait() 호출을 하지 않은 프로세스를 좀비(zombie) 프로세스라고 한다.</strong></p>
+
+<p>부모 프로세스가 wait()을 호출해서 자식 프로세스의 종료를 기다리지 않고 자신을 종료해버린다면 이 상황에 부닥친 자식 프로세스를 <strong>고아(orphan) 프로세스</strong>라고 한다. UNIX의 경우 고아 프로세스는 init 프로세스가 상속하고 종료를 관리한다.</p>
+
+<p><strong>Android 프로세스 계층 (Android Process Hierarchy)</strong></p>
+
+<p>Android는 임의의 프로세스를 종료하지 않고 프로세스의 <strong>중요도 계층</strong>을 식별했으며, 시스템이 프로세스를 종료하여 새로운 또는 보다 중요한 프로세스를 위한 자원을 확보해야 할 경우 <strong>중요도가 낮은 프로세스부터 종료한다</strong></p>
+
+<p>The order of process importance in android</p>
+
+<ol>
+  <li>forground processs</li>
+  <li>visible process</li>
+  <li>service process</li>
+  <li>background process</li>
+  <li>empty process</li>
+</ol>
+
+<p>즉, 시스템 자원을 회수해야만 하는 경우 Android는 먼저 empty process -&gt; background process -&gt; … 순서로 종료한다.</p>
+
+<p>또한 Android 개발 관행은 프로세스 수명주기 지침을 따르는 것을 권장한다.</p>
+
+<hr />
+
+<h3 id="34-프로세스-간-통신-interprocess-communication">3.4 프로세스 간 통신 (Interprocess Communication)</h3>
+
+<p>운영체제 내에서 실행되는 <strong>병행 프로세스들은 독립적이거나 또는 협력적인 프로세스들</strong> 일 수 있다.</p>
+
+<p><strong>프로세스 협력을 허용하는 환경을 제공하는 데는 몇 가지 이유가 있다.</strong></p>
+<ul>
+  <li><strong>정보 공유(information sharing) :</strong> 여러 응용 프로그램이 동일한 정보에 흥미를 느낄 수 있으므로, 그러한 정보를 병행적으로 접근할 수 있는 환경을 제공해야 한다.</li>
+  <li><strong>계산 가속화(computation speedup) :</strong> 만일 우리가 특정 태스크를 빨리 실행하고자 한다면, 우리는 그것을 서브태스크로 나누어 이들 각각이 다른 서브태스크들과 병렬로 실행되게 해야 한다.</li>
+  <li><strong>모듈성(modularity) :</strong> 시스템 기능을 별도의 프로세스들 또는 스레드들로 나누어, 모듈식 형태로 시스템을 구성하기를 원할 수 있다.</li>
+</ul>
+
+<p>협력적 프로세스들은 데이터를 교환할 수 있는, <strong>즉 서로 데이터를 보내거나 받을 수 있는 프로세스 간 통신(IPC) 기법</strong>이 필요하다. 프로세스 간 통신에는 기본적으로 <strong>공유 메모리(sharing memory)</strong>와 <strong>메시지 전달(message passing)</strong>의 두 가지 모델이 있다.</p>
+
+<ul>
+  <li>공유 메모리 모델에서는 협력 프로세스들에 의해 공유되는 메모리의 영역이 구축된다.
+    <ul>
+      <li>공유 메모리 영역을 구축할 때만 시스템 콜이 필요하다.</li>
+    </ul>
+  </li>
+  <li>메시지 전달 모델에서는 통신이 협력 프로세스들 사이에 교환되는 메시지를 통하여 이루어진다.
+    <ul>
+      <li>분산 시스템에서 공유메모리보다 구현하기 쉽다.</li>
+      <li>메시지 전달 시스템은 통상 시스템 콜을 사용하여 구현되므로 커널 간섭 등의 부가적인 시간 소비 작업이 필요하기 때문에 공유 메모리 모델이 메시지 전달보다 더 빠르다</li>
+    </ul>
+  </li>
+</ul>
+
+<p>아래의 그림은 위에 소개된 2가지의 통신 모델(공유 메모리, 메시지 전달)의 그림을 보여준다.</p>
+
+<p><img src="/assets/computer-science/process-8.png" style="width:70%" /></p>
+
+<hr />
+
+<h3 id="35-공유-메모리-시스템에서의-프로세스-간-통신-ipc-in-shared-memory-systems">3.5 공유 메모리 시스템에서의 프로세스 간 통신 (IPC in Shared-Memory Systems)</h3>
+
+<p>공유 메모리를 사용하는 프로세스 간 통신에서는 <strong>통신하는 프로세스들이 공유 메모리 영역을 구축</strong>해야 한다.</p>
+
+<p>통상 공유 메모리 영역은 공유 메모리 세그먼트를 생성하는 프로세스의 주소 공간에 위치한다. 이 공유 메모리 세그먼트를 이용하여 통신하고자 하는 다른 프로세스들은 이 세그먼트를 자신의 주소 공간에 추가하여야 한다.</p>
+
+<p>협력하는 프로세스의 개념을 설명하기 위해서, 협력하는 프로세스의 일반적인 패러다임인 생산자-소비자 문제를 생각해 보자. 생산자 프로세스는 정보를 생성하고 소비자 프로세스는 정보를 소비한다. 생산자-소비자 문제의 하나의 해결책은 <strong>공유 메모리(buffer)를 사용</strong>하는 것이다.</p>
+
+<p>생산자와 소비자가 병행하게 공유 버퍼를 접근하는 상황에 대한 고려 즉, <strong>동기화</strong>도 고려해야만 한다.</p>
+
+<hr />
+
+<h3 id="36-메시지-전달-시스템에서의-프로세스-간-통신-ipc-in-message-passing-systems">3.6 메시지 전달 시스템에서의 프로세스 간 통신 (IPC in Message-Passing Systems)</h3>
+
+<p><strong>메시지 전달 방식은 동일한 주소 공간을 공유하지 않고도 프로세스들이 통신을 하고, 그들의 동작을 동기화할 수 있도록 허용하는 기법을 제공한다.</strong> 특히 분산된 환경에서 유용하다.</p>
+
+<p>만약 프로세스 P와 Q가 통신을 원하면, 반드시 서로 메시지를 보내고 받아야 한다. 이들 사이에 <strong>통신 연결(communication link)</strong>이 설정되어야 한다. 이 연결은 다양한 논리적 방법으로 구현할 수 있다.</p>
+<ul>
+  <li>직접 또는 간접 통신</li>
+  <li>동기식 또는 비동기식 통신</li>
+  <li>자동 또는 명시적 버퍼링</li>
+</ul>
+
+<h4 id="361-명명-naming">3.6.1 명명 (Naming)</h4>
+
+<p>통신을 원하는 프로세스들은 서로를 가리킬 방법이 있어야 한다. 이들은 간접 통신 또는 직접 통신을 사용할 수 있다.</p>
+
+<p><strong>직접 통신하에서, 통신을 원하는 각 프로세스는 통신의 수신자 또는 송신자의 이름을 명시해야 한다.</strong></p>
+<ul>
+  <li>send(P, message) : 프로세스 P에 메시지를 전송한다.</li>
+  <li>receive(Q, message) : 프로세스 Q로부터 메시지를 수신한다.</li>
+</ul>
+
+<p><strong>직접 통신 기법에서 통신 연결은 다음의 특성을 가진다.</strong></p>
+<ul>
+  <li>통신을 원하는 각 프로세스의 쌍들 사이에 연결이 자동으로 구축된다. 프로세스들은 통신하기 위해 상대방의 신원(identity)만 알면 된다.</li>
+  <li>연결은 정확히 두 프로세스 사이에만 연관된다.</li>
+  <li>통신하는 프로세스들의 각 쌍 사이에는 정확히 하나의 연결이 존재해야 한다.</li>
+</ul>
+
+<p>이 기법은 주소 방식에서 대칭성을 보이나, 주소 지정 시에 비대칭을 사용할 수도 있다.</p>
+
+<p><strong>간접 통신에서 메시지들은 <u>메일박스(mailbox) 또는 포트(port)</u>로 송신되고, 그것으로부터 수신된다.</strong> 포트는 추상적으로 프로세스들에 의해 메시지들이 넣어지고 메시지들이 제거될 수 있는 객체라고도 볼 수 있다.</p>
+
+<p>각 포트(메일박스)는 고유의 id를 가지고 두 프로세스들이 공유 포트(메일박스)를 가질 때만 이들 프로세스가 통신할 수 있다.</p>
+<ul>
+  <li>send(A, message) : 메시지를 메일박스 A로 송신한다.</li>
+  <li>receive(A, message) : 메시지를 메일박스 A로부터 수신한다.</li>
+</ul>
+
+<p><strong>간접 통신 방법에서 통신 연결은 다음의 성질을 가진다.</strong></p>
+<ul>
+  <li>한 쌍의 프로세스들 사이의 연결은 이들 프로세스가 공유 메일박스를 가질 때만 구축된다.</li>
+  <li>연결은 두 개 이상의 프로세스들과 연관될 수 있다.</li>
+  <li>통신하고 있는 각 프로세스 사이에는 다수의 서로 다른 연결이 존재할 수 있고, 각 연결은 하나의 메일박스에 대응된다.</li>
+</ul>
+
+<p><strong>메일박스는 한 프로세스 또는 운영체제에 의해 소유될 수 있다.</strong></p>
+
+<h4 id="362-동기화-synchronization">3.6.2 동기화 (Synchronization)</h4>
+
+<p>프로세스 간의 통신은 send와 receive 프리미티브에 대한 호출에 의해 발생한다. 각 프리미티브를 구현하기 위한 서로 다른 설계 옵션이 있다. <strong>메시지 전달은 봉쇄형(blocking)이거나 비봉쇄형(nonblocking) 방식으로 전달된다.</strong></p>
+
+<ul>
+  <li>blocking send : 송신하는 프로세스는 메시지가 수신 프로세스 또는 메일박스에 의해 수신될 때까지 봉쇄된다.</li>
+  <li>nonblocking send : 송신하는 프로세스가 메시지를 보내고 작업을 재시작한다.</li>
+  <li>blocking receive : 메시지가 이용 가능할 때까지 수신 프로세스가 봉쇄된다.</li>
+  <li>nonblocking receive : 송신하는 프로세스가 유요한 메시지 또는 null을 받는다.</li>
+</ul>
+
+<p>send()와 receive()가 모두 봉쇄형일 때, 우리는 송신자와 수신자 간에 <strong>랑데부(rendezvous)</strong>를 하게 된다.</p>
+
+<h4 id="363-버퍼링-buffering">3.6.3 버퍼링 (Buffering)</h4>
+
+<p><strong>통신이 직접적이든 간접적이든 간에, 통신하는 프로세스에 의해 교환되는 메시지는 임시 큐에 들어 있다.</strong></p>
+
+<p>이러한 큐를 구현하는 방식은 다음과 같다.</p>
+
+<ul>
+  <li><strong>무 용량(zero capacity) :</strong> 큐의 최대 길이가 0이다. 즉, 링크는 자체 안에 대기하는 메시지들을 가질 수 없다. 이 경우에,송신자는 메시지를 수신할 때까지 기다려야 한다.</li>
+  <li><strong>유한 용량(bounded capacity) :</strong> 큐는 유한한 길이 n을 가진다. 즉, 최대 n개의 메시지가 그 안에 들어 있을 수 있다. 큐가 가득 차면 봉쇄된다.</li>
+  <li><strong>무한 용량(unbounded capacity) :</strong> 큐는 잠재적으로 무한한 길이를 가진다. 따라서 메시지들이 얼마든지 큐 안에서 대기할 수 있다. 송신자는 절대 봉쇄되지 않는다.</li>
+</ul>
+
+<hr />
+
+<h3 id="37-ipc-시스템의-사례-examples-of-ipc-systems">3.7 IPC 시스템의 사례 (Examples of IPC Systems)</h3>
+
+<p>네 가지 다른 IPC 시스템을 탐구해 보자.</p>
+
+<h4 id="371-posix-공유-메모리-posix-shared-memory">3.7.1 POSIX 공유 메모리 (POSIX Shared Memory)</h4>
+
+<p>POSIX 공유 메모리는 memory-mapped 파일을 사용하여 구현된다. memory-mapped 파일은 공유 메모리의 특정 영역을 파일과 연관시킨다.</p>
+
+<ol>
+  <li>프로세스는 <code class="highlighter-rouge">fd = shm_open(name,  O_CREAT | O_RDWR, 0666)</code> 와 같이 시스템 콜을 사용하여 공유 메모리 객체를 생성한다.</li>
+  <li><code class="highlighter-rouge">ftruncate(fd, SIZE)</code>와 같은 함수를 사용하여 공유 메모리 객체의 크기를 바이트 단위로 설정한다.</li>
+  <li><code class="highlighter-rouge">ptr = (char *)mmap(0, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)</code>와 같은 함수를 사용하여 공유 메모리 객체를 포함하는 memory-mapped 파일을 구축한다.</li>
+</ol>
+
+<h4 id="372-mach-메시지-전달-mach-message-passing">3.7.2 Mach 메시지 전달 (Mach Message Passing)</h4>
+
+<p>모든 태스크 간 통신을 포함하여 Mach에서 대부분의 통신은 <strong>메시지(Message)</strong>로 수행된다. Mach에서 <strong>포트(port)</strong>라고 하는 메일박스로 메시지를 주고 받는다. 포트는 크기가 정해져 있고 단방향이다.
+양방향 통신의 경우 메시지가 한 포트로 전송되고 응답이 별도의 응답 포트로 전송된다.</p>
+
+<p><strong>각 포트에는 여러 송신자가 있을 수 있지만 수신자는 오직 하나만 존재한다.</strong></p>
+
+<p>태스크가 생성되면 Task Self 포트와 Notify 포트라는 두 개의 특별한 포트도 생성된다.</p>
+<ul>
+  <li>커널은 Task Self 포트에 대한 수신 권한을 가지고 있어 태스크가 커널에 메시지를 보낼 수 있다.</li>
+  <li>커널의 이벤트 발생 알림을 작업의 Notify 포트로 보낼 수 있따.</li>
+</ul>
+
+<p>mach_port_allocate() API는 새 포트를 작성하고 메시지 큐를 위한 공간을 할당한다. 또한 포트에 대한 권한을 식별한다.</p>
+
+<p>각 태스크는 또한 <strong>부트스트랩 포트</strong>에 액세스 할 수 있어서 태스크가 생성한 포트를 시스템 전체의 <strong>부트스트랩 서버</strong>에 등록할 수 있다. 포트가 부트스트랩 서버에 등록되면 다른 태스크가 이 레지스트리에서 포트를 검색하여 포트로 메시지를 보낼 수 있는 권한을 얻을 수 있다.</p>
+
+<p>mach_msg() 함수는 메시지를 보내고 받는 표준 API이다. mach_msg()가 호출되면 이는 mach_msg_trap() 함수를 호출하고 mach_msg_trap()은 mach_msg_overwrite_trap()함수를 호출하여 메시지의 실제 전달을 처리한다.</p>
+
+<p>포트(메일박스)가 가득 찼을 경우 mach_msg()에서 설정할 수 있는 옵션</p>
+<ol>
+  <li>큐에 공간이 생길 때까지 무기한 기다린다.</li>
+  <li>최대 n 밀리초 동안 기다린다.</li>
+  <li>기다리지 말고 즉시 복귀한다.</li>
+  <li>메시지를 일시적으로 캐시 한다. 메시지가 전송되는 큐가 가득 차더라도 운영체제에 전달하여 보존한다.</li>
+</ol>
+
+<p><strong>메시지 시스템의 주요 문제점은 일반적으로 송신자의 포트에서 수신자의 포트로 메시지를 복사해야 하므로 발생하는 성능 저하이다.</strong>(가상 메모리 관리 기술을 사용하면 같은 시스템 내의 메시지 전송간에 성능 저하를 최소화 할 수 있다.)</p>
+
+<h4 id="373-windows">3.7.3 Windows</h4>
+
+<p>Windows는 다중 운영 환경 또는 서브시스템을 지원하며, <strong>Application은 메시지 전달(Message Passing) 기법을 통해 이들과 통신한다.</strong> 따라서 응용 프로그램은 서브시스템 서버의 클라이언트로 간주할 수 있다.</p>
+
+<p>Windows의 메시지 전달 설비는 <strong>고급 로컬 프로시저 호출 설비(advanced local procedure call facility, ALPC)</strong>라 불린다. <strong>ALPC는 동일 기계상에 있는 두 프로세스간의 통신에 사용한다.</strong> 원격 프로시저 호출(RPC) 기법과 같으나, Windows에 맞게 특별히 최적화 되었다.</p>
+
+<p>Windows는 두 프로세스 간에 연결을 구축하고 유지하기 위해 <strong>포트 객체</strong>를 사용한다. Windows는 <strong>연결 포트(Connection port)</strong>와 <strong>통신 포트(communication port)</strong>의 두 가지 유형의 포트를 사용한다.</p>
+
+<p>다음은 Windows의 ALPC 과정의 그림이다.</p>
+
+<p><img src="/assets/computer-science/process-9.png" style="width:80%" /></p>
+
+<p>ALPC 채널이 생성되면 다음 3가지 중 하나의 메시지 전달 기법의 하나가 선택된다.</p>
+<ol>
+  <li>256바이트까지의 작은 메시지의 경우, <u>포트의 메시지 큐가 중간 저장소로 사용되고</u>, 메시지는 프로세스에서 프로세스로 복사된다.</li>
+  <li>대용량 메시지는 반드시 <strong>섹션 객체(Section Object)</strong>를 통하여 전달되어야 한다. 섹션 객체란 채널과 연관된 공유 메모리의 영역을 말한다.</li>
+  <li>데이터의 양이 너무 많아서 섹션 객체에 저장될 수 없는 경우, 서버 프로세스가 클라이언트의 주소 공간을 직접 읽거나 쓸 수 있는 API를 사용할 수 있다.</li>
+</ol>
+
+<p><strong>클라이언트는 채널을 설정할 때 메시지 전달 기법을 설정해야만 한다. 즉, 대용량 메시지 전송이 필요한지</strong></p>
+
+<p><u>Windows의 ALPC는 Windows API의 부분이 아니기 때문에 응용 프로그래머는 사용할 수 없다.</u> Windows API를 사용하는 어플리케이션은 RPC(Remote Procedure Calls)를 부르고, <strong>같은 시스템 상에 존재하는 프로세스의 경우 RPC가 호출되면 이 RPC는 간접적으로 ALPC를 호출</strong>하여 처리된다.</p>
+
+<h4 id="374-파이프-pipes">3.7.4 파이프 (Pipes)</h4>
+
+<p><strong>파이프는 두 프로세스가 통신할 수 있게 하는 전달자로서 동작한다.</strong> 파이프는 초기 UNIX 시스템에서 제공하는 IPC 기법의 하나였다.</p>
+
+<p><strong>3.7.4.1 일반 파이프 (Ordinary Pipes)</strong></p>
+
+<p><strong>일반 파이프는 생산자-소비자 형태로 두 프로세스 간에 통신을 허용한다.</strong> 생산자는 파이프의 한 종단(쓰기 종단)에 쓰고, 소비자는 다른 종단(읽기 종단)에서 읽는다.</p>
+
+<p><strong>결과적으로 일반 파이프는 한쪽으로만 데이터를 전송할 수 있으며 오직 단방향 통신만을 가능하게 한다.</strong> 양방향 통신이 필요하다면 각각 다른 방향으로 데이터를 전송할 수 있는 두 개의 파이프를 사용해야 한다.</p>
+
+<p><strong>일반 파이프는 파이프를 생성한 프로세스 이외에는 접근할 수 없다.</strong> 따라서 통상 부모 프로세스가 파이프를 생성하고 fork()로 생성한 자식 프로세스와 통신하기 위해 사용한다.</p>
+
+<p>다음의 그림은 일반 파이프를 위한 파일 디스크립터를 나타낸 그림이다.</p>
+
+<p><img src="/assets/computer-science/process-10.png" style="width:60%" /></p>
+
+<p>fd 배열은 파일 디스크립터와 부모 및 자식 프로세스의 관계를 보여준다. 이 그림에서 보듯이 부모가 파이프의 쓰기 종단(fd[1])에 데이터를 쓰면 파이프의 읽기 종단(fd[0])에서 자식이 읽을 수 있다.</p>
+
+<p>Windows 시스템은 일반 파이프를 <strong>익명 파이프(anonymous pipe)</strong>라고 부른다. <strong>UNIX와 Windows 시스템 모두에서 통신하는 두 프로세스는 부모-자식 관계를 가져야 한다는 것을 꼭 명심하라!! 이 유형의 파이프는 동일한 기계상의 두 프로세스끼리만 통신이 가능하다는 것을 의미한다.</strong></p>
+
+<p><strong>3.7.4.2 지명 파이프 (Named Pipes)</strong></p>
+
+<p><strong>지명 파이프(Named Pipes)는 양방향으로 통신이 가능하며 부모-자식 관계도 필요로 하지 않는다. Named Pipes가 구축되면 여러 프로세스들이 이를 사용하여 통신할 수 있다.</strong></p>
+
+<p>통신 프로세스가 종료하더라도 지명 파이프는 계속 존재한다. UNIX와 Windows 시스템은 구현상에 차이점은 있지만 모두 지명 파이프를 지원한다.</p>
+
+<p><strong>UNIX에서 지명 파이프는 FIFO</strong>라고 부른다. 생성되면 지명 파이프는 파일 시스템의 보통 파일처럼 존재한다. 시스템 콜로 생성 및 조작되며 명시적으로 파일 시스템에서 삭제될 때까지 존재한다. 
+<strong>FIFO는 반이중 전송만이 가능하다.</strong> 서로 다른 기계에 존재하는 프로세스 사이에 통신이 필요하다면 소켓을 사용해야 한다.</p>
+
+<blockquote>
+  <p><strong>반이중 통신 :</strong> 양방향으로 데이터가 전송될 수는 있으나 양쪽에서 동시에 전송하는 것은 불가능한 방식</p>
+
+  <p><strong>전이중 통신 :</strong> 양쪽에서 동시에 데이터를 전송할 수 있는 방식</p>
+</blockquote>
+
+<p><strong>Windows 시스템의 지명 파이프는 전이중 통신을 허용하며, 통신하는 두 프로세스는 같은 기계 또는 다른 기계상에 존재할 수 있다.</strong> 또한 Windows 시스템은 바이트-단위 또는 메시지-단위 데이터의 전송을 허용한다.</p>
+
+<blockquote>
+  <h4 id="실제-상황에서의-파이프">실제 상황에서의 파이프</h4>
+
+  <p><strong>파이프는 UNIX 명령어 라인 환경에서 한 명령의 출력이 다른 명령의 입력으로 사용되는 상황에서 자주 사용된다.</strong> 파이프는 명령어 라인에서 | 문자를 사용하여 구축될 수 있다.</p>
+
+  <p><code class="highlighter-rouge">ex) ls | less</code></p>
+
+  <p>이 시나리오에서 ls 명령은 생산자 역할을 하며 출력은 less 명령에 의해 소비된다.</p>
+
+  <p>Dos Shell도 파이프를 구축하기 위하여 | 문자를 사용한다.</p>
+
+  <p><code class="highlighter-rouge">ex) dir | more</code></p>
+</blockquote>
+
+<hr />
+
+<h3 id="38-클라이언트-서버-환경에서-통신-communication-in-client-server-systems">3.8 클라이언트 서버 환경에서 통신 (Communication in Client-Server Systems)</h3>
+
+<p>클라이언트 서버에서 사용할 수 있는 두 가지 다른 통신 전략(Sockets, RPCs)에 대해서 설명하도록 하겠다.</p>
+
+<h4 id="381-소켓-socket">3.8.1 소켓 (Socket)</h4>
+
+<p><strong>소켓(socket)은 통신의 극점(endpoint)을 뜻한다.</strong> 두 프로세스가 네트워크상에서 통신을 하려면 양 프로세스마다 하나씩, 총 두 개의 소켓이 필요하다. <strong>각 소켓은 IP 주소와 포트 번호 두가지를 접한(concatenate)해서 구별한다.</strong></p>
+
+<p>클라이언트 프로세스가 연결을 요청하면 호스트 컴퓨터가 포트 번호를 부여한다. 이 번호는 1024보다 큰 임의의 정수가 된다.</p>
+
+<p>아래의 그림을 통해서 알아보자.</p>
+
+<p><img src="/assets/computer-science/process-11.png" style="width:60%" /></p>
+
+<p><strong>두 호스트 사이에 패킷들이 오갈 때 그 패킷들은 이 목적지 포트 번호가 지정하는 데 따라 적절한 프로세스로 배달된다.</strong></p>
+
+<p><strong>모든 연결은 유일한 소켓 쌍으로 구성되어야 한다!!</strong></p>
+
+<p>책에는 Java를 사용한 Socket 프로그래밍 예제가 아주 잘 나와 있음으로 이를 참고해 보자!!</p>
+
+<p>소켓을 이용한 통신은 분산된 프로세스 간에 널리 사용되고 효율적이기는 스레드 간에 구조화되지 않은 바이트 스트림만을 통신하도록 하기 때문에 너무 낮은 수준이다. 이 바이트 스트림의 해석은 오롯이 클라이언트와 서버의 책임이 되기 때문에 더 높은 수준의 소켓 기반 통신을 사용해 보자.</p>
+
+<!-- 추후 마음을 잡은 다음에 더 공부하자! -->
+
+<!-- #### 3.8.2 원격 프로시저 호출 (Remote Procedure Calls, RPC)
+
+원격 서비스와 관련한 가장 보편적인 형태 중 하나는 RPC 패러다임으로서, **네트워크에 연결된 두 시스템 사이의 통신에 사용하기 위하여 프로시저 호출 기법을 추상화하는 방법으로 설계되었다.**
+
+RPC에서는 프로세스들이 서로 다른 시스템 위에서 돌아가기 때문에 원격 서비스를 제공하기 위해서는 **메시지 기반 통신**을 해야 한다.
+
+RPC 통신에서 전달되는 **메시지는 구조화 되어** 있고, **데이터 패킷 수준을 넘어선다.** 각 메시지에는 원격지 포트에서 listen 중인 RPC 디먼의 주소가 지정되어 있고 실행되어야 할 함수의 식별자, 그리고 그 함수에게 전달되어야 할 매개변수가 포함된다. 그런 후에 요청된 함수가 실행되고 어떤 출력이든지 별도의 메시지를 통해 요청자에게 반환된다.
+
+원격 프로세스가 어떤 서비스를 받고자 하면 그 서비스에 대응되는 적절한 포트 주소로 메시지를 보내야 한다. -->
+
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Operating-System">Operating-System</a>,&nbsp;<a href="/tag/OS">OS</a>,&nbsp;<a href="/tag/CS">CS</a>,&nbsp;<a href="/tag/Computer">Computer</a>,&nbsp;<a href="/tag/Process">Process</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+      <a href="//twitter.com/share?text=%5BOperating+System+-+Chapter+3%5D+%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4&url=http%3A%2F%2Flocalhost%3A4000%2Fcomputer-science%28cs%29%2F2020%2F10%2F02%2FProcess.html&via=TheBenCentra"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+        <i class="fa fa-twitter-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=%5BOperating+System+-+Chapter+3%5D+%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4&u=http%3A%2F%2Flocalhost%3A4000%2Fcomputer-science%28cs%29%2F2020%2F10%2F02%2FProcess.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcomputer-science%28cs%29%2F2020%2F10%2F02%2FProcess.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      <a href="//plus.google.com/share?title=%5BOperating+System+-+Chapter+3%5D+%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4&url=http%3A%2F%2Flocalhost%3A4000%2Fcomputer-science%28cs%29%2F2020%2F10%2F02%2FProcess.html"
+        onclick="window.open(this.href, 'google-plus-share', 'width=550,height=255');return false;">
+        <i class="fa fa-google-plus-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+      <a href="//www.pinterest.com/pin/create/button/?description=%5BOperating+System+-+Chapter+3%5D+%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4&url=http%3A%2F%2Flocalhost%3A4000%2Fcomputer-science%28cs%29%2F2020%2F10%2F02%2FProcess.html&media=http://localhost:4000/assets/header_image.jpg"
+        onclick="window.open(this.href, 'pinterest-share', 'width=550,height=255');return false;">
+        <i class="fa fa-pinterest-square fa-lg"></i>
+      </a>
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+      <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent('http://localhost:4000/computer-science(cs)/2020/10/02/Process.html') + '&title=[Operating System - Chapter 3] 프로세스'; return false">
+        <i class="fa fa-reddit-square fa-lg"></i>
+      </a>
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/typography/">Typography</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

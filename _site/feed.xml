@@ -6,9 +6,539 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 02 Oct 2020 12:21:03 +0900</pubDate>
-    <lastBuildDate>Fri, 02 Oct 2020 12:21:03 +0900</lastBuildDate>
+    <pubDate>Sat, 03 Oct 2020 13:43:32 +0900</pubDate>
+    <lastBuildDate>Sat, 03 Oct 2020 13:43:32 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>[Operating System - Chapter 3] 프로세스</title>
+        <description>&lt;p&gt;이 포스팅은 공룡책으로 알려진 Operating System Concepts의 3장인 Process를 공부하면서 정리한 포스팅이다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;3-프로세스-process&quot;&gt;3. 프로세스 (Process)&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;프로세스&lt;/strong&gt; : 실행 중인 프로그램을 말한다. 프로세스는 현대의 컴퓨팅 시스템에서의 작업의 단위이다.&lt;/p&gt;
+
+&lt;p&gt;시스템은 사용자 코드를 실행하는 프로세스와 운영체제 코드를 실행하는 프로세스들의 집합이다. 이들 모든 프로세스는 잠재적으로 병행 실행이 가능하고 CPU는 이들 프로세스 가운데서 &lt;strong&gt;다중화(multiplex)&lt;/strong&gt; 된다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;31-프로세스-개념-process-concept&quot;&gt;3.1 프로세스 개념 (Process Concept)&lt;/h3&gt;
+
+&lt;h4 id=&quot;311-프로세스-the-process&quot;&gt;3.1.1 프로세스 (The Process)&lt;/h4&gt;
+
+&lt;p&gt;비공식적으로, 프로세스란 실행 중인 프로그램이다. 프로세스의 현재 활동의 상태는 &lt;strong&gt;프로그램 카운터(PC) 값&lt;/strong&gt;과 &lt;strong&gt;프로세서 레지스터의 내용&lt;/strong&gt;으로 나타낸다.&lt;/p&gt;
+
+&lt;p&gt;프로세스의 메모리는 아래의 그림과 같이 배치되어 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-1.png&quot; style=&quot;width:40%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;text :&lt;/strong&gt; 실행 코드&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;data :&lt;/strong&gt; 전역 변수&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;heap :&lt;/strong&gt; 프로그램 실행 중에 동적으로 할당되는 메모리&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;stack :&lt;/strong&gt; 함수를 호출할 때 임시 데이터 저장장소 (ex. 함수 매개변수, 복귀 주소, 지역변수, …)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;stack 및 heap 섹션은 Runtime에 서로의 방향으로 더 커질 수 있음으로 운영체제는 서로 겹치지 않도록 해야 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;프로그램(Program)은 명령어 리스트를 내용으로 가진 디스크에 저장된 파일(실행 파일이라고 불림)과 같은 수동적인 존재(passive entity)이다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;프로세스(Process)는 다음에 실행할 명령어를 지정하는 프로그램 카운터(PC)와 관련 자원의 집합을 가진 능동적인 존재(active entity)이다. 실행 파일이 메모리에 적재될 때 프로그램은 프로세스가 된다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;프로세스 자체가 다른 개체를 위한 실행 환경으로 동작할 수 있다는 사실에 주목해야 한다. (ex. JVM)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;JVM은 적재된 Java 코드를 해석하고 그 코드를 대신하여 원 기계어를 이용하여 행동을 취하는 프로세스로서 프로그램을 실행한다.&lt;/p&gt;
+
+  &lt;p&gt;java 명령어는 JVM을 보통의 프로세스처럼 실행시키고, JVM은 Java 프로그램을 가상기계 안에서 실행한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;312-프로세스-상태-process-state&quot;&gt;3.1.2 프로세스 상태 (Process State)&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;프로세스는 실행되면서 그 상태가 변한다.&lt;/strong&gt; 프로세스의 상태는 부분적으로 그 프로세스의 현재의 활동에 따라서 정의된다.&lt;/p&gt;
+
+&lt;p&gt;아래의 Status Diagram을 참고해 프로세스의 상태에 대해서 알아보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-2.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;new :&lt;/strong&gt; 프로세스가 생성 중이다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;running :&lt;/strong&gt; 명령어들이 실행되고 있다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;waiting :&lt;/strong&gt; 프로세스가 어떤 이벤트(입출력 완료 또는 신호의 수신 같은)가 일어나기를 기다린다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ready :&lt;/strong&gt; 프로세스가 처리기에 할당되기를 기다린다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;terminated :&lt;/strong&gt; 프로세스의 실행이 종료되었다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;어느 한 순간에 한 Processor의 코어에서는 오직 하나의 프로세스만이 실행된다는 것을 인식하는 것이 중요하다.&lt;/strong&gt; 그렇지만 많은 프로세스가 ready or waiting 상태에 있을 수 있다.&lt;/p&gt;
+
+&lt;h4 id=&quot;313-프로세스-제어-블록-process-control-block&quot;&gt;3.1.3 프로세스 제어 블록 (Process Control Block)&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;각 프로세스는 운영체제에서 프로세스 제어 블록(process control block, PCB)에 의해 표현된다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;아래의 그림은 PCB를 나타내며 이를 통해 PCB에 대해서 알아보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-3.png&quot; style=&quot;width:40%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;프로세스 상태 :&lt;/strong&gt; 프로세스의 상태(new, ready, running, waiting, …)를 나타낸다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;프로그램 카운터 :&lt;/strong&gt; 프로그램 카운터는 이 프로세스가 다음에 실행할 명령어의 주소를 가리킨다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CPU 레지스터들 :&lt;/strong&gt; 레지스터들과 상태 코드에 대한 정보가 포함된다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CPU-스케줄링 정보 :&lt;/strong&gt; 프로세스 우선순위, 스케줄 큐에 대한 포인터와 다른 스케줄 매개변수를 포함한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;메모리 관리 정보 :&lt;/strong&gt; 운영체제에 의해 사용되는 메모리 시스템에 따라 기준 레지스터와 한계 레지스터의 값, 운영체제가 사용하는 메모리 시스템에 따라 페이지 테이블 또는 세그먼트 테이블 등과 같은 정보를 포함한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;회계 정보 :&lt;/strong&gt; CPU 사용 시간과 경과된 실시간, 시간 제한, 계정 번호, 잡 또는 프로세스 번호 등을 포함한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;입출력 상태 정보 :&lt;/strong&gt; 프로세스에 할당된 입출력 장치들과 열린 파일의 목록 등을 포함한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;요약하면 PCB는 약간의 회계 데이터와 함께 프로세스를 시작시키거나 다시 시작시키는데 필요한 모든 데이터를 위한 저장소의 역할을 한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;314-스레드-threads&quot;&gt;3.1.4 스레드 (Threads)&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;프로세스의 개념을 확장하여 한 프로세스가 다수의 실행 스레드를 가질 수 있도록 허용한다. 그들은 따라서 프로세스가 한 번에 하나 이상의 일을 수행할 수 있도록 허용한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ex) 다중 스레드 워드 프로세서는 하나의 스레드에 사용자 입력 관리를 맡기는 동안 다른 스레드가 철자 검사기를 수행하도록 만들 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;32-프로세스-스케줄링-process-scheduling&quot;&gt;3.2 프로세스 스케줄링 (Process Scheduling)&lt;/h3&gt;
+
+&lt;p&gt;다중 프로그래밍의 목적은 &lt;strong&gt;CPU 이용을 최대화&lt;/strong&gt;하기 위하여 항상 어떤 프로세스가 실행되도록 하는 데 있다.&lt;/p&gt;
+
+&lt;p&gt;시분할의 목적은 각 프로그램이 실행되는 동안 &lt;strong&gt;사용자가 상호 작용할 수 있도록 프로세스들 사이에서 CPU코어를 빈번하게 교체&lt;/strong&gt;하는 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;위의 목적을 달성하기 위해 프로세스 스케줄러(Process Scheduler)는 코어에서 실행 가능한 여러 프로세스 중에서 하나의 프로세스를 선택한다.&lt;/strong&gt; 다중 코어 시스템은 한 번에 여러 프로세스를 실행할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;현재 메모리에 있는 프로세스 수를 &lt;strong&gt;다중 프로그래밍 정도&lt;/strong&gt;라고 한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;321-스케줄링-큐-scheduling-queue&quot;&gt;3.2.1 스케줄링 큐 (Scheduling Queue)&lt;/h4&gt;
+
+&lt;p&gt;프로세스가 시스템에 들어가면 &lt;strong&gt;준비 큐(Ready Queue)&lt;/strong&gt;에 들어가서 준비 상태가 되어 CPU 코어에서 실행되기를 기다린다.&lt;/p&gt;
+
+&lt;p&gt;I/O 완료와 같은 특정 이벤트가 발생하기를 기다리는 프로세스는 &lt;strong&gt;대기 큐(Wait Queue)&lt;/strong&gt;에 삽입된다.&lt;/p&gt;
+
+&lt;p&gt;프로세스 스케줄링의 일반적인 표현은 아래와 같은 &lt;strong&gt;큐잉 다이어그램&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-4.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;원은 큐에 서비스를 제공하는 자원을 나타내고 화살표는 시스템의 프로세스의 흐름을 나타낸다. 이 다이어그램을 통해서 말하고 싶은 것은 3가지이다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;프로세스가 I/O 요청을 공표한 다음 I/O 대기 큐에 놓일 수 있따.&lt;/li&gt;
+  &lt;li&gt;프로세스는 새 자식 프로세스를 만든 다음 자식의 종료를 기다리는 동안 대기 큐에 놓일 수 있따.&lt;/li&gt;
+  &lt;li&gt;인터럽트 또는 타임슬라이스가 만료되어 프로세스가 코어에서 강제로 제거되어 준비 큐로 돌아갈 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;322-cpu-스케줄링-cpu-scheduling&quot;&gt;3.2.2 CPU 스케줄링 (CPU Scheduling)&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;CPU 스케줄러의 역할은 준비 큐에 있는 프로세스 중에서 선택된 하나의 프로세스에 CPU 코어를 할당하는 것이다.&lt;/strong&gt; CPU 스케줄러는 CPU를 할당하기 위한 새 프로세스를 자주 선택해야 한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;323-문맥-교환-context-switch&quot;&gt;3.2.3 문맥 교환 (Context Switch)&lt;/h4&gt;
+
+&lt;p&gt;인터럽트는 운영체제가 CPU 코어를 현재 작업에서 뺏어 내어 &lt;strong&gt;커널 루틴&lt;/strong&gt;을 실행할 수 있게 한다. 이러한 연산은 범용 시스템에서는 자주 발생한다. &lt;strong&gt;인터럽트가 발생하면 시스템은 인터럽트 처리가 끝난 후에 &lt;u&gt;문맥(Context)&lt;/u&gt;을 복구할 수 있도록 현재 실행 중인 프로세스의 문맥을 저장할 필요가 있다. 이는 PCB에 저장된다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;문맥(Context)은 CPU 레지스터의 값, 프로세스 상태, 메모리 관리 정보 등을 포함한다.&lt;/p&gt;
+
+&lt;p&gt;CPU 코어를 다른 프로세스로 교환하려면 이전의 프로세스의 상태를 보관하고 새로운 프로세스의 보관된 상태를 복구하는 작업이 필요하다. 이 작업은 &lt;strong&gt;문맥 교환(context switch)&lt;/strong&gt;이라고 하고 아래의 그림에 묘사되어 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-5.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;운영체제가 복잡할수록, 문맥 교환 시 해야만 하는 작업의 양이 더 많아진다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;33-프로세스에-대한-연산-operation-on-processes&quot;&gt;3.3 프로세스에 대한 연산 (Operation on Processes)&lt;/h3&gt;
+
+&lt;p&gt;대부분 시스템 내의 프로세스들은 병행 실행될 수 있으며, 반드시 동적으로 생성되고, 제거되어야 한다. 그러므로 운영체제는 프로세스 생성 및 종료를 위한 기법을 제공해야 한다.&lt;/p&gt;
+
+&lt;h4 id=&quot;331-프로세스-생성-process-creation&quot;&gt;3.3.1 프로세스 생성 (Process Creation)&lt;/h4&gt;
+
+&lt;p&gt;프로세스가 실행되는 동안 프로세스는 여러 개의 새로운 프로세스들을 생성할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;생성하는 프로세스를 &lt;strong&gt;부모 프로세스&lt;/strong&gt;라고 부르고, 새로운 프로세스는 &lt;strong&gt;자식 프로세스&lt;/strong&gt;라고 부른다. 이 새로운 프로세스들은 각각 다시 다른 프로세스들을 생성할 수 있으며 그 결과 &lt;strong&gt;프로세스의 트리&lt;/strong&gt;를 형성한다.&lt;/p&gt;
+
+&lt;p&gt;현대 운영체제들은 유일한 &lt;strong&gt;프로세스 식별자(pid)&lt;/strong&gt;를 사용하여 프로세스를 구분하는데 이 식별자는 보통 정수이다.&lt;/p&gt;
+
+&lt;p&gt;아래의 그림은 Linux 운영체제의 전형적인 프로세스 트리이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-6.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;u&gt;언제나 pid가 1인 systemd 프로세스가 모든 사용자 프로세스의 루트 부모 프로세스 역할을 수행하고 시스템이 부트될 때 생성되는 첫 번째 사용자 프로세스이다.&lt;/u&gt; 시스템이 부팅되면 systemd프로세스는 다양한 사용자 프로세스를 생성한다.&lt;/p&gt;
+
+&lt;p&gt;일반적으로 프로세스가 자식 프로세스를 생성할 때, 그 &lt;strong&gt;자식 프로세스는 자신의 임무를 달성하기 위하여 어떤 자원(CPU 시간, 메모리, 파일, 입출력 장치)이 필요&lt;/strong&gt;하다. 이 자원은 운영체제로부터 직접 얻을 수도 있고, 부모 프로세스가 가진 자원의 부분 집합만을 사용하도록 제한(시스템 과부하 방지)할 수도 있다.&lt;/p&gt;
+
+&lt;p&gt;물리적, 논리적 자원을 제공하는 것 이외에 부모 프로세스는 자식 프로세스에 &lt;strong&gt;초기화 데이터(입력)를 전달&lt;/strong&gt;할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;프로세스가 새로운 프로세스를 생성할 때, &lt;u&gt;두 프로세스를 실행시키는 데 두 가지 가능한 방법&lt;/u&gt;이 존재한다.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;부모와 자식과 병행하게 실행을 계속한다.&lt;/li&gt;
+  &lt;li&gt;부모는 일부 또는 모든 자식이 실행을 종료할 때까지 기다린다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;u&gt;새로운 프로세스들의 주소 공간 측면&lt;/u&gt;에서 볼 때 다음과 같은 두 가지 가능성이 있다.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;자식 프로세스는 부모와 똑같은 프로그램과 데이터를 가진다.&lt;/li&gt;
+  &lt;li&gt;자식 프로세스가 자신에게 적재될 새로운 프로그램을 가지고 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;UNIX 운영체제에서 새로운 프로세스의 생성&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-7.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;새로운 프로세스는 fork() 시스템 콜로 생성되고, 원래 프로세스의 주소 공간의 복사본으로 구성된다.&lt;/li&gt;
+  &lt;li&gt;exec() 시스템 콜은 이진 파일을 메로리로 적재(load)하고 그 프로그램을 실행을 시작한다.
+    &lt;ul&gt;
+      &lt;li&gt;원래의 프로그램의 메모리 이미지를 파괴한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;부모 프로세스는 자식 프로세스가 실행되는 동안 할 일이 없으면 자식이 종료될 때까지 준비 큐에서 자신을 제거하기 위해 wait() 시스템 콜을 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Windows 운영체제에서 새로운 프로세스의 생성&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Windows API의 CreateProcess() 함수를 이용하여 새로운 프로세스를 생성한다.
+    &lt;ul&gt;
+      &lt;li&gt;CreateProcess() API는 자식 프로세스가 생성될 때 주소 공간에 명시된 프로그램을 적재한다. (10개 이상의 매개변수를 요구)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;WaitForSingleObject() 함수는 자식 프로세스의 핸들을 전달받고 이 프로세스가 종료되기를 기다린다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;332-프로세스-종료-process-termination&quot;&gt;3.3.2 프로세스 종료 (Process Termination)&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;프로세스가 마지막 문장의 실행을 끝내고, exit 시스템 콜을 사용하여 운영체제에 자신의 삭제를 요청하면 종료한다.&lt;/strong&gt; 물리 메모리와 가상 메모리, 열린 파일, 입출력 버퍼를 포함한 프로세스의 모든 자원이 할당 해제되고 운영체제로 반납된다.&lt;/p&gt;
+
+&lt;p&gt;다른 방법으로 한 프로세스는 적당한 시스템 콜(ex. TerminateProcess())을 통해서 다른 프로세스의 종료를 유발할 수 있다. 통상적으로 그런 시스템 콜은 단지 종료될 프로세스의 부모만이 호출할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;부모 프로세스는 다음과 같이 여러가지 이유로 자식 중 하나의 실행을 종료할 수 있다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;자식이 자신에게 할당된 자원을 초과하여 사용할 때&lt;/li&gt;
+  &lt;li&gt;자식에게 할당된 태스트가 더이상 필요 없을 때&lt;/li&gt;
+  &lt;li&gt;부모가 exit를 하는데, 운영체제는 부모가 exit 한 후에 자식이 실행을 계속하는 것을 허용하지 않는 경우&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;프로세스가 종료하면 사용하던 자원은 운영체제가 되찾아 간다. &lt;strong&gt;종료되었지만 부모 프로세스가 아직 wait() 호출을 하지 않은 프로세스를 좀비(zombie) 프로세스라고 한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;부모 프로세스가 wait()을 호출해서 자식 프로세스의 종료를 기다리지 않고 자신을 종료해버린다면 이 상황에 부닥친 자식 프로세스를 &lt;strong&gt;고아(orphan) 프로세스&lt;/strong&gt;라고 한다. UNIX의 경우 고아 프로세스는 init 프로세스가 상속하고 종료를 관리한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Android 프로세스 계층 (Android Process Hierarchy)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Android는 임의의 프로세스를 종료하지 않고 프로세스의 &lt;strong&gt;중요도 계층&lt;/strong&gt;을 식별했으며, 시스템이 프로세스를 종료하여 새로운 또는 보다 중요한 프로세스를 위한 자원을 확보해야 할 경우 &lt;strong&gt;중요도가 낮은 프로세스부터 종료한다&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The order of process importance in android&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;forground processs&lt;/li&gt;
+  &lt;li&gt;visible process&lt;/li&gt;
+  &lt;li&gt;service process&lt;/li&gt;
+  &lt;li&gt;background process&lt;/li&gt;
+  &lt;li&gt;empty process&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;즉, 시스템 자원을 회수해야만 하는 경우 Android는 먼저 empty process -&amp;gt; background process -&amp;gt; … 순서로 종료한다.&lt;/p&gt;
+
+&lt;p&gt;또한 Android 개발 관행은 프로세스 수명주기 지침을 따르는 것을 권장한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;34-프로세스-간-통신-interprocess-communication&quot;&gt;3.4 프로세스 간 통신 (Interprocess Communication)&lt;/h3&gt;
+
+&lt;p&gt;운영체제 내에서 실행되는 &lt;strong&gt;병행 프로세스들은 독립적이거나 또는 협력적인 프로세스들&lt;/strong&gt; 일 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;프로세스 협력을 허용하는 환경을 제공하는 데는 몇 가지 이유가 있다.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;정보 공유(information sharing) :&lt;/strong&gt; 여러 응용 프로그램이 동일한 정보에 흥미를 느낄 수 있으므로, 그러한 정보를 병행적으로 접근할 수 있는 환경을 제공해야 한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;계산 가속화(computation speedup) :&lt;/strong&gt; 만일 우리가 특정 태스크를 빨리 실행하고자 한다면, 우리는 그것을 서브태스크로 나누어 이들 각각이 다른 서브태스크들과 병렬로 실행되게 해야 한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;모듈성(modularity) :&lt;/strong&gt; 시스템 기능을 별도의 프로세스들 또는 스레드들로 나누어, 모듈식 형태로 시스템을 구성하기를 원할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;협력적 프로세스들은 데이터를 교환할 수 있는, &lt;strong&gt;즉 서로 데이터를 보내거나 받을 수 있는 프로세스 간 통신(IPC) 기법&lt;/strong&gt;이 필요하다. 프로세스 간 통신에는 기본적으로 &lt;strong&gt;공유 메모리(sharing memory)&lt;/strong&gt;와 &lt;strong&gt;메시지 전달(message passing)&lt;/strong&gt;의 두 가지 모델이 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;공유 메모리 모델에서는 협력 프로세스들에 의해 공유되는 메모리의 영역이 구축된다.
+    &lt;ul&gt;
+      &lt;li&gt;공유 메모리 영역을 구축할 때만 시스템 콜이 필요하다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;메시지 전달 모델에서는 통신이 협력 프로세스들 사이에 교환되는 메시지를 통하여 이루어진다.
+    &lt;ul&gt;
+      &lt;li&gt;분산 시스템에서 공유메모리보다 구현하기 쉽다.&lt;/li&gt;
+      &lt;li&gt;메시지 전달 시스템은 통상 시스템 콜을 사용하여 구현되므로 커널 간섭 등의 부가적인 시간 소비 작업이 필요하기 때문에 공유 메모리 모델이 메시지 전달보다 더 빠르다&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;아래의 그림은 위에 소개된 2가지의 통신 모델(공유 메모리, 메시지 전달)의 그림을 보여준다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-8.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;35-공유-메모리-시스템에서의-프로세스-간-통신-ipc-in-shared-memory-systems&quot;&gt;3.5 공유 메모리 시스템에서의 프로세스 간 통신 (IPC in Shared-Memory Systems)&lt;/h3&gt;
+
+&lt;p&gt;공유 메모리를 사용하는 프로세스 간 통신에서는 &lt;strong&gt;통신하는 프로세스들이 공유 메모리 영역을 구축&lt;/strong&gt;해야 한다.&lt;/p&gt;
+
+&lt;p&gt;통상 공유 메모리 영역은 공유 메모리 세그먼트를 생성하는 프로세스의 주소 공간에 위치한다. 이 공유 메모리 세그먼트를 이용하여 통신하고자 하는 다른 프로세스들은 이 세그먼트를 자신의 주소 공간에 추가하여야 한다.&lt;/p&gt;
+
+&lt;p&gt;협력하는 프로세스의 개념을 설명하기 위해서, 협력하는 프로세스의 일반적인 패러다임인 생산자-소비자 문제를 생각해 보자. 생산자 프로세스는 정보를 생성하고 소비자 프로세스는 정보를 소비한다. 생산자-소비자 문제의 하나의 해결책은 &lt;strong&gt;공유 메모리(buffer)를 사용&lt;/strong&gt;하는 것이다.&lt;/p&gt;
+
+&lt;p&gt;생산자와 소비자가 병행하게 공유 버퍼를 접근하는 상황에 대한 고려 즉, &lt;strong&gt;동기화&lt;/strong&gt;도 고려해야만 한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;36-메시지-전달-시스템에서의-프로세스-간-통신-ipc-in-message-passing-systems&quot;&gt;3.6 메시지 전달 시스템에서의 프로세스 간 통신 (IPC in Message-Passing Systems)&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;메시지 전달 방식은 동일한 주소 공간을 공유하지 않고도 프로세스들이 통신을 하고, 그들의 동작을 동기화할 수 있도록 허용하는 기법을 제공한다.&lt;/strong&gt; 특히 분산된 환경에서 유용하다.&lt;/p&gt;
+
+&lt;p&gt;만약 프로세스 P와 Q가 통신을 원하면, 반드시 서로 메시지를 보내고 받아야 한다. 이들 사이에 &lt;strong&gt;통신 연결(communication link)&lt;/strong&gt;이 설정되어야 한다. 이 연결은 다양한 논리적 방법으로 구현할 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;직접 또는 간접 통신&lt;/li&gt;
+  &lt;li&gt;동기식 또는 비동기식 통신&lt;/li&gt;
+  &lt;li&gt;자동 또는 명시적 버퍼링&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;361-명명-naming&quot;&gt;3.6.1 명명 (Naming)&lt;/h4&gt;
+
+&lt;p&gt;통신을 원하는 프로세스들은 서로를 가리킬 방법이 있어야 한다. 이들은 간접 통신 또는 직접 통신을 사용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;직접 통신하에서, 통신을 원하는 각 프로세스는 통신의 수신자 또는 송신자의 이름을 명시해야 한다.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;send(P, message) : 프로세스 P에 메시지를 전송한다.&lt;/li&gt;
+  &lt;li&gt;receive(Q, message) : 프로세스 Q로부터 메시지를 수신한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;직접 통신 기법에서 통신 연결은 다음의 특성을 가진다.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;통신을 원하는 각 프로세스의 쌍들 사이에 연결이 자동으로 구축된다. 프로세스들은 통신하기 위해 상대방의 신원(identity)만 알면 된다.&lt;/li&gt;
+  &lt;li&gt;연결은 정확히 두 프로세스 사이에만 연관된다.&lt;/li&gt;
+  &lt;li&gt;통신하는 프로세스들의 각 쌍 사이에는 정확히 하나의 연결이 존재해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이 기법은 주소 방식에서 대칭성을 보이나, 주소 지정 시에 비대칭을 사용할 수도 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;간접 통신에서 메시지들은 &lt;u&gt;메일박스(mailbox) 또는 포트(port)&lt;/u&gt;로 송신되고, 그것으로부터 수신된다.&lt;/strong&gt; 포트는 추상적으로 프로세스들에 의해 메시지들이 넣어지고 메시지들이 제거될 수 있는 객체라고도 볼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;각 포트(메일박스)는 고유의 id를 가지고 두 프로세스들이 공유 포트(메일박스)를 가질 때만 이들 프로세스가 통신할 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;send(A, message) : 메시지를 메일박스 A로 송신한다.&lt;/li&gt;
+  &lt;li&gt;receive(A, message) : 메시지를 메일박스 A로부터 수신한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;간접 통신 방법에서 통신 연결은 다음의 성질을 가진다.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;한 쌍의 프로세스들 사이의 연결은 이들 프로세스가 공유 메일박스를 가질 때만 구축된다.&lt;/li&gt;
+  &lt;li&gt;연결은 두 개 이상의 프로세스들과 연관될 수 있다.&lt;/li&gt;
+  &lt;li&gt;통신하고 있는 각 프로세스 사이에는 다수의 서로 다른 연결이 존재할 수 있고, 각 연결은 하나의 메일박스에 대응된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;메일박스는 한 프로세스 또는 운영체제에 의해 소유될 수 있다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;362-동기화-synchronization&quot;&gt;3.6.2 동기화 (Synchronization)&lt;/h4&gt;
+
+&lt;p&gt;프로세스 간의 통신은 send와 receive 프리미티브에 대한 호출에 의해 발생한다. 각 프리미티브를 구현하기 위한 서로 다른 설계 옵션이 있다. &lt;strong&gt;메시지 전달은 봉쇄형(blocking)이거나 비봉쇄형(nonblocking) 방식으로 전달된다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;blocking send : 송신하는 프로세스는 메시지가 수신 프로세스 또는 메일박스에 의해 수신될 때까지 봉쇄된다.&lt;/li&gt;
+  &lt;li&gt;nonblocking send : 송신하는 프로세스가 메시지를 보내고 작업을 재시작한다.&lt;/li&gt;
+  &lt;li&gt;blocking receive : 메시지가 이용 가능할 때까지 수신 프로세스가 봉쇄된다.&lt;/li&gt;
+  &lt;li&gt;nonblocking receive : 송신하는 프로세스가 유요한 메시지 또는 null을 받는다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;send()와 receive()가 모두 봉쇄형일 때, 우리는 송신자와 수신자 간에 &lt;strong&gt;랑데부(rendezvous)&lt;/strong&gt;를 하게 된다.&lt;/p&gt;
+
+&lt;h4 id=&quot;363-버퍼링-buffering&quot;&gt;3.6.3 버퍼링 (Buffering)&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;통신이 직접적이든 간접적이든 간에, 통신하는 프로세스에 의해 교환되는 메시지는 임시 큐에 들어 있다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;이러한 큐를 구현하는 방식은 다음과 같다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;무 용량(zero capacity) :&lt;/strong&gt; 큐의 최대 길이가 0이다. 즉, 링크는 자체 안에 대기하는 메시지들을 가질 수 없다. 이 경우에,송신자는 메시지를 수신할 때까지 기다려야 한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;유한 용량(bounded capacity) :&lt;/strong&gt; 큐는 유한한 길이 n을 가진다. 즉, 최대 n개의 메시지가 그 안에 들어 있을 수 있다. 큐가 가득 차면 봉쇄된다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;무한 용량(unbounded capacity) :&lt;/strong&gt; 큐는 잠재적으로 무한한 길이를 가진다. 따라서 메시지들이 얼마든지 큐 안에서 대기할 수 있다. 송신자는 절대 봉쇄되지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;37-ipc-시스템의-사례-examples-of-ipc-systems&quot;&gt;3.7 IPC 시스템의 사례 (Examples of IPC Systems)&lt;/h3&gt;
+
+&lt;p&gt;네 가지 다른 IPC 시스템을 탐구해 보자.&lt;/p&gt;
+
+&lt;h4 id=&quot;371-posix-공유-메모리-posix-shared-memory&quot;&gt;3.7.1 POSIX 공유 메모리 (POSIX Shared Memory)&lt;/h4&gt;
+
+&lt;p&gt;POSIX 공유 메모리는 memory-mapped 파일을 사용하여 구현된다. memory-mapped 파일은 공유 메모리의 특정 영역을 파일과 연관시킨다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;프로세스는 &lt;code class=&quot;highlighter-rouge&quot;&gt;fd = shm_open(name,  O_CREAT | O_RDWR, 0666)&lt;/code&gt; 와 같이 시스템 콜을 사용하여 공유 메모리 객체를 생성한다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ftruncate(fd, SIZE)&lt;/code&gt;와 같은 함수를 사용하여 공유 메모리 객체의 크기를 바이트 단위로 설정한다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ptr = (char *)mmap(0, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)&lt;/code&gt;와 같은 함수를 사용하여 공유 메모리 객체를 포함하는 memory-mapped 파일을 구축한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;372-mach-메시지-전달-mach-message-passing&quot;&gt;3.7.2 Mach 메시지 전달 (Mach Message Passing)&lt;/h4&gt;
+
+&lt;p&gt;모든 태스크 간 통신을 포함하여 Mach에서 대부분의 통신은 &lt;strong&gt;메시지(Message)&lt;/strong&gt;로 수행된다. Mach에서 &lt;strong&gt;포트(port)&lt;/strong&gt;라고 하는 메일박스로 메시지를 주고 받는다. 포트는 크기가 정해져 있고 단방향이다.
+양방향 통신의 경우 메시지가 한 포트로 전송되고 응답이 별도의 응답 포트로 전송된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;각 포트에는 여러 송신자가 있을 수 있지만 수신자는 오직 하나만 존재한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;태스크가 생성되면 Task Self 포트와 Notify 포트라는 두 개의 특별한 포트도 생성된다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;커널은 Task Self 포트에 대한 수신 권한을 가지고 있어 태스크가 커널에 메시지를 보낼 수 있다.&lt;/li&gt;
+  &lt;li&gt;커널의 이벤트 발생 알림을 작업의 Notify 포트로 보낼 수 있따.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;mach_port_allocate() API는 새 포트를 작성하고 메시지 큐를 위한 공간을 할당한다. 또한 포트에 대한 권한을 식별한다.&lt;/p&gt;
+
+&lt;p&gt;각 태스크는 또한 &lt;strong&gt;부트스트랩 포트&lt;/strong&gt;에 액세스 할 수 있어서 태스크가 생성한 포트를 시스템 전체의 &lt;strong&gt;부트스트랩 서버&lt;/strong&gt;에 등록할 수 있다. 포트가 부트스트랩 서버에 등록되면 다른 태스크가 이 레지스트리에서 포트를 검색하여 포트로 메시지를 보낼 수 있는 권한을 얻을 수 있다.&lt;/p&gt;
+
+&lt;p&gt;mach_msg() 함수는 메시지를 보내고 받는 표준 API이다. mach_msg()가 호출되면 이는 mach_msg_trap() 함수를 호출하고 mach_msg_trap()은 mach_msg_overwrite_trap()함수를 호출하여 메시지의 실제 전달을 처리한다.&lt;/p&gt;
+
+&lt;p&gt;포트(메일박스)가 가득 찼을 경우 mach_msg()에서 설정할 수 있는 옵션&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;큐에 공간이 생길 때까지 무기한 기다린다.&lt;/li&gt;
+  &lt;li&gt;최대 n 밀리초 동안 기다린다.&lt;/li&gt;
+  &lt;li&gt;기다리지 말고 즉시 복귀한다.&lt;/li&gt;
+  &lt;li&gt;메시지를 일시적으로 캐시 한다. 메시지가 전송되는 큐가 가득 차더라도 운영체제에 전달하여 보존한다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;메시지 시스템의 주요 문제점은 일반적으로 송신자의 포트에서 수신자의 포트로 메시지를 복사해야 하므로 발생하는 성능 저하이다.&lt;/strong&gt;(가상 메모리 관리 기술을 사용하면 같은 시스템 내의 메시지 전송간에 성능 저하를 최소화 할 수 있다.)&lt;/p&gt;
+
+&lt;h4 id=&quot;373-windows&quot;&gt;3.7.3 Windows&lt;/h4&gt;
+
+&lt;p&gt;Windows는 다중 운영 환경 또는 서브시스템을 지원하며, &lt;strong&gt;Application은 메시지 전달(Message Passing) 기법을 통해 이들과 통신한다.&lt;/strong&gt; 따라서 응용 프로그램은 서브시스템 서버의 클라이언트로 간주할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;Windows의 메시지 전달 설비는 &lt;strong&gt;고급 로컬 프로시저 호출 설비(advanced local procedure call facility, ALPC)&lt;/strong&gt;라 불린다. &lt;strong&gt;ALPC는 동일 기계상에 있는 두 프로세스간의 통신에 사용한다.&lt;/strong&gt; 원격 프로시저 호출(RPC) 기법과 같으나, Windows에 맞게 특별히 최적화 되었다.&lt;/p&gt;
+
+&lt;p&gt;Windows는 두 프로세스 간에 연결을 구축하고 유지하기 위해 &lt;strong&gt;포트 객체&lt;/strong&gt;를 사용한다. Windows는 &lt;strong&gt;연결 포트(Connection port)&lt;/strong&gt;와 &lt;strong&gt;통신 포트(communication port)&lt;/strong&gt;의 두 가지 유형의 포트를 사용한다.&lt;/p&gt;
+
+&lt;p&gt;다음은 Windows의 ALPC 과정의 그림이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-9.png&quot; style=&quot;width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ALPC 채널이 생성되면 다음 3가지 중 하나의 메시지 전달 기법의 하나가 선택된다.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;256바이트까지의 작은 메시지의 경우, &lt;u&gt;포트의 메시지 큐가 중간 저장소로 사용되고&lt;/u&gt;, 메시지는 프로세스에서 프로세스로 복사된다.&lt;/li&gt;
+  &lt;li&gt;대용량 메시지는 반드시 &lt;strong&gt;섹션 객체(Section Object)&lt;/strong&gt;를 통하여 전달되어야 한다. 섹션 객체란 채널과 연관된 공유 메모리의 영역을 말한다.&lt;/li&gt;
+  &lt;li&gt;데이터의 양이 너무 많아서 섹션 객체에 저장될 수 없는 경우, 서버 프로세스가 클라이언트의 주소 공간을 직접 읽거나 쓸 수 있는 API를 사용할 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;클라이언트는 채널을 설정할 때 메시지 전달 기법을 설정해야만 한다. 즉, 대용량 메시지 전송이 필요한지&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;u&gt;Windows의 ALPC는 Windows API의 부분이 아니기 때문에 응용 프로그래머는 사용할 수 없다.&lt;/u&gt; Windows API를 사용하는 어플리케이션은 RPC(Remote Procedure Calls)를 부르고, &lt;strong&gt;같은 시스템 상에 존재하는 프로세스의 경우 RPC가 호출되면 이 RPC는 간접적으로 ALPC를 호출&lt;/strong&gt;하여 처리된다.&lt;/p&gt;
+
+&lt;h4 id=&quot;374-파이프-pipes&quot;&gt;3.7.4 파이프 (Pipes)&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;파이프는 두 프로세스가 통신할 수 있게 하는 전달자로서 동작한다.&lt;/strong&gt; 파이프는 초기 UNIX 시스템에서 제공하는 IPC 기법의 하나였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.7.4.1 일반 파이프 (Ordinary Pipes)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;일반 파이프는 생산자-소비자 형태로 두 프로세스 간에 통신을 허용한다.&lt;/strong&gt; 생산자는 파이프의 한 종단(쓰기 종단)에 쓰고, 소비자는 다른 종단(읽기 종단)에서 읽는다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;결과적으로 일반 파이프는 한쪽으로만 데이터를 전송할 수 있으며 오직 단방향 통신만을 가능하게 한다.&lt;/strong&gt; 양방향 통신이 필요하다면 각각 다른 방향으로 데이터를 전송할 수 있는 두 개의 파이프를 사용해야 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;일반 파이프는 파이프를 생성한 프로세스 이외에는 접근할 수 없다.&lt;/strong&gt; 따라서 통상 부모 프로세스가 파이프를 생성하고 fork()로 생성한 자식 프로세스와 통신하기 위해 사용한다.&lt;/p&gt;
+
+&lt;p&gt;다음의 그림은 일반 파이프를 위한 파일 디스크립터를 나타낸 그림이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-10.png&quot; style=&quot;width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;fd 배열은 파일 디스크립터와 부모 및 자식 프로세스의 관계를 보여준다. 이 그림에서 보듯이 부모가 파이프의 쓰기 종단(fd[1])에 데이터를 쓰면 파이프의 읽기 종단(fd[0])에서 자식이 읽을 수 있다.&lt;/p&gt;
+
+&lt;p&gt;Windows 시스템은 일반 파이프를 &lt;strong&gt;익명 파이프(anonymous pipe)&lt;/strong&gt;라고 부른다. &lt;strong&gt;UNIX와 Windows 시스템 모두에서 통신하는 두 프로세스는 부모-자식 관계를 가져야 한다는 것을 꼭 명심하라!! 이 유형의 파이프는 동일한 기계상의 두 프로세스끼리만 통신이 가능하다는 것을 의미한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.7.4.2 지명 파이프 (Named Pipes)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;지명 파이프(Named Pipes)는 양방향으로 통신이 가능하며 부모-자식 관계도 필요로 하지 않는다. Named Pipes가 구축되면 여러 프로세스들이 이를 사용하여 통신할 수 있다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;통신 프로세스가 종료하더라도 지명 파이프는 계속 존재한다. UNIX와 Windows 시스템은 구현상에 차이점은 있지만 모두 지명 파이프를 지원한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UNIX에서 지명 파이프는 FIFO&lt;/strong&gt;라고 부른다. 생성되면 지명 파이프는 파일 시스템의 보통 파일처럼 존재한다. 시스템 콜로 생성 및 조작되며 명시적으로 파일 시스템에서 삭제될 때까지 존재한다. 
+&lt;strong&gt;FIFO는 반이중 전송만이 가능하다.&lt;/strong&gt; 서로 다른 기계에 존재하는 프로세스 사이에 통신이 필요하다면 소켓을 사용해야 한다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;반이중 통신 :&lt;/strong&gt; 양방향으로 데이터가 전송될 수는 있으나 양쪽에서 동시에 전송하는 것은 불가능한 방식&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;전이중 통신 :&lt;/strong&gt; 양쪽에서 동시에 데이터를 전송할 수 있는 방식&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Windows 시스템의 지명 파이프는 전이중 통신을 허용하며, 통신하는 두 프로세스는 같은 기계 또는 다른 기계상에 존재할 수 있다.&lt;/strong&gt; 또한 Windows 시스템은 바이트-단위 또는 메시지-단위 데이터의 전송을 허용한다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h4 id=&quot;실제-상황에서의-파이프&quot;&gt;실제 상황에서의 파이프&lt;/h4&gt;
+
+  &lt;p&gt;&lt;strong&gt;파이프는 UNIX 명령어 라인 환경에서 한 명령의 출력이 다른 명령의 입력으로 사용되는 상황에서 자주 사용된다.&lt;/strong&gt; 파이프는 명령어 라인에서 | 문자를 사용하여 구축될 수 있다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ex) ls | less&lt;/code&gt;&lt;/p&gt;
+
+  &lt;p&gt;이 시나리오에서 ls 명령은 생산자 역할을 하며 출력은 less 명령에 의해 소비된다.&lt;/p&gt;
+
+  &lt;p&gt;Dos Shell도 파이프를 구축하기 위하여 | 문자를 사용한다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ex) dir | more&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;38-클라이언트-서버-환경에서-통신-communication-in-client-server-systems&quot;&gt;3.8 클라이언트 서버 환경에서 통신 (Communication in Client-Server Systems)&lt;/h3&gt;
+
+&lt;p&gt;클라이언트 서버에서 사용할 수 있는 두 가지 다른 통신 전략(Sockets, RPCs)에 대해서 설명하도록 하겠다.&lt;/p&gt;
+
+&lt;h4 id=&quot;381-소켓-socket&quot;&gt;3.8.1 소켓 (Socket)&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;소켓(socket)은 통신의 극점(endpoint)을 뜻한다.&lt;/strong&gt; 두 프로세스가 네트워크상에서 통신을 하려면 양 프로세스마다 하나씩, 총 두 개의 소켓이 필요하다. &lt;strong&gt;각 소켓은 IP 주소와 포트 번호 두가지를 접한(concatenate)해서 구별한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;클라이언트 프로세스가 연결을 요청하면 호스트 컴퓨터가 포트 번호를 부여한다. 이 번호는 1024보다 큰 임의의 정수가 된다.&lt;/p&gt;
+
+&lt;p&gt;아래의 그림을 통해서 알아보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/computer-science/process-11.png&quot; style=&quot;width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;두 호스트 사이에 패킷들이 오갈 때 그 패킷들은 이 목적지 포트 번호가 지정하는 데 따라 적절한 프로세스로 배달된다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;모든 연결은 유일한 소켓 쌍으로 구성되어야 한다!!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;책에는 Java를 사용한 Socket 프로그래밍 예제가 아주 잘 나와 있음으로 이를 참고해 보자!!&lt;/p&gt;
+
+&lt;p&gt;소켓을 이용한 통신은 분산된 프로세스 간에 널리 사용되고 효율적이기는 스레드 간에 구조화되지 않은 바이트 스트림만을 통신하도록 하기 때문에 너무 낮은 수준이다. 이 바이트 스트림의 해석은 오롯이 클라이언트와 서버의 책임이 되기 때문에 더 높은 수준의 소켓 기반 통신을 사용해 보자.&lt;/p&gt;
+
+&lt;!-- 추후 마음을 잡은 다음에 더 공부하자! --&gt;
+
+&lt;!-- #### 3.8.2 원격 프로시저 호출 (Remote Procedure Calls, RPC)
+
+원격 서비스와 관련한 가장 보편적인 형태 중 하나는 RPC 패러다임으로서, **네트워크에 연결된 두 시스템 사이의 통신에 사용하기 위하여 프로시저 호출 기법을 추상화하는 방법으로 설계되었다.**
+
+RPC에서는 프로세스들이 서로 다른 시스템 위에서 돌아가기 때문에 원격 서비스를 제공하기 위해서는 **메시지 기반 통신**을 해야 한다.
+
+RPC 통신에서 전달되는 **메시지는 구조화 되어** 있고, **데이터 패킷 수준을 넘어선다.** 각 메시지에는 원격지 포트에서 listen 중인 RPC 디먼의 주소가 지정되어 있고 실행되어야 할 함수의 식별자, 그리고 그 함수에게 전달되어야 할 매개변수가 포함된다. 그런 후에 요청된 함수가 실행되고 어떤 출력이든지 별도의 메시지를 통해 요청자에게 반환된다.
+
+원격 프로세스가 어떤 서비스를 받고자 하면 그 서비스에 대응되는 적절한 포트 주소로 메시지를 보내야 한다. --&gt;
+
+</description>
+        <pubDate>Fri, 02 Oct 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/computer-science(cs)/2020/10/02/Process.html</link>
+        <guid isPermaLink="true">http://localhost:4000/computer-science(cs)/2020/10/02/Process.html</guid>
+        
+        <category>Operating-System</category>
+        
+        <category>OS</category>
+        
+        <category>CS</category>
+        
+        <category>Computer</category>
+        
+        <category>Process</category>
+        
+        
+        <category>Computer-Science(CS)</category>
+        
+      </item>
     
       <item>
         <title>CORS with Spring (MVC, Security)</title>
@@ -2863,113 +3393,6 @@
         <category>Formatter</category>
         
         <category>converter</category>
-        
-        
-        <category>Spring</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring의 HiddenHttpMethodFilter에 관한 이슈</title>
-        <description>&lt;p&gt;이 포스팅에서는 &lt;strong&gt;HTTP Method의 처리 프로세스&lt;/strong&gt;에 대한 서버단의 이슈에 관해서 설명하고자 한다.&lt;/p&gt;
-
-&lt;p&gt;HTML Form에서는 GET과 POST방식의 Methods만 지원한다. HTML Form이 다른 Methods를 지원하지 않는 이유는 &lt;strong&gt;Form의 역할과는 거리가 멀기 때문&lt;/strong&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;왜 HTML Form이 GET과 POST방식의 Methods만 지원하는지에 대해서 궁금한 독자는 다음의 블로그&lt;a href=&quot;http://haah.kr/2017/05/23/rest-http-method-in-html-form/&quot;&gt;(http://haah.kr/2017/05/23/rest-http-method-in-html-form/)&lt;/a&gt; 를 읽어보자.&lt;/p&gt;
-
-&lt;p&gt;이제부터 HTTP Method에 관해서 나에게 어떠한 &lt;strong&gt;이슈&lt;/strong&gt;가 있었고 어떻게 해결했는지에 대해서 알려줄 것이다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;이슈에러-발생&quot;&gt;이슈(에러) 발생&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;아래의 폼은 사용자를 id로 식별하여 정보를 수정하기 위해 수정할 정보를 서버로 전송하는 폼이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;updateForm.html&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- ... --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;question&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;post&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/users/{user.id}/update&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hidden&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;_method&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;put&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;form-group&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;label&amp;gt;&lt;/span&gt;사용자 아이디 : {user.userId}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- ... --&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;사용자의 정보를 수정하기 위해서 클라이언트는 수정할 데이터를 &lt;strong&gt;PUT 형식으로 서버에 요청&lt;/strong&gt;해야 한다.&lt;/p&gt;
-
-&lt;p&gt;하지만 PUT형식을 제공해 주지 않는 HTML 때문에 우리는 나름 꼼수(?)를 사용해서 Spring이 알아먹을 수 있도록 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;put&quot;/&amp;gt;&lt;/code&gt;를 다음과 같이 폼 태그 내부에 위치시켜야 한다.&lt;/p&gt;
-
-&lt;p&gt;나는 이렇게만 하면 Controller의 &lt;code class=&quot;highlighter-rouge&quot;&gt;@PutMapping(&quot;/users/{id}/update&quot;)&lt;/code&gt;애노테이션을 갖은 핸들러 메서드가 해당 요청에 대해서 잘 처리할 줄 알았다.&lt;/p&gt;
-
-&lt;p&gt;하지만 누가 알았을까..? 정말 이제 시작이란것을..&lt;/p&gt;
-
-&lt;p&gt;다음은 위의 폼의 요청에 따라 서버에서 보여지는 로그이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-HiddenHttpMethodFilter-1.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;보이는가..? 서버는 이 요청을 POST로 해석해 해당 URL의 Post 요청에 해당하는 핸들러 메서드를 찾고 있다.&lt;/p&gt;
-
-&lt;p&gt;될리가 있는가.. 우리는 해당 URL이 Put 요청으로 들어왔을 때 처리할 수 있는 핸들러 메서드만 가지고 있는데…&lt;/p&gt;
-
-&lt;p&gt;어찌된 일인가 도통 모르겠다… 일단 해결해 보자!!&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;해결-방안&quot;&gt;해결 방안&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;정말 이 이슈를 해결하는데 생각보다 오래걸렸고, 생각보다 힘들었다.&lt;/p&gt;
-
-&lt;p&gt;이제와서 생각이 드는 거지만, 이러한 &lt;strong&gt;이슈들을 해결하는데 오래걸리고 힘든 이유&lt;/strong&gt;는 기존 &lt;strong&gt;내 머리속의 지식 안에서만 문제를 해결&lt;/strong&gt;하려고 하니까 힘들고 오래걸리는 듯 하다.&lt;/p&gt;
-
-&lt;p&gt;말이 길었다. 어떻게 이러한 문제를 해결할 수 있었는지에 대해서 설명하겠다. (Spring Web MVC Document에 친절하게 나와있다.)&lt;/p&gt;
-
-&lt;p&gt;아까 Spring에서 지원해주는 꼼수라는 말을 기억하는가??? 그렇다. Spring Web MVC는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;put&quot;/&amp;gt;&lt;/code&gt;를 사용해서 POST를 PUT으로 해석한다.&lt;/p&gt;
-
-&lt;p&gt;하지만, Spring은 신이 아니다… 당연히 이러한 역할을 해주는 Filter가 Bean으로 등록되어야 한다. 이러한 역할을 해주는 Filter는 &lt;strong&gt;HiddenHttpMethodFilter&lt;/strong&gt;이다. 이름 그대로 숨겨진 HTTP Method를 필터하는 클래스이다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;정확히 말해서 HiddenHttpMethodFilter는 Hidden 타입의 input 태그의 속성들을 읽어서 HttpServletRequestWrapper.getMethod() 반환 값을 변경해 요청된 HTTP 메소드의 타입을 PUT, DELETE, PATCH로 변경해주는 필터이다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;그래서 &lt;strong&gt;HiddenHttpMethodFilter&lt;/strong&gt;클래스를 Bean으로 등록하면 위의 이슈(문제는) 해결된다.&lt;/p&gt;
-
-&lt;p&gt;다음의 코드는 HiddenHttpMethodFilter를 Bean으로 등록하는 코드이다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MvcConfig&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebMvcConfigurationSupport&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HiddenHttpMethodFilter&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;httpMethodFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;HiddenHttpMethodFilter&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hiddenHttpMethodFilter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HiddenHttpMethodFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hiddenHttpMethodFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이로써 이번 포스팅은 마친다.&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;참조&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href=&quot;https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html&quot;&gt;Spring Web MVC Document&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/filter/HiddenHttpMethodFilter.html&quot;&gt;Spring API&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-</description>
-        <pubDate>Sun, 03 May 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/spring/2020/05/03/Spring-HiddenHttpMethodFilter.html</link>
-        <guid isPermaLink="true">http://localhost:4000/spring/2020/05/03/Spring-HiddenHttpMethodFilter.html</guid>
-        
-        <category>Spring</category>
-        
-        <category>Data</category>
         
         
         <category>Spring</category>
