@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/computer-science(cs)/2020/10/14/Threads-and-Concurrency.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/computer-science(cs)/2020/10/02/Process.html</loc>
     </url>
     
@@ -509,6 +513,22 @@
     
     <url>
         <loc>http://localhost:4000/tag/process/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/threads/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/concurrency/</loc>
     </url>
     
     
