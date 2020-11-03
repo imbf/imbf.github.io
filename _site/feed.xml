@@ -6,9 +6,347 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 24 Oct 2020 10:12:59 +0900</pubDate>
-    <lastBuildDate>Sat, 24 Oct 2020 10:12:59 +0900</lastBuildDate>
+    <pubDate>Tue, 03 Nov 2020 21:40:00 +0900</pubDate>
+    <lastBuildDate>Tue, 03 Nov 2020 21:40:00 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>DevOps란 무엇인가?</title>
+        <description>&lt;p&gt;이 글은 DevOps에 관한 정보를 담고 있는 글이다.&lt;/p&gt;
+
+&lt;p&gt;DevOps는 &lt;a href=&quot;https://github.com/JNU-econovation/webper&quot;&gt;webper 프로젝트&lt;/a&gt;에 적용했던 방법론이기도 하고, 예전부터 공부해 보고 싶은 방법론이기도 해서 DevOps에 대한 많은 문서를 공부해보고 나의 생각 및 관련 자료들을 정리한 글이다.&lt;/p&gt;
+
+&lt;p&gt;“DevOps란 무엇인가?”에 대한 포스팅을 시작으로 프로젝트 개발시 DevOps를 달성(?)할 수 있는 여러 자동화 툴들과 인프라 구성 방법에 대해서 탐구할 생각이다!! 물론 이들 또한 포스팅으로 정리해 올릴 생각이기 때문에 독자 여러분이 많은 관심을 주셨으면 좋겠다.&lt;/p&gt;
+
+&lt;p&gt;지금부터 DevOps에 대해서 알아가기 위한 긴 여정을 시작하도록 하겠다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;1-devops란-무엇인가&quot;&gt;1. DevOps란 무엇인가?&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;DevOps란 무엇인가에 대해서 소개하기 앞서 DevOps는 “문화”인가? “방법론”인가? “추상적인 개념”인가? “도구”인가? “철학”인가?에 대해서 단 하나로 정의하기에는 논란이 많다.&lt;/p&gt;
+
+&lt;p&gt;DevOps에 관한 많은 글을 읽은 나의 입장에서 생각해 봤을 때 DevOps를 하나의 카테고리로 구분하기에는 참 쉽지 않다. 각 문서가 설명하는 DevOps에 대한 정의는 각각 다르지만, &lt;strong&gt;DevOps를 통해 이루고자 하는 바는 모두 동일하다.&lt;/strong&gt; 그래서 나는 DevOps를 설명하기위해 하나의 개념으로 정의하기 보다는 DevOps를 통해 이루고자 하는 바를 명시해 주어 이를 통해 독자가 생각하도록 할 수 있게끔 제시해주고자 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;DevOps는 Dev(개발)와 Ops(운영)를 합쳐 비즈니스(User)의 요구사항을 단기간에 반영할 수 있는 품질 높은 소프트웨어를 만들고자 하는 목적을 가진다. 이를 통해 팀 내의 협업이 증진되는 것은 덤이다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;저자는 DevOps 목적을 이루기 위해 다양한 아키텍처, 자동화 툴, Ias, VCS, Cloud, … 등이 사용될 수 있다고 생각하지만 이러한 방법들이 곧 DevOps라고는 절대 생각하지 않는다. 현재 진행중인 프로젝트의 상황에 맞추어서 잘 사용하면 된다고 생각한다. 하지만 이러한 방법들을 적용하는데 있어서 Best Practice는 존재하니 참고하자.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;2-devops가-도입되기-전-전통적인-개발-방법론의-문제점과-해결책&quot;&gt;2. DevOps가 도입되기 전 전통적인 개발 방법론의 문제점과 해결책&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;전통적인 개발 방법론의 문제점에 대해서 정말 잘 정리해 준 &lt;a href=&quot;https://happycloud-lee.tistory.com/45&quot;&gt;포스팅&lt;/a&gt;이 존재한다. 저자는 개발 경력이 짧아서 전통적인 개발 방법론의 문제점에 대해서 절실히 느껴본 적이 없으니 이를 참고해서 글을 작성하도록 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;전통적인-개발-운영-체계&quot;&gt;전통적인 개발 운영 체계&lt;/h3&gt;
+
+&lt;p&gt;일반적인 개발 운영 체계는 아래의 그림과 같다. 개발팀에 의해서 개발이 끝나면, 시스템은 테스트를 거쳐서 운영팀에 이관되고, 운영팀은 해당 시스템을 배포 및 관리 운영한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/devops/what-is-the-devops-1.png&quot; style=&quot;width:30%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;운영팀으로 이관된 시스템들은 개발팀이 많이 관여하지 않고, 운영팀에 의해서 운영된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;probelm-1-문제-발생&quot;&gt;Probelm 1. 문제 발생&lt;/h3&gt;
+
+&lt;p&gt;시스템을 운영하다 보면, 반드시 장애나 이슈가 생기기 마련이다. 개발팀은 애플리케이션을 볼 수는 있지만, 아랫단의 인프라 시스템은 볼 수 있는 능력이 없다. 반대로 운영팀은 인프라 시스템은 잘 알지만, 애플리케이션 자체에 대해서는 잘 알지 못한다.&lt;/p&gt;
+
+&lt;p&gt;문제가 발생했을 경우 운영팀과 개발팀에서 문제의 정확한 이유를 도출해내서 관계된 팀에게 문제 처리를 맡기면 되지만 위에 말한 것 처럼 각 팀은 서로의 분야 이외에는 알지 못하기 때문에 본인이 아는 지식 범위 밖에서 문제가 발생된다면 이것은 무조건 나의 잘못이 아니라고 간주해 다른 팀에게 처리를 떠넘기는 상황이 발생한다.&lt;/p&gt;
+
+&lt;p&gt;이러한 상황들을 개념으로 정의한 것이 있는데 이게 &lt;strong&gt;Fingerpointyness&lt;/strong&gt; 이다. &lt;strong&gt;Fingerpointyness란 정확하게 누가 어떤 문제를 해결해야 하는지 정의되지 않은 상황에서, 협업이 없어지고 문제 해결이 엉뚱한 방향으로 가는 현상을 의미한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Fingerpointyness의 절차는 아래의 그림과 같으며, 자세히 알아보자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/devops/what-is-the-devops-2.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Freaking out &amp;amp; find fault (문제 발견)&lt;/strong&gt; : 문제가 발생하고 문제의 내용을 파악하는 단계이다. 자기 분야에서 문제가 어떤 것인지, 한정된 지식으로 현상 자체를 인지하는 수준이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Blaming Covering ass 단계 (욕하기)&lt;/strong&gt; : 정확한 원인이 아닌 문제의 현상이 파악되면 본인이 아는 지식 범위 이외일 경우 서로 미루기를 한다. 문제가 미루어진 쪽이 문제의 원인이라면 다행이지만 아닌 경우 서로 미루게 되면서 문제의 근본적인 원인은 해결되지 않고 시간만 계속 간다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Whining, Hiding, Hurt Ego 단계 (맘 상처 입기)&lt;/strong&gt; : 계속해서 서로에게 문제를 넘기다 보면, 문제를 숨기거나 상대방을 헐뜯거나 하면서 결국은 서로는 상처를 입게 되고, 점점 커뮤니케이션은 없어지고 관계는 악화된다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Figuring it out (문제 원인 분석)&lt;/strong&gt; : 문제가 해결되어야 하는 시간이 가까워져 오면, 문제를 풀긴 풀어야 하니 어떻게 든지 스스로 모여서 문제를 같이 보게 되거나, 상위 매니저를 통하여 강제적으로 모여 문제에 대한 원인 분석을 해서 결국 원인을 파악하게 된다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Fixing things(문제 해결)&lt;/strong&gt; : 결과적으로 원인 파악 및 문제가 해결된다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;결국엔 문제가 해결되어 다행이지만, 팀 간에 남겨진 협업 문제는 해결되지 못하고 점점 쌓여만 간다…&lt;/p&gt;
+
+&lt;h3 id=&quot;problem-2-운영-이슈에-대한-전달-문제&quot;&gt;Problem 2. 운영 이슈에 대한 전달 문제&lt;/h3&gt;
+
+&lt;p&gt;개발팀은 서비스를 배포한 후 운영에는 많은 관심을 두지 않기 때문에, 고객과의 접점이 거의 없다. 하지만 User의 요구사항을 받는 쪽은 운영팀이기 때문에 이러한 요구사항을 전달받아 개발팀에게 넘겨주게 되는데… 개발팀이 당연히 좋아할 일이 없다. (일이 늘어나는데 누가 좋아하겠는가??) 결국 이러한 운영팀의 요구사항들은 개발팀에게 거절되기 쉽고 서비스 기획 팀에게 넘어가게 된다.&lt;/p&gt;
+
+&lt;p&gt;수 많은 소프트웨어가 존재하는 현 시대에 소프트웨어가 살아남기 위해서는 사용자의 요구사항을 즉각적으로 반영해야만 하는데 개발과 운영의 분리는 이러한 트렌드와의 거리를 점점 멀어지게 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;problem-3-변경-요건&quot;&gt;Problem 3. 변경 요건&lt;/h3&gt;
+
+&lt;p&gt;서비스가 운영 배포된 후에도, 비즈니스(기획팀)에 의해서, 서비스에 대한 신규 요구 사항은 계속적으로 나오게 되고, 새로운 변경 요건은 신규 개발과, 테스트 배포 그리고 지속적인 운영을 요구 하게 된다.&lt;/p&gt;
+
+&lt;p&gt;하지만 잦은 요구사항은 코드의 잦은 변경과 배포를 요구하게 되고 제대로된 테스트를 거치지 못한 경우 잦은 장애를 유발하게 된다.&lt;/p&gt;
+
+&lt;p&gt;이러한 배경으로 인해서 운영팀은 잦은 배포를 꺼려하게 되고, 조금 더 전통적이고 형식적인 관점에서 주기적인 릴리즈와 테스트를 요구하게 된다. 더 잦은 장애가 발생됨으로 인해서 장애에 대한 적절한 대응책이 없다면 개발팀과 운영팀의 관계는 더 악화 되어 간다.&lt;/p&gt;
+
+&lt;h3 id=&quot;solution&quot;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;우리는 어떠한 방식으로 위의 문제들을 해결할 수 있을까??&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;우리는 개발팀과 운영팀 사이에 존재하는 벽을 허물고 팀 간에 협업을 통해 비즈니스(User)의 요구사항을 단기간에 반영할 수 있는 높은 품질의 소프트웨어를 개발해야 한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;이러한 문제들을 해결하기 위해서 나온 것이 DevOps이다. 즉, 개발과 운영을 합쳐 사용자의 의견에 민감하게 반응하는 높은 품질을 소프트웨어를 만들자는 목적을 가진다.&lt;/p&gt;
+
+&lt;p&gt;하지만 개발과 운영.. 하나만 제대로 하기에도 벅찬데 어떻게 2개를 한번에 한다는 말인가??&lt;/p&gt;
+
+&lt;p&gt;같이 알아보자.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;3-devops와-같은-좋은-개념이-왜-이제서야-발전하게-되었는가&quot;&gt;3. DevOps와 같은 좋은 개념이 왜 이제서야 발전하게 되었는가?&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;개발과 운영을 동시에 하는것은 당연히 어렵다. 개발과 운영은 영역 자체가 매우 상이하고, 요구되는 기술 능력도 많이 차이나기 때문에, 일반적인 엔지니어가 양쪽을 모두 커버하기가 어렵다.&lt;/p&gt;
+
+&lt;p&gt;하지만 근래에는 조금 쉬워졌다. 이러한 이유는 다음과 같다.&lt;/p&gt;
+
+&lt;h3 id=&quot;인터넷의-발전&quot;&gt;인터넷의 발전&lt;/h3&gt;
+&lt;p&gt;인터넷의 엄청난 발전 덕분에 우리는 원하는 정보 대부분을 인터넷을 통해 얻을 수 있다. 아니 전부라고 해도 이상하지 않다. 과거에는 주로 서적 및 교육을 통해서 지식을 얻었다면 요즘은 인터넷, 오픈 소스, Youtube, SlideShare 등의 다양한 플랫폼들을 통해서 지식을 습득할 수 있게 되었다. 본인이 원하는 정보는 다 인터넷 속에 있으니 이 얼마나 좋은 시대인가??&lt;/p&gt;
+
+&lt;h3 id=&quot;오픈-소스의-발전&quot;&gt;오픈 소스의 발전&lt;/h3&gt;
+&lt;p&gt;인터넷이 발전하면서, IT의 흐름이 크게 바뀐 것중에 하나는 더 이상 오라클이나 IBM과 같은 대형 벤더의 주도 기술이 아니라 페이스북이나 구글과 같은 거대 B2C 서비스가 IT의 흐름을 이끌기 시작했고, 이러한 업체들이 오픈소스를 적극적으로 후원 및 장려하기 시작했다. 오픈 소스에서 많은 지식들을 배울 수 있으며, 전세계의 개발자들과 이야기할 수도, 일을 할 수도 있게 되었다.&lt;/p&gt;
+
+&lt;h3 id=&quot;좋은-도구들의-발전&quot;&gt;좋은 도구들의 발전&lt;/h3&gt;
+&lt;p&gt;오픈 소스의 발전으로 인해, 좋은 툴들이 많아 졌다. 개발에 관련된 툴 뿐만 아니라, 빌드, 배포, 모니터링에 대한 툴도 많아졌기 때문에, 운영 업무에 해당 하는 부분들을 상당 부분 자동화를 할 수 있게 되었다.&lt;/p&gt;
+
+&lt;h3 id=&quot;클라우드의-등장&quot;&gt;클라우드의 등장&lt;/h3&gt;
+&lt;p&gt;클라우드 컴퓨팅의 가장 큰 특징 중의 하나는 사용자가 인프라 (서버 설치, 네트워크 케이블 구성) 구성할 필요가 없이, 간단하게 책상 앞에 앉아서 웹사이트를 몇번 클릭 하는 것만으로도 지구 반대편의 데이터 센터에 서버, 스토리지 구성, 네트워크 구성이 가능하게 되었다는 것이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;결론&quot;&gt;결론&lt;/h3&gt;
+&lt;p&gt;개발을 할 때 필요한 모듈을 오픈 소스를 조합해서 만들 수 있으며, 좋은 도구들을 통해서 빌드나 배포등을 쉽게 자동화할 수 있게 되었고, 클라우드를 통해 개발자도 네트워크, 서버등에 대한 설정들을 할 수 있어지고, 부족한 정보들은 인터넷을 통해 얻을 수 있게 되었다. &lt;strong&gt;결과적으로 개발자가 할 수 있는 영역이 더욱 더 넓어져 인프라에 대한 전문 지식 없이도, 인터넷과 오픈 소스 그리고 클라우드의 도움을 받아서, 운영을 같이할 수 있는 환경이 마련됬다는 것이다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;4-devops의-특징은-무엇인가&quot;&gt;4. DevOps의 특징은 무엇인가?&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;DevOps에는 아주 다양한 특징들이 있지만, 몇 가지만 정리해보겠다.&lt;/p&gt;
+
+&lt;h3 id=&quot;product-based-teams-over-component-teams-product-기반-팀-구조&quot;&gt;Product-Based Teams Over Component Teams (Product 기반 팀 구조)&lt;/h3&gt;
+&lt;p&gt;DevOps는 기존의 Dev, QA, Ops 등으로 이루어진 Component 기반의 팀 대신에, Product/Service 기반의 팀 구조를 사용한다. Product/Service 기반의 팀 구조를 도입하게 된다면 개발과 운영 사이의 사일로를 제거할 수 있어 DevOps를 성공적으로 도입할 수 있는 확률이 높아진다.&lt;/p&gt;
+
+&lt;h3 id=&quot;automating-repetitive-tasks-반복적인-작업의-자동화&quot;&gt;Automating repetitive tasks (반복적인 작업의 자동화)&lt;/h3&gt;
+&lt;p&gt;모든 수작업은 자동화된 작업에 비해 위험이 증가되기 때문에, DevOps 팀은 자동화에 집착해야 한다. 이러한 자동화 작업 툴들은 주로 운영 업무에서 많이 쓰이는데, 일반적으로 우리가 CI(Continuous Integration)이나 CD(Continuous Delivery)등을 이용해 다루는 빌드, 배포, 테스트 자동화들이 이에 속한다. 반복적인 작업의 자동화를 통해서 개발 자원들의 작업 효율을 높이고 빠른 서비스 업데이트를 가능하게 하며, 자동화 시스템 구축을 통해서 전체 시스템에 대한 이해도를 높일 수 있게 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;widely-shared-metrics-전체에-공유되어지는-지표&quot;&gt;Widely Shared Metrics (전체에 공유되어지는 지표)&lt;/h3&gt;
+&lt;p&gt;DevOps는 팀 전체가 기준으로 삼을 수 있는 서비스에 대한 공통적인 지표(Metric)가 필요하다. 서비스를 개발하고 개선했을 때, 이를 평가하고 현재의 서비스의 진행 상태 (성공 여부, 시스템의 안정성, 사용자의 반응 등)를 인지할 수 있는 기준이 필요하다는 것이다. 또한 이러한 데이터를 기반으로 하는 의사 결정은 DevOps 조직의 주요 측면 중 하나이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;teamwork-over-individual-work-개인적인-업무-보다는-팀워크&quot;&gt;Teamwork Over Individual Work (개인적인 업무 보다는 팀워크)&lt;/h3&gt;
+&lt;p&gt;DevOps 팀은 높은 수준의 전문성과 엔지니어링을 필요로 한다. 전문성은 올바른 일을 할 수 있는 능력, “아니오”라고 말할 수 있는 용기, 기꺼이 도움을 요청하고, 정중하게 동의하지 않으며, 서로 개방적이고 정직한 협업을 할 수 있는 능력을 반영한다. 팀 내의 구성원들이 동의하지 않거나 논쟁하거나 비판할 때 서로를 무시해서는 안되고 사람이 아니라 아이디어에 동의하지 않아야 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;fail-fast-over-delayed-learning-빠른-실패를-통한-학습&quot;&gt;Fail Fast Over Delayed Learning (빠른 실패를 통한 학습)&lt;/h3&gt;
+&lt;p&gt;성숙한 DevOps 팀은 실수로부터 배우기 위해 post mortems을 수행하고 관련된 자료들은 조직 전체에 공유되어지곤 한다. 여기에는 효과적인 피드백 루프와 높은 수준의 자동화를 필요로 한다. 이 외에도 성숙한 DevOps 팀은 서로를 신뢰하고 서로 도전하며 지속적인 개선을 추구하는 문화를 가지고 있다. 실수가 빨리 공유되어지고 이를 철저히 분석함으로써 조직은 한 걸음 더 성장할 수 있는 기회를 빨리 접할 수 있다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;5-devops를-도입함으로써-얻는-장점은-무엇인가&quot;&gt;5. DevOps를 도입함으로써 얻는 장점은 무엇인가?&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;DevOps를 도입함으로써 팀은 다양한 혜택들을 얻을 수 있다. 물론 DevOps가 장점만 가져다 주는 건 아니지만, DevOps를 도입하기에 적절한 비즈니스 환경을 가지고 있는 조직의 경우 실보다는 득이 훨씬 많을 것이라고 생각된다. (나는 DevOps 찬양론자가 아니다.)&lt;/p&gt;
+
+&lt;p&gt;DevOps를 도입함으로써 얻을 수 있는 혜택에 대해서 몇가지 정리해 보았는데 참고 해 보자.&lt;/p&gt;
+
+&lt;h3 id=&quot;speed-속도&quot;&gt;Speed (속도)&lt;/h3&gt;
+&lt;p&gt;DevOps를 도입한 팀은 운영과 개발에 경계가 없어짐으로 작업 속도가 빨라지고 고객을 위해 더 빠르게 혁신하고, 시장 변화에 더 잘 적응하고, 좀 더 효율적으로 비즈니스 성과를 창출할 수 있다. 예를 들어 MSA와 CI/CD를 사용하면 팀에서 서비스를 주도적으로 운영하여 업데이트를 좀 더 빠르게 릴리스 할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;rapid-delivery-신속한-전달&quot;&gt;Rapid Delivery (신속한 전달)&lt;/h3&gt;
+&lt;p&gt;DevOps는 릴리스의 빈도와 속도를 개선하여 제품을 더 빠르게 혁신하고 개선할 수 있다. 새로운 기능의 릴리스와 버그 수정 속도가 빨라질수록 비즈니스(User)의 요구에 더 빠르게 대응하여 경쟁 우위를 강화할 수 있다. 이 과정에서 CI(Continuous Integration) / CD(Continuous Delivery)를 사용할 수 있는데 이는 빌드에서 배포까지 소프트웨어 릴리스 프로세스를 자동화하는 방식입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;reliability-안전성&quot;&gt;Reliability (안전성)&lt;/h3&gt;
+&lt;p&gt;DevOps는 최종 사용자에게 지속적으로 긍정적인 경험을 제공하는 한편 더욱 빠르게 안정적으로 제공할 수 있도록 어플리케이션 업데이트와 인프라 변경의 품질을 보장한다. CI/CD와 같은 방식을 사용하여 각 변경 사항이 제대로 작동하며 안전한지 테스트하고, Monitoring과 Logging방식을 통해 실시간으로 성능에 대한 정보를 얻을 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;scale-확장&quot;&gt;Scale (확장)&lt;/h3&gt;
+&lt;p&gt;DevOps는 개발자가 규모에 따라 인프라와 개발 프로세스를 운영 및 관리한다. 자동화와 일관성이 지원되므로 위험을 줄이면서 복잡한 시스템 또는 변화하는 시스템을 효율적으로 관리할 수 있다. 예를 들어 Iac(Infrastructure as Code)를 사용하면 개발, 테스트 및 프로덕션 환경을 반복 가능하고 더 효율적인 방식으로 관리할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;improved-collaboration-협업-향상&quot;&gt;Improved Collaboration (협업 향상)&lt;/h3&gt;
+&lt;p&gt;주인의식 및 책임과 같은 가치를 강조하는 DevOps 모델에서는 Product/Service 개발에 좀 더 효과적인 팀을 구축한다. 개발자와 운영팀은 긴밀하게 협업하고, 많은 책임을 공유하며, 워크플로를 결합한다. 이를 통해 비효율성을 줄이고 시간을 절약하고 소프트웨어의 품질을 높일 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;security-보안&quot;&gt;Security (보안)&lt;/h3&gt;
+&lt;p&gt;DevOps는 제어를 유지하고 준수하면서 신속하게 개발을 진행할 수 있다. 자동화된 규정 준수 정책, 세분화된 제어 및 구성 관리 기술을 사용함으로써 보안을 그대로 유지하면서 DevOps 모델을 도입할 수 있다. 예를 들어 Iac와 코드형 정책을 사용하면 규모에 따라 규정 준수를 정의하고 추적할 수 있다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;6-devops-toolchain&quot;&gt;6. DevOps ToolChain&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;DevOps ToolChain이란 DevOps를 적용하기 위해 도와주는 특정한 툴들의 조합이다.&lt;/p&gt;
+
+&lt;p&gt;DevOps는 기술 보다는 관행에 가깝기 때문에 소프트웨어 개발의 모든 단계를 정의할 수 있는 단일 도구는 없어 DevOps의 적용을 도와주는 Tool들의 집합인 ToolChain이 형성되었다.&lt;/p&gt;
+
+&lt;p&gt;ToolChain을 적절히 활용하면 DevOps의 목적인 비즈니스(User)의 요구사항을 단기간에 반영할 수 있는 품질 높은 소프트웨어를 만들 수 있는 확률이 높아진다. ToolChain에 속해있는 Tool들을 DevOps를 이루기 위한 Best Practice라고 보아도 좋지만 이를 사용한다고 해서 DevOps가 도입되는 것은 아니라고 생각한다. 즉, ToolChain을 사용하여 빠른 배포, 코드의 품질 향상 등의 목적을 이룰 수 있지만 이들을 도입한다고 해서 무조건적으로 이루어지는 것은 아니기 때문에 팀 내에서 DevOps를 이루기 위한 노력을 꾸준히 해야된다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;일반적으로 Toolchain이란 tool들이 연속적으로 실행되고 각각의 tool에 대한 환경 상태의 결과 또는 출력이 다음 tool에 대한 시작 환경 또는 입력이 되는 것을 의미하지만, &lt;u&gt;요즘 toolchain은 연속으로 실행되지 않는 관련있는 툴들의 집합을 언급할 때도 사용된다.&lt;/u&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;devops를-위한-핵심-카테고리들에-대해서-알아보고-관련된-특정-tool에-대해서도-알아보자&quot;&gt;DevOps를 위한 핵심 카테고리들에 대해서 알아보고 관련된 특정 tool에 대해서도 알아보자.&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;표현 방식&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Category
+      &lt;ul&gt;
+        &lt;li&gt;Specific Tool Involved&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Planning (기획)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;GitLab&lt;/li&gt;
+      &lt;li&gt;Tasktop&lt;/li&gt;
+      &lt;li&gt;CollabNet’s VersionOne&lt;/li&gt;
+      &lt;li&gt;Trello&lt;/li&gt;
+      &lt;li&gt;Azure Boards&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Issue Tracking (이슈 추적)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Atlassian’s Jira&lt;/li&gt;
+      &lt;li&gt;JetBrains’ YouTrack&lt;/li&gt;
+      &lt;li&gt;Zendesk&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Source Control (소스 코드 관리)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Git&lt;/li&gt;
+      &lt;li&gt;GitHub&lt;/li&gt;
+      &lt;li&gt;GitLab&lt;/li&gt;
+      &lt;li&gt;Bitbucket&lt;/li&gt;
+      &lt;li&gt;Subversion&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Build Tools (빌드 도구)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Maven / gradle&lt;/li&gt;
+      &lt;li&gt;MSBuild&lt;/li&gt;
+      &lt;li&gt;Rake&lt;/li&gt;
+      &lt;li&gt;JFrog Artifactory&lt;/li&gt;
+      &lt;li&gt;NuGet&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Tesing Tools (테스팅 도구)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;JUnit&lt;/li&gt;
+      &lt;li&gt;xUnit.net&lt;/li&gt;
+      &lt;li&gt;Selenium&lt;/li&gt;
+      &lt;li&gt;Jasmine&lt;/li&gt;
+      &lt;li&gt;Cucumber&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Continuous Integration (지속적인 통합)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Jenkins&lt;/li&gt;
+      &lt;li&gt;Travis CI&lt;/li&gt;
+      &lt;li&gt;Circle CI&lt;/li&gt;
+      &lt;li&gt;AWS CodePipeline&lt;/li&gt;
+      &lt;li&gt;Concourse&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Continuous Deployment(Delivery) (지속적인 전달(배포))&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Spinnaker&lt;/li&gt;
+      &lt;li&gt;Octopus Deploy&lt;/li&gt;
+      &lt;li&gt;AWS CodeDeploy&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Configuration-Management Tools (설정 관리 도구)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Terraform&lt;/li&gt;
+      &lt;li&gt;BOSH&lt;/li&gt;
+      &lt;li&gt;Chef&lt;/li&gt;
+      &lt;li&gt;Ansible&lt;/li&gt;
+      &lt;li&gt;Puppet&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cloud Playform (클라우드 플랫폼)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Amazon Web Service(AWS)&lt;/li&gt;
+      &lt;li&gt;Microsoft Azure&lt;/li&gt;
+      &lt;li&gt;Google Cloud Platform&lt;/li&gt;
+      &lt;li&gt;Container Schedulers(k8s, Docker Swarm, …)&lt;/li&gt;
+      &lt;li&gt;Heroku&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Monitoring and Logging Tools (모니터링 및 로깅 도구)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;ELK Stack&lt;/li&gt;
+      &lt;li&gt;Pinpoint&lt;/li&gt;
+      &lt;li&gt;Zipkin&lt;/li&gt;
+      &lt;li&gt;New Relic&lt;/li&gt;
+      &lt;li&gt;Prometheus&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Communication Tools (의사소통 도구)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Slack&lt;/li&gt;
+      &lt;li&gt;Microsoft Teams&lt;/li&gt;
+      &lt;li&gt;Google Hangouts&lt;/li&gt;
+      &lt;li&gt;Zoom&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Knowledge Sharing Tools (지식 공유 도구)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;GitHub Pages&lt;/li&gt;
+      &lt;li&gt;Confluence&lt;/li&gt;
+      &lt;li&gt;Jekyll&lt;/li&gt;
+      &lt;li&gt;Google Sites&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;위의 다양한 카테고리들은 DevOps를 수행하는데 전반적으로 도움이되는 카테고리들이다. 위의 ToolChain들은 팀에서 지속 가능한 방식으로 고객에게 지속적으로 가치를 제공하고 차별화를 지원하는 위치에서 사용되어져야 한다고 생각한다.&lt;/p&gt;
+
+&lt;p&gt;위의 ToolChain은 DevOps를 이루기 위한 Best Practice이지만, 이는 DevOps의 목적을 이루기위한 하나의 수단일 뿐이지 유일한 수단이 아니라는 점을 다시 한번 강조하며 이번 포스팅을 마치도록 하겠다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;다음에는 CI/CD 시리즈로 찾아뵙도록 하겠습니다. 꾸벅~&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dzone.com/articles/5-characteristics-of-a-devops-organisation&quot;&gt;https://dzone.com/articles/5-characteristics-of-a-devops-organisation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dzone.com/articles/the-devops-toolchain&quot;&gt;https://dzone.com/articles/the-devops-toolchain&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/DevOps_toolchain&quot;&gt;https://en.wikipedia.org/wiki/DevOps_toolchain&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/ko/devops/what-is-devops/&quot;&gt;https://aws.amazon.com/ko/devops/what-is-devops/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bcho.tistory.com/815&quot;&gt;https://bcho.tistory.com/815&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bcho.tistory.com/817&quot;&gt;https://bcho.tistory.com/817&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/DevOps&quot;&gt;https://en.wikipedia.org/wiki/DevOps&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 28 Oct 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/devops/2020/10/28/What-is-The-DevOps.html</link>
+        <guid isPermaLink="true">http://localhost:4000/devops/2020/10/28/What-is-The-DevOps.html</guid>
+        
+        <category>DevOps</category>
+        
+        
+        <category>DevOps</category>
+        
+      </item>
     
       <item>
         <title>[Operating System - Chapter 5] CPU 스케줄링</title>
@@ -3889,374 +4227,6 @@
         <category>Infinite</category>
         
         <category>Recursion</category>
-        
-        
-        <category>Spring</category>
-        
-      </item>
-    
-      <item>
-        <title>Spring Security + JWT를 통해 프로젝트에 인증 구현하기</title>
-        <description>&lt;p&gt;Spring Security와 JWT를 활용해서 프로젝트에 인증을 어떻게 구현했는지에 대해서 포스팅 하려고 한다.&lt;/p&gt;
-
-&lt;p&gt;토큰을 사용한 인증은 처음이기도 하고, Google OAuth를 함께 사용하는 바람에… 개념이 해깔려 며칠간 계속 헤맸던 것 같다.&lt;/p&gt;
-
-&lt;p&gt;이제서야 조금 감을 잡으며 프로젝트에 인증 구현을 마쳤는데.. 아직 구현되지 않은 기능들이 매우 많다 ㅎㅎ 빨리 구현하고 싶다!!!&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;서론이 길었다!!! 지금부터 Spring Security란 무엇이고, Spring Security와 JWT를 사용해서 어떻게 인증을 구현했는지에 대해서 포스팅 하겠다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;spring-security란&quot;&gt;Spring Security란?&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Spring Security란 인증과, 권한부여, 일반적인 공격에 대한 보호의 기능을 제공하는 프레임워크이다.&lt;/strong&gt; 즉, Spring Security를 사용하면 어플리케이션의 보안 관련 기능을 자체적으로 구현 할 필요 없이 쉽고 안전하게 구현할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;Spring Security의 Servlet 보안 지원은 &lt;strong&gt;Servlet Filter(이하 Filter)&lt;/strong&gt;를 기반으로 한다. 클라이언트가 어플리케이션으로 request를 보내면, Container는 요청 URI의 경로에 따라 어떤 Filter와 어떤 Servlet을 적용할 것인지 결정한다.&lt;/p&gt;
-
-&lt;p&gt;Spring은 여러 Filter중 Servlet Container Lifecycle과 ApplicationContext사이에 연결할 수 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;DelegatingFilterProxy&lt;/code&gt;라는 Filter를 제공한다.&lt;/p&gt;
-
-&lt;p&gt;Spring Security의 Servlet 보안 지원은 &lt;code class=&quot;highlighter-rouge&quot;&gt;DelegatingFilterProxy&lt;/code&gt;가 감싸고 있는 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;FilterChainProxy&lt;/code&gt;&lt;/strong&gt;에 의해 수행되며, &lt;code class=&quot;highlighter-rouge&quot;&gt;FilterChainproxy&lt;/code&gt;는 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SecurityFilterChain&lt;/code&gt;&lt;/strong&gt;을 통해 많은 작업을 &lt;strong&gt;Security Filter&lt;/strong&gt; 인스턴스에 위임한다.&lt;/p&gt;
-
-&lt;p&gt;위 과정을 그림으로 나타내면 다음과 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-Security-With-JWT-1.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;SecurityFilterChain은 스프링에서 보안과 관련된 여러 Security Filter List를 갖고 있는 객체로 이를 순회하면서 필터링을 실시한다.&lt;/p&gt;
-
-&lt;p&gt;SecurityFilterChain에 존재하는 Security Filter순서는 다음과 같다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;ChannelProcessingFilter&lt;/li&gt;
-  &lt;li&gt;ConcurrentSessionFilter&lt;/li&gt;
-  &lt;li&gt;WebAsyncManageIntegrationFilter&lt;/li&gt;
-  &lt;li&gt;SecurityContextPersistenceFilter&lt;/li&gt;
-  &lt;li&gt;HeaderWriterFilter&lt;/li&gt;
-  &lt;li&gt;CorsFilter&lt;/li&gt;
-  &lt;li&gt;CsrfFilter&lt;/li&gt;
-  &lt;li&gt;LogoutFilter&lt;/li&gt;
-  &lt;li&gt;OAuth2AuthorizationRequestRedirectFilter&lt;/li&gt;
-  &lt;li&gt;Saml2WebSsoAuthenticationRequestFilter&lt;/li&gt;
-  &lt;li&gt;X509AuthenticationFilter&lt;/li&gt;
-  &lt;li&gt;AbstractPreAuthenticatedProcessingFilter&lt;/li&gt;
-  &lt;li&gt;CasAuthenticationFilter&lt;/li&gt;
-  &lt;li&gt;OAuth2LoginAuthenticationFilter&lt;/li&gt;
-  &lt;li&gt;Saml2WebSsoAuthenticationFilter&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;UsernamePasswordAuthenticationFilter&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;ConcurrentSessionFilter&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;… (총 33개의 Spring Security Filter가 존재한다.)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;위의 Security Filter중 &lt;strong&gt;Security Authentication Filter&lt;/strong&gt;(UsernamePasswordAuthentication, OAuth2LoginAuthenticationFilter와 같은 인증 필터)는 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationManager&lt;/code&gt;를 통해 인증을 수행한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationManager&lt;/code&gt;는 Spring Security의 &lt;strong&gt;필터들이 인증을 수행하는 방법에 대한 명세&lt;/strong&gt;를 정의해 놓은 인터페이스이다.&lt;/p&gt;
-
-&lt;p&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationManager&lt;/code&gt;는 일반적으로 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ProviderManager&lt;/code&gt;&lt;/strong&gt;로 구현되며, &lt;code class=&quot;highlighter-rouge&quot;&gt;ProviderManager&lt;/code&gt;는 여러 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationProvider&lt;/code&gt;&lt;/strong&gt;에 인증을 위임한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;여러 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationProvider&lt;/code&gt;중 하나라도 인증에 성공한다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;ProviderManager&lt;/code&gt;에게 인증된 &lt;code class=&quot;highlighter-rouge&quot;&gt;Authentication&lt;/code&gt;객체를 반환하고 이는 event 기반으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationFilter&lt;/code&gt;에 전송된다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ProviderManager&lt;/code&gt;에 설정된 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationProvider&lt;/code&gt;중 어느 것도 성공적으로 인증을 수행할 수 없다면, 인증은 실패할 것이고 알맞는 예외가 &lt;code class=&quot;highlighter-rouge&quot;&gt;ProviderManager&lt;/code&gt;에게 건내질 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;인증이 성공할 경우 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationFilter&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;SecuritycontextHolder&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;SecurityContext&lt;/code&gt;에 인증된 Authentication 객체를 저장할 수 있도록 한다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;아래의-그림은-username-and-password-인증-방식의-아키텍처이다&quot;&gt;아래의 그림은 Username and Password 인증 방식의 아키텍처이다.&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-Security-With-JWT-2.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;위 그림의 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationFilter&lt;/code&gt;의 역할은 &lt;code class=&quot;highlighter-rouge&quot;&gt;UsernamePasswordAuthenticationFilter&lt;/code&gt;가 수행하고 &lt;strong&gt;전체적인 프로세스&lt;/strong&gt;는 다음과 같다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Client가 어플리케이션에 요청을 보내면, Servlet Filter에 의해서 Security Filter로 Security 작업이 위임되고 여러 Security Filter 중에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;UsernamePasswordAuthenticationFilter&lt;/code&gt;&lt;strong&gt;(Username and Password Authentication 방식에서 사용하는 AuthenticationFilter)&lt;/strong&gt;에서 &lt;strong&gt;인증&lt;/strong&gt;을 처리한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationFilter&lt;/code&gt;&lt;strong&gt;(UsernamePasswordAuthenticationFilter인데 지금부터 AuthenticationFilter라고 부름)&lt;/strong&gt;는 Servlet 요청 객체(HttpServletRequest)에서 username과 password를 추출해 &lt;code class=&quot;highlighter-rouge&quot;&gt;UsernameAuthenticationToken&lt;/code&gt;&lt;strong&gt;(이하 인증 객체)&lt;/strong&gt;을 생성한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationFilter&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationManager&lt;/code&gt;&lt;strong&gt;(구현체 : ProviderManager)&lt;/strong&gt;에게 인증 객체를 전달한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ProviderManager&lt;/code&gt;는 인증을 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationProvider&lt;/code&gt;에게 인증 객체를 전달한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationProvider&lt;/code&gt;는 전달받은 인증 객체의 정보(일반적으로 사용자 아이디)를 &lt;code class=&quot;highlighter-rouge&quot;&gt;UserDetailsService&lt;/code&gt;에 넘겨준다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UserDetailsService&lt;/code&gt;는 전달 받은 사용자 정보를 통해 DB에서 알맞는 사용자를 찾고 이를 기반으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;UserDetails&lt;/code&gt;객체를 만듭니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;사용자 정보와 일치하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;UserDetails&lt;/code&gt;객체를 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationProvider&lt;/code&gt;에 전달합니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationProvider&lt;/code&gt;은 전달받은 &lt;code class=&quot;highlighter-rouge&quot;&gt;UserDetails&lt;/code&gt;를 인증해 성공하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;ProviderManager&lt;/code&gt;에게 권한(Authorities)을 담은 검증된 인증 객체를 전달합니다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ProviderManager&lt;/code&gt;는 검증된 인증 객체를 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationFilter&lt;/code&gt;에게 전달합니다. &lt;strong&gt;(event 기반 으로 전달)&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationFilter&lt;/code&gt;는 검증된 인증 객체를 &lt;code class=&quot;highlighter-rouge&quot;&gt;SecurityContextHolder&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;SecurityContext&lt;/code&gt;에 저장합니다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Spring Security 전체를 설명하기에는 하나의 포스팅으로 부족하기 때문에 아주 기본적인 프로세스만 설명했고, 이제 메인 주제인 &lt;strong&gt;나의 프로젝트에 어떻게 Spring Security + JWT를 적용&lt;/strong&gt;했는지에 대해서 알아보도록 하겠다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;spring-security--jwt를-프로젝트에-어떻게-적용-했는가&quot;&gt;Spring Security + JWT를 프로젝트에 어떻게 적용 했는가?&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;클라이언트가 Spring Security를 적용한 어플리케이션에 리소스를 요청할 때 접근 권한이 없는 경우 기본적으로 &lt;strong&gt;Username and Password Authentication Mechanism&lt;/strong&gt;을 사용해 &lt;strong&gt;로그인 폼&lt;/strong&gt;으로 보내지게 되는데 그 역할을 하는 필터는 &lt;code class=&quot;highlighter-rouge&quot;&gt;UsernamePasswordAuthenticationFilter&lt;/code&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;내가 개발하고 있는 Rest API Server는 &lt;strong&gt;Username and Password Authentication Mechanism&lt;/strong&gt;을 사용하지 않을 것이기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;UsernamePasswordAuthenticationFilter&lt;/code&gt;이전에 사용자 정의 필터인 &lt;code class=&quot;highlighter-rouge&quot;&gt;JwtAuthenticationFilter&lt;/code&gt;에서 인증 및 권한처리가 필요했다.&lt;/p&gt;
-
-&lt;p&gt;그래서 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;JwtAuthenticationFilter&lt;/code&gt;&lt;/strong&gt;를 다음과 같이 만들어서 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UsernamePasswordAuthenticationFilter&lt;/code&gt;&lt;/strong&gt;이전에 등록했다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;JwtAuthenticationFilter.java&lt;/strong&gt; : Jwt가 유효한 토큰인지 인증하기 위한 Filter이다.&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JwtAuthenticationFilter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GenericFilterBean&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JwtTokenProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;JwtAuthenticationFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;JwtTokenProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jwtTokenProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Request로 들어오는 Jwt Token의 유효성을 검증하는 filter를 filterChain에 등록합니다.&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;servletRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;servletResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FilterChain&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filterChain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServletException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;resolveToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpServletRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;servletRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;validateToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// token 검증&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Authentication&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAuthentication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// 인증 객체 생성&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;SecurityContextHolder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAuthentication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// SecurityContextHolder에 인증 객체 저장&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;filterChain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;doFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;servletRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;servletResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Spring Security Filter와 통합하지 않고 &lt;strong&gt;사용자가 정의한 필터(JwtAuthenticationFilter)에서 인증 및 권한 작업을 진행&lt;/strong&gt;할 것이기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationManager&lt;/code&gt;를 사용하지 않고 &lt;code class=&quot;highlighter-rouge&quot;&gt;JwtTokenProvider&lt;/code&gt;를 통해서 인증 후 &lt;code class=&quot;highlighter-rouge&quot;&gt;SecurityContextHolder&lt;/code&gt;를 바로 사용했다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Spring Security Document의 관련 글&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;p&gt;If you are not integrating with Spring Security’s Filters you can set the SecurityContextHolder directly and are not required to use an AuthenticationManager.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;다음으로는 생성한 &lt;code class=&quot;highlighter-rouge&quot;&gt;JwtAuthenticationFilter&lt;/code&gt;를 Spring Security의 &lt;code class=&quot;highlighter-rouge&quot;&gt;UsernamePasswordAuthenticationFilter&lt;/code&gt;&lt;strong&gt;이전에 등록하는 설정&lt;/strong&gt;을 할 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;SecurityConfig.java&lt;/strong&gt; : Spring Security 관련 설정들을 하는 Configuration 클래스&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@EnableWebSecurity&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SecurityConfig&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebSecurityConfigurerAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JwtTokenProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;SecurityConfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;JwtTokenProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jwtTokenProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthenticationManager&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;authenticationManagerBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authenticationManagerBean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpSecurity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;httpBasic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;disable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;csrf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;disable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authorizeRequests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;antMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/login/google&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;anonymous&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
-                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;anyRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authenticated&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addFilterBefore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JwtAuthenticationFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UsernamePasswordAuthenticationFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Filter를 등록 했으면 Jwt Token을 생성하고, 인증 및 권한 부여 등의 기능을 제공할 &lt;strong&gt;Provider&lt;/strong&gt;를 만들어야 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;JwtTokenProvider.java&lt;/strong&gt; : Jwt Token을 생성, 인증, 권한 부여, 유효성 검사, PK 추출 등의 다양한 기능을 제공하는 클래스&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JwtTokenProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;TOKEN_VALID_MILISECOND&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000L&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 10시간&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;spring.jwt.secret&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;secretKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserDetailsService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userDetailsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;JwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@Qualifier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userUserDetailsService&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserDetailsService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userDetailsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;userDetailsService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userDetailsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@PostConstruct&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;secretKey&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Base64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encodeToString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;secretKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Jwt 토큰 생성&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userPk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;UserRole&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;roles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;Claims&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;claims&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Jwts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;claims&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userPk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;claims&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;roles&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;roles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Jwts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setClaims&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;claims&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 데이터&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setIssuedAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 토큰 발행 일자&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setExpiration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;TOKEN_VALID_MILISECOND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 만료 기간&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;signWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;SignatureAlgorithm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;HS512&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;secretKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 암호화 알고리즘, secret 값 &lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compact&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Token 생성&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// 인증 성공시 SecurityContextHolder에 저장할 Authentication 객체 생성&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Authentication&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getAuthentication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;UserDetails&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userDetails&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userDetailsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadUserByUsername&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getUserPk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UsernamePasswordAuthenticationToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userDetails&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userDetails&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAuthorities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Jwt Token에서 User PK 추출&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getUserPk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Jwts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setSigningKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;secretKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parseClaimsJws&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBody&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;resolveToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getHeader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;X-AUTH-TOKEN&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Jwt Token의 유효성 및 만료 기간 검사&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;validateToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nc&quot;&gt;Jws&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Claims&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;claims&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Jwts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setSigningKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;secretKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parseClaimsJws&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jwtToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;claims&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBody&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getExpiration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;인증 기능을 수행할 JwtTokenProvider를 만들었으면 JwtTokenProvider가 제공한 사용자 정보로 UserDetails를 제공할 &lt;code class=&quot;highlighter-rouge&quot;&gt;UserDetailsService&lt;/code&gt;를 만들어야 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UserDetailsService.java :&lt;/strong&gt; JwtTokenProvider가 제공한 사용자 정보로 DB에서 알맞은 사용자 정보를 가져와 UserDetails 생성&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Service&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserUserDetailsService&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserDetailsService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;UserUserDetailsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;UserService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;userService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;//&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserDetails&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loadUserByUsername&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UsernameNotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findUserByEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;UserDetailsService까지 만들었으면 UserDetails를 상속받는 &lt;strong&gt;도메인 객체&lt;/strong&gt;를 만들고 사용자를 식별할 JwtToken을 생성할 Controller까지 만들면 Production 코드는 끝이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;(User 클래스와 Controller 클래스의 코드를 첨부하고 싶었으나, 많은 배경지식이 필요한 코드들이 존재해 첨부하지 않았다.)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;그렇다면 위의 생성된 코드들을 테스트 할 수 있는 Test Code를 만들면 다음과 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RunWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;SpringRunner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@SpringBootTest&lt;/span&gt;
-&lt;span class=&quot;nd&quot;&gt;@AutoConfigureMockMvc&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GoogleLoginControllerTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;MockMvc&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mockMvc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@MockBean&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;GoogleLoginService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;googleLoginService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;UserService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;JwtTokenProvider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GoogleLoginWithWrongAccessToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// When &amp;amp; Then&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;when&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;googleLoginService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authenticate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Wrong_Access_Token&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)))&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenReturn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ResponseEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;badRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// Then&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mockMvc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/login/google&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;contentType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;APPLICATION_JSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{\&quot;access_token\&quot; : \&quot;Wrong_Access_Token\&quot;}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;andDo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;andExpect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isBadRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GoogleLoginWithRightAccessToken&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;GoogleUserinfoDTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;googleUserinfoDTO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GoogleUserinfoDTO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;googleUserinfoDTO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;frog&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;googleUserinfoDTO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;frog@email.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nc&quot;&gt;ResponseEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;GoogleUserinfoDTO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;responseEntity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ResponseEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ok&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;googleUserinfoDTO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// When&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;when&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;googleLoginService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authenticate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Right_Access_Token&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)))&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;thenReturn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;responseEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;nc&quot;&gt;MvcResult&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mvcResult&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mockMvc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/login/google&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;contentType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;APPLICATION_JSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{\&quot;access_token\&quot; : \&quot;Right_Access_Token\&quot;}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;andDo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;andExpect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isOk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;andReturn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-
-        &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contentAsString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JsonPath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mvcResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getContentAsString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;$.X-AUTH-TOKEN&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;assertThat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jwtTokenProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getUserPk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contentAsString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEqualTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;frog@email.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;mockMvc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/test&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;X-AUTH-TOKEN&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;contentAsString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;andDo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이를 돌려보면 적절한 Jwt Token으로 인증을 완료하고 SecurityContextHolder에서 알맞는 사용자의 &lt;strong&gt;Principal&lt;/strong&gt;을 가져오는 걸 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/spring/Spring-Security-With-JWT-3.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;글이 아주 길고 장황해 독자들이 이를 읽고 얼마나 많은 도움이 될려는 지는 모르겠지만, Spring Security 아키텍처 부터 프로젝트 적용까지 한 포스팅으로 전부 설명한다는 것이 정말 쉽지 않은 일이었던 것 같고 아주 좋은 경험인 것 같다.&lt;/p&gt;
-
-&lt;p&gt;또한 나의 지식이 늘어감에 또는 나의 프로젝트가 더 커짐에 따라서 이 글을 지속적으로 업데이트 한다는 다짐을 끝으로 글을 마치도록 하겠다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;참고한 사이트&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.spring.io/spring-security/site/docs/5.3.3.BUILD-SNAPSHOT/reference/html5/&quot;&gt;https://docs.spring.io/spring-security/site/docs/5.3.3.BUILD-SNAPSHOT/reference/html5/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://daddyprogrammer.org/post/636/springboot2-springsecurity-authentication-authorization/&quot;&gt;https://daddyprogrammer.org/post/636/springboot2-springsecurity-authentication-authorization/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jeong-pro.tistory.com/205&quot;&gt;https://jeong-pro.tistory.com/205&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.baeldung.com/spring-security-custom-filter&quot;&gt;https://www.baeldung.com/spring-security-custom-filter&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 29 Jun 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/spring/2020/06/29/Spring-Security-with-JWT.html</link>
-        <guid isPermaLink="true">http://localhost:4000/spring/2020/06/29/Spring-Security-with-JWT.html</guid>
-        
-        <category>Spring</category>
-        
-        <category>Security</category>
-        
-        <category>JWT</category>
         
         
         <category>Spring</category>
