@@ -568,6 +568,22 @@
     
     
     <url>
+        <loc>http://localhost:4000/tag/ci-cd/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/cooperation/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
         <loc>http://localhost:4000/category/til/</loc>
     </url>
     
