@@ -133,14 +133,6 @@
     
     
     
-    <url>
-        <loc>http://localhost:4000/about/</loc>
-    </url>
-    
-    
-    
-    
-    
     
     
     <url>
@@ -148,6 +140,14 @@
     </url>
     
     
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/portfolio/</loc>
+    </url>
     
     
     
