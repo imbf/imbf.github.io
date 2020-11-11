@@ -34,7 +34,7 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
 
 ### *Pinpoint Contribution - 오픈소스 컨트리뷰톤 (2020.08 ~ ing)
 
-오픈소스 컨트리뷰톤에 참가하여 대규모 분산 시스템을 위한 APM 도구인 Pinpoint에 기여하였습니다.
+오픈소스 컨트리뷰톤에 참가하여 대규모 분산 시스템을 위한 APM 도구인 Pinpoint의 web모듈에 기여하였습니다.
 
 - **Batch 내의 Alarm Webhook 기능 개발 (진행중)** - [https://github.com/imbf/pinpoint](https://github.com/imbf/pinpoint)
     - 요구사항 추가에 따른 Alarm 도메인 재설계 및 구현
@@ -46,17 +46,15 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
     - Receiver 도메인 모델 설계 및 구현
     - 동적인 Webhook Message를 위한 Deserialize 기능 구현
 
-    
-
 - **Batch 내의 Mail Sender 테스트 작성** - [https://github.com/pinpoint-apm/pinpoint/pull/7271](https://github.com/pinpoint-apm/pinpoint/pull/7271)
-- **Annotation 및 Typo 수정**
+- **프로젝트의 Annotation 및 Typo 수정**
 - **컨트리뷰톤에서 Pinpoint팀 멘티 대표로 최종 발표를 진행해 장려상(정보통신산업진흥원장상) 수상**
 
 <br>
 
 ### *Webper - ECONOVATION (2020.04 ~ 2020.09)
 
-관심있는 웹 사이트를 drag & drop으로 보관할 수 있는 웹 서비스인 webper에 백앤드 개발자로 참여하여 서비스를 개발하였습니다. 
+관심있는 웹 사이트를 drag & drop으로 보관할 수 있는 웹 서비스인 webper에 백앤드 개발자로 참여하여 Spring을 사용해 인증 및 데이터 서버를 개발하였습니다. 
 
 **Webper 저장소:** [https://github.com/JNU-econovation/webper](https://github.com/JNU-econovation/webper)
 
@@ -96,13 +94,13 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
 
 ### *제2회 전남대학교 이노베이션 온라인 해커톤 TF팀장 (2020.05 ~ 2020.08)
 
-전남대학교 최초의 온라인 해커톤인 이노베이션 해커톤의 TF팀 팀장을 맡아 대회를 성공적으로 기획 및 운영할 수 있도록 TF팀을 리드하였습니다. 약 40명의 참가자 참여한 해커톤을 성공적으로 운영함으로써 학생들에게 새로운 IT 인프라와 경험을 제공해주어 전남대학교 개발 생태계에 긍정적인 영향을 기여하였습니다.
+전남대학교 최초의 온라인 해커톤인 이노베이션 해커톤의 TF 팀 팀장을 맡아 성공적으로 대회를 기획 및 운영할 수 있도록 TF 팀을 리드하였습니다. 약 40명의 학생들이 참여한 해커톤을 성공적으로 운영함으로써 전남대학교 학생들에게 새로운 IT 인프라와 경험을 제공해 주었고 이를 통해 전남대학교 개발 생태계에 긍정적인 영향을 기여하였습니다.
 
-**이노베이션 해커톤 전대신문 기사:** [http://press.cnumedia.com/news/articleView.html?idxno=14891](http://press.cnumedia.com/news/articleView.html?idxno=14891)
+**이노베이션 해커톤 관련 전대신문 기사:** [http://press.cnumedia.com/news/articleView.html?idxno=14891](http://press.cnumedia.com/news/articleView.html?idxno=14891)
 
-- **해커톤 TF팀을 운영팀, 기획팀, 홍보팀으로 나누어 업무의 분업화, 권한, 책임 강조**
-- **TF 팀에 프로젝트 관리를 위해 칸반 보드(Trello)를 도입시켜 팀내 생산성 향상**
-- **기업 및 기관(KT, 전남대, 싸이버테크, ...)들과 지속적인 만남을 통한 후원 유치**
+- **해커톤 TF팀을 운영팀, 기획팀, 홍보팀으로 나누어 업무의 분업화, 권한, 책임, 협업 강조**
+- **프로젝트 관리를 위해 TF 팀에 칸반 보드(Trello)를 도입시켜 팀내 생산성 향상**
+- **기업 및 기관(KT, 전남대, 싸이버테크, ...)들과 지속적인 만남을 통한 해커톤 후원 유치**
 - **디스코드, Google Meets, Slack, Google Docs 등의 도구를 팀내에 도입해 협업 프로세스 개선**
 
 <br>
@@ -110,23 +108,22 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
 ### *전남대학교 IT 동아리 ECONOVATION 회장 (2020.02 ~ ing)
 
 
-전남대학교 대표 IT 동아리인 ECONOVATION의 2020년도 회장직을 맡고 있습니다. ECONOVATION은 졸업생들을 포함하여 총 88명의 회원들로 이루어진 전남대학교 대표 IT 동아리입니다.
+전남대학교 대표 IT 동아리인 ECONOVATION의 2020년도 회장직을 맡고 있습니다. ECONOVATION은 전남대학교 개발 생태계에 긍정적인 영향을 기여하기 위해 언제나 노력하고 있으며 현재 28명의 회원들이 활동하고 있는 전남대학교 대표 IT 동아리입니다.
 
 **ECONOVATION 홈페이지:** [http://econovation.kr/about](http://econovation.kr/about)
 
-- **오프라인 중심의 동아리 활동을 다양한 도구(Slack, Google Meets, GitHub 등)를 사용하여 온라인 중심의 활동으로 전환**
+- **코로나 시대에 맞추어 오프라인 중심의 동아리 활동을 다양한 도구(Slack, Google Meets, GitHub 등)를 사용하여 온라인 중심의 활동으로 전환**
 - **동아리 프로젝트 최종 발표인 2020 ECONOVATION Online Summer Dev 기획 및 운영**
-- **신입회원 Git 교육 행사인 Let's git it Started 스태프 참여**
-
-<br>
+- **동아리 Git 교육 행사인 Let's git it Started 에 스태프로 참여**
 
 <!-- ### 전남대학교 기초창의설계 경진대회 참여 (2019.04 ~ )
 Mobius 플랫폼을 활용한 스마트 도어락을 설계해서 전남대학교 기초창의설계 경진대회에서 동상을 수상하였습니다. -->
 
 ---
+
 # Skill
 
-프로젝트 진행중에 사용중 혹은 사용했던 기술들입니다.
+현재 진행되는 프로젝트에 사용중 혹은 사용했던 기술들입니다.
 
 ### Backend
 - **Java, NodeJS**
