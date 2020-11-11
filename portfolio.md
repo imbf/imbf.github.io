@@ -5,7 +5,7 @@ permalink: /portfolio/
 main_nav: true
 ---
 
-<img src="/assets/portfolio/profile.JPG" style="width:30%">
+<img src="/assets/portfolio/profile.jpg" style="width:30%">
 <!-- ![alt text]({{ site.baseurl }}/assets/profile.jpg "Profile Picture"){:.profile} -->
 
 # Frog - 'why'를 좋아하는 개발자
