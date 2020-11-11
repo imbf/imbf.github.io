@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 포트폴리오
+title: Portfolio
 permalink: /portfolio/
 main_nav: true
 ---
