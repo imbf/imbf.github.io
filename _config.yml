@@ -10,11 +10,11 @@ exclude:
 
 # Site settings
 title: Green Frog Developer
-subtitle: "죽을때까지 변화하고 싶은 엉뚱한 개발자의 블로그"
+subtitle: "죽을때까지 변화하고 싶은 개발자의 엉뚱한 블로그"
 email: qowhdwlsdk@gmail.com
 name: 배종진
 description: >
-  오늘보다 나은 내일을 위해 변화를 꿈꾸는 개발자입니다.
+  객체지향을 사랑하고 클린코드에 관심이 많습니다. 질문을 좋아하고 생각하는 것을 좋아합니다.
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the
 # root of your server.
@@ -76,7 +76,7 @@ social:
     username: TheBenCentra
     url: ""
     desc: Follow me on Twitter
-    share: true
+    share: false
 
   - name: Facebook
     icon: facebook
@@ -90,12 +90,12 @@ social:
     username: imbf
     url: https://github.com/imbf
     desc: Fork me on GitHub
-    share: false
+    share: true
 
   - name: LinkedIn
     icon: linkedin
-    username: Ben Centra
-    url: ""
+    username: 배종진
+    url: "https://www.linkedin.com/in/%EC%A2%85%EC%A7%84-%EB%B0%B0-9992251a8/"
     desc: Connect with me on LinkedIn
     share: true
 
@@ -104,7 +104,7 @@ social:
     username: ""
     url: ""
     desc: Add me to your Circles
-    share: true
+    share: false
 
   - name: YouTube
     icon: youtube
@@ -125,7 +125,7 @@ social:
     username: ""
     url: ""
     desc: Follow me on Pinterest
-    share: true
+    share: false
 
   - name: SoundCloud
     icon: soundcloud
@@ -174,7 +174,7 @@ social:
     username: ""
     url: ""
     desc: Share to Reddit
-    share: true
+    share: false
 
   - name: "Hacker News"
     icon: hacker-news
