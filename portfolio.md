@@ -24,7 +24,7 @@ main_nav: true
 
 객체지향을 사랑하며 생각하는 것을 좋아하는 서버 개발자로서 다양한 프로젝트 경험이 있습니다. 이를 바탕으로 좋은 설계와 좋은 코드가 무엇인지 항상 고민하고 있으며, 좋은 팀원이자 좋은 사람이 되기 위해 노력하고 있습니다.
 
-DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 공부하고 프로젝트에 적용하고 있습니다. 서비스 개발에서 가장 중요한 건 비즈니스에 대한 깊은 이해와 커뮤니케이션이라고 믿고 있으며 이를 위해 언제나 노력합니다.
+DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 공부하고 프로젝트에 적용하고 있습니다. 서비스 개발에서 가장 중요한 건 비즈니스에 대한 깊은 이해와 커뮤니케이션이라고 믿고 있으며 항상 중요시 여깁니다.
 
 변화하고 도전하는 것을 좋아하며 계기를 만들기 위해 꾸준히 다양한 콘텐츠를 접하려고 노력하고 있습니다.
 
@@ -37,7 +37,7 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
 오픈소스 컨트리뷰톤에 참가하여 대규모 분산 시스템을 위한 APM 도구인 Pinpoint의 web모듈에 기여하였습니다.
 
 - **Batch 내의 Alarm Webhook 기능 개발 (진행중)** - [https://github.com/imbf/pinpoint](https://github.com/imbf/pinpoint)
-    - 요구사항 추가에 따른 Alarm 도메인 재설계 및 구현
+    - Webhook 요구사항 추가에 따른 Alarm 도메인 재설계 및 구현
     - Webhook Data Spec 작성
     - DB 스키마 변경에 따른 하위호환 구현
     - Front 단에 웹훅 기능 추가
@@ -54,7 +54,7 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
 
 ### *Webper - ECONOVATION (2020.04 ~ 2020.09)
 
-관심있는 웹 사이트를 drag & drop으로 보관할 수 있는 웹 서비스인 webper에 백앤드 개발자로 참여하여 Spring을 사용해 인증 및 데이터 서버를 개발하였습니다. 
+관심있는 웹 사이트를 drag & drop으로 보관할 수 있는 웹 서비스인 webper에 백앤드 개발자로 참여하여 인증 및 데이터 API 서버를 개발하였습니다. 
 
 **Webper 저장소:** [https://github.com/JNU-econovation/webper](https://github.com/JNU-econovation/webper)
 
@@ -73,7 +73,7 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
 **Blog 주소:** [https://imbf.github.io](https://imbf.github.io)
 - **약 30여개의 기술 포스팅 작성**
 - **GitHub Pages + Jekyll을 활용해 정적 페이지 서비스 운영 중**
-- **Java, Spring, DevOps, CS, Clean Code 등의 다양한 주제에 대한 글을 작성하고 있습니다.**
+- **Java, Spring, DevOps, CS, Clean Code 등의 다양한 주제에 대해 글을 작성하고 있습니다.**
 
 <br>
 
@@ -94,7 +94,7 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
 
 ### *제2회 전남대학교 이노베이션 온라인 해커톤 TF팀장 (2020.05 ~ 2020.08)
 
-전남대학교 최초의 온라인 해커톤인 이노베이션 해커톤의 TF 팀 팀장을 맡아 성공적으로 대회를 기획 및 운영할 수 있도록 TF 팀을 리드하였습니다. 약 40명의 학생들이 참여한 해커톤을 성공적으로 운영함으로써 전남대학교 학생들에게 새로운 IT 인프라와 경험을 제공해 주었고 이를 통해 전남대학교 개발 생태계에 긍정적인 영향을 기여하였습니다.
+전남대학교 최초의 온라인 해커톤인 이노베이션 해커톤의 TF 팀 팀장을 맡아 성공적으로 대회를 기획 및 운영할 수 있도록 팀을 리드하였습니다. 약 40명의 학생들이 참여한 해커톤을 성공적으로 운영함으로써 전남대학교 학생들에게 새로운 IT 인프라와 경험을 제공해 주었고 이를 통해 전남대학교 개발 생태계에 긍정적인 영향을 기여하였습니다.
 
 **이노베이션 해커톤 관련 전대신문 기사:** [http://press.cnumedia.com/news/articleView.html?idxno=14891](http://press.cnumedia.com/news/articleView.html?idxno=14891)
 
@@ -112,7 +112,7 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
 
 **ECONOVATION 홈페이지:** [http://econovation.kr/about](http://econovation.kr/about)
 
-- **코로나 시대에 맞추어 오프라인 중심의 동아리 활동을 다양한 도구(Slack, Google Meets, GitHub 등)를 사용하여 온라인 중심의 활동으로 전환**
+- **코로나 시대에 대응하기 위해 오프라인 중심의 동아리 활동을 다양한 도구(Slack, Google Meets, GitHub 등)를 사용하여 온라인 중심의 활동으로 전환**
 - **동아리 프로젝트 최종 발표인 2020 ECONOVATION Online Summer Dev 기획 및 운영**
 - **동아리 Git 교육 행사인 Let's git it Started 에 스태프로 참여**
 
@@ -123,7 +123,7 @@ Mobius 플랫폼을 활용한 스마트 도어락을 설계해서 전남대학�
 
 # Skill
 
-현재 진행되는 프로젝트에 사용중 혹은 사용했던 기술들입니다.
+현재 진행되는 프로젝트에 사용중 혹은 과거에 사용했던 기술들입니다.
 
 ### Backend
 - **Java, NodeJS**
@@ -137,13 +137,12 @@ Mobius 플랫폼을 활용한 스마트 도어락을 설계해서 전남대학�
 - **MySQL**
 - **Jenkins**
 - **Pinpoint**
-- **nCloud Server Instance**
+- **nCloud**
 
 ### Front-End
 
 - **Javascript**
 - **HTML, CSS**
-- **Handlebars**
 
 ---
 
