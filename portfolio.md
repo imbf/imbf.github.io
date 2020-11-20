@@ -128,7 +128,7 @@ Mobius 플랫폼을 활용한 스마트 도어락을 설계해서 전남대학�
 ### Backend
 - **Java, NodeJS**
 - **Spring Boot, Spring MVC, Spring Batch, Spring Security, Spring Data JPA**
-- **Junit4, Jupiter, Mockito**
+- **JUnit, Mockito**
 - **Maven**
 - **IntelliJ, Visual Studio Code**
 
