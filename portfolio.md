@@ -58,7 +58,7 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
 
 **Webper 저장소:** [https://github.com/JNU-econovation/webper](https://github.com/JNU-econovation/webper)
 
-- **Jenkins Pipeline을 이용하여 CI/CD 구축**
+- **Jenkins + GitHub Webhook을 이용하여 CI/CD 구축**
 - **nCloud를 활용하여 API Server Deploy**
 - **Spring Security + JWT를 사용해 인증 구현**
 - **ORM을 위해 Spring Data JPA 사용해서 DB와 통신 구현**
