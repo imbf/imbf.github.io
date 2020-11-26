@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
+
+
+  <title>[Jenkins로 CI/CD 구축하기 - 1] Ubuntu(18.04)에 Jenkins 설치하기</title>
+  <meta name="description" content="이번 포스팅에서는 Ubuntu(18.04)에 Jenkins를 설치하고 환경 설정까지 하는 방법을 공유하도록 하겠습니다.">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="이번 포스팅에서는 Ubuntu(18.04)에 Jenkins를 설치하고 환경 설정까지 하는 방법을 공유하도록 하겠습니다." />
+  <meta property="og:url" content="http://localhost:4000/devops/2020/11/26/Install-Jenkins-in-Ubuntu(18.04).html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="[Jenkins로 CI/CD 구축하기 - 1] Ubuntu(18.04)에 Jenkins 설치하기" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[Jenkins로 CI/CD 구축하기 - 1] Ubuntu(18.04)에 Jenkins 설치하기">
+  <meta name="twitter:description" content="이번 포스팅에서는 Ubuntu(18.04)에 Jenkins를 설치하고 환경 설정까지 하는 방법을 공유하도록 하겠습니다.">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/devops/2020/11/26/Install-Jenkins-in-Ubuntu(18.04).html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/devops/2020/11/26/Install-Jenkins-in-Ubuntu(18.04).html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/portfolio/">Portfolio</a>
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">[Jenkins로 CI/CD 구축하기 - 1] Ubuntu(18.04)에 Jenkins 설치하기</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">November 26, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/DevOps">Devops</a> (default) -->
+    <a href="/category/DevOps">DevOps</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <p>이번 포스팅에서는 Ubuntu(18.04)에 Jenkins를 설치하고 환경 설정까지 하는 방법을 공유하도록 하겠습니다.</p>
+
+<p><a href="https://imbf.github.io/devops/2020/10/28/What-is-The-DevOps.html">DevOps가 무엇인가?</a> 에 대해서는 이전 포스팅에서 다루었고, 이번부턴 Jenkins로 CI/CD 구축하기 시리즈를 시작하도록 하겠습니다.</p>
+
+<p>이번 포스팅은 시리즈의 첫 번째 주제인 <strong>Ubuntu(18.04)에 Jenkins 설치하고 환경 설정하기</strong> 입니다. <strong>Ubuntu(18.04)에 Jenkins를 설정하고 관련 환경을 구성하면서 겪었던 이슈 및 방법</strong>에 대해서 공유할 예정입니다.</p>
+
+<p><strong>내가 지식을 받았을 때 처럼 나의 지식과 경험이 누군가에게는 도움이 되길 간절히 소망합니다.</strong></p>
+
+<hr />
+
+<h2 id="ubuntu1804에-jenkins-설치하기">Ubuntu(18.04)에 Jenkins 설치하기</h2>
+
+<p><strong>Ubuntu</strong>는 사용자의 편의성에 초점을 맞춘 <strong>Linux 배포판</strong>입니다. 고로 우리는 Ubuntu를 사용할 때 Linux와 비슷하게 여겨도 큰 상관이 없습니다.<u>(특정 기능 사용시 다른 배포판(CentOS 등)과 사용하는 명령어가 다르긴 하다.)</u></p>
+
+<p>Ubuntu 18.04는 Ubuntu에서 2년마다 발표하는 LTS(Long Term Support)중의 하나이며, 이 OS 환경에서 Jenkins를 설치하는 방법을 소개할 것입니다.</p>
+
+<p><strong>우리는 Jenkins 버전 중 현재 가장 최신의 Long Term Support(LTS) Release를 설치할 예정이며 과정은 아래와 같습니다.</strong></p>
+
+<h3 id="1-jenkins-설치를-위해-repository-key-추가">1. Jenkins 설치를 위해 Repository key 추가</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+</code></pre></div></div>
+
+<p>키가 잘 추가 되었다면 <strong>OK</strong>라는 문구를 보실 수 있습니다.</p>
+
+<h3 id="2-서버의-sourceslist에-jenkins-패키지-저장소를-추가">2. 서버의 sources.list에 Jenkins 패키지 저장소를 추가</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ &gt; \
+    /etc/apt/sources.list.d/jenkins.list'
+</code></pre></div></div>
+
+<h3 id="3-패키지-인덱스-정보-업데이트">3. 패키지 인덱스 정보 업데이트</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
+</code></pre></div></div>
+
+<h3 id="4-jenkins-패키지-설치">4. Jenkins 패키지 설치</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install jenkins
+</code></pre></div></div>
+
+<p><strong>여기까지 잘 따라 오셨다면 Jenkins는 잘 설치 되었습니다.</strong></p>
+
+<h3 id="5-java-jdk-8-설치">5. Java JDK 8 설치</h3>
+
+<p>하지만 Jenkins를 실행하기 위해서는 특정 버젼의 <strong>Java JDK</strong>가 필요함으로 설치해주도록 하겠습니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install openjdk-8-jdk
+</code></pre></div></div>
+<p>Java JDK 8 버전이 잘 설치 되었을 경우 <code class="highlighter-rouge">java -version</code>이라고 bash에 입력해주면 아래와 같은 로그를 볼 수 있습니다.</p>
+
+<p><img src="/assets/devops/install-jenkins-in-ubuntu-2.png" /></p>
+
+<h3 id="6-jenkins-실행하기">6. Jenkins 실행하기</h3>
+
+<p>이제 Jenkins와 Java도 잘 설치 되었음으로 <strong>Jenkins를 실행</strong>해 보도록 하겠습니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl start jenkins
+</code></pre></div></div>
+
+<p>Jenkins가 정상적으로 잘 실행 되었다면 아래와 같은 명령어를 bash에 입력할 시 <strong>jenkins service의 상태를 체크</strong>할 수 있습니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl status jenkins
+</code></pre></div></div>
+
+<p>저와 같은 로그가 보인다면, Jenkins가 잘 실행 된 것입니다.</p>
+
+<p><img src="/assets/devops/install-jenkins-in-ubuntu-3.png" style="width:90%" /></p>
+
+<h3 id="7-jenkins-포트-변경하기">7. Jenkins 포트 변경하기</h3>
+
+<p>Jenkins를 실행시켰을 때 기본적으로 8080 포트에서 동작합니다. 하지만 Spring Project의 경우 기본 포트가 8080이기 때문에 중복되어 불편할 수 있음으로 <strong>Jenkins 포트를 9090포트로 바꾸어</strong> 주도록 하겠습니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo vi /etc/default/jenkins
+</code></pre></div></div>
+
+<p>이 작업은 아주 간단합니다. 아래와 같이 vi 에디터를 사용해서 /etc/default/Jenkins 파일의 <strong>HTTP_PORT를 9090포트로 변경</strong>해주면 됩니다.</p>
+
+<p><img src="/assets/devops/install-jenkins-in-ubuntu-4.png" style="width:80%" /></p>
+
+<p>Jenkins 포트를 9090으로 변경했다면 <strong>Jenkins를 재실행</strong> 해주도록 합시다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl restart jenkins
+</code></pre></div></div>
+
+<h3 id="8-방화벽-설정">8. 방화벽 설정</h3>
+
+<p>기본적으로 OS는 보안을 위해 방화벽으로 주요 포트 이외의 대부분의 포트에 다른 호스트들의 접근을 막아놓기 마련입니다.</p>
+
+<p>그래서, <strong>ufw를 사용하여 다른 호스트가 나의 9090포트에 접근할 수 있도록 열어 놓아야 합니다.</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo ufw allow 9090
+</code></pre></div></div>
+
+<p>특정 호스트만 나의 9090포트에 접근할 수 있도록 할 수 있지만 이 부분은 생략하도록 하겠습니다.</p>
+
+<p>잘 설정이 되었으면 아래와 같은 명령어를 입력합니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo ufw status
+</code></pre></div></div>
+
+<p>명령어 입력시 아래와 같이 9090 포트의 Rule이 생성되었다면 성공입니다.</p>
+
+<p><img src="/assets/devops/install-jenkins-in-ubuntu-5.png" style="width:80%" /></p>
+
+<h3 id="9-jenkins-설정하기">9. Jenkins 설정하기</h3>
+
+<p>이제 Jenkins를 실행하기 위한 모든 작업이 끝이 났습니다.</p>
+
+<p><strong>추가적으로 Jenkins의 초기 설정인 Plugin 설치, 계정 설정, secret key 입력을 진행하도록 하겠습니다.</strong></p>
+
+<p>브라우저를 통해서 <code class="highlighter-rouge">http://(hostIp or hostName):9090</code> 에 접속시 아래와 같은 화면을 보실 수 있으며</p>
+
+<p><img src="/assets/devops/install-jenkins-in-ubuntu-6.png" style="width:60%" /></p>
+
+<p>/var/lib/jenkins/secrets/initialAdminPassword 에 가서 password를 복사해서 Administrator password 폼에 입력합니다.</p>
+
+<p><img src="/assets/devops/install-jenkins-in-ubuntu-7.png" style="width:60%" /></p>
+
+<p>폼에 Password를 입력하고 Continue를 클릭하면 다음과 같은 <strong>플러그인 설치 화면</strong>이 나오게 되는데 <strong>본인이 사용하는 플러그인을 잘 모른다면 Install Suggested Plugins를 클릭</strong>하시면 됩니다.</p>
+
+<p><img src="/assets/devops/install-jenkins-in-ubuntu-8.png" style="width:60%" /></p>
+
+<p>Install Suggested Plugins 버튼을 클릭하면 <strong>권장 Plugin 설치가 진행되니, Getting Started 게이지가 다 찰 때까지 기다리면 됩니다.</strong></p>
+
+<p><img src="/assets/devops/install-jenkins-in-ubuntu-9.png" style="width:60%" /></p>
+
+<p>플러그인 설치가 완료되면 <strong>계정 설정 페이지</strong>가 나오게 되는데 폼을 다 채우고 save and Continue 버튼을 클릭합니다.</p>
+
+<p><strong>이 계정 정보는 브라우저를 통해 Jenkins 접속시 항상 입력해야 함으로 꼭 잊어버리지 않아야 합니다.</strong></p>
+
+<p><img src="/assets/devops/install-jenkins-in-ubuntu-10.png" style="width:60%" /></p>
+
+<p>계정 설정 완료 후 추가적으로 1~2가지 설정을 마치면 아래와 같은 Jenkins 화면을 볼 수 있습니다.</p>
+
+<p><img src="/assets/devops/install-jenkins-in-ubuntu-11.png" style="width:60%" /></p>
+
+<p>이를 기반으로 독자 여러분이 본인의 입맛에 맞게끔 Jenkins를 요리해서 사용하면 됩니다.</p>
+
+<hr />
+
+<p>이로써 Ubuntu(18.04)에 Jenkins 설치하기 및 관련 환경 구성하기를 마치며 다음에는 <strong>Jenkins에 GitHub Webhook 연동하기</strong> 포스팅으로써 찾아오도록 하겠습니다.</p>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/DevOps">DevOps</a>,&nbsp;<a href="/tag/CI/CD">CI/CD</a>,&nbsp;<a href="/tag/Jenkins">Jenkins</a>,&nbsp;<a href="/tag/Ubuntu">Ubuntu</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=%5BJenkins%EB%A1%9C+CI%2FCD+%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0+-+1%5D+Ubuntu%2818.04%29%EC%97%90+Jenkins+%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0&u=http%3A%2F%2Flocalhost%3A4000%2Fdevops%2F2020%2F11%2F26%2FInstall-Jenkins-in-Ubuntu%2818.04%29.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdevops%2F2020%2F11%2F26%2FInstall-Jenkins-in-Ubuntu%2818.04%29.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/portfolio/">Portfolio</a>
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://www.linkedin.com/in/%EC%A2%85%EC%A7%84-%EB%B0%B0-9992251a8/" title="Connect with me on LinkedIn">
+              <i class="fa fa-linkedin"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">객체지향을 사랑하고 클린코드에 관심이 많습니다. 질문을 좋아하고 생각하는 것을 좋아합니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/devops/2020/11/26/Install-Jenkins-in-Ubuntu(18.04).html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/computer-science(cs)/2020/11/04/Synchronization-Tools.html</loc>
     </url>
     
@@ -577,6 +581,22 @@
     
     <url>
         <loc>http://localhost:4000/tag/monitor/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/jenkins/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/ubuntu/</loc>
     </url>
     
     
