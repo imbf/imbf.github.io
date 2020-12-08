@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/interview/2020/11/26/NAVER-Interview-Preparation-1.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/devops/2020/11/26/Install-Jenkins-in-Ubuntu(18.04).html</loc>
     </url>
     
@@ -645,6 +649,14 @@
     
     <url>
         <loc>http://localhost:4000/category/devops/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/category/interview/</loc>
     </url>
     
     

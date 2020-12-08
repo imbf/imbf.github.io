@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
+
+
+  <title>[기술 면접 준비 - 1일차] 운영체제</title>
+  <meta name="description" content="기술 면접 준비 1일차 포스팅 - 운영체제">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="기술 면접 준비 1일차 포스팅 - 운영체제" />
+  <meta property="og:url" content="http://localhost:4000/interview/2020/11/26/NAVER-Interview-Preparation-1.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="[기술 면접 준비 - 1일차] 운영체제" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[기술 면접 준비 - 1일차] 운영체제">
+  <meta name="twitter:description" content="기술 면접 준비 1일차 포스팅 - 운영체제">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/interview/2020/11/26/NAVER-Interview-Preparation-1.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/interview/2020/11/26/NAVER-Interview-Preparation-1.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/portfolio/">Portfolio</a>
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">[기술 면접 준비 - 1일차] 운영체제</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">November 26, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Interview">Interview</a> (default) -->
+    <a href="/category/Interview">Interview</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h1 id="기술-면접-준비-1일차-포스팅---운영체제">기술 면접 준비 1일차 포스팅 - 운영체제</h1>
+
+<hr />
+<h2 id="코어-core">코어 (Core)</h2>
+
+<h3 id="코어란-무엇인가요">코어란 무엇인가요??</h3>
+
+<p>CPU의 기본 계산 단위입니다.</p>
+
+<hr />
+
+<h2 id="프로세스-process">프로세스 (Process)</h2>
+
+<h3 id="프로세스는-무엇인가요">프로세스는 무엇인가요?</h3>
+
+<p>프로세스란 실행 중인 프로그램을 의미하고 보조저장장치로부터 메모리에 적재되어 <strong>CPU의 할당을 받을 수 있는 단위</strong>를 말합니다.</p>
+
+<h4 id="프로세스의-메모리-구조는-어떻게-되죠">프로세스의 메모리 구조는 어떻게 되죠??</h4>
+
+<p>프로세스는 기본적으로 실행 코드가 저장되는 <strong>text 영역</strong>, 전역 변수 등을 수록하는 <strong>data 영역</strong>, 프로세스 실행 중에 동적으로 할당되는 메모리인 <strong>heap 영역</strong>, 함수의 매개변수, 복귀 주소와 로컬 변수와 같은 임시 자료를 갖는 <strong>stack 영역</strong>으로 이루어져 있습니다.</p>
+
+<h4 id="프로세스는-운영체제에-어떻게-저장-되죠">프로세스는 운영체제에 어떻게 저장 되죠??</h4>
+
+<p>프로세스는 <strong>PCB</strong>라는 자료구조를 통해서 저장되어집니다. PCB란 Process Control Block의 줄임말으로 특정 <strong>프로세스에 대한 중요한 정보를 저장하고 있는 운영체제의 자료구조</strong>이고 이는 <u>PID, Process Status, PC, CPU 레지스터, CPU 스케줄링 정보</u> 등으로 구성되어 집니다.</p>
+
+<h3 id="스레드-thread">스레드 (Thread)</h3>
+
+<h4 id="스레드란-무엇인가요">스레드란 무엇인가요?</h4>
+
+<p><strong>스레드는 프로세스의 CPU 이용을 위한 기본 단위</strong>로 프로세스의 주소 공간이나 자원등을 공유해 프로세스를 여러 실행 흐름으로 실행시킬 수 있습니다.</p>
+
+<h3 id="멀티-스레딩이란-무엇인가요">멀티 스레딩이란 무엇인가요?</h3>
+
+<p><strong>하나의 프로세스를 다수의 실행 단위 즉, 여러개의 스레드로 구분</strong>하여 프로세스의 자원을 공유해 <strong>처리 능력을 향상</strong> 시키는 것을 멀티스레딩이라고 합니다.</p>
+
+<h4 id="스택을-스레드마다-독립적으로-할당하는-이유가-있나요">스택을 스레드마다 독립적으로 할당하는 이유가 있나요?</h4>
+
+<p>스택은 함수의 인자, 복귀 주소, 지역 변수 등을 저장하기 위해 사용되는 메모리 공간이므로 <strong>스택 메모리 공간이 독립적이라는 것은 독립적인 함수 호출이 가능하다는 것이고 이는 독립적인 실행 흐름이 추가</strong>되는 것이기 때문에 프로세스를 여러 실행 흐름으로 만들기 위해서는 스레드에 스택을 독립적으로 할당해야 합니다.</p>
+
+<h4 id="pc-register를-스레드마다-독립적으로-할당하는-이유">PC Register를 스레드마다 독립적으로 할당하는 이유</h4>
+
+<p>PC 값은 다음에 실행될 명령어의 주소를 나타내므로 <strong>프로세스의 개별 실행 흐름인 스레드가 독립적으로 명령어들을 실행하기 위해선 스레드에 PC 레지스터가 독립적으로 할당</strong>되어야 합니다.</p>
+
+<hr />
+
+<h2 id="멀티-스레드-multithread">멀티 스레드 (MultiThread)</h2>
+
+<h3 id="멀티-스레드의-장단점은-무엇인가요">멀티 스레드의 장단점은 무엇인가요?</h3>
+
+<p><strong>멀티 스레드를 통해 하나의 실행 흐름인 프로세스를 여러 개의 실행 흐름으로 만들 수 있습니다. 이를 통해 프로세스의 처리 능력 향상과 자원의 소모가 줄어드는 것을 기대할 수 있습니다. 하지만 여러 개의 스레드가 동일한 자원을 접근할 경우 경쟁 조건이 발생할 수 있으며 동기화를 신경 써줘야 합니다.</strong> 스레드간의 동기화를 위한 동기화 기법들은 매우 다양하며 잘못 사용할 경우 병목 현상을 발생시킬 수 있어 이를 사용하기 위해 많은 자원이 필요하다는 것이 단점입니다.</p>
+
+<h3 id="멀티-스레드와-멀티-프로세스의-차이는-무엇인가요">멀티 스레드와 멀티 프로세스의 차이는 무엇인가요?</h3>
+
+<p><strong>멀티 스레드와 멀티 프로세스의 차이는 여러 실행흐름을 프로세스를 통해서 만드느냐 아니면 프로세스 내의 스레드를 통해서 만드느냐의 차이입니다.</strong> 이 두가지 기법 다 동시에 여러 작업을 수행한다는 점에서 목적은 같지만, 서로 장단점이 존재하기 때문에 개발 도메인에서 적합한지, 단점이 뭐가 있고, 장점은 뭐가 있는지, 왜 이 기법을 사용해야 하는지에 대해 팀 내에서 깊게 논의 한 후 시스템에 적용해야 한다고 생각합니다.</p>
+
+<hr />
+
+<h2 id="스케줄러-scheduler">스케줄러 (Scheduler)</h2>
+
+<h3 id="프로세스-스케줄러란-무엇인가요"><strong>프로세스 스케줄러란 무엇인가요??</strong></h3>
+
+<p>멀티 프로세스 기법을 사용하는 시스템은 프로세스의 실행 순서를 스케줄링 해야만 합니다. 이러한 <strong>프로세스의 실행 순서를 스케줄링하는 도구를 프로세스 스케줄러</strong>라고 합니다.</p>
+
+<h3 id="프로세스-스케줄러에는-어떠한-것들이-존재하죠"><strong>프로세스 스케줄러에는 어떠한 것들이 존재하죠?</strong></h3>
+
+<p>프로그램이 저장되어 있는 디스크에서 메모리로 프로세스 스케줄링을 담당하는 Job Schduler, CPU와 메모리 사이의 스케줄링을 담당하는 CPU Schecudler, 메모리에서 디스크로 프로세스 스케줄링을 담당하는 Swapper등이 있는걸로 알고 있습빈다.</p>
+
+<h3 id="cpu-스케줄러란-무엇인가요">CPU 스케줄러란 무엇인가요?</h3>
+
+<p><strong>Ready Queue에 있는 프로세스들을 스케줄링하는 스케줄러를 CPU 스케줄러</strong>라고 합니다.</p>
+
+<h3 id="cpu-스케줄러의-기법에는-어떤게-있을까요">CPU 스케줄러의 기법에는 어떤게 있을까요?</h3>
+
+<p><strong>먼저 Ready Queue에 들어온 프로세스를 먼저 처리하는 First Come Fist Serve(FCFS) 스케줄링 기법</strong>, <strong>CPU Burst Time이 짧은 프로세스를 먼저 처리하는 Shortest Job First(SJF) 스케줄링 기법</strong>, SJF 기법 기반으로 <strong>새로운 프로세스가 도착할 때마다 새로운 스케줄링이 이루어져 가장 짧은 프로세스를 먼저 처리하는 Shortest Remaining time First(SRT) 기법</strong>, <strong>프로세스에 우선순위를 부여하여 우선순위가 높은 프로세스를 먼저 처리하는 Priority Schduling 기법</strong>, <strong>프로세스에 CPU 할당 시간을 정해 놓아 CPU를 할당하는 방법인 Round Robin 기법</strong> 등이 있습니다.</p>
+
+<hr />
+
+<h3 id="동기와-비동기의-차이는-무엇인가요">동기와 비동기의 차이는 무엇인가요?</h3>
+
+<p>동기는 요청과 동시에 결과가 일어나는 경우를 동기라고 표현하고, 비동기는 요청과 결과가 동시에 일어나지 않는 경우를 비동기라고 표현한다.</p>
+
+<h3 id="block과-non-block의-차이는-무엇인가요">block과 non-block의 차이는 무엇인가요?</h3>
+
+<p>요청에 대한 응답을 얻기 까지 다른 실행 흐름들이 기다리는 것을 blocking이라고 하고, 다른 실행 흐름이 요청에 대한 응답을 대기하지 않고 자유롭게 CPU나 메모리 등을 이용하는 상황을 non-blocking 이라고 한다.</p>
+
+<hr />
+
+<h2 id="프로세스-동기화-process-synchronization">프로세스 동기화 (Process Synchronization)</h2>
+
+<h3 id="critical-section은-무엇인가요">Critical Section은 무엇인가요?</h3>
+
+<p><strong>동일한 자원을 동시에 접근하는 작업을 실행하는 코드 영역을 Critical Section</strong> 이라고 합니다.</p>
+
+<h3 id="critical-section-problem을-해결하기-위한-조건이-무엇일까요">Critical Section Problem을 해결하기 위한 조건이 무엇일까요?</h3>
+
+<p>Critical Section Problem을 해결하기 위한 조건은 첫 번째 <strong>특정 프로세스가 Critical Section을 수행하고 있다면 다른 프로세스는 이 Critical Section에 들어오지 못하게 하는 상호 배제(Mutual Exclusion)</strong> 조건입니다.</p>
+
+<p>두 번째는 Critical Section에서 실행중인 프로세스가 없고, <strong>별도의 동작이 없는 프로세스들만 Critical Section 진입 후보 프로세스로서 참여할 수 있다는 조건인 Progress</strong> 입니다.</p>
+
+<p>세 번째는 <strong>특정 프로세스가 Ciritcal Section에 진입 신청 후 받아들여지기까지 기간이 한정되어야 함을 나타내는 Bounded Waiting</strong> 입니다.</p>
+
+<h3 id="critical-section-problem을-해결하기-위한-기법에는-무엇이-있나요">Critical Section Problem을 해결하기 위한 기법에는 무엇이 있나요?</h3>
+
+<p>첫 번째는 <strong>하드웨어 기반 해결책인 Lock</strong>입니다. Critical Section에 진입하기전에 Lock을 얻고, Critical Section에서 빠져 나올 때 Lock을 방출함으로써 프로세스간에 동기화를 유지합니다.</p>
+
+<p>두 번째는 <strong>Semaphores 입니다. 소프트웨어 상에서 Ciritcal Section 문제를 해결하기 위한 동기화 도구</strong>이며, 두 개의 프로세스 사이에서 동기화를 유지할 수 있는 이진 세마포와 프로세스 세개 이상의 프로세스 사이에서 동기화를 유지할 수 있는 카운팅 세마포가 있습니다.</p>
+
+<p>세 번째는 <strong>모니터 입니다. 모니터는 고급 언어의 설계 구조물로서, 개발자의 코드를 상호배제 하게끔 만든 추상화된 데이터 형태</strong> 입니다.</p>
+
+<hr />
+
+<h2 id="메모리-관리-전략">메모리 관리 전략</h2>
+
+<h3 id="swapping-이란-무엇인가요">Swapping 이란 무엇인가요?</h3>
+
+<p><strong>Swapping 이란 메모리의 관리를 위해 사용되는 기법</strong>입니다. CPU 할당 시간이 끝난 프로세스의 메모리를 보조기억장치(하드디스크)로 내보내고 다른 프로세스를 메모리로 불러 들이는 것을 의미합니다.</p>
+
+<blockquote>
+  <p>이러한 과정을 swap (스왑시킨다) 이라 한다. <strong>주 기억장치(RAM)으로 불러오는 과정을 swap-in, 보조 기억장치로 내보내는 과정을 swap-out</strong> 이라 한다. swap 에는 큰 디스크 전송시간이 필요하기 때문에 현재에는 메모리 공간이 부족할 때 Swapping이 시작된다.</p>
+</blockquote>
+
+<h3 id="swapping을-하면서-발생하는-문제점에-대해서-알고-있나요">Swapping을 하면서 발생하는 문제점에 대해서 알고 있나요?</h3>
+
+<p>대표적으로 <strong>단편화(Fragmentation) 문제</strong>를 들 수 있습니다. 프로세스들이 메모리에 적재되고 제거되는 일이 반복되다보면 메모리 사이에 사용 하지 못할 만큼의 작은 자유 공간들이 늘어나게 되는데 이를 단편화라고 합니다.</p>
+
+<p>단편화의 종류는 크게 외부 단편화와 내부 단편화로 나눌 수 있습니다. <strong>외부 단편화란 메모리에서 프로세스 사이 사이 남는 공간들을 의미하는 것이고, 내부 단편화란 프로세스가 사용하는 메모리 공간에서 남는 부분을 의미하는 것입니다.</strong></p>
+
+<h3 id="그렇다면-외부-단편화를-해소하기-위한-방법은-무엇이-있을까요">그렇다면 외부 단편화를 해소하기 위한 방법은 무엇이 있을까요?</h3>
+
+<p><strong>압축</strong>이 있을 것 같습니다. 외부 단편화를 해소하기 위해 프로세스가 사용하는 메모리 공간들을 한쪽으로 몰아, 자유 공간을 확보하는 방법론 이지만, <u>작업효율이 좋지 않아 잘 사용하지 않습니다.</u></p>
+
+<h3 id="그렇다면-또-다른-외부-단편화-문제를-해결할-수-있는-방법은-무엇인가요">그렇다면 또 다른 외부 단편화 문제를 해결할 수 있는 방법은 무엇인가요?</h3>
+
+<p>대표적인 예로는 메모리 공간이 연속적이어야 한다는 제약을 없애는 <strong>페이징 기법</strong>을 들 수 있습니다. <strong>물리 메모리를 Frame 이라는 고정 크기로 분리하고, 논리 메모리는 페이지라 불리는 고정 크기의 블록으로 분리하는 기법입니다.</strong></p>
+
+<p><strong>이러한 페이징 기법을 통해 논리 메모리는 물리 메모리에 저장될 때, 연속되어 저장될 필요가 없고 물리 메모리의 남는 프레임에 적절히 배치됨으로 외부 단편화를 해결할 수 있습니다.</strong></p>
+
+<p>즉, 하나의 프로세스가 사용하는 공간을 여러개의 페이지로 나뉘어서 논리 메모리에서 관리하고, 개별 페이지는 순서에 상관없이 물리 메모리에 있는 프레임에 mapping되어 저장하는 방법입니다.</p>
+
+<p><strong>하지만 페이지의 크기는 정해져 있기 때문에 내부 단편화는 발생할 수 있다고 생각합니다.</strong></p>
+
+<h3 id="세그멘테이션이란-무엇입니까">세그멘테이션이란 무엇입니까?</h3>
+
+<p><strong>세그멘테이션은 프로세스를 물리적 크기의 단위가 아닌 논리적 내용의 단위인 세그먼트로 분할하고 메모리를 할당하며 주소를 변환하는 기법이다.</strong></p>
+
+<p>세그먼트들의 크기가 서로 다르기 때문에 메모리를 페이징 기법에서처럼 미리 분할해 둘 수 없고, <strong>메모리에 적재될 때 빈 공간을 찾아 할당하는 사용자 관점의 가상 메모리 관리 기법이다.</strong></p>
+
+<p><strong>세그먼트의 단위가 다르기 때문에 메모리에 서로 다른 크기를 가진 여러 세그먼트를 저장할 시 외부 단편화가 생기는 문제점이 존재해 잘 사용하지는 않습니다.</strong></p>
+
+<hr />
+
+<h2 id="가상-메모리-virtual-memory">가상 메모리 (Virtual Memory)</h2>
+
+<h3 id="가상-메모리란-무엇인가">가상 메모리란 무엇인가?</h3>
+
+<p><strong>가상 메모리란 프로세스 전체가 메모리 내에 올라오지 않더라도 실행이 가능하도록 하는 기법</strong>이며, 프로그램이 물리 메모리보다 커도 된다는 주요 장점이 있다.</p>
+
+<h3 id="왜-가상-메모리가-나오게-되었는가">왜 가상 메모리가 나오게 되었는가?</h3>
+
+<p>실행되는 코드의 전부를 물리 메모리에 존재시켜야 했고, 메모리 용량보다 큰 프로그램은 실행시킬 수 없었다. 또한 멀티 프로세스상에서 여러 프로그램을 동시에 메모리에 올리기에는 용량의 한계와, 페이지 교체등의 성능 이슈가 발생했기 때문에 이를 해결하기 위해 가상 메모리 기법이 나오게 되었습니다.</p>
+
+<h3 id="가상-메모리를-통해서-우리는-어떤-장점을-얻을-수-있는가">가상 메모리를 통해서 우리는 어떤 장점을 얻을 수 있는가?</h3>
+
+<p><strong>프로그램의 일부분만 메모리에 올릴 수 있게 되었고 이를 통해 물리 메모리 크기에 제약을 받지 않게 되었습니다. 고로 더 많은 프로그램을 동시에 실행할 수 있게 되었다. 또한 swap에 필요한 입출력이 줄었기 때문에 프로그램들이 빠르게 실행된다는 장점을 가지고 있다.</strong></p>
+
+<h3 id="가상-메모리는-어떻게-동작하는가">가상 메모리는 어떻게 동작하는가?</h3>
+
+<p><strong>가상 메모리는 실제의 물리 메모리 개념과 사용자의 논리 메모리 개념을 분리한 것으로 정리할 수 있다.</strong> 이로써 작은 메모리를 가지고도 얼마든지 큰 가상 주소 공간을 프로그래머에게 제공할 수 있습니다.</p>
+
+<p><strong>가상 주소 공간이란 한 프로세스가 메모리에 저장되는 논리적인 모습을 가상메모리에 구현한 공간</strong>이다. 프로세스가 요구하는 메모리 공간을 가상메모리에서 제공함으로써 현재 직접적으로 필요치 않는 메모리 공간은 실제 물리 메모리에 올리지 않는 것으로 물리 메모리를 절약할 수 있다.</p>
+
+<ul>
+  <li><strong>가상 메모리는 시스템 라이브러리가 여러 프로세스들 사이에 공유될 수 있도록 합니다.</strong></li>
+  <li><strong>프로세스들이 메모리를 공유하는 것을 가능하게 하고, 프로세스들은 공유 메모리를 통해 통신할 수 있다</strong>. 이 또한, 각 프로세스들은 각자 자신의 주소 공간처럼 인식하지만, 실제 물리 메모리는 공유되고 있다.</li>
+</ul>
+
+<h3 id="요구-페이징-demand-paging이란-무엇인가">요구 페이징 (Demand Paging)이란 무엇인가?</h3>
+
+<p><strong>프로그램 실행 시작 시에 프로그램 전체를 디스크에서 물리 메모리에 적재하는 대신, 초기에 필요한 것들만 적재하는 전략을 요구 페이징이라 하며 가상 메모리 시스템에서 많이 사용된다.</strong> 요구 페이징을 사용하는 가상 메모리에서는 <strong>실행과정에서 필요해질 때 페이지들이 적재된다.</strong></p>
+
+<h3 id="페이지-교체-알고리즘이란-무엇인가">페이지 교체 알고리즘이란 무엇인가?</h3>
+
+<p>요구 페이징에서 언급된대로 프로그램 실행시에 모든 항목이 물리 메모리에 올라오지 않기 때문에, <strong>프로세스의 동작에 필요한 페이지를 요청하는 과정에서 page fault가 발생하게 되면, 원하는 페이지를 보조저장장치에서 가져오게 되는 것을 의미합니다.</strong></p>
+
+<h3 id="페이지-교체-알고리즘의-순서는-어떻게-되는가">페이지 교체 알고리즘의 순서는 어떻게 되는가?</h3>
+
+<ol>
+  <li>디스크에서 필요한 페이지의 위치를 찾는다.</li>
+  <li>빈 페이지 프레임을 찾는다.
+    <ul>
+      <li>페이지 교체 알고리즘을 통해 희생될(victim) 페이지를 고른다.</li>
+      <li>희생될 페이지를 디스크에 기록하고, 관련 페이지 테이블을 수정한다.</li>
+    </ul>
+  </li>
+  <li>새롭게 비워진 페이지 테이블 내 프레임에 새 페이지를 읽어오고, 프레임 테이블을 수정한다.</li>
+  <li>사용자 프로세스 재 시작</li>
+</ol>
+
+<h3 id="페이지-교체-알고리즘에는-어떠한-것들이-있는가">페이지 교체 알고리즘에는 어떠한 것들이 있는가?</h3>
+
+<ol>
+  <li>FIFO 페이지 교체 : 먼저 물리 메모리에 들어온 페이지 순서대로 페이지 교체 시점에 먼저 나가게 된다.</li>
+  <li>최적 페이지 교체 : 앞으로 가장 오랫동안 사용되지 않을 페이지를 찾아 교체하는 알고리즘이다.</li>
+  <li>LRU (Least Recently Used) 페이지 교체 : 가장 오랫동안 사용되지 않은 페이지를 선택하여 교체한다. (최적 알고리즘 근사 알고리즘)</li>
+  <li>LFU (Least Frequently Used) 페이지 교체 : 참조 횟수가 가장 적은 페이지를 교체하는 방법이다.</li>
+  <li>
+    <h2 id="mfu-most-frequently-used-페이지-교체--참조-횟수가-가장-많은-페이지를-교체하는-방법이다">MFU (Most Frequently Used) 페이지 교체 : 참조 횟수가 가장 많은 페이지를 교체하는 방법이다.</h2>
+  </li>
+</ol>
+
+<h2 id="캐시cache">캐시(Cache)</h2>
+
+<h3 id="캐시-메모리란-무엇인가">캐시 메모리란 무엇인가?</h3>
+
+<p><strong>캐시 메모리란 속도가 빠른 장치와 느린 장치간의 속도차에 따른 병목 현상을 줄이기 위한 범용 메모리이다.</strong></p>
+
+<h3 id="캐시-메모리에서-가장-신경써야-하는-문제는-무엇인가">캐시 메모리에서 가장 신경써야 하는 문제는 무엇인가?</h3>
+
+<p>캐시 메모리의 역할을 수행하기 위해서는 CPU가 어떤 데이터를 원할 것인가를 예측할 수 있어야 한다. <strong>즉, 적중률(hit rate)을 극대화 시켜야 한다.</strong></p>
+
+<h3 id="적중률hit-rate을-극대화-시키기-위해-어떻게-해야-하는가">적중률(hit rate)을 극대화 시키기 위해 어떻게 해야 하는가?</h3>
+
+<p><strong>적중률을 극대화 시키기 위해 데이터 지역성(Locality)의 원리를 사용한다.</strong> 즉, Locality란 기억 장치 내의 정보를 균일하게 Access 하는 것이 아닌 어느 한 순간에 특정 부분을 집중적으로 참조하는 특성인 것이다.</p>
+
+<h3 id="지역성은-어떻게-나뉘는가">지역성은 어떻게 나뉘는가?</h3>
+
+<p><strong>데이터 지역성은 대표적으로 시간 지역성(Temporal Locality)과 공간 지역성(Spatial Locality)으로 나뉘고 이는 다음과 같다.</strong></p>
+
+<ul>
+  <li><strong>시간 지역성 : 최근에 참조된 주소의 내용은 곧 다음에 다시 참조되는 특성.</strong></li>
+  <li><strong>공간 지역성 : 대부분의 실제 프로그램이 참조된 주소와 인접한 주소의 내용이 다시 참조되는 특성</strong></li>
+</ul>
+
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Operating-System">Operating-System</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=%5B%EA%B8%B0%EC%88%A0+%EB%A9%B4%EC%A0%91+%EC%A4%80%EB%B9%84+-+1%EC%9D%BC%EC%B0%A8%5D+%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C&u=http%3A%2F%2Flocalhost%3A4000%2Finterview%2F2020%2F11%2F26%2FNAVER-Interview-Preparation-1.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Finterview%2F2020%2F11%2F26%2FNAVER-Interview-Preparation-1.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/portfolio/">Portfolio</a>
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://www.linkedin.com/in/%EC%A2%85%EC%A7%84-%EB%B0%B0-9992251a8/" title="Connect with me on LinkedIn">
+              <i class="fa fa-linkedin"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">객체지향을 사랑하고 클린코드에 관심이 많습니다. 질문을 좋아하고 생각하는 것을 좋아합니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
