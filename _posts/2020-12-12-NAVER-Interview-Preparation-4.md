@@ -110,12 +110,14 @@ Kruskal의 시간 복잡도는 O(ElogE)이고, Prim Algorithm의 시간 복잡�
 
 **Spring MVC의 시작은 HttpServletRequest 객체를 핸들링하는 DispatcherServlet이라고 할 수 있습니다. DispatcherServlet은 사용자의 HTTP 요청을 처리하기 위하여 등록된 핸들러로 디스패치하여 매핑 및 예외 처리 기능을 제공**합니다.
 
-**DispatcherServlet으로 요청이 들어온다면 api 서버가 아닌 일반 웹 서버의 과정은 다음과 같습니다.**
+**DispatcherServlet으로 요청이 들어왔을 때 웹 서버의 일반적인 과정은 다음과 같습니다.**
+
 1. DispatcherServlet으로 HTTP Request가 들어온다.
-2. DispatcherServlet은 HandlerMapping을 통해서 요청 URL과 맵핑되는 Controller를 검색한다.
-3. 검색된 Controller는 요청을 받아 적절한 비즈니스 로직을 태운다.
-4. View가 존재한다면 요청에 대한 응답을 받을 View의 이름을 DispatcherServlet을 통해서 View Resolver로 전달한다.
-5. View Resolver는 응답 받을 View가 있는지 검색한다.
+2. DispatcherServlet은 HandlerMapping을 통해서 요청 URL 등의 정보와 맵핑되는 적절한 Controller를 검색한다.
+3. DispatcherServlet은 Controller의 비즈니스 로직 실행 작업을 HandlerAdapter에 전달한다.
+4. Controller는 요청을 받아 적절한 비즈니스 로직을 태운다.
+4. 비느지스 로직을 끝난 후 사용자에게 응답 할 View의 이름을 DispatcherServlet을 통해서 View Resolver로 전달한다.
+5. View Resolver는 View name에 해당하는 view를 검색한다. (prefix, suffix, resource path)
 6. 응답 받을 View가 존재한다면 DispatcherServlet으로 View를 가져오고 사용자에게 응답한다.
 
 ### Servlet이란 무엇인가요?
@@ -126,20 +128,15 @@ Kruskal의 시간 복잡도는 O(ElogE)이고, Prim Algorithm의 시간 복잡�
 
 **Web Deployment Descriptor(web.xml)**
 
-- web application 설정을 위한 deployment descriptor
-- Deploy할 때 Servlet의 정보를 설정해준다.
-- 브라우저가 Java Servlet에 접근하기 위해서는 WAS에 필요한 정보를 알려줘야 해당하는 Servlet을 호출할 수 있다.
-    - 배포할 Servlet이 무엇인지
-    - 해당 Servlet이 어떤 URL에 매핑되는지
-- 구체적인 설정 내용
-    - DispatcherServlet
-    - ContextLoaderLinser
-    - SpringSecurityFilterChain, EncodingFilter
+- DispatcherServlet 설정 (모든 요청 맵핑도 필요)
+- ContextConfigLocation 설정
+- Filter 설정
+- SpringSecurityFilterChain
 
 **Spring MVC Configuration Files**
 
 - **dispatcher-servlet.xml**
-    - Controller 관련 
+    - Controller 관련
     - mvc:annotation-driven 설정
     - Component-scan 관련
     - 정적인 data 위치 mapping
@@ -165,10 +162,9 @@ HttpMessageConverter, ViewResolver, Resource, jar 등, 톰캣 설정 및 web.xml
 
 이 설정이 추가되는 코드는 DelegatingWebMvcConfiguration 클래스의 로직에서 WebMvcConfigurer를 상속받는 Bean들을 주입받고 이를 Spring MVC 설정에 추가합니다.
 
-### HttpMessageConverter는 무엇인가?
 
+### Spring MVC에서 Spring Boot Starter가 해주는 것들을 제대로 익히자!
 
-
-
+### Spring MVC에서 어떠한 구성들이 필요하고 Converter문제는 어떻게 되고 Exception 문제는 어떻게 되는지 잘 익혀보자!!
 
 
