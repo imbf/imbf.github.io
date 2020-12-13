@@ -42,7 +42,7 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
     - DB 스키마 변경에 따른 하위호환 구현
     - Front 단에 웹훅 기능 추가
 
-- **Webhook Receiver Server 개발 (진행중)** - [https://github.com/doll6777/slack-receiver](https://github.com/doll6777/slack-receiver)
+- **Webhook Receiver Server 개발** - [https://github.com/doll6777/slack-receiver](https://github.com/doll6777/slack-receiver)
     - Receiver 도메인 모델 설계 및 구현
     - 동적인 Webhook Message를 위한 Deserialize 기능 구현
 
