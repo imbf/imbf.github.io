@@ -108,17 +108,17 @@ Kruskal의 시간 복잡도는 O(ElogE)이고, Prim Algorithm의 시간 복잡�
 
 ### Spring MVC의 구조에 대해서 설명해 주실 수 있나요?
 
-**Spring MVC의 시작은 HttpServletRequest 객체를 핸들링하는 DispatcherServlet이라고 할 수 있습니다. DispatcherServlet은 사용자의 HTTP 요청을 처리하기 위하여 등록된 핸들러로 디스패치하여 매핑 및 예외 처리 기능을 제공**합니다.
+**Spring MVC의 시작은 DispatcherServlet이라고 할 수 있습니다. DispatcherServlet은 사용자의 HTTP 요청을 처리하기 위하여 등록된 핸들러로 디스패치하여 매핑 및 예외 처리 기능을 제공**합니다.
 
-**DispatcherServlet으로 요청이 들어왔을 때 웹 서버의 일반적인 과정은 다음과 같습니다.**
+**DispatcherServlet으로 요청이 들어왔을 때 웹 서버의 대략적인 과정은 다음과 같습니다.**
 
 1. DispatcherServlet으로 HTTP Request가 들어온다.
 2. DispatcherServlet은 HandlerMapping을 통해서 요청 URL 등의 정보와 맵핑되는 적절한 Controller를 검색한다.
-3. DispatcherServlet은 Controller의 비즈니스 로직 실행 작업을 HandlerAdapter에 전달한다.
+3. DispatcherServlet은 HandlerAdapter를 통해 HandlerMapping에서 결정된 핸들러 정보를 통해서 컨트롤러를 호출한다.
 4. Controller는 요청을 받아 적절한 비즈니스 로직을 태운다.
-4. 비느지스 로직을 끝난 후 사용자에게 응답 할 View의 이름을 DispatcherServlet을 통해서 View Resolver로 전달한다.
-5. View Resolver는 View name에 해당하는 view를 검색한다. (prefix, suffix, resource path)
-6. 응답 받을 View가 존재한다면 DispatcherServlet으로 View를 가져오고 사용자에게 응답한다.
+5. 비즈니스 로직이 끝난 후 사용자에게 응답 할 View의 이름을 DispatcherServlet을 통해서 View Resolver로 전달한다.
+6. View Resolver는 View name에 해당하는 view를 검색한다. (prefix, suffix, resource path)
+7. 응답 받을 View가 존재한다면 DispatcherServlet으로 View를 가져오고 사용자에게 응답한다.
 
 ### Servlet이란 무엇인가요?
 
@@ -126,10 +126,10 @@ Kruskal의 시간 복잡도는 O(ElogE)이고, Prim Algorithm의 시간 복잡�
 
 ### Spring MVC를 위한 필수 설정
 
-**Web Deployment Descriptor(web.xml)**
+**Web Deployment Descriptor(web.xml)이란 클라이언트가 어떤 URL을 요청했을 때 어떤 Servlet 파일을 실행시킬 것인지를 매핑해놓은 파일이다.**
 
-- DispatcherServlet 설정 (모든 요청 맵핑도 필요)
-- ContextConfigLocation 설정
+- Servlet 설정
+- ContextConfigLocation 설정 : Context Loader가 load할 수 있는 설정 파일의 위치 명시
 - Filter 설정
 - SpringSecurityFilterChain
 
@@ -152,19 +152,47 @@ Kruskal의 시간 복잡도는 O(ElogE)이고, Prim Algorithm의 시간 복잡�
 
 **Spring Boot기반 MVC는 기존에 Spring MVC에서 필수적으로 설정해야 하는 톰캣설정 및 web.xml에 관련된 설정을 스프링 부트의 내부모듈에 의해서 구동시 자동설정** 해준다.
 
-@SpringBootApplication 어노테이션은 @ComponentScan, @EnableAutoConfiguration, @Configuration 에노테이션 등으로 이루어져 있는데 이게 핵심이다.
+**@SpringBootApplication 어노테이션은 @ComponentScan, @EnableAutoConfiguration, @Configuration 에노테이션** 등으로 이루어져 있는데 이게 핵심이다.
 
 HttpMessageConverter, ViewResolver, Resource, jar 등, 톰캣 설정 및 web.xml에 관련된 설정을 스프링 부트의 내부모듈에 의해서 구동시 자동설정 해준다.
 
 ### Spring Boot 설정 관련 이슈는 있었는가?
 
-네! Spring Boot에서 MVC 설정 관련해서 이슈가 있었습니다. Spring Boot MVC의 자동 설정에 가장 중요한 클래스는 WebMvcAutoConfiguration인데 위에  @ConditionalOnMissingBean(WebMvcConfigurationSupport.class)와 같은 애노테이션이 있었습니다. 즉, WebMvcConfigurationSupport Bean이 존재하면 Web Mvc AutoConfiguration이 되지 않는다는 이야기 입니다. 즉, 우리는 Spring Boot MVC에 설정을 추가하기 위해서 WebMvcConfigurationSupport를 상속받아 Bean으로 만들면 자동 설정이 되지 않으니까 안되고 WebMvcConfigurer를 상속받아서 빈으로 만들어야 합니다.
+**Spring Boot MVC의 자동 설정에 가장 중요한 클래스는 WebMvcAutoConfiguration**인데 위에  @ConditionalOnMissingBean(WebMvcConfigurationSupport.class)와 같은 애노테이션이 있었습니다.
 
-이 설정이 추가되는 코드는 DelegatingWebMvcConfiguration 클래스의 로직에서 WebMvcConfigurer를 상속받는 Bean들을 주입받고 이를 Spring MVC 설정에 추가합니다.
+즉, WebMvcConfigurationSupport Bean이 존재하면 WebMvcAutoConfiguration bean이 생성되지 않아 web mvc 자동 설정이 되지 않는다는 이야기 입니다.
 
+**우리는 Spring Boot MVC에 설정을 추가하기 위해서는 WebMvcConfigurer를 상속받아서 빈으로 만들어야 합니다.**
 
-### Spring MVC에서 Spring Boot Starter가 해주는 것들을 제대로 익히자!
+이 설정이 추가되는 코드는 **DelegatingWebMvcConfiguration** 클래스의 로직에서 WebMvcConfigurer Bean들을 주입받고 이를 Spring MVC 설정에 추가합니다.
 
-### Spring MVC에서 어떠한 구성들이 필요하고 Converter문제는 어떻게 되고 Exception 문제는 어떻게 되는지 잘 익혀보자!!
+### Spring MVC에서 Spring Boot Starter가 해주는 것들은 무엇인가요??
 
+프로젝트의 pom.xml을 보면 일단 가져오는 **프로젝트 의존성 부터 차이**가 존재한다. **spring mvc는 spring 프로젝트의 spring-webmvc라는 의존성**을 가져오고, **spring boot mvc는 spring boot 프로젝트의 spring-boot-starter-web**을 가져온다.
+
+spring boot starter web은 기본적인 spring mvc를 사용하기 위한 많은 설정을 자동화 해주고 애노테이션 기반으로 프로젝트의 설정을 할 수 있도록 한다.
+
+**spring boot web mvc가 해주는 설정들은 다음과 같다.**
+
+- 내장된 웹 애플리케이션 서버(Tomcat, Jetty, Undertow)
+- 의존성을 손쉽게 관리할 수 있는 Project Object Model
+- 설정의 표준화와 자동화
+    - Spring Framework의 수 많은 XML 기반의 설정을 Spring Boot의 자동 설정으로 제거하거나 properties 형식과 JavaConfig 형식으로 대체
+    - 각종 Filter, ViewResolver, DispatcherServlet설정, ComponentScan, Annoation기반 설정 등을 자동으로 설정해준다.
+
+### Spring MVC와 WAS의 관계
+
+**클라이언트는 tomcat에게 요청을 보내고 tomcat은 URL 및 기타 정보에 따라(web.xml) 처리를 위해 요청을 보낼 서블릿**을 결정합니다. spring web mvc에서 이 서블릿은 대부분 DispatcherServlet을 의미하고 이를 통해 Controller단으로 들어와 비즈니스 로직을 태운 뒤 적절한 모델을 만들어 뷰에 랜더링한 후 톰캣에게 다시 전송되고 톰캣은 클라이언트에게 다시 전송합니다.
+
+### Executable Jar File
+
+**Spring Boot maven plugin을 사용하면 Spring Boot loader가 Tomcat이 내재된 실행가능한 Jar파일을 생성**해준다. 우리는 이를 통해 jar 파일만 실행시키면 되는 것이니 스프링을 구성할 때 매우 편리하다.
+
+### Spring MVC에서 Exception 이 발생하면 어떻게 되는가?
+
+**request mapping 또는 request handler로 부터 예외가 발생하면 DispatcherServlet은 HandlerExceptionResolver구현체가 예외를 처리해 적절한 응답을 클라이언트에게 보낸다.** 나는 Jackson 사용간에 Deserialize에서 에러 발생을 경험해 보았기 때문에 **DefaultHandlerExceptionResolver**가 400번 상태 코드를 맵핑해서 사용자에게 응답해주었다.
+
+### Spring Message Converter는 어떻게 동작하는가?
+
+**Spring Boot는 HttpMessageConvertersAutoConfiguration을 이용해서 Converter 서비스도 자동 구성해줌으로 이를 이용하면 된다. Json Parsing을 위해 MappingJackson2HttpMessageConverter가 사용된다.**
 
