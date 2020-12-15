@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  "[기술 면접 준비 - 6일차] Github Pages Blog"
-date:   2020-12-13
+date:   2020-12-14
 author: Green Frog Developer
 categories: Interview
-tags: Smart-Doorlock Mobius Node.js oneM2M
+tags: GitHub-Pages Blog Jekyll
 ---
 
 # Github Pages Blog
