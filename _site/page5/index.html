@@ -257,6 +257,22 @@
 
 	
 
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
 
       </ul>
     </nav>
@@ -278,6 +294,75 @@
 
 <div class="wrapper">
 <ul class="post-list">
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/spring/2020/06/29/Spring-Security-with-JWT.html">Spring Security + JWT를 통해 프로젝트에 인증 구현하기</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Spring Security와 JWT를 활용해서 프로젝트에 인증을 어떻게 구현했는지에 대해서 포스팅 하려고 한다. 토큰을 사용한 인증은 처음이기도 하고, Google OAuth를 함께 사용하는 바람에… 개념이 해깔려 며칠간 계속 헤맸던 것 같다. 이제서야 조금 감을 잡으며 프로젝트에 인증 구현을 마쳤는데.. 아직 구현되지 않은...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">June 29, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <!-- <a href="/category/Spring">Spring</a>  (default)-->
+        <a href="/category/Spring">Spring</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/spring/2020/05/30/Use-MockBean-Test.html">@MockBean을 사용한 통합(Controller)테스트</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>이 글에서는 @MockBean을 사용한 통합테스트에 관한 이슈에 대해서 다루어 보도록 하겠다. 이 이슈는 Google OAuth를 사용하는 Service레이어를 의존하는 Controller를 테스트하는 과정에서 발생되었다. Controller 코드는 다음과 같다. @RestController public class GoogleLoginController { GoogleLoginService googleLoginService; UserService userService; public GoogleLoginController(GoogleLoginService googleLoginService, UserService userService)...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">May 30, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <!-- <a href="/category/Spring">Spring</a>  (default)-->
+        <a href="/category/Spring">Spring</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/spring/2020/05/08/RequestParam-RequestBody-(Conversion).html">@RequestParam, @RequestBody에 관한 이슈 (Conversion 관점)</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Conversion관점의 @RequestParam와 @RequestBody에 관한 이슈에 대해서 다루어 보도록 하겠다. 이 이슈는 서버로 Form Data를 보내서 Request handler 메소드의 인자로서 setter가 없는 클래스의 객체를 받고 싶은 욕구에서 시작 되었다. Form Data writer=abc&amp;title=Spring&amp;contents=Johnson domain @Getter @Entity public class Question { @Id @GeneratedValue(strategy...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">May 8, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <!-- <a href="/category/Spring">Spring</a>  (default)-->
+        <a href="/category/Spring">Spring</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
   
   <li>
     <h2>
@@ -316,75 +401,6 @@
         
         <!-- <a href="/category/Spring">Spring</a>  (default)-->
         <a href="/category/Spring">Spring</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/spring/2020/03/28/Create-MVC-Project.html">Intellij에서 스프링 MVC Project 생성하기</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>이 글에서는 Intellij를 활용해서 Spring MVC Project를 생성 및 설정하는 방법에 대해 소개할 것이다. [사용한 개발 환경] 자바 : Java8 운영체제: macOS Catalina 개발 도구: IntelliJ IDEA ULTIMATE 프레임워크: Spring MVC + Maven 서버: Tomcat 8.5.53 1. Project 생성하기 Intellij를...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">March 28, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <!-- <a href="/category/Spring">Spring</a>  (default)-->
-        <a href="/category/Spring">Spring</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/spring/2020/03/26/Spring-MVC-Noticeboard.html">Spring MVC를 활용한 게시판 구축하기</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>이 글은 Spring MVC를 활용한 게시판 구축하는 과정을 포스팅한 글이다. [사용한 개발 환경] 자바 : Java8 운영체제: macOS Catalina 개발 도구: IntelliJ IDEA ULTIMATE 서버: Tomcat 8.5.53 Spring MVC의 Request처리 방법 스프링 MVC에서는 @Controller 어노테이션이 붙은 클래스 안에 @RequestMapping 어노테이션이...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">March 26, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <!-- <a href="/category/Spring">Spring</a>  (default)-->
-        <a href="/category/Spring">Spring</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/computer-science(cs)/2020/03/25/Cloud-Computing.html">클라우드 컴퓨팅(Cloud Computing)이란 무엇인가?</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>이 글에서는 클라우드 컴퓨팅(Cloud Computing)에 대해서 알아볼 것이다. 클라우트 컴퓨팅(Cloud Computing) 이란? 클라우드 컴퓨팅이란 클라우드(인터넷)을 통해 가상화된 컴퓨터의 시스템 리소스(IT 리소스)를 요구하는 즉시 제공하는 것이다. 인터넷 기반 컴퓨팅의 일종으로 정보를 자신의 컴퓨터가 아닌 클라우드(인터넷)에 연결된 다른 컴퓨터로 처리하는 기술을 의미한다....</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">March 25, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <!-- <a href="/category/Computer-Science(CS)">Computer-science(cs)</a>  (default)-->
-        <a href="/category/Computer-Science(CS)">Computer-Science(CS)</a>
         
       
       </div>
@@ -446,6 +462,22 @@
 
 	
 	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
 	
 
 	
