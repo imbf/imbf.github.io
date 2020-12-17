@@ -23,17 +23,17 @@ Spring Security와 JWT를 활용해서 프로젝트에 인증을 어떻게 구�
 
 **Spring Security란 인증과, 권한부여, 일반적인 공격에 대한 보호의 기능을 제공하는 프레임워크이다.** 즉, Spring Security를 사용하면 어플리케이션의 보안 관련 기능을 자체적으로 구현 할 필요 없이 쉽고 안전하게 구현할 수 있다.
 
-Spring Security의 Servlet 보안 지원은 **Servlet Filter(이하 Filter)**를 기반으로 한다. 클라이언트가 어플리케이션으로 request를 보내면, Container는 요청 URI의 경로에 따라 어떤 Filter와 어떤 Servlet을 적용할 것인지 결정한다.
+Spring Security의 Servlet 보안 지원은 **Servlet Filter(이하 Filter)**를 기반으로 한다. 클라이언트가 어플리케이션으로 request를 보내면, Servlet Container는 요청 URI의 경로에 따라 어떤 Filter와 어떤 Servlet을 적용할 것인지 결정한다.
 
 Spring은 여러 Filter중 Servlet Container Lifecycle과 ApplicationContext사이에 연결할 수 있는 `DelegatingFilterProxy`라는 Filter를 제공한다.
 
-Spring Security의 Servlet 보안 지원은 `DelegatingFilterProxy`가 감싸고 있는 **`FilterChainProxy`**에 의해 수행되며, `FilterChainproxy`는 **`SecurityFilterChain`**을 통해 많은 작업을 **Security Filter** 인스턴스에 위임한다.
+Spring Security의 Servlet Filter 지원은 `DelegatingFilterProxy`가 감싸고 있는 **`FilterChainProxy`**에 의해 수행되며, `FilterChainproxy`는 **`Security Filter Chain`**을 통해 많은 작업을 **Security Filter** 인스턴스에 위임한다.
 
 위 과정을 그림으로 나타내면 다음과 같다.
 
 <img src="/assets/spring/Spring-Security-With-JWT-1.png" style="width:70%">
 
-SecurityFilterChain은 스프링에서 보안과 관련된 여러 Security Filter List를 갖고 있는 객체로 이를 순회하면서 필터링을 실시한다.
+Security Filter Chain은 스프링에서 보안과 관련된 여러 Security Filter List를 갖고 있는 객체로 이를 순회하면서 필터링을 실시한다.
 
 SecurityFilterChain에 존재하는 Security Filter순서는 다음과 같다.
 
