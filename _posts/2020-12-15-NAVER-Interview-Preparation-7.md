@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[기술 면접 준비 - 8일차] 자기소개 & 동아리 회장 및 해커톤 활동"
+title:  "[기술 면접 준비 - 7일차] 자기소개 & 동아리 회장 및 해커톤 활동"
 date:   2020-12-15
 author: Green Frog Developer
 categories: Interview

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[기술 면접 준비 - 9일차] 네트워크"
+title:  "[기술 면접 준비 - 8일차] 네트워크"
 date:   2020-12-16
 author: Green Frog Developer
 categories: Interview
