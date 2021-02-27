@@ -6,12 +6,987 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 17 Dec 2020 00:35:48 +0900</pubDate>
-    <lastBuildDate>Thu, 17 Dec 2020 00:35:48 +0900</lastBuildDate>
+    <pubDate>Sun, 28 Feb 2021 00:20:17 +0900</pubDate>
+    <lastBuildDate>Sun, 28 Feb 2021 00:20:17 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
-        <title>[기술 면접 준비 - 9일차] 네트워크 &amp; 인증</title>
+        <title>[실무 면접 준비 - 1] 인턴 프로젝트 (Booking Recommendation System)</title>
+        <description>&lt;hr /&gt;
+
+&lt;h1 id=&quot;booking-recommendation-system&quot;&gt;Booking Recommendation System&lt;/h1&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;인턴-기간-동안에-개발한-예약-추천-시스템에-대해-저희에게-간단히-설명해-주실-수-있나요&quot;&gt;인턴 기간 동안에 개발한 예약 추천 시스템에 대해 저희에게 간단히 설명해 주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;제가 이번 인턴 기간 동안에 개발한 예약 추천 시스템은 과거 예약 데이터를 사용해 네이버 예약 사용자들이 특정 업체 선택 시 선택한 업체와 가장 유사한 업체, 선택한 업체의 사용자들이 가장 선호하는 업체와 업종을 추천해 주는 시스템을 만들었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;인턴-기간-동안에-진행한-추천-시스템-개발을-통해-얻은-점이-있나요&quot;&gt;인턴 기간 동안에 진행한 추천 시스템 개발을 통해 얻은 점이 있나요?&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;DB부터 Front-End까지의 End-To-End 개발로 전체적인 시스템 아키텍처에 대한 이해가 높아질 수 있는 계기가 되었습니다.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;지금까지 많은 프로젝트를 진행하면서 서비스에 필요한 서버 단이나 DB 단만 개발해 왔습니다. 하지만 이번 인턴 기간을 통해 추천 시스템을 처음부터 끝까지 End-To-End로 개발해 전체적인 시스템 아키텍처에 대한 이해가 높아질 수 있는 계기가 되었습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;서비스를 만들기 위해 시스템의 구현 뿐만 아니라 운영도 아주 중요한 요소라는 점을 깨닫는 계기가 되었습니다.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;사실 학생 때는 시스템이 정상동작하는 것만 신경썻는데, 막상 인스턴스가 많은 시스템을 구현해보니 DB Lock에 의한 일시적인 에러나 서버 인스턴스에 문제가 생기는 등 운영상의 이슈가 발생했습니다. 예전에는 해당 이슈가 일어난 인스턴스들을 재시작하면 문제가 해결되는 줄 알았으나 이는 일시적인 문제 해결일 뿐이고, 서비스를 위해서는 시스템의 정상적인 운영도 꼭 필요하다는 점을 깨닫게 되었습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;기본기의 중요성에 대해서 깨닫는 계기가 되었습니다.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;추천 시스템을 구현하면서 Spring Boot Web을 제외한 대부분의 인스턴스들은 처음 학습하였습니다. 새로운 기술들을 빠르게 학습하고 적용하기 위해서는 전체 시스템을 이해할 수 있는 능력인 기본기가 가장 중요하다고 느끼게 되었고 현재에도 운영체제(공룡책)을 정독하고 있습니다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;추천-시스템-개발간에-가장-어려웠던-점은-무엇인가요&quot;&gt;추천 시스템 개발간에 가장 어려웠던 점은 무엇인가요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;추천 시스템을 개발하면서 가장 어려웠던 점은 추천을 위해서 추천 알고리즘을 기획하고 설계했던 부분이 가장 어려웠던 것 같습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;제 서비스에서 추천 알고리즘의 성능 평가는 사용자들의 객관적인 지표가 존재하지 않기 때문에 주관적으로 평가가 되어지는데, 좋은 추천 알고리즘을 위해서는 대부분의 사람들이 선호할만한 업체나 업종을 추천하는 알고리즘을 개발했어야만 했고, 이러한 알고리즘을 개발하기 위해서 사용되어지는 모든 로직과 상수값, 기준점들이 다 마땅한 이유가 있어야만 했었고, 그러한 고민 속에서도 추천 알고리즘이 제 자신만의 색깔을 잃어버리면 안됬었습니다. 종합해보자면 저는 좀 더 특별하고, 재미있고, 성능 좋은 알고리즘을 만들기 위해서 많이 고민했던 것 같습니다. 당연히 추천 서비스는 처음 해보는 거라서 추천 알고리즘의 기획과 설계가 많이 어려웠지만 이를 위해 A4용지로 20장도 넘게 그림을 그리는 것을 통해서 머리속의 생각들을 정리할 수 있었고 이를 통해 재미있고 좋은 알고리즘이 나올 수 있었던 것 같습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;추천-시스템을-개발하시면서-분명히-시간이-부족했을텐데-어떠한-부분을-더-챙기고-싶었나요&quot;&gt;추천 시스템을 개발하시면서 분명히 시간이 부족했을텐데… 어떠한 부분을 더 챙기고 싶었나요?&lt;/h3&gt;
+
+&lt;p&gt;사실 더 개발하고 싶은 부분은 너무 많았습니다. 추천 알고리즘 개선부터 Redis나 Batch의 장애 대응 고도화, 배치에 병렬 프로그래밍 도입 등 다양한 부분을 더 개발 하고 싶었는데, 일단 기간 내에 서비스를 완성하는 것이 가장 중요하니 어느 정도 개발된 부분에 대해서는 만족했어야만 했습니다. &lt;strong&gt;이러한 많은 부분 중에서 그래도 가장 관심있는 부분은 장애 대응 고도화입니다.&lt;/strong&gt; 현재 Batch나 Redis에 장애 대응 전략을 세워서 개발하였지만 아직 부족한 부분이 몇가지 존재해서 현재에도 계속 공부하고 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;어떻게-장애-대응을-고도화-시키고-싶으시나요&quot;&gt;어떻게 장애 대응을 고도화 시키고 싶으시나요?&lt;/h3&gt;
+
+&lt;p&gt;일단 현재 Batch Process에 장애 대응을 위해서 Skip, Retry, Back-off 전략을 구현한 상태이며 &lt;strong&gt;Batch Process 실패시 알람을 보내는 클라이언트 부분을 개발하고 싶습니다.&lt;/strong&gt; 두 번째로는 현재 Redis 장애 대응을 위해 Master-Replica 운영 모델을 도입해서 적용 했는데, 좀 더 &lt;strong&gt;장애 대응을 자동화 하기 위해서 Redis Sentinel이나 Redis Cluster 운영 모델을 도입하고 싶습니다. 아니면 Health Checker도 도입해보고 싶습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;health-checker란-무엇인가요&quot;&gt;Health Checker란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Health check는 서버의 상태를 주기적으로 체크하여 서버의 상태가 통신이 불가능할 경우 서버에 특정 조치를 취해 서비스를 원활하게 제공하기 위해 이용되는 방법이다.&lt;/strong&gt; 서버의 상태를 주기적으로 점검하는 방법으로는 Link, ARP, ICMP, TCP, Script 방식이 있으며, 헬스체크에서는 서버로 일정 시간 간격으로 서비스에 대하여 Open과 Close를 반복적으로 진행하여 서비스 제공 가능 유무를 점검합니다. 아마 제가 구현하고 싶은 방식은 가장 익숙한 TCP 방식이지 않을까 생각하고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;헬스체크를 위해 사용되는 패킷의 종류, 패킷을 전송하는 주기와 서버의 응답을 기다리는 시간, 응답이 수신 되지 않았을 때 다시 패킷을 보내주는 횟수는 사용자의 설정에 따라 동작합니다. 전송 주기가 짧을 수록 서버의 장애 여부를 정확하게 파악할 수 있지만, 이는 네트워크의 부하가 될 수 있음으로 문맥을 잘 고려해서 설정 해야만 합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;네이버-예약에-추천-시스템이-왜-필요할까요&quot;&gt;네이버 예약에 추천 시스템이 왜 필요할까요?&lt;/h3&gt;
+
+&lt;p&gt;현 시대에 사는 사람들은 인터넷에 너무나 많은 정보가 존재하기 때문에 자신이 어떠한 정보를 원하는지 조차도 잘 알지 못합니다. 이러한 상황은 네이버 예약 사용자들에게도 동일하게 발생한다고 생각합니다. 너무나 많은 업체 및 상품들이 등록되어 있어서 사용자들은 어떤 업체를 예약해야될지 잘 알지 못합니다. 이러한 불편함을 해결해주고자 수 많은 업체를 필터링해서 사용자가 선호할만한 업체를 추천해주는 시스템이 네이버 예약에 꼭 필요하다고 생각합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;추천-시스템의-기대-효과는-무엇인가요&quot;&gt;추천 시스템의 기대 효과는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;추천 시스템의 대표적인 기대 효과로는 네이버 예약 사용자들의 서비스 만족도 증가 효과를 기대할 수 있구요, 또한 추천 시스템으로부터 발생한 다양한 지표를 활용해서 새로운 이벤트를 기획할 수도 있습니다. 이 뿐만 아니라 평소라면 검색하지 못할 다양한 업체를 추천 시스템을 통해서 추천해줌으로써 사용자의 예약의 폭 확장을 불러일으킬 수도 있습니다. 결국 추천 시스템을 통해서 예약 서비스의 성장을 이룰 수 있다고 생각합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;여러-추천-대상-중-왜-업체를-추천하게-되었나요&quot;&gt;여러 추천 대상 중 왜 업체를 추천하게 되었나요?&lt;/h3&gt;
+
+&lt;p&gt;예약 추천 시스템을 기획해 보았을 때 추천 대상은 크게 업종과 업체, 상품으로 나눌 수 있었습니다. 이들간의 관계를 살펴보면 업종은 업체를 포함하고 업체는 상품을 포함합니다. 업종을 추천하게 된다면 사용자들은 같은 업종에 속한 수 많은 업체 중 특정 업체를 선택해야만 하는 불편함이 발생했고, 상품을 추천하기에는 동일한 업체임에도 불구하고 등록된 상품들의 다양성이 너무 심해서 알고리즘의 성능이 좋지 않을것 같았습니다. 이러한 이유에서 업체 추천이 가장 적절하다고 생각해서 업체를 추천하는 시스템을 기획하게 되었습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;패치&quot;&gt;패치&lt;/h3&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;정지 없이 서버 패치를 한 방법 새 버전으로 준비된 서버들을(site B) 미리 준비한다.&lt;/li&gt;
+    &lt;li&gt;기존 서버로의 추가 유입을 막고(Drain) 새 버전 서버로 유입되도록 바꿉니다(Redirect)&lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Draining과 Redirecting을 계속하여 두 개의 Site를 뒤집는(Flip) 방식으로 서비스의 중단 없이 패치를 적용합니다.&lt;/p&gt;
+
+      &lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation1-3.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Flip이 완료되면 모든 접속이 새 Site로 붙게되며 기존 Site는 deactivate 됩니다.&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;h3 id=&quot;장애&quot;&gt;장애&lt;/h3&gt;
+
+  &lt;p&gt;&lt;strong&gt;장애는 피할 수 없다. 장애에 견디고 복구 가능한지가 중요하다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;모든 서비스는 Health Check 프로토콜을 구현하고 있습니다. Health Check가 실패한 경우를 모니터링하여 장애를 감지합니다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;SPOF&lt;/strong&gt; 를 피하기 위해 동종 서비스들은 개념적으로 Pool에 담겨 있고 장애 감지시 해당 노드가 Pool 에서 제거됩니다.&lt;/p&gt;
+
+  &lt;blockquote&gt;
+    &lt;p&gt;&lt;strong&gt;단일 장애점(single point of failure, SPOF)은 시스템 구성 요소 중에서, 동작하지 않으면 전체 시스템이 중단되는 요소를 말한다&lt;/strong&gt;&lt;/p&gt;
+  &lt;/blockquote&gt;
+
+  &lt;p&gt;그리고 서비스 종류별 Pool을 두고 있습니다.&lt;/p&gt;
+
+  &lt;p&gt;만약 예상치 못한 이유로 서비스 전체나 상당부분이 불안정한 경우가 발생한다면 서버들을(Site) 다시 배포합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;recommendation-algorithm&quot;&gt;Recommendation Algorithm&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;업체와-업종-추천을-위해서-사용한-알고리즘에-대해-저희에게-알려주실-수-있나요&quot;&gt;업체와 업종 추천을 위해서 사용한 알고리즘에 대해 저희에게 알려주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;일단 수 많은 업체와 업종 중 특정 대상을 추천하려면 추천 대상간에 랭킹 작업이 필요합니다. 저는 랭킹 작업을 진행하기 위해서 랭킹 점수를 업체 간의 접근성과 유사도, 만족도의 곱으로 정의했고 업체간의 유사도를 구하기 위해서 두 가지의 추천 알고리즘을 사용하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;선택한 업체와 가장 유사한 업체를 추천하기 위해 업체와 속성간의 관계를 기반으로 업체를 추천하는 알고리즘인 키워드 기반의 Content Based Filtering을 사용했구요, 선택한 업체의 사용자들이 가장 선호하는 업체를 추천하기 위해 업체와 사용자의 관계를 기반으로 하는 알고리즘인 Collaborative Filtering을 사용하였습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;키워드-기반의-content-based-filtering이란-무엇인가요&quot;&gt;키워드 기반의 Content Based Filtering이란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;일단 Content Based Filtering이란 업체와 속성간의 관계를 기반으로 가장 유사한 업체를 필터링하는 알고리즘을 의미합니다.&lt;/strong&gt; 저는 업체 정보를 분석해 키워드로 나눈 뒤 업체들의 속성을 산출했으며 산출된 속성들과 업체들간의 관계를 행렬로써 표시해 업체간의 유사도를 구할 수 있었습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Content Based Filtering의 한계점으로는 콘텐츠가 많아 질수록 속성을 추출하기 어려워진다는 문제점이 존재한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;collaborative-filtering이란-무엇인가요&quot;&gt;Collaborative Filtering이란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Collaborative Filtering이란 사용자와 업체간의 관계를 기반으로 사용자들이 가장 선호하는 업체를 필터링하는 알고리즘 입니다.&lt;/strong&gt; 과거 예약 데이터를 사용하면 특정 업체를 예약한 사용자들을 알 수 있고, 사용자들의 업체 선호도를 알 수 있습니다. 이러한 관계를 행렬로써 표시해 업체간의 유사도를 구할 수 있었습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;협업 필터링의 한계점으로 &lt;strong&gt;콜드 스타트, 계산 효율 저하, 롱 테일 등의 문제&lt;/strong&gt;가 있음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;업종-추천은-어떻게-하셨나요&quot;&gt;업종 추천은 어떻게 하셨나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;업종 추천을 위해서 시간, 순서, 기간에 따른 사건의 규칙을 분석하는 방법인 순차 분석을 사용하였습니다.&lt;/strong&gt; 순차 분석을 위해 특정 업체를 예약한 사용자들의 데이터를 분석 했구요, 사용자들의 개인별 업체 예약 시점을 기준으로 특정 기간 내의 예약 데이터를 분석함으로써 예약한 업체가 속해있는 업종과 다른 업종이 특정 기간 내에 얼마나 자주 예약되는지를 산출 할 수 있었습니다. 이러한 관계를 통해 업종간의 관계를 산출할 수 있었구요 특정 업종에 속한 업체 선택시 관련된 업종을 추천할 수 있는 알고리즘을 설계할 수 있었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;추천-알고리즘의-성능-문제나-cold-start-문제를-해결하기-위해서-hybrid-filtering은-고려하지-않았나요&quot;&gt;추천 알고리즘의 성능 문제나 Cold Start 문제를 해결하기 위해서 Hybrid Filtering은 고려하지 않았나요?&lt;/h3&gt;
+
+&lt;p&gt;물론 Hybrid Filtering의 도입도 검토해 보았습니다. Hybrid Filtering은 Collaborative Filtering과 Content Based Filtering으로 표현되어지기 때문에 Cold Start나 Long Tail 등의 문제를 해결할 수 있습니다. 하지만 제 서비스는 사용자 없기 때문에 알고리즘의 성능은 개인의 주관으로 평가되어질 수 밖에 없고 제가 적절하다고 생각했던 알고리즘이 남들이 보기에는 적절하지 않을 수도 있겠다고 생각이 들었습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;이러한 이유에서 선택한 업체와 유사하면서 선택한 업체의 사용자들이 선호하는 업체를 추천하는 것 보다는 이를 분리해서 선택한 업체와 유사한 업체, 선택한 업체의 사용자들이 선호하는 업체로 나누는 것이 인턴 평가 때 팀원분들이 업체 추천에 대해서 더 쉽게 공감할 수 있겠다고 생각해서 Hybrid FIltering 대신 Content Based Filtering과 Collaborative FIltering을 구현하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;추천-알고리즘-대신-머신러닝을-사용하지-않은-이유&quot;&gt;추천 알고리즘 대신 머신러닝을 사용하지 않은 이유&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;일단 머신러닝을 사용하지 않은 가장 큰 이유는 시간적인 문제 때문에 사용하지 않았습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;총 6주간의 인턴 기간 동안 추천 서비스 기획과 설계에 2주를 사용하고 남은 4주 동안에 추천 시스템을 구현하기 위해 수 많은 기술들을 배우고 적용했어야만 했습니다. 머신러닝을 한번도 접해보지 않은 상황에서 알고리즘을 세우고, 데이터를 전처리하고 학습시켜 모델을 만들고 이를 테스트하고 실제 프로세싱에 적용하기에는 시간이 부족할 거라고 생각했습니다. 또한 로직으로써 추천 알고리즘을 풀어내도 충분히 재미있고 성능 좋은 결과를 낼 수 있을것 같다는 자신감도 조금 있었구요!! 이러한 이유에서 머신러닝 대신 추천 알고리즘을 사용했습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;형태소-분석기인-komoran을-사용한-이유&quot;&gt;형태소 분석기인 KOMORAN을 사용한 이유&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;업체와 속성간의 관계 행렬을 구하기 위해 업체 정보를 형태소 분석을 통해 키워드로 만들고 싶어서 형태소 분석기인 KOMORAN을 사용했습니다.&lt;/strong&gt; 또한 KOMORAN은 Maven Repository에 등록되어 있기 때문에 간단히 메이븐 설정 파일을 수정하는 것 만으로도 쉽게 라이브러리를 프로젝트에 가져올 수 있다는 장점이 있어서 KOMORAN을 사용하였습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;cosine-similarity를-사용한-이유&quot;&gt;Cosine Similarity를 사용한 이유&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;추천 알고리즘을 사용한다면 업체를 벡터로 표현할 수 있습니다. 이러한 벡터간의 유사도 즉, 업체간의 유사도를 구하기 위해 Cosine Similarity를 사용했으며, 이는 벡터의 크기가 아닌 방향의 유사도를 판단하는 함수입니다.&lt;/strong&gt; 실제로 벡터간의 크기의 유사도를 판단하는 방법인 Euclidean, Manhattan, Minkowski Distance 방법보다 Cosine Similarity가 제 로직에서는 훨씬 성능이 좋았습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;fasttext를-사용한-이유&quot;&gt;FastText를 사용한 이유&lt;/h3&gt;
+
+&lt;p&gt;업체와 속성간의 관계 행렬을 구하기 위해 텍스트 유사도가 필요했었고, 텍스트 유사도를 구하기 위해 텍스트를 백터로 임베딩할 필요가 있었습니다. &lt;strong&gt;즉, 텍스트를 백터로 임베딩 하기위해 텍스트의 표현 및 분류를 학습할 수 있도록 하는 오픈 소스 라이브러리인 FastText를 사용했으며, 미리 한국어로 학습된 모델을 사용했습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;알고리즘-vs-모델&quot;&gt;알고리즘 vs 모델&lt;/h3&gt;
+
+  &lt;p&gt;&lt;strong&gt;알고리즘&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;어떤 문제의 해결을 위하여 입력된 자료를 토대로 하여 원하는 출력을 유도하여 내는 규칙&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;모델&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;주어진 데이터를 가지고 알고리즘을 통해서 학습을 시켜서 모델을 도출&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;알고리즘 : y = wx + b&lt;/li&gt;
+    &lt;li&gt;모델 : y = 2x + 2 (w와 b를 머신러닝이 구해준다.)&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;postgresql&quot;&gt;PostgreSQL&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;postgresql을-사용한-이유가-있으시나요&quot;&gt;PostgreSQL을 사용한 이유가 있으시나요?&lt;/h3&gt;
+
+&lt;p&gt;사실 수 많은 관계형 DBMS 중 PostgreSQL만을 사용하게 된 이유는 없습니다. MSSQL이나 MySQL, MariaDB등 다양한 RDBMS를 고려해보기도 했는데요, 일단 운영 데이터를 가져와서 사용해야 하기 때문에 RDBMS는 무조건적으로 사용해야 했었고 그렇다면 오픈 소스임에도 불구하고 다른 DB에 비해서 좋은 성능과 다양한 기능을 제공해주는 PostgreSQL을 사용해보면 어떨까? 하는 생각에 PostgreSQL을 사용하게 되었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;postgresql의-특징에-대해서-알고-있으신가요&quot;&gt;PostgreSQL의 특징에 대해서 알고 있으신가요?&lt;/h3&gt;
+
+&lt;p&gt;일단, 오픈 소스임에도 불구하고 좋은 성능과 다양한 기능을 제공해주는 것으로 알고 있습니다. Microsoft Azure VM 환경에서 여러 DB간에 단순 쿼리 성능을 비교한 지표를 본적이 있는데요 물론 Oracle DB에 비해서는 PostgreSQL의 쿼리 성능이 떨어지긴 하지만 다른 DB에 비해서는 확실히 성능이 좋다는 것을 볼 수 있었습니다. 기능적인 측면에서도 신뢰도를 최우선으로 하여 다양한 인덱싱 기법과, 트랜잭션 및 ACID, 동시성 성능을 높여주는 MVCC 기능, 다양하고 유연한 REPLICA 방식 지원, 다양한 언어에 제공되는 인터페이스, 잘 만든 문서나 메뉴얼 등을 지원해주는 것으로 알고 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;어떠한-인덱싱-기법을-지원해주는가요&quot;&gt;어떠한 인덱싱 기법을 지원해주는가요?&lt;/h3&gt;
+
+&lt;p&gt;기본적으로 PostgreSQL은 B-Tree 인덱스를 지원해주구요, 이 뿐만 아니라 복합 인덱스, GIN(Generalized Inverted Index), Gist(Generalized Inverted Search Tree) 인덱스 타입을 제공해주는 것으로 알고 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;동시성-성능을-높여주는-mvcc-기능은-뭔가요&quot;&gt;동시성 성능을 높여주는 MVCC 기능은 뭔가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;MVCC란 Multi-Version Concurrency Control의 줄임말로써, 동시 접근을 허용하는 데이터베이스에서 동시성을 제어하기 위해 사용하는 방법 중 하나라고 알고 있습니다.&lt;/strong&gt; PostgreSQL에 접근하는 사용자는 접근한 시점의 데이터베이스 Snapshot을 읽고, 데이터에 대한 변경이 완료될 때 이를 새로운 버젼으로 가정해 이전 버젼의 데이터와 비교해서 변경된 내용을 기록하는 방법으로 동시성을 제어합니다. 이를 MVCC라고 하구요.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lock이 존재하지 않기 때문에 일반적인 RDBMS보다 빠르게 작동하지만, 버젼 이슈가 생길 수 있다는 점을 주의해야만 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;hr /&gt;
+
+  &lt;h3 id=&quot;postgresql-1&quot;&gt;&lt;strong&gt;PostgreSQL&lt;/strong&gt;&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;오라클에 준하는 기능을 가지고 있다.&lt;/li&gt;
+    &lt;li&gt;MVCC, Point in Time Recovery 등의 특징이 존재한다.&lt;/li&gt;
+    &lt;li&gt;INSERT, SELECT, UPDATE 쿼리 성능이 비교적 좋은 편이다.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation1-1.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;PostgreSQL Instance Objects Hierarchy Architecture&lt;/strong&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation1-2.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Oracle구조와 가장 유사한 DB이다.&lt;/li&gt;
+    &lt;li&gt;성능도 비슷하다.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;redis&quot;&gt;Redis&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;추천-시스템에서-redis를-사용하신-이유가-무엇인가요&quot;&gt;추천 시스템에서 Redis를 사용하신 이유가 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Redis를 사용하게 된 대표적인 이유는 인메모리 Key-Value 데이터 저장소로써, 추천 데이터를 캐싱하기 위해서 사용하였습니다.&lt;/strong&gt; 뿐만 아니라 Sorted Set과 같은 다양한 자료구조도 지원해주고, Slave-Replica나 Redis Sentinel과 같은 여러 운영 모델도 지원해주기 때문에 시스템을 더 안정적이고 성능이 좋게 만들고 싶어서 Redis를 사용하게 되었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;캐싱caching이란-무엇인가요&quot;&gt;캐싱(Caching)이란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;캐싱이란 특정 데이터를 빠르게 접근할 수 있도록 임시적인 저장 위치에 데이터를 저장해두는 방법을 의미합니다.&lt;/strong&gt; 캐싱을 통해서 속도가 빠른 장치와 속도가 느린 장치 사이에서 발생하는 병목 현상을 줄일 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;병목(bottleneck) 현상&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;병목(bottleneck) 현상은 전체 시스템의 성능이나 용량이 하나의 구성 요소로 인해 제한을 받는 현상을 말합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;레디스의-key---value-구조는-어떻게-잡으셨나요&quot;&gt;레디스의 Key - Value 구조는 어떻게 잡으셨나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Redis에 데이터를 저장하기 위한 키는 크게 키워드 기반의 업체 추천과, 사용자 기반의 업체 추천, 업종 추천, 업종별 업체 추천으로 나누었구요 이들 모두 계층적으로 구성하였습니다.&lt;/strong&gt; &lt;strong&gt;Value는 추천 업체 아이디와 추천 점수를 Json 형태의 문자열로써 저장하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;추천-데이터-저장을-위해-어떠한-자료구조를-사용하셨나요&quot;&gt;추천 데이터 저장을 위해 어떠한 자료구조를 사용하셨나요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;추천 데이터를 저장하기 위해 SortedSet 자료구조를 사용하였습니다.&lt;/strong&gt; 특정 업체나 업종의 추천 대상들을 저장하기 위해서 Set이나 List와 같은 자료구조를 사용해야만 했으며, 레디스에 저장시 추천 점수별로 정렬 되면 매번 어플리케이션 레이어에서 부담해야하는 정렬 작업이 줄어들어 훨씬 성능면에서 좋아질 것 같아서 SortedSet 자료구조를 사용했으며 정렬을 위한 score는 추천 점수를 사용하였습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;redis의-운영-모델에-대해서-설명해주세요&quot;&gt;Redis의 운영 모델에 대해서 설명해주세요.&lt;/h3&gt;
+
+&lt;p&gt;레디스 운영 모델은 크게&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;하나의 Redis 인스턴스만을 사용하는 Standalone 모델,&lt;/li&gt;
+  &lt;li&gt;Master 인스턴스의 데이터를 비동기적으로 여러개의 Replica 인스턴스로 복제하는 Master - Replica 모델,&lt;/li&gt;
+  &lt;li&gt;레디스의 높은 고가용성을 위해 모니터링, 알림, 자동화된 장애대응을 지원하는 Redis Sentinel 모델,&lt;/li&gt;
+  &lt;li&gt;다양한 장애 대응 및 파티셔닝을 제공하는 Redis Cluster 모델 등&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;다양한 운영 모델이 존재합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;데이터-분산-방법&quot;&gt;&lt;strong&gt;데이터 분산 방법&lt;/strong&gt;&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Application&lt;/strong&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Consistent Hashing
+          &lt;ul&gt;
+            &lt;li&gt;&lt;strong&gt;일관된 해싱&lt;/strong&gt;(Consistent hashing)은 웹서버의 개수가 변동하는 가운데 요청을 분산하는 방법을 말한다. 해시테이블의 크기가 변할 때, 평균적으로 K/n의 키만 재매핑되면 된다.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Sharding (Horizontal Partitioning)
+          &lt;ul&gt;
+            &lt;li&gt;같은 테이블 스키마를 가진 데이터를 다수의 데이터베이스에 분산하여 저장하는 방법을 의미합니다.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Redis Cluster&lt;/strong&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Hash 기반으로 Slot을 0 ~ 16384로 구분하여 자신의 Slot에 해당하는 Node로 Redirect 된다.&lt;/li&gt;
+        &lt;li&gt;장점
+          &lt;ul&gt;
+            &lt;li&gt;자체적인 Primary, Secondary Failover&lt;/li&gt;
+            &lt;li&gt;Slot 단위의 데이터 관리.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;단점
+          &lt;ul&gt;
+            &lt;li&gt;메모리 사용량이 더 많음&lt;/li&gt;
+            &lt;li&gt;Library 의존성&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;redis-장애-대응을-위해-어떻게-처리-하셨죠&quot;&gt;Redis 장애 대응을 위해 어떻게 처리 하셨죠?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Redis 장애 대응을 위해 하나의 Master와 두 개의 Replica로 이루어진 Master - Replica 운영 모델을 도입하여 Master가 다운될 시 Replica를 통해 Read를 하는 장애 대응 전략을 구축 했습니다.&lt;/strong&gt; 이러한 전략으로는 장애 대응이 완벽하다고 말 할 수는 없으며, Redis Sentinel 이라던지, Health Checker를 도입해서 노드 재시작 및 노드 자동 승격 기능 등을 사용해보고 싶습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;redis의-구조는-알고-계시나요&quot;&gt;Redis의 구조는 알고 계시나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Redis는 ANSI C를 사용해서 작성되었으며 Disk를 사용해서 persistence를 지원한다.&lt;/strong&gt; redis에서는 데이터를 저장하는 방법으로 snapshot(RDB) 방식과 AOF(Append on file) 방식을 사용한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;snappshot(RDB) 방식은 특정 순간에 메모리에 있는 내용 즉, snapshot을 disk에 옮겨 담는 방식이다. (restart 시간이 빠르지만 특정 snapshot 이후 변경된 데이터는 유실된다.)&lt;/li&gt;
+  &lt;li&gt;AOF 방식은 redis의 모든 write/update 연산 자체를 모두 log 파일에 기록해서 서버 재시작시 기록된 write/update를 재실행하는 방법이다. (데이터 유실이 발생하지 않지만 restart시 느리다.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Redis는 사용자 명령어를 Single Thread로 처리하기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Long-Time&lt;/code&gt; 명령 수행시 다른 명령어들은 처리할 수 없는 상태가 되기 때문에 꼭 주의해야 합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;redis-java-client인-lettuce는-무엇인가요&quot;&gt;Redis Java Client인 Lettuce는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Lettuce는 Netty 기반의 고성능 비동기 Redis 클라이언트로써 다른 Redis 클라이언트인 Jedis보다 훨신 빠릅니다. 또한 레디스의 다양한 운영 모델과 커넥션을 지원하구요 무엇보다도 잘 만들어진 공식 문서가 매력적입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;database-partioning&quot;&gt;Database Partioning&lt;/h3&gt;
+
+  &lt;p&gt;&lt;strong&gt;데이터베이스를 여러 부분으로 분할하는 것을 &lt;code class=&quot;highlighter-rouge&quot;&gt;데이터베이스 파티셔닝(DB Partioning)&lt;/code&gt;이라고 한다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;데이터베이스 파티셔닝은 중요한 튜닝기법으로 데이터가 너무 커져서, 조회하는 시간이 길어질 때 또는 관리 용이성, 성능, 가용성 등의 향상을 이유로 행해진다. 데이터베이스가 분할된 각 부분을 &lt;strong&gt;파티션&lt;/strong&gt;이라고 부른다.&lt;/p&gt;
+
+  &lt;h4 id=&quot;database-sharding-수평-분할-horizontal-partioning&quot;&gt;Database Sharding (수평 분할, Horizontal Partioning)&lt;/h4&gt;
+
+  &lt;p&gt;&lt;strong&gt;테이블을 수평으로 쪼개서 각 행을 다른 DB에 분산시키는 것이다.&lt;/strong&gt; 분할된 각 부분을 &lt;strong&gt;샤드(Shard)&lt;/strong&gt;라고 한다. 즉, 각 샤드의 스키마 구조는 동일하다.&lt;/p&gt;
+
+  &lt;h4 id=&quot;vertical-partioning수직-분할&quot;&gt;Vertical Partioning(수직 분할)&lt;/h4&gt;
+
+  &lt;p&gt;&lt;strong&gt;테이블을 수직으로 쪼개서 테이블의 일부 열을 다른 DB로 빼내는 형태로 분할한다.&lt;/strong&gt; 정규화는 본질적으로 수직 분할에 관련된 과정이다. 특정 테이블에서 자주 참조되는 열을 수직 분할시켜 해당 데이터를 캐싱할 수도 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;이슈&quot;&gt;이슈&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;spring-data-redis-contribution-과정에-대해서-알려주실-수-있나요&quot;&gt;Spring Data Redis Contribution 과정에 대해서 알려주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;redis는 버젼 5.0부터 slave라는 용어가 replica로 변경되었고 Redis 클라이언트인 Lettuce-core는 버젼 5.2.0부터 코드 레벨의 Slave를 Replica로 변경하였습니다. 하지만 최근 Spring Data Redis Doc을 보면 Lettuce-core 버젼 5.2.0 이상을 사용함에도 불구하고 Deprecated된 SLAVE_PREFERRED를 통해서 특정 기능의 사용을 안내 합니다.&lt;/p&gt;
+
+&lt;p&gt;저는 이 부분이 잘못되었다고 생각해 직접 Spring Data Redis 프로젝트에 이슈를 발급하였고 Deprecated 된 부분을 모두 고친 뒤 PR을 날렸습니다. 현재 PR이 머지가 되었으며 해당 이슈가 해결되었습니다.&lt;/p&gt;
+
+&lt;p&gt;많은 사용자가 존재하는 Spring Project에 조그마한 부분이지만 기여할 수 있었다는 점에서 매우 뿌듯하고 행복합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;outofmemoryexception-이슈에-대해서-공유해주실-수-있나요&quot;&gt;OutOfMemoryException 이슈에 대해서 공유해주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;추천 알고리즘을 위해 업체와 사용자 관계를 벡터 값으로 표현해 Integer 객체로 저장 했는데요, Batch Processing 간에 모든 업체와 모든 사용자간의 관계를 벡터 값으로 표현 했을 경우 수십, 수백억 개의 Interger 객체가 생겼었습니다. &lt;strong&gt;이러한 무분별한 Integer 객체 생성으로 인해 객체를 저장하는 메모리인 Heap의 공간이 부족했었고 결국 JVM의 메모리가 부족하다는 OutOfMemoryError가 발생하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;저는 이러한 이슈를 해결하기 위해 업체의 벡터 값을 저장하기 위한 자료구조를 Integer List 에서 Int 배열 즉, Wrapper 타입에서 Primitive 타입으로 리팩토링 하였고, 이를 통해 Heap 메모리에 저장되는 데이터의 사이즈를 줄여 OutOfMemoryError를 해결할 수 있었을 뿐만 아니라 Wrapper 타입으로 저장 시 발생하는 객체 생성, 참조 등의 부하를 줄여 Batch Processing 성능을 개선할 수 있었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;primitive-와-wrapper-타입은-각각-무엇이고-언제-써야하는지-알려주세요&quot;&gt;Primitive 와 Wrapper 타입은 각각 무엇이고, 언제 써야하는지 알려주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Primitive 타입은 Java에 키워드로 등록된 8개의 비객체형 원시 타입을 의미하구요, Wrapper 타입은 primitive type을 Wrapping해 객체로 다루기 위해서 사용하는 클래스를 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;단순하고 반복적인 계산을 위해 Wrapper 타입의 객체가 계속 생성되는 경우 성능상 Primitive 타입을 사용하는 것이 더 좋고, DB에서 데이터를 가져오는 경우나, primitive 타입의 default 값으로부터 혼란이 발생하기 쉬운 경우 Wrapper 타입을 사용하는 것이 더 좋습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h2 id=&quot;jvm&quot;&gt;JVM&lt;/h2&gt;
+
+  &lt;p&gt;자바 가상 머신으로 &lt;strong&gt;자바 바이트 코드를 실행할 수 있는 주체&lt;/strong&gt;이다.&lt;/p&gt;
+
+  &lt;p&gt;운영체제 위에서 동작하는 프로세스로 &lt;u&gt;자바 코드(.java)를 컴파일해서 얻는 바이트 코드(.class)를 해당 운영체제가 이해할 수 있는 기계어로 바꿔 실행시켜주는 역할&lt;/u&gt;을 한다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;JVM의 구성을 살펴보면 크게 4가지(Class Loader, Execution Engine, Garbage Collector, Runtime Data Area)로 나뉜다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;!&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation1-4.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
+
+  &lt;h3 id=&quot;1-class-loader&quot;&gt;1. Class Loader&lt;/h3&gt;
+
+  &lt;p&gt;컴파일러를 통해서 생성된 바이트코드(.class)를 엮어서 JVM이 운영체제로부터 할당받은 메모리 영역인 &lt;strong&gt;Runtime Data Area&lt;/strong&gt;로 적재하는 역할을 Class Loader가 한다.&lt;/p&gt;
+
+  &lt;h3 id=&quot;2-execution-engine&quot;&gt;2. Execution Engine&lt;/h3&gt;
+
+  &lt;p&gt;Class Loader에 의해 &lt;strong&gt;메모리에 적재된 클래스(바이트 코드)들을 기계어로 변경해 명령어 단위로 실행하는 역할&lt;/strong&gt;을 한다. 명령어를 하나 하나 실행하는 인터프리터(Interpreter)방식이 있고 JIT(Just-In-Time) 컴파일러를 이용하는 방식이 있다.&lt;/p&gt;
+
+  &lt;p&gt;JIT 컴파일러는 적절한 시간에 전체 바이트 코드를 네이티브 코드로 변경해서 Execution Engine이 네이티브로 컴파일된 코드를 실행하는 것으로 성능을 높이는 방식이다.&lt;/p&gt;
+
+  &lt;h3 id=&quot;3-garbage-collector&quot;&gt;3. Garbage Collector&lt;/h3&gt;
+
+  &lt;p&gt;Garbage Collector(GC)는 Heap 메모리 영역에 생성(적재)된 객체들 중에 &lt;strong&gt;참조되지 않는 객체들을 탐색 후 제거하는 역할&lt;/strong&gt;을 한다.&lt;/p&gt;
+
+  &lt;h3 id=&quot;4-runtime-data-area&quot;&gt;4. Runtime Data Area&lt;/h3&gt;
+
+  &lt;p&gt;JVM은 프로그램 실행간에 사용되어지는 다양한 Runtime Data Area를 제공한다. 이러한 Data Area 중 몇몇은 JVM이 시작할 때 생성되어지고 JVM이 종료되어질 때 소멸된다. 하지만 다른 몇몇의 Data Area는 스레드마다 할당되어진다. 스레드마다 할당되어지는 Data Area는 스레드 생성시 생성되어지고 스레드 종료시 소멸되어진다.&lt;/p&gt;
+
+  &lt;h4 id=&quot;41-the-pc-register&quot;&gt;4.1 The pc Register&lt;/h4&gt;
+
+  &lt;p&gt;JVM은 한번에 많은 스레드의 실행을 지원할 수 있습니다. &lt;strong&gt;각각의 JVM 스레드는 자신의 pc(program counter) register를 갖고 있습니다.&lt;/strong&gt; 언제든지(At any point), JVM 스레드는 단일 메서드 즉(namely), 해당 스레드에 대한 현재 메서드의 코드를 실행할 수 있습니다. 해당 메소드가 native code가 아닌 경우 pc 레지스터에는 현재 실행중인 JVM 명령어의 주소가 포함됩니다. 만약 현재 스레드에 의해서 실행되고 있는 메서드가 native라면, JVM의 pc 레지스터의 값은 정의되지 않을것 입니다. JVM의 pc 레지스터는 특정 플랫폼에서의 native pointer 또는 return Address를 잡을만큼 꽤 큽니다.&lt;/p&gt;
+
+  &lt;h4 id=&quot;42-java-virtual-machine-stacks&quot;&gt;4.2 Java Virtual Machine Stacks&lt;/h4&gt;
+
+  &lt;p&gt;&lt;strong&gt;각각의 JVM 스레드들은 Java Virtual Machine Stack을 가지고 있고 스레드와 동시에 생성됩니다. Java Virtual Machine Stack은 프레임을 저장합니다.&lt;/strong&gt; JVM Stack은 C와 같은 기존 언어의 스택과 유사합니다. &lt;u&gt;JVM 스택은 지역 변수와 부분적인 결과를 보유하고, 메소드 호출과 반환에서 역할을 수행합니다.&lt;/u&gt; JVM 스택은 프레임을 푸시하고 팝하는 것을 제외하고 직접 조작하지 못하므로 프레임에 heap이 할당될 수 있습니다. JVM 스택의 메모리는 연속적일(contiguous) 필요가 없습니다.&lt;/p&gt;
+
+  &lt;p&gt;스레드에서의 연산이 JVM 스택이 허용하는 것 보다 더 큰 Stack이 필요한 경우 JVM은 StackOverFlowError을 발생합니다.&lt;/p&gt;
+
+  &lt;p&gt;JVM스택이 동적으로 확장되어지고 확장을 위해서 이용가능한 메모리가 불충분함에도 확장을 시도하거나, 새로운 스레드를 위해 JVM 스택의 초기화를 하기위해 메모리가 불충분할 경우 JVM은 OutOfMemoryError를 던집니다.&lt;/p&gt;
+
+  &lt;h4 id=&quot;43-heap&quot;&gt;4.3 Heap&lt;/h4&gt;
+
+  &lt;p&gt;&lt;strong&gt;JVM은 모든 JVM 스레드 사이에서 공유되어지는 heap 영역을 갖습니다. heap은 모든 클래스의 인스턴스와 배열에 대한 메모리가 할당되는 run-time data area 입니다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;heap은 JVM이 시작되어질 때 생성됩니다.&lt;/strong&gt; &lt;strong&gt;객체들의 heap 저장소는 &lt;u&gt;자동 저장소 관리 시스템(Garbage Collector)&lt;/u&gt;에 의해 회수됩니다.&lt;/strong&gt; 객체들은 절대 명시적으로 할당이 해제되지 않습니다. JVM은 특정 유형의 자동 저장소 관리 시스템을 가정하지 않으며 저장소 관리 기술은 구현자의 시스템 요구사항에 따라서 선택되어질 수 있습니다. 힙은 고정된 사이즈가 될 수 있으며 또는 연산에 의해서 확장되어질 수 있습니다. 만약 더 큰 heap이 필요하지 않다면 축소되어질 수도 있습니다. 힙 메모리는 연속적(contiguous)일 필요가 없습니다.&lt;/p&gt;
+
+  &lt;p&gt;JVM은 초기 heap 사이즈를 조절할 수 있도록 프로그래머 또는 사용자에게 제공해주고, 뿐만 아니라 동적으로 힙을 확장 또는 축소할 수 있도록 최대 및 최소 힙 사이즈를 제어할 수 있습니다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;만약 연산이 자동 저장소 관리 시스템으로부터 이용가능한 힙 보다 더 많은 힙을 필요로 한다면, JVM은 OutOfMemoryError를 던집니다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;h4 id=&quot;44-method-area&quot;&gt;4.4 Method Area&lt;/h4&gt;
+
+  &lt;p&gt;&lt;strong&gt;JVM은 모든 JVM 스레드 사이에서 공유되어지는 method area를 가집니다. method area는 기존 언어의 컴파일된 코드를 위한 저장 영역과 유사하거나 운영 체제 프로세스의 텍스트 세그먼트와 유사합니다.&lt;/strong&gt; &lt;strong&gt;method area는 run-time 상수 풀, 필드, 메소드 데이터, 메소드와 생성자를 위한 코드와 같은 클래스별 구조를 저장합니다.&lt;/strong&gt; 이는 인스턴스 초기화와 인터페이스 및 클래스 초기화에서 사용되어지는 특별한 메소드들도 포함합니다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;method area는 JVM이 시작할 때 생성되어지며, 논리적으로 heap의 일부분&lt;/strong&gt;이지만 간단한 구현에서는 Garbage collector 또는 압축을 선택하지 않을 수 있습니다. 이러한 스펙은 컴파일된 코드를 관리하기 위해서 사용되어지는 정책 또는 method area에 대한 위치를 요구하지 않습니다. method area는 고정된 크기일 수 있고 연산에서 요구된다면 확장되어질 수 있습니다. 그리고 불필요하다면 축소될 수도 있습니다. method area를 위한 메모리는 연속적인 공간을 필요하지 않습니다.&lt;/p&gt;
+
+  &lt;h4 id=&quot;45-run-time-constant-pool&quot;&gt;4.5 Run-Time Constant Pool&lt;/h4&gt;
+
+  &lt;p&gt;&lt;strong&gt;run-time constant pool은 클래스 파일에있는 constant_pool table에 대한 클래스별 또는 인터페이스별 runtime 표현입니다&lt;/strong&gt;. &lt;strong&gt;run-time constant pool은 컴파일 타임에 알려진 숫자 리터럴부터 런타임에 해결되어야하는 메서드 및 필드 참조에 이르기까지  여러 종류의 상수들을 포함합니다.&lt;/strong&gt; run-time constant pool은 일반적인 기호 테이블보다 더 넓은 범위의 데이터를 포함하지만 기존 프로그래밍 언어의 기호 테이블과 유사한 기능을 제공합니다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;각각의 run-time constant pool은 JVM method area로부터 할당되어 집니다. 클래스 또는 인터페이스를 위한 run-time constant pool은 클래스와 인터페이스가 JVM에 의해서 생성되어질 때 생성됩니다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;클래스와 인터페이스가 생성될 때 JVM method area에서 이용가능한 메모리보다 더 많은 run-time constant pool 생성을 요구한다면 JVM은 OutOfMemoryError를 발생할 겁니다.&lt;/p&gt;
+
+  &lt;h4 id=&quot;46-native-method-stacks&quot;&gt;4.6 Native Method Stacks&lt;/h4&gt;
+
+  &lt;p&gt;JVM은 native methods(자바 프로그래밍 언어 이외의 언어로 작성된 메서드)를 지원하기 위해 구어적으로(colloquially) C 스택이라고 하는 기존 스택을 사용할 수 있습니다. Native method stacks은 C와 같은 언어에서 JVM 명령어의 집합을 위한 인터프리터의 구현으로부터 사용되어질 수 있습니다. native methods를 로드할 수 없고, 기존 스택에 의존하지 않는 JVM 구현은 native method 스택을 제공할 필요가 없습니다. 만약 제공되어진다면 native method stacks는 일반적으로 스레드가 생성될 때 스레드마다 할당되어집니다.&lt;/p&gt;
+
+  &lt;h3 id=&quot;5-frames&quot;&gt;5. Frames&lt;/h3&gt;
+
+  &lt;p&gt;&lt;strong&gt;프레임은 데이터와 부분적인 결과를 저장하기 위해 사용되어 집니다. 뿐만 아니라 동적인 linking을 수행하고 메소드를 위해 값을 리턴하고 예외를 dispatch 하기위해서 사용되어집니다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;새로운 프레임은 메서드가 호출되어질 때 생성되어지고 메서드 호출이 완료되어질 때 소멸됩니다.&lt;/strong&gt; 프레임들은 프레임을 생성하는 스레드의 JVM stack으로부터 할당되어집니다. &lt;strong&gt;각각의 프레임들은 자신의 지역변수들에 대한 배열과, 피연산자 stack, 현재 메소드의 클래스의 run-time constnat pool의 참조를 가지고 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;Frame은 디버깅 정보와 같이 추가적인 구현 스펙 정보와 함께 확장되어집니다.&lt;/p&gt;
+
+  &lt;p&gt;지역 변수 배열 및 피연산자 스택의 크기는 컴파일 타임에 결정이 되어지고, 프레임과 관련있는 메서드에 대한 코드가 제공되어집니다. 프레임 데이터 구조의 사이즈는 오직 JVM 구현에 의존하며 이러한 구조의 메모리는 메서드 호출과 동시에 할당되어집니다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;메서드를 실행하기 위한 프레임은 제어를 위한 스레드가 활성화 되는 시점에서 활성화 됩니다. 이러한 프레임을 현재 프레임이라고 하고 이러한 메소드는 현재 메소드라고 합니다. 현재 메서드가 정의되어진 클래스를 현재 클레스라고 합니다. 지역 변수와 피연산자 스택의 연산은 일반적으로 현재 프레임을 참조합니다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;메서드가 다른 메서드를 호출하거나 해당 메서드가 완료한다면 해당 프레임은 현재 상태가 아닙니다. &lt;strong&gt;메서드가 호출될 때 새로운 프레임이 생성되고 현재 프레임이 되며 제어는 세로운 메서드로 이동합니다. 메서드가 리턴되어지면 현재 프레임은 메서드 호출의 결과를 이전 프레임으로 다시 전달합니다. 현재 프레임은 버려지고 이전의 프레임이 현재 프레임이 될것 입니다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;스레드에 의해서 생성되어지는 프레임은 해당 스레드에 로컬이고 어떠한 다른 스레드에 의해서 참조되어질 수 없습니다.&lt;/p&gt;
+
+  &lt;h3 id=&quot;6-garbage-collection&quot;&gt;6. Garbage Collection&lt;/h3&gt;
+
+  &lt;p&gt;&lt;strong&gt;Runtime Data Area의 Heap 부분은 5개의 영역(eden, survivor1, survivor2, old, permanent)으로 나뉜다.&lt;/strong&gt; heap의 영역을 5개로 나눈 이유는 효율적으로 GC가 일어나게 하기 위함이다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;GC는 Minor GC와 Major GC로 나뉜다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Minor GC: New 영역에서 일어나는 GC&lt;/strong&gt;
+      &lt;ol&gt;
+        &lt;li&gt;최초에 객체가 생성되면 Eden 영역에 생성된다.&lt;/li&gt;
+        &lt;li&gt;Eden 영역에 객체가 가득차게 되면 첫 번째 GC가 일어난다.&lt;/li&gt;
+        &lt;li&gt;Survivor1 영역에 Eden 영역의 메모리를 그대로 복사한다. 그리고 Survivor1 영역을 제외한 다른 영역의 객체를 제거한다.&lt;/li&gt;
+        &lt;li&gt;Eden 영역도 가득차고 Survivor1 영역도 가득차게 된다면, Eden 영역에 생성된 객체와 Survivor1 영역에 생성된 객체 중에 참조되고 있는 객체가 있는지 검사한다.&lt;/li&gt;
+        &lt;li&gt;참조 되고있지 않은 객체는 내버려 두고 참조되고 있는 객체만 survivor2 영역에 복사한다.&lt;/li&gt;
+        &lt;li&gt;survivor2 영역을 제외한 다른 영역의 객체들을 제거한다.&lt;/li&gt;
+        &lt;li&gt;위의 과정중에 일정 횟수이상 참조되고 있는 객체들을 survivor2에서 Old영역으로 이동시킨다.&lt;/li&gt;
+        &lt;li&gt;해당 과정의 지속적인 반복&lt;/li&gt;
+      &lt;/ol&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Major GC(Full GC): Old 영역에서 일어나는 GC&lt;/strong&gt;
+      &lt;ol&gt;
+        &lt;li&gt;Old 영역에 있는 모든 객체들을 검사하며 참조되고 있는지 확인한다.&lt;/li&gt;
+        &lt;li&gt;참조되지 않은 객체들을 모아 한 번에 제거한다.
+          &lt;ul&gt;
+            &lt;li&gt;Minor GC 보다 시간이 훨씬 많이 걸리고 실행중에 GC를 제외한 모든 쓰레드가 중지된다.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ol&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;Major GC(Full GC)가 일어나면,
+Old 영역에 있는 참조가 없는 객체들을 표시하고 그 해당 객체들을 모두 제거하게 된다. 그러면서 Heap 메모리 영역에 중간중간 구멍(파편화)이 생기는데 이 부분을 위해 재구성을 하게 된다(디스크 조각모음처럼 조각난 메모리를 정리함)
+&lt;strong&gt;따라서 메모리를 옮기고 있는데 다른 쓰레드가 메모리를 사용해버리면 안되기 때문에 모든 쓰레드가 정지하게 되는 것이다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;성능-및-가독성-개선을-위해-쿼리-분리-및-인덱싱-작업을-어떻게-진행하셨나요&quot;&gt;성능 및 가독성 개선을 위해 쿼리 분리 및 인덱싱 작업을 어떻게 진행하셨나요??&lt;/h3&gt;
+
+&lt;p&gt;업종 추천을 위해 사용자가 특정 업체를 예약한 시점을 기준으로 특정 기간 동안의 예약 데이터를 가져와야 하는 쿼리가 필요했습니다. 이를 위해 처음 작성한 쿼리는 조인한 테이블이 많아서 성능도 좋지 않고 가독성도 매우 떨어졌습니다. 이를 해결하기 위해 &lt;strong&gt;쿼리의 개수가 무분별하게 많아지지 않는 선에서 쿼리를 분리했고, 쿼리의 개수가 늘어나 발생하는 지연을 줄이고자 인덱싱 작업을 진행 하였습니다.&lt;/strong&gt; 이를 통해 쿼리의 성능 및 가독성이 증가될 수 있었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;db-인덱스란-무엇인가요&quot;&gt;DB 인덱스란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;DB 인덱스는 데이터베이스 테이블의 동작 속도를 높여주는 자료 구조를 의미합니다.&lt;/strong&gt; 마치 책의 앞 부분에 존재하는 목차와 같습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;인덱싱은-어떠한-경우에-사용하면-좋을까요&quot;&gt;인덱싱은 어떠한 경우에 사용하면 좋을까요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;인덱싱은 테이블에 저장된 데이터의 양이 많고 SELECT가 UPDATE보다 잦은 경우, 인덱스를 사용하고자 하는 컬럼의 값이 다양한 경우에 데이터베이스에 인덱스를 추가한다면 성능 개선의 효과를 볼 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;UPDATE나 INSERT가 자주 일어나는 테이블에 수 많은 인덱스를 설정하게 된다면 매번 데이터가 바뀔 때마다 인덱스를 다시 재구성해주어야하는 오버헤드가 발생하기 때문에 성능상의 이슈가 발생할 수 있습니다. 즉, 인덱스는 SELECT 할 때 빛을 발합니다.&lt;/p&gt;
+
+&lt;p&gt;여러 컬럼의 값이 존재하는 경우 보통 여러 컬럼을 활용해서 데이터를 검색하곤 합니다. 이러한 과정에서 매번 PRIMARY KEY로 FULL SEARCH 할 수 없기 때문에 자주 검색되는 컬럼에 인덱스를 걸어주면 성능 향상의 효과를 기대할 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;그렇다면-어떠한-컬럼에-인덱스를-설정하는게-좋을까요&quot;&gt;그렇다면 어떠한 컬럼에 인덱스를 설정하는게 좋을까요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;인덱스를 설정하면 좋을 컬럼은&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;WHERE 절과 같은 조건 절에 자주 활용되는 컬럼&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;당연히 자주 활용되는 컬럼이 인덱스로 설정되면 성능 향상을 기대할 수 있겠지?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;카디널리티가 높은(컬럼의 중복되는 값이 많이 없는) 컬럼&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;카디널리티가 낮다면 어차피 full search 할테고, 이점이 많이 사라지는게 아닐까? 되도록이면 인덱스를 통해서 많은 row 들을 필터링한다면 그게 성능이 좋은게 아닐까?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;복합-인덱스는-무엇인가요&quot;&gt;복합 인덱스는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;복합 인덱스란 인덱스에 컬럼이 두개 이상 걸려 있는 경우를 의미하구요, 보통 조건문에 걸리는 컬럼이 많은 경우에 사용됩니다.&lt;/strong&gt; 복합 인덱스에서 컬럼을 지정할 때 보통 카디널리티가 높은 순에서 낮은 순으로 구성하는 것이 성능이 더 좋습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;어떠한-자료구조를-사용하여서-인덱싱-작업을-진행-했나요&quot;&gt;어떠한 자료구조를 사용하여서 인덱싱 작업을 진행 했나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;저는 PostgreSQL에서 인덱싱 작업시 default로 지원해주는 B-Tree 자료구조를 사용해서 인덱스를 설정하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;cardinality&quot;&gt;Cardinality&lt;/h3&gt;
+
+  &lt;p&gt;특정 컬럼에 존재하는 값의 중복도를 나타내는 상대적인 표현이다.&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;중복도가 ‘낮으면’ Cardinality가 ‘높다’고 표현한다.&lt;/strong&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;중복도가 ‘높으면’ Cardinality가 ‘낮다’고 표현한다.&lt;/strong&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ex) 주민등록번호는 중복되는 값이 없으므로 카디널리티가 높고, 이름은 종복되는 값이 많으므로 주민등록번호에 비해 상대적으로 카디닐러티가 낮다고 할 수 있다.&lt;/code&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;api&quot;&gt;API&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;api-서버-구현을-위해-어떠한-기술을-사용하셨나요&quot;&gt;API 서버 구현을 위해 어떠한 기술을 사용하셨나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;API 서버 구현을 위해 Spring Boot Web을 사용했구요,&lt;/strong&gt; Front로부터 업체 추천 요청이 들어왔을 경우 Redis에 캐시된 추천 업체 데이터를 읽어와서 이를 사용해서 PostgreSQL로부터 업체 정보를 읽어와 API 를 통해서 추천 데이터를 제공합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;api-를-설계-및-구현-하면서-어려웠던-점이-있으시나요&quot;&gt;API 를 설계 및 구현 하면서 어려웠던 점이 있으시나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;API 구현보다는 설계가 더 어려웠던 것 같습니다. 설계 중에서 가장 어려웠지만 재미있었던 점은 “어떻게 하면 좀 더 확장성 및 유지보수성이 좋은 API를 만들 수 있을까?” 에 대해서 고민했던 점입니다.&lt;/strong&gt; 현재는 제 API서버의 클라이언트는 크게 한 대이지만, 추후에 수 많은 클라이언트가 제 API를 가져다 사용했을 경우 쉽게 확장할 수 있고 쉽게 유지보수가 가능하게 끔 만들어 보고 싶었던  생각에서부터 생겼던 고민이었던 것 같습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;그래서-api는-잘-설계-되었나요&quot;&gt;그래서 API는 잘 설계 되었나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;네! 제 API를 사용할 여러 클라이언트들의 입장에서 생각하고 고민한 결과 API 설계는 잘 되었던 것 같습니다.&lt;/strong&gt; 제 API는 크게 업체 정보 API, 상품 정보 API, 업종 추천 API, 업체 추천 API로 각 API들은 되도록 Restful하게 만들었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;restful-api가-무엇인지-저희에게-설명해주실-수-있나요&quot;&gt;Restful API가 무엇인지 저희에게 설명해주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Restful API는 REST 아키텍쳐 스타일을 따르는 API를 의미합니다. REST는 분산 하이퍼미디어 시스템(예, 웹)을 위한 소프트웨어 아키텍처 스타일을 의미하구요 이를 위해 6가지의 제약조건이 존재합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Uniform Interface:&lt;/strong&gt; 구성요소(클라이언트, 서버 등) 사이의 인터페이스는 균일(uniform)해야 한다.
+    &lt;ul&gt;
+      &lt;li&gt;시스템 아키텍처가 단순화되고, 구현과 서비스가 분리되므로 독립적인 진화가 가능하다.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;제약조건&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;identification of resources:&lt;/strong&gt; 리소스가 URI로 식별&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;manipulation of resources through representations:&lt;/strong&gt; representation 전송을 통해서 resource를 조작해야 한다.&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;self-descriptiove messages:&lt;/strong&gt; 메시지는 스스로 설명해야한다.
+            &lt;ul&gt;
+              &lt;li&gt;ex) Content-Type, API&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;hypermedia as the engine of application state (HATEOAS):&lt;/strong&gt; 애플리케이션의 상태는 항상 hyperlink를 통해서 전이가 되어야 한다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Layered System:&lt;/strong&gt; 아키텍처는 계층(hierarchical layers)적으로 구성이 가능해야하며, 각 레이어에 속한 구성요소는 인접하지 않은 레이어의 구성요소를 볼 수 없어야 한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cacheable:&lt;/strong&gt; 클라이언트는 응답을 캐싱할 수 있어야 한다.
+    &lt;ul&gt;
+      &lt;li&gt;효율, 규모 확장성, 성능 개선&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Client-Server:&lt;/strong&gt; 클라이언트-서버 스타일은 아키텍처를 단순화시키고 작은 단위로 분리(decouple)함으로써 클라이언트-서버의 각 파트가 독립적으로 개선될 수 있도록 해준다.
+    &lt;ul&gt;
+      &lt;li&gt;사용자 인터페이스에 대한 관심을 데이터 저장에 대한 관심으로부터 분리 (web-server - api server)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Stateless:&lt;/strong&gt; 클라이언트와 서버의 통신에는 상태가 없어야 한다. 모든 요청은 필요한 모든 정보를 담고 있어야 한다.
+    &lt;ul&gt;
+      &lt;li&gt;상태를 저장할 필요가 없으므로 규모확장성(Scalability)가 개선된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Code-On-Demand (Optional):&lt;/strong&gt; 서버가 네트워크를 통해 클라이언트에 프로그램을 전달하면 그 프로그램이 클라이언트에서 실행될 수 있어야 한다.
+    &lt;ul&gt;
+      &lt;li&gt;이 제약조건은 팔수는 아니며 Javascript나 Java applet을 의미한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;batch&quot;&gt;Batch&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;추천-시스템에서-batch-processing을-왜-사용하셨나요&quot;&gt;추천 시스템에서 Batch Processing을 왜 사용하셨나요?&lt;/h3&gt;
+
+&lt;p&gt;Web은 실시간 처리를 중요시하기 때문에 사용자로부터 요청이 들어온 순간에 전체 수 십, 수 백만개의 업체 중 추천 대상을 산출해서 응답을 보내는 작업은 시간이 오래걸려서 적절하지 못하다고 생각했습니다. 이를 위해서 &lt;strong&gt;사용자가 요청을 보내기 전에 미리 수 많은 예약 데이터를 분석해서 추천 대상을 캐싱해놓고 싶어 Batch Processing 즉, 일괄 처리를 도입하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;batch-processing을-위해서-spring-batch를-사용하게-된-이유가-있나요&quot;&gt;Batch Processing을 위해서 Spring Batch를 사용하게 된 이유가 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Batch Processing을 위해서 Spring Batch를 사용하게 된 대표적인 이유는 Spring Batch의 기본적인 프로세스만 이해한다면 비즈니스 로직에 집중할 수 있다는 점에서 매력을 느껴 Spring Batch를 사용하였습니다.&lt;/strong&gt; 이 외에도 트랜잭션 관리, 장애 대응 전략 등 다양한 기능을 제공해 줘서 Spring Batch를 사용하였습니다. 또한 사실 Spring Framework에서 적용하고 있는 철학이나, 전략, 핵심 기술들이 익숙해서 Spring Batch를 사용했던 이유도 있긴 합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;spring-batch의-구조에-대해서-저희에게-간단히-설명-해주실-수-있나요&quot;&gt;Spring Batch의 구조에 대해서 저희에게 간단히 설명 해주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Spring Batch에는 하나의 배치 작업 단위인 Job이 존재하구요, Job은 독립적이고 순차적인 단계를 의미하는 Step의 집합으로 구성되어집니다. Step은 Chunk 지향으로 데이터를 처리할 수 있는 Reader, Processor, Writer로 구성되어질 수 있고, 간단하게 하나의 execute 메서드를 실행하는 Tasklet으로도 구성되어질 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;chunk-기반의-프로세싱은-무엇인지에-대해서-알려주실-수-잇나요&quot;&gt;chunk 기반의 프로세싱은 무엇인지에 대해서 알려주실 수 잇나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Spring Batch에서 구현하는 Chunk 지향 프로세싱은 Spring Batch 버젼 2.0부터 지원해주는 기능으로써 하나의 트랜잭션 내에서 ItemReader에 의해 한 번에 하나의 아이템을 읽어서 Chunk를 만들고 ItemProcessor에 의해 청크를 프로세싱한 후 aggreagate 시킵니다. 아이템을 읽은 횟수가 설정한 commit interval과 동일할 때 전체 청크는 ItemWriter에 의해서 write되어지고 트랜잭션은 커밋되어지는 프로세싱을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;chunk-oriented-processing과-tasklet은-각각-언제-쓰이는게-적절하나요&quot;&gt;chunk-oriented Processing과 Tasklet은 각각 언제 쓰이는게 적절하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;chunk 지향 프로세싱은 청크 단위로 한번에 하나씩 데이터를 읽어서 처리하고 전송하는 과정이 필요한 경우에 사용하는 것이 적절할 것 같구요, Tasklet은 간단한 스크립트나 단순한 SQL 문을 호출하는 등 Job 수행에는 꼭 필요한 과정이지만 굳이 청크 기반으로 데이터를 처리할 필요가 없는 경우에 사용하는게 적절할 것 같습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;batch에서-어떠한-기준으로-job과-step을-나누셨죠&quot;&gt;Batch에서 어떠한 기준으로 Job과 Step을 나누셨죠?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;추천 대상을 산출하기 위해 사용하는 추천 알고리즘 별로 Job을 나누었으며 랭킹을 매기기 위해 데이터를 가공할 필요가 있는 경우 랭킹 Step 이전에 데이터 프로세싱 Step들을 구성하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;spring-batch-메타-테이블-구조에-대해서-알려주실-수-있나요&quot;&gt;Spring Batch 메타 테이블 구조에 대해서 알려주실 수 있나요?&lt;/h3&gt;
+
+&lt;h4 id=&quot;job&quot;&gt;JOB&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;BATCH_JOB_INSTANCE&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;JOB이 실행될 때 생성되는 JOB_INSTANCE에 관한 정보를 저장하고 있습니다.&lt;/strong&gt;
+엄연히 말하자면 JOB_INSTANCE는 JOB이 실행될 때마다 생성되지 않고 &lt;strong&gt;JOB_PARAMETER 값에 따라 새로 생성&lt;/strong&gt;됩니다.&lt;/li&gt;
+      &lt;li&gt;JOB_PARAMETER에 의해서 동일한 JOB의 여러 JOB_INSTANCE간에 구분이 이루어집니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;BATCH_JOB_EXECUTION&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;JOB(JOB_INSTANCE)을 실행하기위한 단일 시도의 기술적인 개념들을 저장합니다.&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;EXECUTION은 실패 또는 성공으로 끝날 수 있지만, EXECUTION이 성공적으로 완료되지 않는한 해당 EXECUTION에 해당하는 JOB_INSTANCE는 완료된 것으로 간주하지 않습니다.&lt;/li&gt;
+      &lt;li&gt;JOB_INSATNCE의 단일 실행을 나타내는 JOB_EXECUTE에 관한 정보를 담고 있습니다.&lt;/li&gt;
+      &lt;li&gt;JOB_INSTANCE와 JOB_EXECUTION은 부모(1)와 자식(N) 관계입니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;BATCH_JOB_EXECUTION_PARAMS&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;JOB_PARAMETER에 대한 모든 정보를 기록하고 있습니다.&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;BATCH_JOB_EXECUTION_CONTEXT&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;EXECUTION_CONTEXT와 관련된 모든 정보를 기록합니다.&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;1개의 JOB_EXECTION에 각 JOB_EXECUTION_CONTEXT가 있으며 특정 작업 실행에 필요한 모든 작업 레벨 데이터를 포함합니다.&lt;/strong&gt; 일반적으로 JOB_INSTANCE가 중지된 위치에서 다시 시작할 수 있도록, 실패(Fail)이후 지점에 State를 나타냅니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;BATCH_JOB_EXECUTE_SEQ, BATCH_JOB_SEQ&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;JOB_EXECUTE와 JOB의 순서 관리 테이블입니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;step&quot;&gt;Step&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;BATCH_STEP_EXECUTION&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;STEP을 실행하기위한 단일 시도에 관련된 정보를 저장합니다. 각 STEP이 실행될 때마다 STEP_EXECUTION이 생성되고 저장됩니다&lt;/strong&gt;.&lt;/li&gt;
+      &lt;li&gt;이전 STEP이 실패해서 다음 STEP의 실행 또한 실패한다면, 어떠한 STEP_EXECUTION도 persist(영속화) 되어지지 않습니다. &lt;strong&gt;STEP_EXECUTION은 실제로 해당 STEP이 시작될 때만 생성됩니다.&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;각각의 STEP_EXECUTION은 해당 &lt;u&gt;STEP의 참조와 관련된 커밋과 롤백 개수, 시작과 종료 시간등 트랜잭션과 관련된 데이터를 포함&lt;/u&gt;합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;BATCH_STEP_EXECUTION_CONTEXT&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;STEP의 EXECUTION_CONTEXT와 관련된 모든 정보를 저장합니다.&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;STEP_EXECUTION 당 1개의 STEP_EXECUTION_CONTEXT가 있으며 개발자가 batch 실행에서 유지해야하는 모든 데이터(재시작을 위한 정적인 정보 또는 통계 정보)를 포함합니다.&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;BATCH_STEP_EXECUTION_SEQ&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;STEP_EXECUTION의 시퀀스관리 테이블입니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;jobrepository는-무엇인가요&quot;&gt;JobRepository는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;JobRepository란 Batch의 Stereotype 인  JobExecution, StepExectuion 등을 위한 영속성 메커니즘입니다.&lt;/strong&gt; JobRepository는 JobLauncher, Job, Step 구현을 위한 CRUD 작업을 제공합니다. Job이 시작되어질 때, repository로 부터 JobExecution을 가져오고, 실행 과정에서 StepExecution과 JobExecution 구현을 repository로 전달하여 유지합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;fault-tolerant-시스템을-위해-batch에-어떠한-장애대응-전략을-도입하셨나요&quot;&gt;Fault Tolerant 시스템을 위해 Batch에 어떠한 장애대응 전략을 도입하셨나요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Batch Processing 간에 NPE나, JSONException 등이 발생했을 경우, 해당 chunk 처리를 최대 10회 skip 하는 전략인 Skip 정책을 도입했습니다. 그리고 DB lock이나, 다른 일시적인 이유에 의해서 TransientDataAccessException이나 RedisBusyException 등이 발생했을 경우 300ms의 시간을 두고 최대 3회 재시도하는 정책인 Retry 정책과 Back-off 정책을 도입하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;batch-process-scheduling을-위해서-무엇을-사용하셨나요-jenkins는&quot;&gt;Batch Process Scheduling을 위해서 무엇을 사용하셨나요? (Jenkins는?)&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Batch Process 스케줄링을 위해서 BatchJobLaunchScheduler 클래스를 구현해 매일 아침 7시에 Batch Process가 동작할 수 있도록 Spring Scheduler를 사용해서 스케줄링을 구현하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;spring-scheduler를-구현했을-경우-단점이-뭘까요&quot;&gt;&lt;strong&gt;Spring Scheduler를 구현했을 경우 단점이 뭘까요?&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;만약 배치 작업이 너무 거대해서 클러스터로 구성하여 스프링 스케줄러로 스케줄링 하였을 때, 하나의 배치 노드에서 전체 클러스터의 스케줄링 작업을 수행한다는 것이 어색하다.&lt;/strong&gt; 만약 해당 스프링 스케줄러 기능이 포함된 배치 노드가 다운되었다면 배치 실행을 안할 것인가..? 즉, 장애대응에 완벽한 구조를 가지고 있지 않다. 그나마 좀 더 완벽한 장애대응을 가지는 CI 툴의 사용을 고려해 보자.&lt;/p&gt;
+
+&lt;h3 id=&quot;ci-툴을-scheduler로-도입했을-시-장점&quot;&gt;CI 툴을 Scheduler로 도입했을 시 장점&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;CI툴은 대부분 Slack이나, Email, SMS 등 다양한 Integration을 제공하고 실행 이력, 로그 관리, Dashboard등 UI가 굉장히 잘 되어 있습니다. 뿐만 아니라 REST API, Scheduling, 수동 실행 등 다양한 실행 방법을 제공하기 때문에 CI 도구를 Scheduler로 도입했을 경우 많은 장점들이 존재합니다. 다양한 플러그인 및 계정별 권한 관리도 지원해주고요&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;spring-scheduler&quot;&gt;Spring Scheduler&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;장점&lt;/strong&gt;
+      &lt;ul&gt;
+        &lt;li&gt;스프링에서 자체적으로 지원하는 기능으로써 애플리케이션 내부에서 쉽게 구현할 수 있어 비용이 적게든다.&lt;/li&gt;
+        &lt;li&gt;자바 어플리케이션을 띄우고 주기적으로 실행할 수 있으므로 스케줄된 메소드를 정시에 실행 가능하다.&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;단점&lt;/strong&gt;
+      &lt;ul&gt;
+        &lt;li&gt;스케줄러 interval이 매우 짧을 경우 작업 수행시간이 interval 시간보다 길어질 상황이 생길 수 있다.
+          &lt;ul&gt;
+            &lt;li&gt;멀티스레딩으로 설정을 직접 커스터마이ㅈ징 가능&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;interval 시간보다 긴 작업이 존재한다면 다른 작업들도 제 시간에 실행되지 않는 문제가 발생할 수 있다.
+          &lt;ul&gt;
+            &lt;li&gt;비동기 애노테이션(@Async)로 아직 작업이 끝나지 않았더라도, 새로운 스레드를 할당해 작업을 수행할 수 있다.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;멀티 서버일 경우 스케줄러가 중복 실행되는 문제
+          &lt;ul&gt;
+            &lt;li&gt;ShedLock 잠금으로 해결 가능
+              &lt;ul&gt;
+                &lt;li&gt;ShedLock은 스케줄링된 task가 최대 동시에 한번만 실행가능하도록 만들어진 라이브러리입니다.&lt;/li&gt;
+                &lt;li&gt;만약 테스크가 하나의 노드에서 실행되는 경우, 다른 노드로부터 같은 테스크의 실행을 막기위해 잠금을 획득합니다. &lt;strong&gt;즉, 하나의 작업이 이미 한 노드에서 실행중인 경우 다른 노드에서의 실행은 대기하지 않고 단순히 건너 뜁니다.&lt;/strong&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;front-end-업데이트-예정&quot;&gt;Front-End (업데이트 예정)&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;리액트를-사용한-이유는-무엇인가요&quot;&gt;리액트를 사용한 이유는 무엇인가요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;리액트를 사용해서 UI를 확장성 및 재사용성이 높은 컴포넌트의 집합으로 개발하기 위해 사용하였습니다.&lt;/strong&gt; 또한 리액트에서 사용할 수 있는 스타일 라이브러리나 상태 관리 라이브러리를 사용하고 싶어서 리액트를 사용하기도 하였습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;프론트를-개발하면서-어려운-점은-없으셨나요&quot;&gt;프론트를 개발하면서 어려운 점은 없으셨나요?&lt;/h3&gt;
+
+&lt;p&gt;백앤드 개발에 집중하다 보니 프로젝트 막바지에 프론트앤드 개발에 투자할 시간이 상대적으로 많이 없었는데요, 이러한 상황에서 리액트도 처음 사용하다보니 리액트에서 제공해주는 기능 하나 하나를 완벽히 이해하고 가져다 쓰기에는 어려운 점이 많았습니다.일단 프론트 앤드는 이상 없이 요구사항 전부를 구현 했으나, 리액트의 장점과 특징들을 제대로 활용하지 못하고 그냥 가져다 사용한 것만 같아서 생산성과 유지 보수성이 높은 코드를 작성하는게 가장 어려웠습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;리액트의-대표적인-특징은-무엇인가요&quot;&gt;리액트의 대표적인 특징은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;리액트의 대표적인 특징으로는 UI를 상태를 가지는 간단한 컴포넌트의 집합으로 표현할 수 있고, Virtual DOM을 사용하여 변화가 필요한 곳만 렌더링 할 수 있다는 특징을 가지고 있습니다.&lt;/strong&gt; 또한 리액트는 엄청나게 큰 생태계를 가지고 있어 다양한 기능들이 새로 추가되고 유지보수 되고 있으며 이를 통해 개발자들이 좀 더 쉽게 UI를 개발할 수 있게 해줍니다.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 24 Feb 2021 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/interview/2021/02/24/NAVER-Practical-Interview-Preparation-1.html</link>
+        <guid isPermaLink="true">http://localhost:4000/interview/2021/02/24/NAVER-Practical-Interview-Preparation-1.html</guid>
+        
+        <category>Booking-Recommendation-System</category>
+        
+        <category>Batch</category>
+        
+        <category>PostgreSQL</category>
+        
+        <category>Spring</category>
+        
+        <category>Redis</category>
+        
+        <category>React</category>
+        
+        
+        <category>Interview</category>
+        
+      </item>
+    
+      <item>
+        <title>[기술 면접 준비 - 9일차] Pinpoint &amp; Webper Projects</title>
+        <description>&lt;hr /&gt;
+
+&lt;h1 id=&quot;pinpoint&quot;&gt;Pinpoint&lt;/h1&gt;
+
+&lt;h3 id=&quot;핀포인트에-어떤-기여를-하셨죠&quot;&gt;핀포인트에 어떤 기여를 하셨죠?&lt;/h3&gt;
+
+&lt;p&gt;저는 &lt;strong&gt;Pinpoint Batch 모듈에 Webhook 기능을 개발하면서 Metric 별로 수집되는 서로 다른 값의 형식을 추상화할 수 있는 DTO 구조를 설계했고 관련 Alarm 도메인 구조를 재설계 하였습니다. 또한 Webhook Json Data Spec을 정의하고 Pinpoint webhook Receiver 예제 프로젝트를 개발하였습니다&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;현재에도-진행중이신가요&quot;&gt;현재에도 진행중이신가요??&lt;/h3&gt;
+
+&lt;p&gt;네 그렇습니다. 원래 계획대로라면 이미 끝났어야만 하는데 사실 &lt;strong&gt;Batch가 Pinpoint Web 모듈 내에서 독립된 모듈로 분리되면서 머지가 늦은 것 같습니다.&lt;/strong&gt; 웹 모듈 내의 배치에서는 웹훅 기능이 정상동작하는 것을 테스트 했으며, 현재 독립된 batch 모듈로 webhook 기능을 옮기는 작업을 진행하고 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;얼마-정도-후에-머지가-될-예정인가요&quot;&gt;얼마 정도 후에 머지가 될 예정인가요??&lt;/h3&gt;
+
+&lt;p&gt;팀원 분들이 같이 힘을 합치면 2~3일 안에도 끝낼 수 있습니다. 하지만 두 분다 직장도 계시고 네이버 경력 공채에 참여중이시기 때문에 시간 맞추기도 어려웠고, 저도 현재 예약 플랫폼 채용 과정에 참여중이라서 &lt;strong&gt;이번 년도 안에 마스터에 머지하는게 저희 목표&lt;/strong&gt;입니다. 핀포인트 팀과도 이미 이야기 나누었구요!!&lt;/p&gt;
+
+&lt;h3 id=&quot;핀포인트를-개발하시면서-어려움이-있으셨나요&quot;&gt;핀포인트를 개발하시면서 어려움이 있으셨나요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;여러가지 어려움 중 한가지는 Checker에서 검색하는 Metrics 들의 타입이 너무 다르다는 것이었습니다.&lt;/strong&gt; Checker의 구현체에 따라서 Metric 값의 타입은 Integer, Integer 타입의 Array, 특정 객체 타입의 Array 등 다양한 타입이 존재했습니다. 기존 SMS와 Email을 통해서 알람을 보낼 때는 수집된 값의 형식이 달라도 전송하기전에 Message Template을 통해서 특정 텍스트 형식을 만들어 보내면 됐었지만, Webhook 기능은 Pinpoint와 다른 어플리케이션 간에 확장성 제공이 목적이었기 때문에 Metric 별로 특정 텍스트 형식을 만들어 보내기에는 사용자의 입장에서 자유도가 떨어지고 필요시 다시 문자열 처리를 해야만하는 부담을 주는 상황이었습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;문제를 해결하기 위해 Metric 별로 수집된 값의 서로 다른 타입을 모두 추상화할 수 있는 DTO 구조를 설계 및 구현했고, 수집된 Metric 값의 형식에 기반하여 도메인 구조를 재설계 및 구현함으로써 문제를 해결할 수 있었습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!-- ### 프로젝트 환경 구성에서 가장 어려웠던 점
+
+**가장 어려웠던 점은 핀포인트 개발환경을 구성하는 것이 가장 어려웠습니다.**
+
+처음에 저는 제가 개발할 모듈만 로컬에서 띄우고 나머지 모듈인 hbase, collector 등은 도커에서 컨테이너로 띄우는 방식으로 이번 핀포인트 웹훅 프로젝트를 진행하려고 했습니다. 하지만 로컬에서 띄운 모듈은 hbase 컨테이너와 통신하지 못했습니다. docker-compose도 바꿔보고, 모듈을 다 컨테이너로 올려서 돌려도 보고 (이건 특이하게 되더라구요), 포트 맵핑도 다시 해보고 여러 방법을 써보았습니다. 하지만 핀포인트와 도커 관련한 지식이 부족해서 멘토님께 이 현상에 대해서 말씀 드렸고, 멘토님 또한 아주 중요한 문제라면서 이슈에 올리시구 개발하셨습니다.
+
+거의 1주일이 넘는 시간을 이 이슈를 해결하기 위해서 약간 이슈에 대한 집착 때문에 달려들었던 것 같습니다.
+
+### 해결 하셨나요?
+
+해결이 된다면 말씀을 해주신다고 하셨는데 아직 관련 이슈가 closed 되지 않았고, 다른 멘티분이 관련해서 올리신 PR이 머지되지 않은것을 봐서는 현재 해결이 안된 것 같습니다.
+
+하지만 대략의 원인을 멘토님께 직접 들었을 때 로컬의 web 모듈은 컨테이너의 zookeeper를 바라보는데 이 zookeeper는 도커 hbase의 위치 정보가 없어서 connection이 안됬던 것이고, 컨테이너의 web 모듈은 hbase의 embedded된 zookeeper로 정상 접속하기 때문에 컨테이너의 web 모듈은 돌아가고 로컬의 web 모듈은 돌아가지 않는 것이었습니다. --&gt;
+
+&lt;h3 id=&quot;핀포인트를-개발하시면-가장-좋았던-점은-무엇인가요&quot;&gt;핀포인트를 개발하시면 가장 좋았던 점은 무엇인가요??&lt;/h3&gt;
+
+&lt;p&gt;좋았던 점은 사실 너무 많았습니다 거의 대부분이라고 해도 될정도로요!! 모니터링 도메인에서 객체지향이 어떻게 적용되고 있는지도 배울 수 있었고, 같은 멘티들이 다들 경력직 개발자여서 코드리뷰를 통해 “이분들은 코드를 이렇게 짜는구나”, “그러면 이런 장점과 단점이 존재하구나”, “내가 코드를 작성하는 방식을 이렇게 한번 바꿔보면 어떨까?” 에 대해서도 많이 느끼고 배울 수 있었던 기회였던 것 같구요.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;가장 좋았던 점은 제 코드에 대해서 질문할 수 있는 능력을 키운것이 가장 좋았던 것 같습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;예전에는 제가 코드를 작성함에 있어서 코드에 대해서 질문을 던진 적이 별로 없었습니다. 확장성이나 유지보수성이 어떻게 되든 버그가 없고 잘 돌아가기만 하면 만족했었습니다. 하지만 이번 기회를 통해서 “유지보수성이 좋은 코드란 무엇이고?”, “확장성이 좋은 코드란 무엇인가?” 에 대해서 깊게 생각해 볼 수 있었고 작성된 코드에 대해서 “왜 이건 이렇게 해야만하고?”, “다른 방법을 택하면 왜 안되지?”, “이 방법에 장점은 뭐고 단점은 뭘까?”, “이 사람은 어떤 의도로 이런 코드를 작성했을까?” 등의 질문들을 이제는 자연스럽게 제 자신에게 던질 수 있는 능력을 키운것이 가장 좋았습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;batch-란-무엇인가요&quot;&gt;Batch 란 무엇인가요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Batch란 데이터를 실시간으로 처리하는것이 아닌 일괄처리하는 것을 의미합니다.&lt;/strong&gt; (ex. 정산, 알람 등의 어플리케이션을 구현하기 위해서 사용될 수 있습니다.)&lt;/p&gt;
+
+&lt;h3 id=&quot;pinpoint-batch-구조에-대해서-설명해주실-수-있나요&quot;&gt;Pinpoint Batch 구조에 대해서 설명해주실 수 있나요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;JobLauncher에 의해서 정해진 시간마다 AlarmJob이 실행되는데 AlarmJob은 하나의 AlarmStep을 가지고 있고, Alarm Step은 AlarmReader, AlarmProcessor, AlarmWriter로 구성되어 있습니다.&lt;/strong&gt; AlarmReader는 HBase에서 어플리케이션의 Metrics를 가져오고, AlarmProcessor는 이 Metric들이 Threshold가 넘는지 확인하고, AlarmWriter는 Threshold가 넘는 Metric값과 관련 어플리케이션 정보를 User에게 email, sms, webhook 등을 이용해 전송하는 구조를 가지고 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;hbase에-대해서-알고-계시나요&quot;&gt;HBase에 대해서 알고 계시나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;HBase는 컬럼 기반의 NoSQL 분산형 데이터 베이스&lt;/strong&gt;라고 입니다. &lt;u&gt;스키마, 조인, 인덱스가 없고 대량 데이터에 대해 강력한 연산과 일관성을 제공&lt;/u&gt;하는 것으로 알고 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;분산형-데이터-베이스란-무엇인가요&quot;&gt;분산형 데이터 베이스란 무엇인가요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;분산형 데이터 베이스란 데이터를 분산해서 저장하고 관리해 높은 신뢰성과 성능을 구현하는데 효과적인 데이터 베이스를 분산형 데이터베이스&lt;/strong&gt;라고 합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;스키마-변경에-따른-하위-호환-기능-구현은-어떻게-하셨나요&quot;&gt;스키마 변경에 따른 하위 호환 기능 구현은 어떻게 하셨나요?&lt;/h3&gt;
+
+&lt;p&gt;webhook 기능을 개발하며 DB 테이블에 컬럼이 하나 추가될 필요가 있었습니다. 컬럼이 추가되지 않으면 webhook 기능을 사용하지 못하기 때문에 기능을 사용하기 위해서는 사용자가 직접 DB에 들어가 컬럼을 추가하는 쿼리문을 실행해야만 했었습니다.&lt;/p&gt;
+
+&lt;p&gt;하지만 웹훅 기능을 사용하지 않지만 다른 기능 때문에 최근 release를 다운로드 받은 기존 사용자에게 “DB에 들어가서 column을 추가해 그렇지 않으면 알람 기능 자체를 사용 못할거야!” 라고 말하는 것은 적절하지 않다고 생각했기 때문에 웹훅을 사용하지 않을 기존 사용자를 위해서 하위 호환 기능을 구현할 필요가 있었습니다.&lt;/p&gt;
+
+&lt;p&gt;하위 호환을 위해 webhook.enable이라는 property를 통해 웹훅 기능을 사용하는 유저와 사용하지 않는 유저를 구분했습니다. 즉, webhook.enable이 true라고 설정되어 있다면 컬럼이 추가된 쿼리문이 날라가고 webhook이 동작하며, false라고 설정되어 있다면 컬럼이 추가되지 않은 쿼리문이 날라가고 webhook을 비활성화 하면서 하위 호환을 유지할 수 있었습니다.&lt;/p&gt;
+
+&lt;p&gt;이를 통해 평소에 전혀 경험해보지 못햇던 데이터베이스 하위 호환을 경험할 수 있어서 즐거운 경험이었습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;webper&quot;&gt;webper&lt;/h1&gt;
+
+&lt;h3 id=&quot;spring-security란-무엇인가요&quot;&gt;Spring Security란 무엇인가요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Spring Security란 인증과, 권한부여, 일반적인 공격에 대한 보호의 기능을 제공하는 프레임워크입니다.&lt;/strong&gt; Spring Security를 사용하면 어플리케이션의 보안 관련 기능을 자체적으로 구현 할 필요 없이 쉽고 안전하게 구현할 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;왜-spring-security를-사용하게-되었나요&quot;&gt;왜 Spring Security를 사용하게 되었나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;공식문서에서 인증과, 권한 부여, 일반적인 공격에 대한 보호의 기능을 제공하는 프레임워크라고 나와있었고 Spring Security를 사용하면 보안 관련 기능을 자체적으로 구현할 필요 없이 쉽고 안전하게 구현할 수 있다고 나와 있길레 사용했습니다. 하지만 사용해보니 전혀 쉽지 않았고 저는 단지 토큰 기반의 인증 기능을 구현하고 싶었을 뿐이지, Servlet이 맵핑되기 전에 Filter기반의 인증과정이 처리되어야 할 필요가 없었지만 토이프로젝트이기도해서 한번 도전해보자, 많이 배워보자 라는 마음으로 시작하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;무엇이-가장-어려웠나요&quot;&gt;무엇이 가장 어려웠나요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;처음에 Spring Security 구조를 잡는 것이 가장 어려웠습니다.&lt;/strong&gt; Filter, Security Filter 개념도 매우 어려웠고 Servlet, Servlet Container, IoC Container의 개념도 잘 정립이 되어 있지 않은 상태였기 관련 문서도 잘 읽히지 않았지만 계속 하나하나 깊이있게 파다 보니까 구조를 알 수 있었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;filter와-security-filter의-차이를-말씀해-주실-수-있나요&quot;&gt;Filter와 Security Filter의 차이를 말씀해 주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Filter와 Security Filter는 서블릿 컨테이너에 의해 Servlet에 요청이 맵핑되기 전에 실행되는 필터입니다. 둘다 똑같은 필터인데 그냥 Filter는 서블릿 컨테이너에 등록되서 사용되는 필터이고 Security Filter는 DelegatingFilterProxy가 서블릿 컨테이너에 Filter로 등록되어서 ApplicationContext가 관리하는 Filter이자 Bean들인 Security Filter Chain으로 필터 작업을 위임하는 형태입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;즉, 쉽게 말해서 Filter와 Security Filter는 모두 서블릿에 요청이 맵핑되기 전에 실행되는 필터인데 이를 서블릿 컨테이너에 직접 등록하느냐, ApplicationContext에 Bean으로 등록해서 사용하느냐의 차이입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;filter와-interceptor의-차이를-말씀해-주실-수-있나요&quot;&gt;Filter와 Interceptor의 차이를 말씀해 주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Filter는 Spring Context 외부에 존재하여 Servlet에 요청이 맵핑되기 전에 다양한 작업들을 하는 것을 의미하구요, Interceptor는 Spring Context 내부에 존재하여 DispatcherServlet이 컨트롤러를 호출하기 전, 후에 요청과 응답에 대해 처리 하는 것을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;종진님이-구현하신-spring-security의-인증방식-아키텍처를-알-수-있을까요&quot;&gt;종진님이 구현하신 Spring Security의 인증방식 아키텍처를 알 수 있을까요?&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;처음에 Servlet Container를 통해서 요청이 들어오고 Filter Chain을 수행합니다.&lt;/li&gt;
+  &lt;li&gt;Filter Chain 중에서 DelegatingFilterProxy 필터를 만나면 이는 FilterChainProxy에게 요청을 위임하고 이는 Security Filter Chain을 실행시킵니다.&lt;/li&gt;
+  &lt;li&gt;다양한 Security FilterChain이 존재하지만 인증을 수행하는 필터인 AuthenticationFilter를 거치게 되고 이 객체를 통해 전체적인 인증 과정이 수행됩니다.&lt;/li&gt;
+  &lt;li&gt;정상적으로 인증 과정이 수행이 되었다면 AuthenticationFilter는 SecurityContext에 인증 객체를 저장하게 됩니다.&lt;/li&gt;
+  &lt;li&gt;AuthenticationFilter의 임무가 끝났음으로 다음 Security Filter Chain이 시작됩니다.&lt;/li&gt;
+  &lt;li&gt;Security Filter Chain이 다 끝나고 Filter Chain도 다 끝나면 이제 DispatcherServlet으로 요청이 맵핑되어서 관련 로직들이 실행됩니다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;저는 여기서 AuthenticationFilter로서 JWTAuthenticationFilter를 만들었으며 Security Filter Chain에 등록하였습니다. 여기서 JWT 토큰을 분석하여 DB에 있는 데이터와 동일한지에 대해서 살펴 보았고 동일 하다면 SecurityContext에 관련 인증 객체를 저장하였습니다.&lt;/p&gt;
+
+&lt;p&gt;SecurityContext는 default로 ThreadLocalSecurityContextHolderStrategy를 사용하여 인증 객체를 저장하기 때문에 서블릿당 하나의 인증 객체가 저장됨을 알 수 있었습니다. 추후에 Controller에서 이러한 인증 객체를 가져와서 직접 관련 비즈니스 로직들을 사용자에 맞게 태웠습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;orm-이란-무엇인가요&quot;&gt;ORM 이란 무엇인가요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;ORM이란 Object-Relational Mapping의 줄임말로써 클래스와 SQL 데이터베이스 스키마의 메타데이터를 사용하여 DB와 통신시 객체와 SQL 테이블간에 자동으로 맵핑해주는 것을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;객체 모델과 관계형 모델간의 패러다임 불일치가 존재하는데 객체간의 관계를 바탕으로 SQL을 자동 생성하여 불일치를 해결하는 것이기도 하다.&lt;/p&gt;
+
+&lt;h3 id=&quot;orm을-왜-사용하셨나요&quot;&gt;ORM을 왜 사용하셨나요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;반복되는 쿼리문을 없앤 더 직관적이고 객체지향적인 코드를 작성하고 싶어서 사용했습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;orm이-모든것을-해결해-주나요&quot;&gt;ORM이 모든것을 해결해 주나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;ORM을 사용하는 것은 매우 편리하지만, 이러한 편리함 때문에 내부 구조를 잘 모르고 사용하면 속도 저하 및 일관성을 무너뜨리는 문제점이 생길 수 있습니다.&lt;/strong&gt; 또한 일부 자주 사용되는 대형 SQL 문은 속도를 위해 별도의 튜닝이 필요하기 때문에 결국 SQL을 사용할 수도 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;orm을-사용하면-완벽하게-쿼리문이-없어지나요&quot;&gt;ORM을 사용하면 완벽하게 쿼리문이 없어지나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Spring Data JPA에서 지원해 주지 않는 연산이거나, 성능이 너무 안좋은 쿼리문이 발생할 시 엔티티들을 재설계 하거나 직접 쿼리문을 작성&lt;/strong&gt;하는 경우도 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;orm-jpa-spring-data-jpa의-차이점에-대해서-알려주세요&quot;&gt;ORM, JPA, Spring Data JPA의 차이점에 대해서 알려주세요&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ORM은 클래스와 SQL 데이터베이스 스키마의 메타데이터를 사용하여 어플리케이션이 DB와 통신시 객체와 SQL 테이블간에 자동으로 맵핑&lt;/strong&gt;해주는 것을 의미하구요&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;JPA는 자바단에서 ORM을 위한 명세&lt;/strong&gt;를 의미하구요&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Spring Data JPA는 Spring에서 JPA를 편리하게 사용하기 위해 이를 한번 레파지토리 인터페이스 기반으로 추상화 시킨 명세&lt;/strong&gt;를 의미합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;hibernate는-무엇인가요&quot;&gt;Hibernate는 무엇인가요??&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Hibernate는 자바단의 ORM 표준 명세인 JPA의 구현체 입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;엔티티-설정간에-어떠한-제약을-넣을-수-있나요&quot;&gt;엔티티 설정간에 어떠한 제약을 넣을 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Primary Key 맵핑, 엔티티 간의 관계 설정, nullable, length등의 제약&lt;/strong&gt;을 넣을 수 있는 걸로 알고 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;jpa에서-객체의-상태는-어떤게-있나요&quot;&gt;JPA에서 객체의 상태는 어떤게 있나요?&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Transient&lt;/strong&gt; : JPA가 모르는 상태&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Persistent&lt;/strong&gt; : JPA가 관리중인 상태
+    &lt;ul&gt;
+      &lt;li&gt;1차 캐시 : Persistent Context에 인스턴스 저장&lt;/li&gt;
+      &lt;li&gt;Dirty Checking : Persistent Context에 올라간 객체의 변경사항을 계속 감지&lt;/li&gt;
+      &lt;li&gt;Write Behind : 객체의 상태변화를 DB에 최대한 늦게 필요한 시점에 적용&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Detached&lt;/strong&gt; : JPA가 더이상 관리하지 않는 상태&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Removed&lt;/strong&gt; : JPA가 관리하긴 하지만 삭제하기로 한 상태&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;entity-관계를-어떻게-가져올-것인가&quot;&gt;Entity 관계를 어떻게 가져올 것인가?&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Eager&lt;/strong&gt; : 지금 관련있는 엔티티를 전부다 가져온다&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Lazy&lt;/strong&gt; : 나중에 관련있는 엔티티를 가져온다.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 17 Dec 2020 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/interview/2020/12/17/NAVER-Interview-Preparation-9.html</link>
+        <guid isPermaLink="true">http://localhost:4000/interview/2020/12/17/NAVER-Interview-Preparation-9.html</guid>
+        
+        <category>Pinpoint</category>
+        
+        <category>Webper</category>
+        
+        <category>Projects</category>
+        
+        
+        <category>Interview</category>
+        
+      </item>
+    
+      <item>
+        <title>[기술 면접 준비 - 8일차] 네트워크</title>
         <description>&lt;hr /&gt;
 
 &lt;h1 id=&quot;네트워크&quot;&gt;네트워크&lt;/h1&gt;
@@ -115,22 +1090,22 @@
 &lt;h3 id=&quot;jwt의-단점은-무엇인가요&quot;&gt;JWT의 단점은 무엇인가요??&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;일단 JWT는 상태 정보를 저장하지 않기 때문에 한번 발행된 토큰은 임의로 삭제할 수 없습니다. 고로 적절한 토큰 만료 기간을 넣어줘야 했습니다.&lt;/li&gt;
-  &lt;li&gt;JWT 토큰은 Header, Payload, Signature등 3부분으로 이루어 졌고 전체적으로 길이가 길기 때문에 많은 요청과 응답이 발생할 경우 성능에 영향을 줄 수 있습니다.&lt;/li&gt;
-  &lt;li&gt;JWT의 Payload 자체는 암호화 된 것이 아니라 인코딩 된 것이기 떄문에 암호화에 신경 쓰거나, 중요 데이터를 넣지 않아야 합니다.&lt;/li&gt;
-  &lt;li&gt;Token 기반의 인증과 마찬가지로 Token을 탈취 당했을 경우 사용자 식별을 할 수 없었습니다. 이를 위해 HTTPS나 적절한 만료 기간을 설정했어야만 했습니다.&lt;/li&gt;
+  &lt;li&gt;JWT 토큰은 상태 정보를 저장하지 않아 한번 발행된 토큰이 임의로 삭제될 수 없기 때문에 적절한 토큰 만료 기간을 넣어줘야 했습니다.&lt;/li&gt;
+  &lt;li&gt;JWT 토큰은 전체적으로 길이가 길기 때문에 많은 요청과 응답이 발생할 경우 성능에 영향을 줄 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;JWT의 Payload 자체는 암호화 된 것이 아니라 인코딩 된 것이기 때문에 암호화에 신경 쓰거나, 중요 데이터를 Payload에 넣지 않아야 합니다.&lt;/li&gt;
+  &lt;li&gt;Token 기반의 인증과 마찬가지로 Token을 탈취 당했을 경우 올바른 사용자 식별을 할 수 없습니다. 이를 위해 HTTPS나 적절한 만료 기간을 설정했어야만 했습니다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;oauth&quot;&gt;OAuth&lt;/h3&gt;
 
-&lt;p&gt;OAuth란 특정 애플리케이션이 다른 애플리케이션의 정보에 대해 접근 권한을 부여할 수 있는 공통적인 수단으로서 접근 위임을 위한&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;OAuth란 특정 애플리케이션이 다른 애플리케이션의 정보에 접근할 수 있는 권한을 관리하는 프로토콜 입니다.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;osi-7-레이어는-무엇인가&quot;&gt;OSI 7 레이어는 무엇인가??&lt;/h3&gt;
 
-&lt;p&gt;OSI 7 레이어는 아래와 같습니다.&lt;/p&gt;
+&lt;p&gt;OSI 7 레이어란 네트워크를 계층적인 구조로 표현한 것을 가리키며 구조는 아래와 같습니다.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;물리 계층(Physical Layer)&lt;/strong&gt; : 한 비트를 노드에서 다음 노드로 전송해주는 서비스를 담당한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;물리 계층(Physical Layer)&lt;/strong&gt; : 하나의 비트를 노드에서 다음 노드로 전송해주는 서비스를 담당한다.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;링크 계층(Link Layer)&lt;/strong&gt; : 물리 계층을 통해 송수신되는 정보의 오류와 흐름을 관리하여 안전한 정보의 전달을 수행할 수 있도록 도와주는 서비스를 담당한다. (MAC)&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;네트워크 계층(Network Layer)&lt;/strong&gt; : 데이터를 목적지까지 가장 안전하고 빠르게 전달하는 라우팅과 포워딩 서비스를 담당한다. (IP)&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;전송 계층(Transport Layer)&lt;/strong&gt; : End to End 사용자들이 신뢰성있는 데이터를 주고받을 수 있게 도와준다. (TCP, UDP)&lt;/li&gt;
@@ -141,18 +1116,18 @@
 
 &lt;h3 id=&quot;왜-osi-7-레이어로-나누었을까&quot;&gt;왜 OSI 7 레이어로 나누었을까??&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;네트워크를 7계층으로 나눈 이유는 네트워킹 과정을 단계별로 파악할 수 있어 이상이 발생했을 경우에 다른 레이어의 장비 및 소프트웨어를 건들지 않고도 이상이 생긴 단계만 고칠 수 있게끔&lt;/strong&gt; 해준다. 즉, &lt;strong&gt;하나의 네트워크를 다음과 같이 7개의 레이어로 분리하면서 레이어간에 결합도는 낮추고 응집도는 올려 유지보수에 강하게 만들려는 목적&lt;/strong&gt;이다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;네트워크를 7계층으로 나눈 이유는 네트워크에서 이상이 발생했을 경우 다른 레이어의 장비 및 소프트웨어를 건들지 않고도 이상이 생긴 특정 레어어만 고칠 수 있는 유지보수 측면에서의 장점과, 새로운 응용 계층 프로토콜을 개발할 경우 물리계층 부터 개발하지 않고 표현계층까지 재사용함으로써 확장성 측면에서의 장점을 가지기 때문에 네트워크를 계층적 구조인 OSI 7 레이어로 나누었습니다.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;http는-무엇인가&quot;&gt;HTTP는 무엇인가?&lt;/h3&gt;
 
-&lt;p&gt;HTTP는 어플리케이션 계층 프로토콜의 한 종류로써 TCP/IP 기반의 신뢰적인 프로토콜입니다. 주로 브라우저와 서버간의 통신을 하기 위해 자주 사용합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;HTTP는 어플리케이션 계층 프로토콜의 한 종류로써 TCP/IP 기반의 신뢰적인 프로토콜입니다. 주로 브라우저와 서버간의 통신을 하기 위해 자주 사용합니다.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;헤더 필드로는 Content-Legth, Content-Type, Connection, User-Agent, Accept, Status Code 등이 존재합니다.&lt;/p&gt;
 
 &lt;p&gt;http status code는 HTTP Response의 필드 중에 하나인데 순서는 아래와 같습니다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;1xx: 요청을 받았으며 작업을 계속한다.&lt;/li&gt;
+  &lt;li&gt;1xx: 서버는 요청을 받았으며 작업을 계속한다.&lt;/li&gt;
   &lt;li&gt;2xx: 클라이언트가 요청한 동작을 수신하고 이해했으며 성공적으로 처리했음을 가리킨다.&lt;/li&gt;
   &lt;li&gt;3xx: 클라이언트는 요청을 마치기 위해 추가 동작을 취해야 한다는 것을 의미하구요&lt;/li&gt;
   &lt;li&gt;4xx: 클라이언트의 요청에 오류가 있다는 것을 말합니다.&lt;/li&gt;
@@ -174,12 +1149,17 @@
 
 &lt;h3 id=&quot;tcp와-udp의-차이는-무엇인가&quot;&gt;TCP와 UDP의 차이는 무엇인가?&lt;/h3&gt;
 
-&lt;p&gt;UDP는 비신뢰적이고 비연결형 서비스를 제공하는 프로토콜이구요 TCP는 신뢰적이고 연결형 서비스를 제공하는 프로토콜 입니다. UDP는 주로 DNS나, IPTV등에서 사용하고 TCP는 HTTP 등에서 사용됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;UDP는 비신뢰적이고 비연결형 서비스를 제공하는 프로토콜이구요 TCP는 신뢰적이고 연결형 서비스를 제공하는 프로토콜 입니다.&lt;/strong&gt; UDP는 주로 DNS나, IPTV등에서 사용하고 TCP는 HTTP 등에서 사용됩니다.&lt;/p&gt;
 
-&lt;h3 id=&quot;3-way-handshake에-대해서-알고-잇나요&quot;&gt;3 Way-HandShake에 대해서 알고 잇나요??&lt;/h3&gt;
+&lt;h3 id=&quot;tcp의-3-way-handshake에-대해서-알고-잇나요&quot;&gt;TCP의 3 Way-HandShake에 대해서 알고 잇나요??&lt;/h3&gt;
 
-&lt;p&gt;3 Way-Handshake 란 전송 제어 프로토콜(TCP)에서 통신을 하는 장치간 서로 연결이 잘 되어있는지 확인하는 과정, 방법이다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;TCP의 3 Way Handshake란 TCP로 통신을 하는 장치간에 서로 연결이 잘 되어있는지 확인하는 과정, 방법이다.&lt;/strong&gt;&lt;/p&gt;
 
+&lt;ol&gt;
+  &lt;li&gt;synchronize의 줄임말인 syn 세그먼트를 클라이언트가 서버로 보낸다.&lt;/li&gt;
+  &lt;li&gt;서버는 클라이언트에게 syn에 대한 ack를 보낸다&lt;/li&gt;
+  &lt;li&gt;클라이언트는 syn에 대한 ack의 ack를 보낸다.&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         <pubDate>Wed, 16 Dec 2020 00:00:00 +0900</pubDate>
         <link>http://localhost:4000/interview/2020/12/16/NAVER-Interview-Preparation-8.html</link>
@@ -193,7 +1173,7 @@
       </item>
     
       <item>
-        <title>[기술 면접 준비 - 8일차] 자기소개 &amp; 동아리 회장 및 해커톤 활동</title>
+        <title>[기술 면접 준비 - 7일차] 자기소개 &amp; 동아리 회장 및 해커톤 활동</title>
         <description>&lt;h1 id=&quot;자기소개&quot;&gt;자기소개&lt;/h1&gt;
 
 &lt;p&gt;&lt;strong&gt;안녕하세요 “깊은 생각과 고민을 통해 공유하는 것을 좋아하는” 서버 개발자 배종진입니다. 저는 객체지향과 자바를 가장 좋아하고 잘 다룰 수 있으며 관련 프로젝트 경험으로는 Pinpoint batch 모듈에 webhook 기능을 개발한 경험과 Spring Boot 기반의 api 서버를 개발해본 경험이 있습니다. 이 외에도 다양한 프로젝트 및 스터디를 통해서 코드의 품질에 대해서도 항상 고민하고 있으며 더 나은 코드를 위해 토론하는 과정 자체를 좋아합니다. 전남대학교 소프트웨어 개발 동아리 회장과 교내 최초 온라인 해커톤 운영을 통해 전남대학교 개발 생태계에 이바지한 경험이 있으며 주어진 환경에서 최선의 변화를 항상 시도하고 즐겨하는 편입니다.&lt;/strong&gt;&lt;/p&gt;
@@ -1294,644 +2274,6 @@
         
         
         <category>Interview</category>
-        
-      </item>
-    
-      <item>
-        <title>[Jenkins로 CI/CD 구축하기 - 1] Ubuntu(18.04)에 Jenkins 설치하기</title>
-        <description>&lt;p&gt;이번 포스팅에서는 Ubuntu(18.04)에 Jenkins를 설치하고 환경 설정까지 하는 방법을 공유하도록 하겠습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://imbf.github.io/devops/2020/10/28/What-is-The-DevOps.html&quot;&gt;DevOps가 무엇인가?&lt;/a&gt; 에 대해서는 이전 포스팅에서 다루었고, 이번부턴 Jenkins로 CI/CD 구축하기 시리즈를 시작하도록 하겠습니다.&lt;/p&gt;
-
-&lt;p&gt;이번 포스팅은 시리즈의 첫 번째 주제인 &lt;strong&gt;Ubuntu(18.04)에 Jenkins 설치하고 환경 설정하기&lt;/strong&gt; 입니다. &lt;strong&gt;Ubuntu(18.04)에 Jenkins를 설정하고 관련 환경을 구성하면서 겪었던 이슈 및 방법&lt;/strong&gt;에 대해서 공유할 예정입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;내가 지식을 받았을 때 처럼 나의 지식과 경험이 누군가에게는 도움이 되길 간절히 소망합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;ubuntu1804에-jenkins-설치하기&quot;&gt;Ubuntu(18.04)에 Jenkins 설치하기&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;Ubuntu&lt;/strong&gt;는 사용자의 편의성에 초점을 맞춘 &lt;strong&gt;Linux 배포판&lt;/strong&gt;입니다. 고로 우리는 Ubuntu를 사용할 때 Linux와 비슷하게 여겨도 큰 상관이 없습니다.&lt;u&gt;(특정 기능 사용시 다른 배포판(CentOS 등)과 사용하는 명령어가 다르긴 하다.)&lt;/u&gt;&lt;/p&gt;
-
-&lt;p&gt;Ubuntu 18.04는 Ubuntu에서 2년마다 발표하는 LTS(Long Term Support)중의 하나이며, 이 OS 환경에서 Jenkins를 설치하는 방법을 소개할 것입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;우리는 Jenkins 버전 중 현재 가장 최신의 Long Term Support(LTS) Release를 설치할 예정이며 과정은 아래와 같습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;1-jenkins-설치를-위해-repository-key-추가&quot;&gt;1. Jenkins 설치를 위해 Repository key 추가&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;키가 잘 추가 되었다면 &lt;strong&gt;OK&lt;/strong&gt;라는 문구를 보실 수 있습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-서버의-sourceslist에-jenkins-패키지-저장소를-추가&quot;&gt;2. 서버의 sources.list에 Jenkins 패키지 저장소를 추가&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ &amp;gt; \
-    /etc/apt/sources.list.d/jenkins.list'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;3-패키지-인덱스-정보-업데이트&quot;&gt;3. 패키지 인덱스 정보 업데이트&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get update
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;4-jenkins-패키지-설치&quot;&gt;4. Jenkins 패키지 설치&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install jenkins
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;여기까지 잘 따라 오셨다면 Jenkins는 잘 설치 되었습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;5-java-jdk-8-설치&quot;&gt;5. Java JDK 8 설치&lt;/h3&gt;
-
-&lt;p&gt;하지만 Jenkins를 실행하기 위해서는 특정 버젼의 &lt;strong&gt;Java JDK&lt;/strong&gt;가 필요함으로 설치해주도록 하겠습니다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install openjdk-8-jdk
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Java JDK 8 버전이 잘 설치 되었을 경우 &lt;code class=&quot;highlighter-rouge&quot;&gt;java -version&lt;/code&gt;이라고 bash에 입력해주면 아래와 같은 로그를 볼 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/devops/install-jenkins-in-ubuntu-2.png&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;6-jenkins-실행하기&quot;&gt;6. Jenkins 실행하기&lt;/h3&gt;
-
-&lt;p&gt;이제 Jenkins와 Java도 잘 설치 되었음으로 &lt;strong&gt;Jenkins를 실행&lt;/strong&gt;해 보도록 하겠습니다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl start jenkins
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Jenkins가 정상적으로 잘 실행 되었다면 아래와 같은 명령어를 bash에 입력할 시 &lt;strong&gt;jenkins service의 상태를 체크&lt;/strong&gt;할 수 있습니다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl status jenkins
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;저와 같은 로그가 보인다면, Jenkins가 잘 실행 된 것입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/devops/install-jenkins-in-ubuntu-3.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;7-jenkins-포트-변경하기&quot;&gt;7. Jenkins 포트 변경하기&lt;/h3&gt;
-
-&lt;p&gt;Jenkins를 실행시켰을 때 기본적으로 8080 포트에서 동작합니다. 하지만 Spring Project의 경우 기본 포트가 8080이기 때문에 중복되어 불편할 수 있음으로 &lt;strong&gt;Jenkins 포트를 9090포트로 바꾸어&lt;/strong&gt; 주도록 하겠습니다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo vi /etc/default/jenkins
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이 작업은 아주 간단합니다. 아래와 같이 vi 에디터를 사용해서 /etc/default/Jenkins 파일의 &lt;strong&gt;HTTP_PORT를 9090포트로 변경&lt;/strong&gt;해주면 됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/devops/install-jenkins-in-ubuntu-4.png&quot; style=&quot;width:80%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Jenkins 포트를 9090으로 변경했다면 &lt;strong&gt;Jenkins를 재실행&lt;/strong&gt; 해주도록 합시다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl restart jenkins
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;8-방화벽-설정&quot;&gt;8. 방화벽 설정&lt;/h3&gt;
-
-&lt;p&gt;기본적으로 OS는 보안을 위해 방화벽으로 주요 포트 이외의 대부분의 포트에 다른 호스트들의 접근을 막아놓기 마련입니다.&lt;/p&gt;
-
-&lt;p&gt;그래서, &lt;strong&gt;ufw를 사용하여 다른 호스트가 나의 9090포트에 접근할 수 있도록 열어 놓아야 합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ufw allow 9090
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;특정 호스트만 나의 9090포트에 접근할 수 있도록 할 수 있지만 이 부분은 생략하도록 하겠습니다.&lt;/p&gt;
-
-&lt;p&gt;잘 설정이 되었으면 아래와 같은 명령어를 입력합니다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ufw status
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;명령어 입력시 아래와 같이 9090 포트의 Rule이 생성되었다면 성공입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/devops/install-jenkins-in-ubuntu-5.png&quot; style=&quot;width:80%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;9-jenkins-설정하기&quot;&gt;9. Jenkins 설정하기&lt;/h3&gt;
-
-&lt;p&gt;이제 Jenkins를 실행하기 위한 모든 작업이 끝이 났습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;추가적으로 Jenkins의 초기 설정인 Plugin 설치, 계정 설정, secret key 입력을 진행하도록 하겠습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;브라우저를 통해서 &lt;code class=&quot;highlighter-rouge&quot;&gt;http://(hostIp or hostName):9090&lt;/code&gt; 에 접속시 아래와 같은 화면을 보실 수 있으며&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/devops/install-jenkins-in-ubuntu-6.png&quot; style=&quot;width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;/var/lib/jenkins/secrets/initialAdminPassword 에 가서 password를 복사해서 Administrator password 폼에 입력합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/devops/install-jenkins-in-ubuntu-7.png&quot; style=&quot;width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;폼에 Password를 입력하고 Continue를 클릭하면 다음과 같은 &lt;strong&gt;플러그인 설치 화면&lt;/strong&gt;이 나오게 되는데 &lt;strong&gt;본인이 사용하는 플러그인을 잘 모른다면 Install Suggested Plugins를 클릭&lt;/strong&gt;하시면 됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/devops/install-jenkins-in-ubuntu-8.png&quot; style=&quot;width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Install Suggested Plugins 버튼을 클릭하면 &lt;strong&gt;권장 Plugin 설치가 진행되니, Getting Started 게이지가 다 찰 때까지 기다리면 됩니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/devops/install-jenkins-in-ubuntu-9.png&quot; style=&quot;width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;플러그인 설치가 완료되면 &lt;strong&gt;계정 설정 페이지&lt;/strong&gt;가 나오게 되는데 폼을 다 채우고 save and Continue 버튼을 클릭합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;이 계정 정보는 브라우저를 통해 Jenkins 접속시 항상 입력해야 함으로 꼭 잊어버리지 않아야 합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/devops/install-jenkins-in-ubuntu-10.png&quot; style=&quot;width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;계정 설정 완료 후 추가적으로 1~2가지 설정을 마치면 아래와 같은 Jenkins 화면을 볼 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/devops/install-jenkins-in-ubuntu-11.png&quot; style=&quot;width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이를 기반으로 독자 여러분이 본인의 입맛에 맞게끔 Jenkins를 요리해서 사용하면 됩니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;이로써 Ubuntu(18.04)에 Jenkins 설치하기 및 관련 환경 구성하기를 마치며 다음에는 &lt;strong&gt;Jenkins에 GitHub Webhook 연동하기&lt;/strong&gt; 포스팅으로써 찾아오도록 하겠습니다.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 26 Nov 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/devops/2020/11/26/Install-Jenkins-in-Ubuntu(18.04).html</link>
-        <guid isPermaLink="true">http://localhost:4000/devops/2020/11/26/Install-Jenkins-in-Ubuntu(18.04).html</guid>
-        
-        <category>DevOps</category>
-        
-        <category>CI/CD</category>
-        
-        <category>Jenkins</category>
-        
-        <category>Ubuntu</category>
-        
-        
-        <category>DevOps</category>
-        
-      </item>
-    
-      <item>
-        <title>[Operating System - Chapter 6] 동기화 도구들</title>
-        <description>&lt;p&gt;이 포스팅은 공룡책으로 알려진 Operating System Concepts의 6장인 &lt;strong&gt;Synchronization Tools&lt;/strong&gt;를 공부하면서 정리한 포스팅이다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;6-동기화-도구들-synchronization-tools&quot;&gt;6. 동기화 도구들 (Synchronization Tools)&lt;/h2&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;협력적 프로세스는 시스템 내에서 실행 중인 다른 프로세스의 실행에 영향을 주거나 영향을 받는 프로세스이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;이 장에서는 논리 주소 공간을 공유하는 협력적 프로세스의 질서 있는 실행을 보장하여, 이를 통해 &lt;strong&gt;데이터의 일관성&lt;/strong&gt;을 유지하는 다양한 메커니즘에 대해 논의하도록 하겠다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;61-배경-background&quot;&gt;6.1 배경 (Background)&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;우리는 이미 프로세스가 병행하게 또는 병렬로 실행될 수 있다는 것을 알고 있다. 본 장에서는 프로세스가 병행 또는 병렬로 실행될 때 여러 프로세스가 공유하는 &lt;strong&gt;데이터의 무결성&lt;/strong&gt;에 어떤 문제를 일으키는지에 관해 설명한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;동시에 여러 개의 프로세스가 동일한 자료를 접근하여 조작하고, 그 실행 결과가 접근이 발생한 특정 순서에 의존하는 상황을 경쟁 상황(race condition)이라고 한다.&lt;/strong&gt; 경쟁 상황으로부터 보호하기 위해, 우리는 한순간에 하나의 프로세스만이 데이터를 조작하도록 보장해야 한다. 이러한 보장을 위해, 우리는 어떤 형태로든 프로세스들이 동기화되도록 할 필요가 있다.&lt;/p&gt;
-
-&lt;p&gt;또한 다중 코어 시스템의 대두와 더불어 다중 스레드 어플리케이션의 개발에 대한 관심이 증가하고 있다. 다중 스레드 어플리케이션에서는 자원을 공유할 가능성이 매우 높은 여러 스레드가 서로 다른 처리 코어에서 병렬로 실행된다. 이러한 상황에서 race condition은 더 빈번하게 발생할 수 있어, 스레드들이 동기화되도록 할 필요가 있다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;62-임계구역-문제-the-critical-section-problem&quot;&gt;6.2 임계구역 문제 (The Critical Section Problem)&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;프로세스 동기화에 관한 논의는 소위 임계구역 문제라고 불리는 문제로부터 시작한다. n개의 프로세스 {P0, P1, …, P(n-1)}이 있는 시스템을 고려해 보자.&lt;/p&gt;
-
-&lt;p&gt;각 프로세스는 &lt;strong&gt;임계구역(critical section)&lt;/strong&gt;이라고 부르는 코드를 포함하고 있고, 그 안에서는 적어도 하나 이상의 다른 프로세스와 공유하는 데이터에 접근하고 갱신할 수 있다. 이 시스템의 중요한 특징은 &lt;strong&gt;한 프로세스가 자신의 임계구역에서 수행하는 동안에는 다른 프로세스들은 그들의 임계구역에 들어갈 수 없다는 사실이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;임계구역 문제는 프로세스들이 데이터를 협력적으로 공유하기 위하여 자신들의 활동을 동기화할 때 사용할 수 있는 프로토콜(약속)을 설계하는 것이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;각 프로세스는 자신의 임계구역으로 진입하려면 진입 구역(entry section)에서 진입 허가를 요청해야 하고, 임계구역 뒤에는 퇴출 구역(exit section)이 따라올 수 있다. 코드의 나머지 부분들을 총칭하여 나머지 구역(reaminder section)이라고 한다.&lt;/p&gt;
-
-&lt;p&gt;이를 사용하는 프로세스의 일반적인 구조를 나타낸 그림은 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/computer-science/synchronization-tools-1.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;아래의 그림에 나와 있는 것처럼 entry section과 exit section은 프로세스의 동기화를 위해서 매우 중요하다.&lt;/p&gt;
-
-&lt;p&gt;임계구역 문제에 대한 해결안은 다음의 &lt;strong&gt;세 가지 요구 조건&lt;/strong&gt;을 충족해야 한다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;상호 배제(mutual exclusion):&lt;/strong&gt; 프로세스 P가 자기의 임계구역에서 실행된다면, 다른 프로세스들은 그들 자신의 임계구역에서 실행될 수 없다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;진행(progress):&lt;/strong&gt; 자기의 임계구역에서 실행되는 프로세스가 없고 그들 자신의 임계구역으로 진입하려고 하는 프로세스들이 있다면, 나머지 구역에서 실행 중이지 않는 프로세스들만 다음에 누가 그 임계구역으로 진입할 수 있는지를 결정하는 데 참여할 수 있으며, 이 선택은 무한정 연기될 수 없다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;한정된 대기(bounded waiting):&lt;/strong&gt; 프로세스가 자기의 임계구역에 진입하려는 요청을 한 후부터 그 요청이 허용될 때까지 다른 프로세스들이 그들 자신의 임계구역에 진입하도록 허용되는 횟수에 한계가 있어야 한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;임의의 한순간에 많은 커널 모드 프로세스들이 운영체제 안에서 활성화될 수 있기 때문에 운영체제를 구현하는 코드(커널 코드)는 경쟁 조건이 발생하기 쉽다. &lt;u&gt;경쟁 조건이 발생하기 쉬운 커널 자료구조로는 메모리 할당을 관리하는 자료구조, 프로세스 리스트를 유지하는 자료구조, 인터럽트 처리를 위한 자료구조 등이 있다.&lt;/u&gt;&lt;/p&gt;
-
-&lt;p&gt;운영체제 내에서 임계구역을 다루기 위해서 &lt;strong&gt;선점형 커널&lt;/strong&gt;과 &lt;strong&gt;비선점형 커널&lt;/strong&gt;의 두 가지 일반적인 접근법이 사용된다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;선점형 커널은 프로세스가 커널 모드에서 수행되는 동안 선점되는 것을 허용한다.&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;선점형 커널에 대해서는 동일한 주장을 할 수 없어 경쟁 조건이 발생할 수 있기 때문에 공유되는 커널 자료구조에서 경쟁 조건이 발생하지 않는다는 것을 보장하도록 신중하게 설계되어야 한다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;비선점형 커널은 커널 모드에서 수행되는 프로세스의 선점을 허용하지 않고 커널 모드 프로세스는 커널을 빠져나갈 때까지 또는 봉쇄될 때까지 또는 자발적으로 CPU의 제어를 양보할 때까지 계속 수행된다.&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;한 순간에 커널 안에서 실행 중인 프로세스는 하나밖에 없으므로 경쟁 조건을 염려할 필요는 없다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;커널 모드 프로세스가 대기 중인 프로세스에 프로세서를 양도하기 전에 오랫동안 실행할 위험이 적기 때문에 선점형 커널은 더 응답이 민첩할 수 있다. 하지만 선점형 커널을 설계하기 앞서 경쟁 조건을 잘 고려해야만 한다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;63-peterson의-해결안-petersons-solution&quot;&gt;6.3 Peterson의 해결안 (Peterson’s Solution)&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Peterson 해결안은 Critical Section과 Remainder Section을 번갈아 가며 실행하는 두 개의 프로세스로 한정된다. 보통 프로세스는 P0와 P1로 번호를 매긴다. Peterson의 해결안은 두 프로세스가 두 개의 데이터 항목을 공유하도록 하여 해결한다. 이는 다음과 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;turn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Critical Section으로 진입할 순번을 나타내는 변수&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 각 프로세스가 Critical Section으로 진입할 준비가 되었다는 것을 표현한 배열&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;flag[i]가 참이라면 Pi가 Critical Section으로 진입할 준비가 된다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;Pi의 Peterson 알고리즘은 다음과 같다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/computer-science/synchronization-tools-2.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Critical Section으로 진입하기 위해서는 Pi는 먼저 flag[i]를 참으로 만들고, turn을 j로 지정한다. 이렇게 함으로써 Pi는 Pj가 Critical Section으로 진입하기를 원한다면 진입 가능하다는 것을 보장한다. 만일 두 프로세스가 동시에 진입하기를 원한다면 진입 turn은 거의 동시에 i와 j로 지정될 것이다. 이 때의 경우 turn의 궁극적인 값이 둘 중 누가 먼저 Critical Section으로 진입할 것인가를 결정한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;flag[j]가 false(Pj가 remainder section 수행)가 되거나 turn이 i(Pj는 준비완료됬고, Pi가 Entry Section에서 대기하고 있음)일 경우 Pi는 Critical Section에 들어갈 수 있다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Peterson의 해결안이 Ciritical Section 문제를 해결하기 위해선 위에서 명시한 것 처럼 3가지 요구조건을 만족해야 한다. 같이 살펴보자.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;상호 배재(Mutual Exclusion)
-    &lt;ul&gt;
-      &lt;li&gt;flag[2]와 turn 변수에 의해서 하나의 프로세스만 Critical Section에서 연산을 수행할 수 있음으로 Mutual Exclusion는 지켜진다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;진행(Progress)
-    &lt;ul&gt;
-      &lt;li&gt;각 프로세스가 자신이 Critical Section을 수행할 동안 while문에서 다른 프로세스를 유한하게 대기하도록 만드는 방법을 통하여 Progress를 지킬 수 있다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;한정된 대기(bounded waiting)
-    &lt;ul&gt;
-      &lt;li&gt;각 프로세스들은 Critical Section에 진입하려는 요청을 한 후부터 다른 프로세스가 Critical Section을 수행하는 동안 유한하게 대기함으로 bounded waiting 또한 지켜진다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Peterson의 해결안은 최신 컴퓨터 아키텍처에서 작동한다고 보장되지 않는다. &lt;u&gt;주된 이유는 시스템 성능을 향상하기 위해 프로세스 또는 컴파일러가 종속성이 없는 읽기 및 쓰기 작업을 재정렬&lt;/u&gt; 할 수 있기 때문이다. 예로 들어, Peterson 해결안의 entry section의 첫 두 문장의 순서를 바꾸게 되면 임계구역 문제를 해결할 수 없다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;64-동기화를-위한-하드웨어-지원-hardware-support-for-synchronization&quot;&gt;6.4 동기화를 위한 하드웨어 지원 (Hardware Support for Synchronization)&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Critical Section 문제의 소프트 웨어 기반 해결책은 최신 컴퓨터 아키텍처에서 작동하지 않을 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이 절에서는 Critical Section 문제를 해결하기 위한 지원을 제공하는 &lt;strong&gt;세 가지 하드웨어 명령&lt;/strong&gt;을 제시한다. 이러한 프리미티브(초기의, 원초적인, …) 연산은 동기화 도구로 직접 사용될 수 있거나 더 추상적인 동기화 기법의 기초 형태로 사용될 수 있다.&lt;/p&gt;
-
-&lt;h4 id=&quot;641-메모리-장벽-memory-barriers&quot;&gt;6.4.1 메모리 장벽 (Memory Barriers)&lt;/h4&gt;
-
-&lt;p&gt;&lt;strong&gt;컴퓨터 아키텍처가 응용 프로그램에게 제공하는 메모리 접근 시 보장되는 사항을 결정한 방식을 메모리 모델이라고 한다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;일반적으로 메모리 모델은 두 가지 범주 중 하나에 속한다.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;강한 순서:&lt;/strong&gt; 한 프로세서의 메모리 변경 결과가 다른 모든 프로세서에 즉시 보임.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;약한 순서:&lt;/strong&gt; 한 프로세서의 메모리 변경 결과가 다른 프로세서에 즉시 보이지 않음.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;컴퓨터 아키텍처는 메모리의 모든 변경 사항을 다른 모든 프로세서로 전파하는 명령어를 제공하여 다른 프로세서에서 실행 중인 스레드에 메모리 변경 사항이 보이는 것을 보장&lt;/strong&gt;한다. 이러한 명령어를 &lt;strong&gt;메모리 장벽(Memory Barriers) 또는 메모리 펜스(Memory Fences)&lt;/strong&gt;라고 한다.&lt;/p&gt;
-
-&lt;p&gt;메모리 장벽 명령어가 실행될 때, 시스템은 후속 적재 또는 저장 연산이 수행되기 전에 모든 적재 및 저장이 완료되도록 한다. 따라서 명령이 재정렬 되더라도 메모리 장벽은 향후 적재 또는 저장 작업이 수행되기 전에 저장 작업이 메모리에서 완료되어 다른 프로세서에 보이도록 한다.&lt;/p&gt;
-
-&lt;p&gt;메모리 장벽은 매우 낮은 수준의 연산으로 간주하며 일반적으로 Mutual Exclusion을 보장하는 특수 코드를 작성할 때 커널 개발자만 사용한다.&lt;/p&gt;
-
-&lt;h4 id=&quot;642-하드웨어-명령어-hardware-instructions&quot;&gt;6.4.2 하드웨어 명령어 (Hardware Instructions)&lt;/h4&gt;
-
-&lt;p&gt;&lt;strong&gt;많은 현대 기계들은 한 워드(word)의 내용을 검사하고 변경하거나, 두 워드의 내용을 원자적으로 교환(swap)할 수 있는, 즉 인터럽트 되지 않는 하나의 단위로서, 특별한 하드웨어 명령어들을 제공한다.&lt;/strong&gt; 우리는 이들을 사용하여 간단한 방식으로 Critical Section을 해결할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이 명령어들을 추상적으로 표현하자면 test_and_set()과 compare_and_swap()이 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;test_and_set()&lt;/strong&gt; 명령어는 원자적(atomically)으로 실행된다. 아래의 그림은 test_and_set() 명령어의 정의문이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/computer-science/synchronization-tools-3.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이를 활용한 Critical Section의 Mutucal Exclsion 해결 알고리즘은 아래와 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/computer-science/synchronization-tools-6.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;위의 알고리즘은 lock이라는 공유 변수가 한 프로세스에서 false일 경우 lock을 true로 만들고 자신은 Critical Section으로 들어간다. Critical Section에서 빠져나온 프로세스가 lock을 false로 만들면 다른 프로세스가 Critical Section에 들어가고 이러한 과정이 반복되는 알고리즘이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;compare_and_swap()&lt;/strong&gt; 명령어는 test_and_set() 명령어와 마찬가지로 두 개의 워드에 원자적인 연산을 하지만 두 워드의 내용 교환에 기반을 둔 다른 기법을 사용한다. 아래의 그림은 compare_and_swap() 명령어의 정의문이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/computer-science/synchronization-tools-4.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Critical Section 요구 조건을 모두 만족시키는 compare_and_swap() 명령어를 이용한 알고리즘에 대해서 설명하도록 하겠다. 공통 데이터 및 코드는 아래와 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;waiting&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 프로세스i가 대기하고 있다는 것을 나타내는 배열&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/computer-science/synchronization-tools-5.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Pi가 임계구역에 진입하는 경우는 오직 waiting[i] == false 이든지 key == 0 이 되어야 한다. lock이 0일 때에만 key가 0 이되고 lock이 1로 바뀌면서 무한 루프에서 빠져나올 수 있다.&lt;/p&gt;
-
-&lt;p&gt;waiting[i]를 false로 바꾸고 임계 구역을 실행한 뒤 i를 순차적으로 증가시켜 자신과 같을 때 까지 또는 i가 기다리고 있을 때 까지 무한 루프를 돌고, 선택된 프로세스를 Ciritical Section에 진입할 수 있도록 해주는 알고리즘이다.&lt;/p&gt;
-
-&lt;p&gt;위의 알고리즘은 Ciritical Section 해결안이 만족해야 하는 요구조건인 Mutual Exclusion, Progress, Bounded Waiting를 모두 만족한다.&lt;/p&gt;
-
-&lt;h4 id=&quot;643-원자적-변수-atomic-variables&quot;&gt;6.4.3 원자적 변수 (Atomic Variables)&lt;/h4&gt;
-
-&lt;p&gt;&lt;strong&gt;원자적 변수(atomic variable)은 정수 및 부울과 같은 기본 데이터 유형에 대한 원자적 연산을 제공한다. 원자적 변수는 카운터가 증가할 때와 같이 갱신되는 동안 단일 변수에 대한 데이터 경쟁이 있을 수 있는 상황에서 상호 배제를 보장하는데 사용할 수 있다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;원자적 변수를 지원하는 대부분의 시스템은 원자적 변수에 접근하고 조작하기 위한 기능뿐만 아니라 특별한 원자적 데이터 유형을 제공한다.&lt;/p&gt;
-
-&lt;p&gt;원자적 변수는 운영체제 및 병행 응용 프로그램에서 일반적으로 사용되지만 카운터 및 시퀀스 생성기와 같은 공유 데이터 한 개의 갱신에만 제한되는 경우가 많다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;65-mutex-locks&quot;&gt;6.5 Mutex Locks&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;mutex lock은 mutual exclusion lock의 축약 형태로서 Critical Section을 해결하기위한 하드웨어 기반의 해결책보다 상위 수준의 해결책이다.&lt;/strong&gt; 우리는 Critical Section을 보호하고, 따라서 Racing Condition을 방지하기 위해 mutex lock을 사용한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;즉, 프로세스는 Critical Section에 들어가기 전에 반드시 lock을 획득해야 하고 Critical Section을 빠져나올 때 lock을 반환해야 한다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;mutex lock 에 대해서 알기 위해서 우리는 3가지를 알아야 한다.&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;acquire(): 락을 획득하는 함수&lt;/li&gt;
-  &lt;li&gt;release(): 락을 반환하는 함수&lt;/li&gt;
-  &lt;li&gt;available: 락의 가용 여부를 표시하는 변수&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;acquire() 함수의 정의는 다음과 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;acquire&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;available&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* busy wait */&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;available&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;release() 함수의 정의는 다음과 같다.&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;available&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;아래의 그림은 Mutex lock을 사용한 Critical Section 문제 해결 알고리즘이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/computer-science/synchronization-tools-7.png&quot; style=&quot;width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;지금까지 설명한 구현 방식의 단점은 &lt;strong&gt;바쁜 대기(busy waiting)&lt;/strong&gt;를 해야 한다는 것이다. 프로세스가 임계구역에 있는 동안 임계구역에 들어가기 원하는 다른 프로세스들은 acquire() 함수를 호출하는 반복문을 계속 실행해야 한다. 이러한 busy waiting은 다른 프로세스가 생산적으로 사용할 수 있는 CPU 주기를 낭비한다.&lt;/p&gt;
-
-&lt;p&gt;우리가 설명한 mutex lock 유형을 &lt;strong&gt;스핀락(spinlock)&lt;/strong&gt;이라고도 한다. 락을 사용할 수 있을 때까지 프로세스가 회전하기 때문이다. 그러나 스핀락은 프로세스가 락을 기다려야 하고 문맥 교환에 상당한 시간이 소요될 때 문맥 교환이 필요하지 않다는 장점이 있다.&lt;/p&gt;
-
-&lt;p&gt;최신 다중 코어 컴퓨팅 시스템에서 스핀락은 많은 운영체제에서 널리 사용된다. &lt;strong&gt;일반적으로 락이 유지되는 기간이 문맥 교환을 두 번(1.스레드를 대기상태로 2.대기중인 스레드를 복원) 하는 시간보다 짧은 경우 스핀락을 사용한다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;락 경합(Lock Competition)&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;p&gt;락에 대한 경합 상태일 수도 비경합 상태일 수도 있다.&lt;/p&gt;
-
-  &lt;p&gt;락을 획득하려고 시도하는 동안 스레드가 봉쇄되면 락은 경합 상태로 간주한다.&lt;/p&gt;
-
-  &lt;p&gt;스레드가 락을 얻으려고 시도할 때 락을 사용할 수 있으면 락은 비경합 상태로 간주한다.&lt;/p&gt;
-
-  &lt;p&gt;&lt;strong&gt;높은 경합 상태의 락은 병행 실행 응용 프로그램의 성능을 전체적으로 저하한다.&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;66-세마포-semaphores&quot;&gt;6.6 세마포 (Semaphores)&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;세마포 S는 정수 변수로서, 초기화를 제외하고는 단지 두 개의 표준 원자적(atomical) 연산 wait()와 signal()로만 접근할 수 있다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;wait() 연산은 원래 “검사하다”를 의미하는 네덜란드어 proberen에서 &lt;strong&gt;P&lt;/strong&gt;, 그리고 signal() 연산은 “증가하다”를 의미하는 verhogen에서 &lt;strong&gt;V&lt;/strong&gt;라고 지어졌다.&lt;/p&gt;
-
-&lt;p&gt;wait()의 정의는 다음과 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wait&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// busy wait&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;signal()의 정의는 다음과 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;wait()와 signal() 연산 시 세마포의 정수 값을 변경하는 연산은 반드시 원자적으로 수행되어야 한다.&lt;/p&gt;
-
-&lt;h4 id=&quot;661-세마포-사용법-semaphore-usage&quot;&gt;6.6.1 세마포 사용법 (Semaphore Usage)&lt;/h4&gt;
-
-&lt;p&gt;운영체제는 종종 카운팅(counting)과 이진(binary) 세마포를 구분한다. &lt;strong&gt;카운팅 세마포의 값은 제한 없는 영역을 갖지만 이진 세마포의 값은 0과 1사이의 값만 가능하다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;카운팅 세마포는 유한한 개수를 가진 자원에 대한 접근을 제어하는데 사용될 수 있다.&lt;/strong&gt; 세마포는 가용한 자원의 개수로 초기화된다. 각 자원을 사용하려는 프로세스는 세마포에 wait() 연산을 수행하며, 이때 세마포의 값은 감소한다. 프로세스가 자원을 방출할 때는 signal() 연산을 수행하고 세마포는 증가하게 된다. &lt;strong&gt;세마포의 값이 0이 되면 모든 자원이 사용중임을 나타낸다.&lt;/strong&gt; 이후 자원을 사용하려는 프로세스는 세마포 값이 0보다 커질 때까지 봉쇄된다.&lt;/p&gt;
-
-&lt;h4 id=&quot;662-세마포-구현-semaphore-implementation&quot;&gt;6.6.2 세마포 구현 (Semaphore Implementation)&lt;/h4&gt;
-
-&lt;p&gt;&lt;strong&gt;Busy Waiting을 피하기 위해 세마포 S를 대기하면서 일시 중지된 프로세스는 다른 프로세스가 signal() 연산을 실행하면 재시작되어야 한다.&lt;/strong&gt; 프로세스는 sleep() 연산에 의해서 일시 중지되고 wakeup() 연산에 의하여 재시작된다. (대기상태 &amp;lt;-&amp;gt; 준비 완료 상태)&lt;/p&gt;
-
-&lt;p&gt;세마포를 활용한 Critical Section 문제 해결 알고리즘을 구현하기 위해 세마포의 정의는 다음과 같다.&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;semaphore&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;wait() 연산의 정의는 다음과 같다.&lt;/p&gt;
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wait&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;semaphore&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;signal() 연산의 정의는 다음과 같다.&lt;/p&gt;
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;semaphore&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;P&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;wakeup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;    
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;wakeup()과 sleep()은 프로세스를 일시 중지 or 재실행시키는 운영체제의 기본적인 시스템 콜이다.&lt;/p&gt;
-
-&lt;p&gt;세마포의 프로세스 리스트는 Bounded Waiting를 보장하도록 잘 구현해야만 한다.&lt;/p&gt;
-
-&lt;p&gt;단일 Processor 환경에서는 wait()와 signal() 연산들이 원자적으로 실행되는것을 보장하기 위해 실행되는 동안 인터럽트를 금지함으로써 해결할 수 있지만, 다중 코어 환경에서는 모든 처리 코어에서 인터럽트를 금지하여야만 한다. 이는 매우 어려울 수 있으며 성능을 심각하게 감소시킬 수 있음으로 많은 부분을 고려해야만 한다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;67-모니터-monitors&quot;&gt;6.7 모니터 (Monitors)&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;mutex락 혹은 세마포를 사용할 때에도 타이밍 오류는 여전히 발생할 수 있다. 예로들어, wait()과 signal() 연산의 순서가 뒤바뀌는 경우, Critical Section이 끝나고 signal()대신 wait()이 호출되는 경우&lt;/p&gt;
-
-&lt;p&gt;이러한 오류를 처리하기 위한 한 가지 전략은 간단한 동기화 도구를 통합하여 고급 언어 구조물을 제공하는 것이다. 이번엔 고급 언어 구조물 중 하나인 &lt;strong&gt;모니터(monitor)&lt;/strong&gt;를 살펴보자!!&lt;/p&gt;
-
-&lt;h4 id=&quot;671-모니터-사용법-monitor-usage&quot;&gt;6.7.1 모니터 사용법 (Monitor Usage)&lt;/h4&gt;
-
-&lt;p&gt;추상화된 데이터 형(abstract data type, ADT)은 데이터와 이 데이터를 조작하는 함수들의 집합을 하나의 단위로 묶어 보호한다. 이때 함수의 구현은 ADT의 특정한 구현과 독립적이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;모니터 형은 모니터 내부에서 프로그래머가 정의한 상호 배제가 보장되는 일련의 연산자 집합을 포함하는 ADT이다.&lt;/strong&gt; 모니터 형은 인스턴스의 상태를 정의하는 변수들과 이를 조작할 수 있는 프로시저 또는 함수들의 본체도 같이 포함하고 있다.&lt;/p&gt;
-
-&lt;p&gt;따라서 모니터 내에 정의된 함수만이 오직 모니터 내에 지역적으로 선언된 변수들과 형식 매개변수들에만 접근할 수 있다. (객체의 캡슐화와 매우 비슷한 구조)&lt;/p&gt;
-
-&lt;p&gt;아래의 그림은 모니터의 개략도이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/computer-science/synchronization-tools-8.png&quot; style=&quot;width:50%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;모니터 구조물은 모니터 안에 항상 하나의 프로세스만이 활성화되도록 보장해 준다.&lt;/strong&gt; 그러나 지금까지 정의한 모니터 구조물은 어떤 동기화 기법을 모델링하는 데에는 충분한 능력을 제공하지 않는다.&lt;/p&gt;
-
-&lt;p&gt;condition이라는 구조물로 동기화 기법들을 제공해 보자. 자신의 동기화 기법을 작성할 필요가 있는 프로그래머는 하나 이상의 condition 형의 변수를 정의할 수 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;이 condition 형 변수에 호출될 수 있는 연산은 오직 wait()와 signal()이다. x.wait()은 이 연산을 호출한 프로세스는 다른 프로세스가 x.signal()을 호출할 때까지 일시 중지 되어야 한다는 것을 의미한다.&lt;/p&gt;
-
-&lt;p&gt;Java와 C# 등을 포함한 많은 프로그래밍 언어들은 이 절에서 설명한 모니터의 개념을 편입 시켰다.&lt;/p&gt;
-
-&lt;h4 id=&quot;672-세마포를-이용한-모니터의-구현-implementing-a-monitor-using-semaphores&quot;&gt;6.7.2 세마포를 이용한 모니터의 구현 (Implementing a Monitor Using Semaphores)&lt;/h4&gt;
-
-&lt;p&gt;각 모니터마다 mutex라는 이진 세마포가 정의되고 그 초기 값은 1이다. 프로세스는 모니터로 들어가기 전에 wait(mutex)를 실행하고 모니터를 나온 후에 signal(mutex)을 실행해야 한다.&lt;/p&gt;
-
-&lt;p&gt;모니터 구현 시 signal-and-wait 기법을 사용한다. Signaling 프로세스는 실행 재개되는 프로세스가 모니터를 떠나는지 아니면 wait() 할 때까지 그 자신이 다시 기다려야 하므로 next라는 이진 세마포가 추가로 필요하게 되고 0으로 초기화된다.&lt;/p&gt;
-
-&lt;p&gt;signaling 프로세스는 자신을 중단시키기 위해 next를 사용할 수 있다. 정수형 변수 next_count에서도 next에서 일시 중지 되는 프로세스의 개수를 세기 위해 제공된다. 따라서 각 외부 프로시저 F는 아래로 대체된다.&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;wait&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mutex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 일시 중지된 프로세스가 존재한다면&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// next 프로세스를 실행 재개한다.&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-    &lt;span class=&quot;nf&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mutex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위와 같이 알고리즘을 작성한다면 Mutual Exclusion은 보장된다.&lt;/p&gt;
-
-&lt;h4 id=&quot;673-모니터-내에서-프로세스-수행-재개-resuming-processes-within-a-monitor&quot;&gt;6.7.3 모니터 내에서 프로세스 수행 재개 (Resuming Processes within a Monitor)&lt;/h4&gt;
-
-&lt;p&gt;“조건 변수 x에 여러 프로세스가 일시 중지 되어 있을 때 어떠한 프로세스를 수행 재개시킬 것인가??”에 대해서 논의해 보면 가장 간단한 방법은 FCFS 순이다. 하지만 많은 경우 이러한 간단한 스케줄링 기법은 충분하지 않다.&lt;/p&gt;
-
-&lt;p&gt;이를 위해서 아래와 같은 형식의 &lt;strong&gt;conditional-wait 구조&lt;/strong&gt;를 사용할 수 있다. 이 구조물은 다음과 같은 형태를 가진다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;x.wait(c);&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;여기서 c는 정수이고, 우선순위 번호(priority number)라고 불리며 일시 중지 되는 프로세스의 이름과 함께 저장된다. 즉, x.signal()이 수행되면 가장 작은 우선순위 번호를 가진 프로세스가 다음번에 수행 재개 된다.&lt;/p&gt;
-
-&lt;p&gt;이 새로운 기법을 설명하기 위해 아래와 같은 구조를 가진 ADT인 ResourceAllocator 모니터를 예로든다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/computer-science/synchronization-tools-9.png&quot; style=&quot;width:80%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이 모니터는 한 개의 자원을 여러 프로세스 사이에 할당해 준다. 각 프로세스는 자원을 할당받기를 원하면 그 자원을 사용할 최대 시간을 지정한다. 모니터는 이 중 가장 적은 시간을 희망한 프로세스에 자원을 할당해 준다. 이 자원을 액세스하려는 프로세스는 아래의 순서를 따라야 한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acquire&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// R은 ResourceAllocator형 인스턴스이다.&lt;/span&gt;
-
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;access&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;time을 사용해서 한 개의 자원을 접근하는데 무리없이 동작하는 것 처럼 보이지만 사실 다음과 같은 문제가 발생할 수 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;프로세스가 자원에 대한 허락을 받지 않고 자원을 액세스 할 경우&lt;/li&gt;
-  &lt;li&gt;프로세스가 자원에 대한 허락을 받은 다음 그 자원을 방출하지 않을 경우&lt;/li&gt;
-  &lt;li&gt;프로세스가 자원에 대한 허락을 받지 않았는데도 그 자원을 방출할 경우&lt;/li&gt;
-  &lt;li&gt;프로세스가 자원에 대한 허락을 받은 다음 방출하지 않은 상태에서 또 그 자원을 요청할 경우&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;사실 위와 동일한 문제들은 모니터를 사용할 때 뿐만 아니라 세마포를 사용할 때도 동일하게 발생한다.&lt;/p&gt;
-
-&lt;p&gt;이 문제를 해결하기 위해서 &lt;strong&gt;자원 액세스 연산 자체를 ResourceAllocator 모니터 내부에 두는 방법&lt;/strong&gt;이 있고, 프로세스들이 올바른 순서를 지키도록 보장하기 위해서 &lt;strong&gt;ResourceAllocator 모니터와 모니터가 관리하는 자원을 사용하는 모든 프로그램을 검사&lt;/strong&gt;하는 방법이 있다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;68-라이브니스-liveness&quot;&gt;6.8 라이브니스 (Liveness)&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;라이브니스는 프로세스가 실행 수명주기 동안 진행되는 것을 보장하기 위해 시스템이 충족해야 하는 일련의 속성을 말한다.&lt;/strong&gt; 즉, 프로세스가 lock을 얻기 위해 무기한 대기하는 것은 “라이브니스 실패”의 한 예이다.&lt;/p&gt;
-
-&lt;p&gt;다양한 형태의 라이브니스 실패가 존재한다. 그러나 모두 성능과 응답성이 나쁜 것이 특징이다. 라이브니스 실패의 매우 간단한 예는 무한 루프이다. 즉, Mutex 락 및 Semaphore를 사용하여 상호 배제를 제공하려는 노력은 종종 병행 프로그래밍에서 이러한 실패로 이어질 수 있다.&lt;/p&gt;
-
-&lt;h4 id=&quot;681-교착-상태-deadlock&quot;&gt;6.8.1 교착 상태 (Deadlock)&lt;/h4&gt;
-
-&lt;p&gt;대기 큐를 가진 Semaphore 구현은 두 개 이상의 프로세스들이, 오로지 대기 중인 프로세스들 중 하나에 의해서만 야기될 수 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;signal()연산&lt;/code&gt;를 무한정 기다리는 상황이 발생할 수 있다. 이런 상태에 도달했을 때, 이들 프로세스들을 &lt;strong&gt;교착 상태(deadlock)&lt;/strong&gt;라고 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;한 집합 내의 모든 프로세스가 그 집합 내의 다른 프로세스만이 유발할 수 있는 이벤트를 기다릴 때, 이 프로세스들의 집합이 교착 상태에 있다고 말한다.&lt;/strong&gt; 우리가 여기서 주로 관심을 두고 있는 “이벤트”들은 mutex 락과 Sempahore 같은 자원의 획득과 방출이다.&lt;/p&gt;
-
-&lt;h4 id=&quot;682-우선순위-역전-priority-inversion&quot;&gt;6.8.2 우선순위 역전 (Priority Inversion)&lt;/h4&gt;
-
-&lt;p&gt;&lt;strong&gt;높은 우선순위 프로세스가 현재 낮은 우선순위 프로세스 또는 연속된 낮은 우선순위 프로세스들에 의해 접근되고 있는 커널 데이터를 읽거나 변경할 필요가 있을 때 스케줄링의 어려움이 생기게 된다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;통상 커널데이터는 락에 의해 보호되기 때문에 낮은 우선순위 프로세스가 자원의 사용을 마칠 때까지 높은 우선순위 프로세스가 기다려야 한다. 낮은 우선순위 프로세스가 또 다른 높은 우선순위 프로세스에 의해 선점되는 경우에 상황은 더욱 복잡해진다. 이러한 경우 낮은 우선순위 프로세스는 계속 기다려야만 한다. 이 라이브니스 문제는 &lt;strong&gt;우선순위 역전(priority inversion)&lt;/strong&gt;문제로 알려져 있다.&lt;/p&gt;
-
-&lt;p&gt;통상 우선순위 역전 문제는 &lt;strong&gt;우선순위 상속 프로토콜(priority-inheritance protocol)&lt;/strong&gt;을 구현하여 해결한다. 우선순위 상속 프로토콜의 하나의 예시로서, 더 높은 우선순위 프로세스가 필요로 하는 자원에 접근하는 모든 프로세스는 문제가 된 자원의 사용이 끝날 때까지 더 높은 우선순위를 상속받는다. 자원 사용이 끝나면 원래 우선순위로 되돌아간다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;69-평가evaluation&quot;&gt;6.9 평가(Evaluation)&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;일반적으로 하드웨어 솔루션은 매우 낮은 수준으로 간주하며 mutex 락과 같은 다른 동기화 도구를 구성하기 위한 기초로 사용된다.&lt;/p&gt;
-
-&lt;p&gt;그러나 최근 lock overhead 없이 경쟁 조건으로부터 보호하는 &lt;strong&gt;lock free algorithm&lt;/strong&gt;을 구현하기 위해 CAS(Compare And Swap) 명령을 사용하는데 중점을 두고 있다. 이러한 락 없는 솔루션은 오버헤드가 낮고 확장성이 있기 때문에 인기를 얻고 있지만 알고리즘 자체는 개발 및 테스트가 어려운 경우가 많다.&lt;/p&gt;
-
-&lt;p&gt;CAS 기반 접근 방식은 낙관적인 접근법으로 간주되고, locking 기반 접근 방식은 비관적 전략으로 간주된다.&lt;/p&gt;
-
-&lt;p&gt;경쟁 조건을 해결하기 위한 기법의 선택은 시스템 성능에도 큰 영향을 줄 수 있다.&lt;/p&gt;
-
-&lt;p&gt;모니터와 조건 변수와 같은 고급 도구의 매력은 단순성과 사용 편의성으로부터 나온다.&lt;/p&gt;
-
-&lt;p&gt;다행스럽게도 병행 프로그래밍의 요구 사항을 해결하는 확장 가능하고 효율적인 도구를 개발하기 위한 많은 연구가 진행되고 있다. 이는 다음과 같다.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;더 효율적인 코드를 생성하는 컴파일러 설계&lt;/li&gt;
-  &lt;li&gt;병행 프로그래밍을 지원하는 언어 개발&lt;/li&gt;
-  &lt;li&gt;기존 라이브러리 및 API의 성능 향상&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;다음 7장에서는 개발자가 사용할 수 있는 다양한 운영체제 및 API가 이 장에서 제시된 동기화 도구를 어떻게 구현하는지 알아보도록 하자.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;6장에서는 프로세스 중심의 동기화에 대해서 주로 다루었다. 나는 프로세스 동기화 뿐만 아니라 멀티 스레드를 처리하는 다중 코어 시스템에서 어떻게 스레드간에 동기화를 유지하는지도 궁금하기 때문에 추후 더 공부할 계획이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;6장은 여기서 마치도록 하고 7장인 Synchonization Examples에서 뵙도록 하겠다. 꾸벅~&lt;/strong&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 04 Nov 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/computer-science(cs)/2020/11/04/Synchronization-Tools.html</link>
-        <guid isPermaLink="true">http://localhost:4000/computer-science(cs)/2020/11/04/Synchronization-Tools.html</guid>
-        
-        <category>Operating-System</category>
-        
-        <category>CS</category>
-        
-        <category>Mutex</category>
-        
-        <category>Lock</category>
-        
-        <category>Semaphore</category>
-        
-        <category>Monitor</category>
-        
-        
-        <category>Computer-Science(CS)</category>
         
       </item>
     

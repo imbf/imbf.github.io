@@ -2,6 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
     <url>
+        <loc>http://localhost:4000/interview/2021/02/24/NAVER-Practical-Interview-Preparation-1.html</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/interview/2020/12/17/NAVER-Interview-Preparation-9.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000/interview/2020/12/16/NAVER-Interview-Preparation-8.html</loc>
     </url>
     
@@ -732,6 +740,70 @@
     
     
     <url>
+        <loc>http://localhost:4000/tag/pinpoint/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/webper/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/projects/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/booking-recommendation-system/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/batch/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/postgresql/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/redis/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/tag/react/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
         <loc>http://localhost:4000/category/til/</loc>
     </url>
     
@@ -837,6 +909,14 @@
     
     <url>
         <loc>http://localhost:4000/page8/</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>http://localhost:4000/page9/</loc>
     </url>
     
     

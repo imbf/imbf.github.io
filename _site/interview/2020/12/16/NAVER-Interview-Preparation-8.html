@@ -8,11 +8,11 @@
   <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
 
 
-  <title>[기술 면접 준비 - 9일차] 네트워크 & 인증</title>
+  <title>[기술 면접 준비 - 8일차] 네트워크</title>
   <meta name="description" content="">
   
   <meta name="author" content="배종진">
-  <meta name="copyright" content="&copy; 배종진 2020">
+  <meta name="copyright" content="&copy; 배종진 2021">
   
 
   <!-- External libraries -->
@@ -46,7 +46,7 @@
   <meta property="og:description" content="" />
   <meta property="og:url" content="http://localhost:4000/interview/2020/12/16/NAVER-Interview-Preparation-8.html">
   <meta property="og:site_name" content="Green Frog Developer" />
-  <meta property="og:title" content="[기술 면접 준비 - 9일차] 네트워크 & 인증" />
+  <meta property="og:title" content="[기술 면접 준비 - 8일차] 네트워크" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
   <meta property="og:image:type" content="image/png" />
@@ -57,7 +57,7 @@
   
   <!-- Twitter: card tags -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="[기술 면접 준비 - 9일차] 네트워크 & 인증">
+  <meta name="twitter:title" content="[기술 면접 준비 - 8일차] 네트워크">
   <meta name="twitter:description" content="">
   <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
   <meta name="twitter:url" content="http://localhost:4000/interview/2020/12/16/NAVER-Interview-Preparation-8.html">
@@ -270,6 +270,24 @@
 
 	
 
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
 
       </ul>
     </nav>
@@ -283,7 +301,7 @@
 <div class="post-header-container " >
   <div class="scrim ">
     <header class="post-header">
-      <h1 class="title">[기술 면접 준비 - 9일차] 네트워크 & 인증</h1>
+      <h1 class="title">[기술 면접 준비 - 8일차] 네트워크</h1>
       <p class="info">by <strong>Green Frog Developer</strong></p>
     </header>
   </div>
@@ -413,22 +431,22 @@
 <h3 id="jwt의-단점은-무엇인가요">JWT의 단점은 무엇인가요??</h3>
 
 <ul>
-  <li>일단 JWT는 상태 정보를 저장하지 않기 때문에 한번 발행된 토큰은 임의로 삭제할 수 없습니다. 고로 적절한 토큰 만료 기간을 넣어줘야 했습니다.</li>
-  <li>JWT 토큰은 Header, Payload, Signature등 3부분으로 이루어 졌고 전체적으로 길이가 길기 때문에 많은 요청과 응답이 발생할 경우 성능에 영향을 줄 수 있습니다.</li>
-  <li>JWT의 Payload 자체는 암호화 된 것이 아니라 인코딩 된 것이기 떄문에 암호화에 신경 쓰거나, 중요 데이터를 넣지 않아야 합니다.</li>
-  <li>Token 기반의 인증과 마찬가지로 Token을 탈취 당했을 경우 사용자 식별을 할 수 없었습니다. 이를 위해 HTTPS나 적절한 만료 기간을 설정했어야만 했습니다.</li>
+  <li>JWT 토큰은 상태 정보를 저장하지 않아 한번 발행된 토큰이 임의로 삭제될 수 없기 때문에 적절한 토큰 만료 기간을 넣어줘야 했습니다.</li>
+  <li>JWT 토큰은 전체적으로 길이가 길기 때문에 많은 요청과 응답이 발생할 경우 성능에 영향을 줄 수 있습니다.</li>
+  <li>JWT의 Payload 자체는 암호화 된 것이 아니라 인코딩 된 것이기 때문에 암호화에 신경 쓰거나, 중요 데이터를 Payload에 넣지 않아야 합니다.</li>
+  <li>Token 기반의 인증과 마찬가지로 Token을 탈취 당했을 경우 올바른 사용자 식별을 할 수 없습니다. 이를 위해 HTTPS나 적절한 만료 기간을 설정했어야만 했습니다.</li>
 </ul>
 
 <h3 id="oauth">OAuth</h3>
 
-<p>OAuth란 특정 애플리케이션이 다른 애플리케이션의 정보에 대해 접근 권한을 부여할 수 있는 공통적인 수단으로서 접근 위임을 위한</p>
+<p><strong>OAuth란 특정 애플리케이션이 다른 애플리케이션의 정보에 접근할 수 있는 권한을 관리하는 프로토콜 입니다.</strong></p>
 
 <h3 id="osi-7-레이어는-무엇인가">OSI 7 레이어는 무엇인가??</h3>
 
-<p>OSI 7 레이어는 아래와 같습니다.</p>
+<p>OSI 7 레이어란 네트워크를 계층적인 구조로 표현한 것을 가리키며 구조는 아래와 같습니다.</p>
 
 <ol>
-  <li><strong>물리 계층(Physical Layer)</strong> : 한 비트를 노드에서 다음 노드로 전송해주는 서비스를 담당한다.</li>
+  <li><strong>물리 계층(Physical Layer)</strong> : 하나의 비트를 노드에서 다음 노드로 전송해주는 서비스를 담당한다.</li>
   <li><strong>링크 계층(Link Layer)</strong> : 물리 계층을 통해 송수신되는 정보의 오류와 흐름을 관리하여 안전한 정보의 전달을 수행할 수 있도록 도와주는 서비스를 담당한다. (MAC)</li>
   <li><strong>네트워크 계층(Network Layer)</strong> : 데이터를 목적지까지 가장 안전하고 빠르게 전달하는 라우팅과 포워딩 서비스를 담당한다. (IP)</li>
   <li><strong>전송 계층(Transport Layer)</strong> : End to End 사용자들이 신뢰성있는 데이터를 주고받을 수 있게 도와준다. (TCP, UDP)</li>
@@ -439,18 +457,18 @@
 
 <h3 id="왜-osi-7-레이어로-나누었을까">왜 OSI 7 레이어로 나누었을까??</h3>
 
-<p><strong>네트워크를 7계층으로 나눈 이유는 네트워킹 과정을 단계별로 파악할 수 있어 이상이 발생했을 경우에 다른 레이어의 장비 및 소프트웨어를 건들지 않고도 이상이 생긴 단계만 고칠 수 있게끔</strong> 해준다. 즉, <strong>하나의 네트워크를 다음과 같이 7개의 레이어로 분리하면서 레이어간에 결합도는 낮추고 응집도는 올려 유지보수에 강하게 만들려는 목적</strong>이다.</p>
+<p><strong>네트워크를 7계층으로 나눈 이유는 네트워크에서 이상이 발생했을 경우 다른 레이어의 장비 및 소프트웨어를 건들지 않고도 이상이 생긴 특정 레어어만 고칠 수 있는 유지보수 측면에서의 장점과, 새로운 응용 계층 프로토콜을 개발할 경우 물리계층 부터 개발하지 않고 표현계층까지 재사용함으로써 확장성 측면에서의 장점을 가지기 때문에 네트워크를 계층적 구조인 OSI 7 레이어로 나누었습니다.</strong></p>
 
 <h3 id="http는-무엇인가">HTTP는 무엇인가?</h3>
 
-<p>HTTP는 어플리케이션 계층 프로토콜의 한 종류로써 TCP/IP 기반의 신뢰적인 프로토콜입니다. 주로 브라우저와 서버간의 통신을 하기 위해 자주 사용합니다.</p>
+<p><strong>HTTP는 어플리케이션 계층 프로토콜의 한 종류로써 TCP/IP 기반의 신뢰적인 프로토콜입니다. 주로 브라우저와 서버간의 통신을 하기 위해 자주 사용합니다.</strong></p>
 
 <p>헤더 필드로는 Content-Legth, Content-Type, Connection, User-Agent, Accept, Status Code 등이 존재합니다.</p>
 
 <p>http status code는 HTTP Response의 필드 중에 하나인데 순서는 아래와 같습니다.</p>
 
 <ul>
-  <li>1xx: 요청을 받았으며 작업을 계속한다.</li>
+  <li>1xx: 서버는 요청을 받았으며 작업을 계속한다.</li>
   <li>2xx: 클라이언트가 요청한 동작을 수신하고 이해했으며 성공적으로 처리했음을 가리킨다.</li>
   <li>3xx: 클라이언트는 요청을 마치기 위해 추가 동작을 취해야 한다는 것을 의미하구요</li>
   <li>4xx: 클라이언트의 요청에 오류가 있다는 것을 말합니다.</li>
@@ -472,12 +490,17 @@
 
 <h3 id="tcp와-udp의-차이는-무엇인가">TCP와 UDP의 차이는 무엇인가?</h3>
 
-<p>UDP는 비신뢰적이고 비연결형 서비스를 제공하는 프로토콜이구요 TCP는 신뢰적이고 연결형 서비스를 제공하는 프로토콜 입니다. UDP는 주로 DNS나, IPTV등에서 사용하고 TCP는 HTTP 등에서 사용됩니다.</p>
+<p><strong>UDP는 비신뢰적이고 비연결형 서비스를 제공하는 프로토콜이구요 TCP는 신뢰적이고 연결형 서비스를 제공하는 프로토콜 입니다.</strong> UDP는 주로 DNS나, IPTV등에서 사용하고 TCP는 HTTP 등에서 사용됩니다.</p>
 
-<h3 id="3-way-handshake에-대해서-알고-잇나요">3 Way-HandShake에 대해서 알고 잇나요??</h3>
+<h3 id="tcp의-3-way-handshake에-대해서-알고-잇나요">TCP의 3 Way-HandShake에 대해서 알고 잇나요??</h3>
 
-<p>3 Way-Handshake 란 전송 제어 프로토콜(TCP)에서 통신을 하는 장치간 서로 연결이 잘 되어있는지 확인하는 과정, 방법이다.</p>
+<p><strong>TCP의 3 Way Handshake란 TCP로 통신을 하는 장치간에 서로 연결이 잘 되어있는지 확인하는 과정, 방법이다.</strong></p>
 
+<ol>
+  <li>synchronize의 줄임말인 syn 세그먼트를 클라이언트가 서버로 보낸다.</li>
+  <li>서버는 클라이언트에게 syn에 대한 ack를 보낸다</li>
+  <li>클라이언트는 syn에 대한 ack의 ack를 보낸다.</li>
+</ol>
 
 </article>
 
@@ -508,7 +531,7 @@
     
     
     
-      <a href="//www.facebook.com/sharer.php?t=%5B%EA%B8%B0%EC%88%A0+%EB%A9%B4%EC%A0%91+%EC%A4%80%EB%B9%84+-+9%EC%9D%BC%EC%B0%A8%5D+%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC+%26+%EC%9D%B8%EC%A6%9D&u=http%3A%2F%2Flocalhost%3A4000%2Finterview%2F2020%2F12%2F16%2FNAVER-Interview-Preparation-8.html"
+      <a href="//www.facebook.com/sharer.php?t=%5B%EA%B8%B0%EC%88%A0+%EB%A9%B4%EC%A0%91+%EC%A4%80%EB%B9%84+-+8%EC%9D%BC%EC%B0%A8%5D+%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC&u=http%3A%2F%2Flocalhost%3A4000%2Finterview%2F2020%2F12%2F16%2FNAVER-Interview-Preparation-8.html"
         onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
         <i class="fa fa-facebook-square fa-lg"></i>
       </a>
@@ -683,6 +706,24 @@
 
 	
 	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
 	
 
 	
