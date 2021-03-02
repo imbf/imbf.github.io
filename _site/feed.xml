@@ -6,9 +6,405 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 01 Mar 2021 10:01:38 +0900</pubDate>
-    <lastBuildDate>Mon, 01 Mar 2021 10:01:38 +0900</lastBuildDate>
+    <pubDate>Tue, 02 Mar 2021 16:00:51 +0900</pubDate>
+    <lastBuildDate>Tue, 02 Mar 2021 16:00:51 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>[실무 면접 준비 - 3] 데이터베이스 &amp; 네트워크 (Database &amp; Network)</title>
+        <description>&lt;hr /&gt;
+
+&lt;h2 id=&quot;database&quot;&gt;Database&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;데이터베이스란-무엇인가요&quot;&gt;데이터베이스란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;데이터베이스란 여러 사람이 공유하여 사용할 목적으로 통합되어 관리되는 데이터의 집합을 의미합니다.&lt;/strong&gt; 이러한 데이터베이스를 관리하는 시스템을 데이터베이스 시스템 즉, DBMS라고 하는거구요.&lt;/p&gt;
+
+&lt;h3 id=&quot;데이터베이스의-특징은-무엇인가요&quot;&gt;데이터베이스의 특징은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;데이터베이스의 특징으로는 독립성, 무결성, 보안성, 일관성, 중복 최소화가 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;독립성(Independence) :&lt;/strong&gt; 데이터베이스는 데이터를 사용하는 응용 프로그램과 독립적으로 데이터를 저장 및 관리한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;무결성(Integrity) :&lt;/strong&gt; 데이터베이스는 다양한 제약조건 및 기능을 통해 데이터의 무결성을 유지해준다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;보안성(Security) :&lt;/strong&gt; 데이터베이스는 계정 및 권한 관리를 통해 데이터들의 보안을 유지해준다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;일관성(Consistency) :&lt;/strong&gt; 데이터베이스는 다양한 제약조건을 통해 데이터를 일관되게 유지해준다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;중복 최소화(Minimum Duplication) :&lt;/strong&gt; 데이터베이스는 데이터를 통합해서 관리함으로써 데이터의 중복을 최소화한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;데이터-무결성&quot;&gt;데이터 무결성&lt;/h3&gt;
+
+  &lt;p&gt;&lt;strong&gt;데이터 무결성이란 데이터의 정확성과 일관성을 유지하고 보증하는 것을 가리키며 데이터베이스 시스템의 중요한 기능이다.&lt;/strong&gt; 데이터 무결성은 일반적으로 일련의 무결성 제한이나 규칙에 의해 데이터베이스 시스템이 강제한다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;무결성 제한의 유형&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;개체 무결성(Entity Integrity) :&lt;/strong&gt; 모든 테이블은 기본 키(primary key)를 가져야 하며 기본 키로 선택된 열은 고유하고 빈 값은 허용되지 않음을 규정한다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;참조 무결성(Referential Integrity) :&lt;/strong&gt; 모든 외래 키 값은 Null이거나 참조 릴레이션의 기본키 값과 동일해야 한다는 규정이다. 즉, 릴레이션은 참조할 수 없는 외래키 값을 가질 수 없다는 규정이다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;범위 무결성(Domain Integrity) :&lt;/strong&gt; 정의된 범위에서 관계형 데이터베이스의 모든 열이 선언되도록 규정한다.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;데이터베이스에-존재하는-key에-대해서-설명해주세요&quot;&gt;데이터베이스에 존재하는 Key에 대해서 설명해주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;기본키(Primary Key)란 하나의 테이블에서 특정 ROW를 구별할 수 있는 속성(Attribute)을 의미합니다.&lt;/strong&gt; 개체 무결성에 의해 기본키에는 Null 값과 중복된 값이 저장되어질 수 없습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;외래키(Foreign Key)란 참조되는 테이블의 기본키와 대응되어 테이블 간에 참조 관계를 표시하는 키입니다.&lt;/strong&gt; 외래키로 지정되면 참조 무결성에 의해 참조 테이블의 기본키에 없는 값은 입력할 수 없습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;조인이란-무엇이고-어떠한-조인이-있는지-알려주실-수-있나요&quot;&gt;조인이란 무엇이고 어떠한 조인이 있는지 알려주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;조인이란 2개 이상의 테이블에서 조건에 맞는 데이터를 추출하기 위하여 사용하는 쿼리문을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Inner Join : 2개 이상의 테이블에서 교집합만을 추출&lt;/li&gt;
+  &lt;li&gt;Left Join : 2개 이상의 테이블에서 FROM문에 해당하는 부분을 추출&lt;/li&gt;
+  &lt;li&gt;Right Join : 2개 이상의 테이블에서 FROM 문의 테이블과 JOIN하는 테이블에 해당하는 부분을 추출&lt;/li&gt;
+  &lt;li&gt;Outer Join : 2개 이상의 테이블에서 모든 테이블에 해당하는 부분을 추출&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation3-1.png&quot; style=&quot;width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;transaction&quot;&gt;Transaction&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;트랜잭션은-무엇인가요&quot;&gt;트랜잭션은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;트랜잭션(Transaction)이란 데이터베이스의 상태를 변환시키는 하나의 논리적 기능을 수행하기 위한 작업의 단위 또는 한꺼번에 모두 수행되어야 할 일련의 연산들을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;트랜잭션transaction의-특징은-어떤게-있나요&quot;&gt;트랜잭션(Transaction)의 특징은 어떤게 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;트랜잭션의 특징으로는 ACID라고 하는 4가지 특성이 있으며 이는, 원자성(Atomicity), 일관성(Consistency), 격리성(Isolation), 지속성(Durability)을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;원자성(Atomicity) :&lt;/strong&gt;  트랜잭션의 연산이 데이터베이스에 모두 반영되든지 아니면 전혀 반영되지 않아야 한다는 것을 의미합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;일관성(Consistency) :&lt;/strong&gt; 트랜잭션이 수행된 이후에도 데이터베이스는 언제나 일관성 있는 데이터를 보장해야 한다는 것을 의미합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;독립성(Isolation) :&lt;/strong&gt; 여러 트랜잭션이 동시에 수행되더라도 각각의 트랜잭션은 서로 간섭없이 독립적으로 수행되어야 한다는 것을 의미합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;지속성(Duration) :&lt;/strong&gt; 성공적으로 완료된 트랜잭션의 결과는 데이터베이스에 영구적으로 저장되어야 한다는 것을 의미합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;트랜잭션transaction은-어떻게-동작하나요&quot;&gt;트랜잭션(Transaction)은 어떻게 동작하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation3-2.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;트랜잭션을 시작합니다.&lt;/li&gt;
+  &lt;li&gt;트랜잭션 내의 다양한 작업을 수행합니다.
+    &lt;ul&gt;
+      &lt;li&gt;트랜잭션 내의 모든 작업을 이상없이 완료했다면 해당 트랜잭션을 Commit 합니다.&lt;/li&gt;
+      &lt;li&gt;트랜잭션 내의 작업을 진행하던 중에 실패했다면 해당 트랜잭션을 Rollback 또는 Abort 합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;index&quot;&gt;Index&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;인덱스index란-무엇인가요&quot;&gt;인덱스(Index)란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;데이터베이스 인덱스란 테이블의 동작 속도(Row 검색 속도)를 높여주는 자료구조를 의미합니다.&lt;/strong&gt; 마치 책의 앞 부분에 존재하는 목차와 같습니다. 데이터베이스는 인덱스를 따로 저장하며 관계형 DB의 경우에는 테이블로 인덱스를 관리합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;인덱스를-구현하기-위한-자료구조는-어떤게-존재하나요&quot;&gt;인덱스를 구현하기 위한 자료구조는 어떤게 존재하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;인덱스를 구현하기 위한 대표적인 자료구조로는 Hash Table과 B+ Tree가 존재합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Hash Table&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;해시 테이블은 Key와 Value로 데이터를 저장하는 자료구조로 &lt;strong&gt;빠른 데이터 검색이 필요할 때 유용&lt;/strong&gt;합니다. 시간복잡도는 O(1) 입니다.&lt;/li&gt;
+      &lt;li&gt;해시 테이블은 Key값을 이용해 고유한 Index를 생성하여 그 Index에 저장된 값을 꺼내오는 구조입니다.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;해시는 등호(=) 연산에만 특화되어 있기 때문에 부등호 연산(&amp;gt;, &amp;lt;)이 자주 사용되는 데이터베이스 검색을 위해서는 적절하지 않습니다.&lt;/strong&gt; key-value 기반의 DB인 Redis에는 적절한 것 같다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;B+ Tree&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;DB의 인덱스를 위해 자식 노드가 2개 이상인 Binary Tree를 개선시킨 자료구조로서 아래와 같은 특성을 가진다.
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;Leaf 노드(데이터 노드)만 인덱스와 함께 데이터(Value)를 가지고 있고, 나머지 노드(인덱스 노드)들은 데이터를 위한 인덱스(key)만을 갖는다.&lt;/strong&gt; Leaf 노드들은 LinkedList로 연결되어 있다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;B+Tree의 리프노드들은 LinkedList로 연결하여 순차검색을 용이하게 하는 등 인덱스에 맞게 최적화하였다.&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;[PostgreSQL] GIN(Generalized Inverted Index)&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;GIN 자료구조는 인덱스를 적용하는 컬럼의 값을 일정한 규칙에 따라 쪼개고 이를 사용하는 자료구조입니다.&lt;/strong&gt; 즉, LIKE와 같은 연산이 많을 경우 B+ Tree나 Hash Table 인덱스보다 훨씬 빠르게 동작할 수 있습니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;인덱스를-고려할-때-어떠한-점에-주의해야-하나요&quot;&gt;인덱스를 고려할 때 어떠한 점에 주의해야 하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;인덱스를 설정할 때 해당 테이블에서 어떠한 쿼리가 자주 사용되는지 분석 해야합니다.&lt;/strong&gt; SELECT가 자주 사용되는 테이블이라면 인덱스 설정시 성능 향상의 효과를 기대할 수 있지만 UPDATE, DELETE, INSERT 쿼리가 자주 사용되는 테이블이라면 오히려 인덱스 설정시 성능이 감소될 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;인덱스 설정시 카디널리티가 높은 즉, 컬럼에 중복되는 값이 많이 없는 컬럼을 인덱스로 걸어야 합니다.&lt;/strong&gt; 카디널리티가 낮은 컬럼을 인덱스로 사용시 인덱스를 통해서 수 많은 row가 검색 될 것이며, 이는 다시 Full Search로써 결과값을 검색해야합니다. 만약 카디널리티가 높은 컬럼을 인덱스로 사용한다면 인덱스를 통해서 소수의 row만 검색될 것이며 우리는 이들 중 조건에 맞는 row만 반환하면 되기 때문에 성능이 훨씬 좋습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;정규화normalization&quot;&gt;정규화(Normalization)&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;정규화는-무엇이며-왜-필요한가요&quot;&gt;정규화는 무엇이며 왜 필요한가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;정규화란 데이터베이스에서 갱신 이상을 없애고 데이터의 중복을 최소화하기 위해 하나의 테이블을 둘 이상의 테이블로 분리하는 작업을 의미합니다.&lt;/strong&gt; 갱신 이상에는 삽입 이상, 삭제 이상, 수정 이상 등이 포함됩니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;갱신-이상&quot;&gt;갱신 이상&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;삽입 이상(Insertion Anomalies) :&lt;/strong&gt; 원하지 않는 자료가 삽입된다든지, 삽입하는데 자료가 부족해 삽입이 되지 않아 발생하는 이상을 의미합니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;삭제 이상(Deletion Anomalies) :&lt;/strong&gt; 하나의 자료만 삭제하고 싶지만, 그 자료가 포함된 튜플 전체가 삭제됨으로써 원하지 않는 정보의 손실이 발생하는 이상을 의미합니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;수정 이상(Modification Anomalies) :&lt;/strong&gt; 데이터 수정시 일부의 튜플만 갱신되어 데이터의 일관성에 이상이 생기는 현상을 의미합니다.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;정규형이란-무엇이고-이들의-종류에-대해서-설명해주실-수-있나요&quot;&gt;정규형이란 무엇이고 이들의 종류에 대해서 설명해주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;정규형이란 특정 조건을 만족하는 테이블의 스키마 형태를 말하며 제 1 정규형, 제 2 정규형, 제 3 정규형, BCNF 정규형 등이 존재합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;제 1 정규형 :&lt;/strong&gt; 테이블의 &lt;u&gt;각 로우에 컬럼의 값이 1개&lt;/u&gt;만 있어야 하는 형태의 테이블 스키마를 의미합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;제 2 정규형 :&lt;/strong&gt; 제 1 정규형을 만족하면서 &lt;u&gt;Primary Key가 합성키이며, 부분 종속(Primary Key 중에 특정 컬럼에만 종속된 컬럼)이 없어야 하는 형태&lt;/u&gt;의 테이블 스키마를 의미합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;제 3 정규형 :&lt;/strong&gt; 제 2 정규형을 만족하면서 테이블 내의 &lt;u&gt;비주요 속성이 기본 키에만 의존&lt;/u&gt;하는 테이블 스키마를 의미합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;BCNF 정규형 :&lt;/strong&gt; 제 3 정규형을 만족하면서 &lt;u&gt;모든 결정자가 후보키 집합&lt;/u&gt;에 속한 테이블 스키마를 의미합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;함수적-종속성functional-dependency&quot;&gt;함수적 종속성(Functional Dependency)&lt;/h3&gt;
+
+  &lt;p&gt;&lt;strong&gt;함수적 종속성이란 속성 값의 의미와 속성 간의 상호 관계로부터 유도되는 제약조건의 일종을 의미합니다.&lt;/strong&gt; X와 Y를 임의의 속성 집합이라고 할 때, X의 값이 Y의 값을 유일하게(unique) 결정한다면 “X는 Y를 함수적으로 결정한다”라고 합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;nosql&quot;&gt;NoSQL&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;nosql이란-무엇이고-어떠한-경우에-사용하는-것이-좋나요&quot;&gt;NoSQL이란 무엇이고 어떠한 경우에 사용하는 것이 좋나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;NoSQL 테이터베이스란 전통적인 관계형 모델에서 벗어나서 다양한 데이터 모델을 사용하여 데이터의 관리와 접근을 지원하는 데이터베이스를 의미합니다.&lt;/strong&gt; NoSQL은 데이터의 스펙이 자주 변경되는 경우나, Read 작업이 자주 일어나는 경우, 수 많은 양의 데이터를 다루기 위해 수평 확장이 자주 필요한 경우에 사용하면 좋습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;nosql의-장점과-단점에-대해서-말해주세요&quot;&gt;NoSQL의 장점과 단점에 대해서 말해주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;NoSQL의 장점으로는 스키마가 없거나 느슨하게 제공되기 때문에 요구사항 변경에 유연하게 대처할 수 있습니다. 또한 관계형 데이터베이스에 비해 수평 확장이 쉽기 때문에 대용량 데이터 처리시 성능상의 이점을 얻어갈 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NoSQL의 단점으로는 데이터베이스마다 사용하는 데이터의 모델이 다르기 때문에 이를 도입하기 위해서는 해당 데이터베이스를 깊게 공부해야해서 익숙한 관계형 데이터베이스보단 학습 비용이 많이 든다는 단점이 존재하구요, SQL처럼 엄격한 제약조건이 존재하지 않기 때문에 데이터를 수정하거나 삭제하는 경우 모든 컬렉션에 걸쳐서 이를 반영해야 하는 단점이 존재합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;사용해보신-nosql이-있으시나요-있다면-무엇이고-왜-사용했는지-알려주세요&quot;&gt;사용해보신 NoSQL이 있으시나요? 있다면 무엇이고 왜 사용했는지 알려주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;저는 Key-Value 구조의 데이터베이스인 Redis를 사용해 보았습니다. 레디스는 인-메모리 기반의 데이터베이스로써 데이터 접근이 타 DB에 비해 상대적으로 빠르다는 장점을 가지고 있습니다. 이러한 이유에서 추천 정보를 캐싱하기 위해서 Redis를 사용했으며 장애 대응을 위해 Redis가 제공하는 Master-Replica 모델을 도입하였습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;데이터-모델에-따라-nosql을-분류한다면-어떻게-분류할-수-있을까요&quot;&gt;데이터 모델에 따라 NoSQL을 분류한다면 어떻게 분류할 수 있을까요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;대표적으로 하나의 키에 하나의 데이터가 저장되는 Key-Value Data Model을 채택하고 있는 데이터베이스와 Key-Value 모델을 개념적으로 확장해서 하나의 키에 하나의 구조화된 문서를 저장하는 Document Data Model을 채택한 데이터베이스 등으로 나눌 수 있을것 같습니다.&lt;/strong&gt; Key-Value Data Model을 채택하고 있는 데이터베이스는 대표적으로 Redis를 들 수 있구요, Document Data Model을 채택하고 있는 데이터베이스는 대표적으로 MongoDB가 존재합니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;computer-network&quot;&gt;Computer Network&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;osi-7-layer에-대해서-설명해주실-수-있나요&quot;&gt;OSI 7 Layer에 대해서 설명해주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;OSI 7 Layer란 네트워크를 7개의 계층으로 추상화한 구조를 의미합니다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;물리 계층(Physical Layer) :&lt;/strong&gt; 하나의 비트를 노드에서 다음 노드로 전송해주는 &lt;u&gt;하드웨어 전송 기술&lt;/u&gt;을 다루는 계층입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;링크 계층(Link Layer) :&lt;/strong&gt; 물리 계층을 통해 송수신되는 &lt;u&gt;정보의 오류와 흐름을 관리하여 신뢰성있는 전송을 보장&lt;/u&gt;하는 계층입니다. (MAC)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;네트워크 계층(Network Layer) :&lt;/strong&gt; 송신 호스트에서 수신 호스트까지 패킷을 전달하기 위해 &lt;u&gt;라우팅과 포워딩을 담당&lt;/u&gt;하는 계층입니다. (IP)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;전송 계층(Transport Layer) :&lt;/strong&gt; &lt;u&gt;End-to-End 사용자들이 신뢰성있는 데이터를 주고받&lt;/u&gt;을 수 있게 도와주는 계층입니다.(TCP, UDP)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;세션 계층(Session Layer) :&lt;/strong&gt; &lt;u&gt;양 끝단의 응용 프로세스가 통신(동시 송수신, 반이중, 전이중)을 관리하기 위한 방법을 제공&lt;/u&gt;해주는 계층입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;표현 계층(Presentation Layer) :&lt;/strong&gt; &lt;u&gt;코드간의 번역&lt;/u&gt;을 담당하여 사용자 시스템에서 데이터의 형식상 차이를 다루는 부담을 응용 계층으로부터 덜어주는 계층입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;응용 계층(Application Layer) :&lt;/strong&gt; 응용 프로세스와 직접 관계하여 &lt;u&gt;일반적인 응용 서비스를 수행&lt;/u&gt;하는 계층입니다. (HTTP, DNS, SSH)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;네트워크를-7개의-계층으로-나눈-이유가-무엇일까요&quot;&gt;네트워크를 7개의 계층으로 나눈 이유가 무엇일까요?&lt;/h3&gt;
+
+&lt;p&gt;네트워크를 7계층으로 나눈 이유는 &lt;strong&gt;네트워크에서 이상이 발생했을 경우 다른 레이어의 장비 및 소프트웨어를 건들지 않고도 이상이 생긴 특정 레어어만 고칠 수 있는 유지보수 측면에서의 장점&lt;/strong&gt;과, 예로들어 새로운 응용 계층 프로토콜을 개발할 경우 &lt;strong&gt;물리계층 부터 개발하지 않고 표현계층까지 재사용함으로써 확장성 및 재사용성 측면에서의 장점&lt;/strong&gt;을 가지기 때문에 네트워크를 계층적 구조인 OSI 7 레이어로 나눈 것 같습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;dns는-무엇인가요&quot;&gt;DNS는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;DNS란 Domain Name System의 약자로 Host의 Domain Name을 IP로 변환해주는 서비스를 의미합니다.&lt;/strong&gt; DNS는 서버들의 계층 구조로 구현된 분산형 데이터베이스로서 주요 구성 요소로 Root, Top Level Domain(TLD), Authoritative, Local DNS Server가 존재합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;브라우저에-wwwnavercom을-입력시-dns가-동작하는-순서를-저희에게-설명해주실수-있나요&quot;&gt;브라우저에 www.naver.com을 입력시 DNS가 동작하는 순서를 저희에게 설명해주실수 있나요?&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Host가 www.naver.com 도메인 네임에 해당하는 IP를 얻기 위해 Local DNS Server에 요청을 보냅니다.&lt;/li&gt;
+  &lt;li&gt;Local DNS Server에 해당 IP가 캐시되어 있을 경우 바로 응답해줄 수 있지만, 없을경우 Root DNS Server에 요청을 보냅니다. &lt;strong&gt;Root DNS Server&lt;/strong&gt;는 &lt;strong&gt;.com&lt;/strong&gt;을 인식한 후  &lt;strong&gt;.com 도메인을 관리하는 서버인 Top Level Domain(TLD) Server의 IP를 알려줍니다.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Local DNS Server는 TLD Server에 www.naver.com 도메인 네임에 해당하는 IP를 얻을 수 있는지 요청합니다. TLD Server에서 해당 IP를 캐시하고 있을 경우 바로 응답해줄 수 있지만, 없을경우 &lt;strong&gt;naver.com을 인식한후 naver.com을 관리하는 서버인 Authoritative Server의 IP를 알려줍니다.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Local DNS Server는 Authoritative Server에 www.naver.com 도메인 네임에 해당하는 IP를 얻을 수 있는지 요청합니다. &lt;strong&gt;Authoritative Server는 해당 도메인 네임에 대응하는 IP를 응답해 줍니다.&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Local DNS Server는 Host에게 www.naver.com 도메인 네임에 대응하는 IP를 xxx.xxx.xxx.xxx 응답해줍니다.&lt;/li&gt;
+  &lt;li&gt;Host는 IP를 사용해서 다른 호스트에게 요청을 보냅니다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;ip는-무엇인가요&quot;&gt;IP는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;IP(Internet Protocol)는 Internet Protocol의 약자로써 송신 호스트와 수신 호스트가 패킷 교환 네트워크에서 정보를 주고받는데 사용하는 프로토콜입니다.&lt;/strong&gt; 이는 네트워크 계층에서 &lt;u&gt;호스트의 주소지정과 패킷 분할 및 조립 기능을 담당&lt;/u&gt;합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;IP는 비신뢰성(unreliability)과 비연결성(connectionlessness)이 특징이며 패킷 전송의 정확한 순서를 보장하려면 TCP 프로토콜 즉, 전송 계층과 같은 상위 프로토콜을 사용해야 합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;tcp와-udp는-각각-무엇이고-이들의-차이점에-대해서-알려주시고-각각-언제-사용하면-좋을지-알려주세요&quot;&gt;TCP와 UDP는 각각 무엇이고 이들의 차이점에 대해서 알려주시고 각각 언제 사용하면 좋을지 알려주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;UDP는 비신뢰적이고 비연결형 서비스를 제공하는 프로토콜이구요 TCP는 신뢰적이고 연결형 서비스를 제공하는 프로토콜입니다.&lt;/strong&gt; 신뢰성이 요구되어지는 HTTP와 같은 응용 계층 프로토콜은 TCP를 사용하구요, 신뢰성이 중요하지 않고 데이터를 빠른 속도로 전송하고자하는 DNS나 VoIP와 같은 응용 계층 프로토콜은 UDP를 사용합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-way-handshake와-4-way-handshake에-대해서-설명해주세요&quot;&gt;3 way handshake와 4 way handshake에 대해서 설명해주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;TCP는 정확한 전송을 보장하기 위해서 두 호스트간에 논리적인 접속을 위해 3 way handshake를 진행합니다. 전송이 완료되었다면 4 way handshake를 통해서 호스트간의 연결이 해제됩니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;3-way-handshake---연결-성립&quot;&gt;&lt;strong&gt;3 way handshake - 연결 성립&lt;/strong&gt;&lt;/h3&gt;
+
+  &lt;p&gt;TCP는 정확한 전송을 보장해야하기 때문에 두 호스트간에 논리적인 접속을 위해서 3 way handshake를 진행합니다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation3-3.png&quot; style=&quot;width:60%&quot; /&gt;&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;클라이언트가 서버에게 SYN 패킷을 보낸다.(seq : x)&lt;/li&gt;
+    &lt;li&gt;서버가 SYN(x)를 받고, 클라이언트로 ACK와 SYN 패킷을 보낸다. (seq : y , ACK : x + 1)&lt;/li&gt;
+    &lt;li&gt;클라이언트가 패킷을 받았다면 ACK(y+1)을 다시 서버로 보낸다.&lt;/li&gt;
+    &lt;li&gt;두 호스트간에 연결 성공&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;h3 id=&quot;4-way-handshake---연결-해제&quot;&gt;4 way handshake - 연결 해제&lt;/h3&gt;
+
+  &lt;p&gt;TCP는 두 호스트간의 연결을 해제하기위해 4 way handshake를 진행합니다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation3-4.png&quot; style=&quot;width:60%&quot; /&gt;&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;클라이언트는 서버에게 연결을 종료한다는 FIN 플래그를 보냅니다.&lt;/li&gt;
+    &lt;li&gt;서버는 FIN을 받고, 확인했다는 ACK를 클라이언트에게 보냅니다.
+(이때 모든 데이터를 보내기 위해 TIME OUT 상태가 됩니다.)&lt;/li&gt;
+    &lt;li&gt;서버는 데이터를 모두 보냈다면, 연결이 종료되었다는 FIN 플래그를 클라이언트에게 보냅니다.&lt;/li&gt;
+    &lt;li&gt;클라이언트는 FIN을 받고, 확인했다는 ACK를 서버에게 보냅니다.
+(아직 서버로부터 받지 못한 데이터가 있을 수 있으므로 TIME_WAIT을 통해 기다립니다.)&lt;/li&gt;
+    &lt;li&gt;두 호스트간에 연결 해제&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;http란-무엇인가요&quot;&gt;HTTP란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTP는 어플리케이션 계층 프로토콜의 한 종류로써 TCP/IP 기반의 신뢰적인 프로토콜입니다.&lt;/strong&gt; 주로 브라우저와 서버간의 통신을 하기 위해 자주 사용합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;http와-https의-차이는-무엇인가요&quot;&gt;HTTP와 HTTPS의 차이는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;HTTP와 HTTPS는 TCP/IP 기반의 신뢰적인 어플리케이션 계층 프로토콜입니다. 두 프로토콜 모두 브라우저와 서버간의 통신을 위해서 자주 사용하지만 HTTP는 텍스트 교환이므로, 누군가가 네트워크에서 신호를 가로채면 내용이 노출되는 보안 이슈가 존재합니다. 이러한 &lt;strong&gt;보안 이슈를 해결하기 위해 SSL 인증서를 사용해서 HTTP를 암호화한 프로토콜이 HTTPS 입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;http-request-method는-무엇이고-어떤-종류가-있는지-설명해주세요&quot;&gt;HTTP Request Method는 무엇이고 어떤 종류가 있는지 설명해주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTP는 Request Method를 정의하여, 주어진 리소스에서 수행하길 원하는 행동을 나타냅니다.&lt;/strong&gt; HTTP Request Method 종류로는 &lt;u&gt;GET, POST, PUT, DELETE, PATCH&lt;/u&gt; 등이 존재합니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;GET :&lt;/strong&gt; GET 메서드는 특정 리소스를 요청합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;POST :&lt;/strong&gt; POST 메서드는 특정 리소스에 요청에 포함된 데이터를 처리하는 것을 요청합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;PUT :&lt;/strong&gt; PUT 메서드는 특정 리소스의 현재 표현식을 모두 요청에 포함된 payload로 바꿉니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DELETE :&lt;/strong&gt; DELETE 메서드는 특정 리소스를 삭제합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;PATCH :&lt;/strong&gt; PATCH 메서드는 특정 리소스의 특정 부분만을 수정하는데 사용합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;http-response-status-code는-무엇이며-어떤-종류가-있는지-설명해주세요&quot;&gt;HTTP Response Status Code는 무엇이며 어떤 종류가 있는지 설명해주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTP Reponse Status Code는 말 그대로 HTTP 요청에 대한 상태를 나타내는 코드이며 100번대 코드부터 500번대 코드까지 존재합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;1xx :&lt;/strong&gt; 서버는 요청을 받았으며 작업을 계속진행한다는 상태를 나타내는 코드들의 집합
+    &lt;ul&gt;
+      &lt;li&gt;100 Continue&lt;/li&gt;
+      &lt;li&gt;101 Switching Protocol&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;2xx :&lt;/strong&gt; 서버는 클라이언트의 요청을 성공적으로 처리했다는 상태를 나타내는 코드들의 집합
+    &lt;ul&gt;
+      &lt;li&gt;200 OK&lt;/li&gt;
+      &lt;li&gt;201 Created&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;3xx :&lt;/strong&gt; 서버는 클라이언트의 요청을 성공적으로 처리했지만 클라이언트는 요청을 마치기 위해 추가 동작을 취해야 한다는 상태를 나타내는 코드들의 집합
+    &lt;ul&gt;
+      &lt;li&gt;301 Moved Permanently&lt;/li&gt;
+      &lt;li&gt;302 Found&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;4xx :&lt;/strong&gt; 서버는 클라이언트의 요청에 오류가 있다는 상태를 나타내는 코드들의 집합
+    &lt;ul&gt;
+      &lt;li&gt;400 Bad Request&lt;/li&gt;
+      &lt;li&gt;401 Unauthorized&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;5xx :&lt;/strong&gt; 서버는 클라이언트의 요청에는 이상이 없지만 이를 처리하는 서버에 문제가 있다는 것을 나타내는 코드들의 집합
+    &lt;ul&gt;
+      &lt;li&gt;500 Internal Server Error&lt;/li&gt;
+      &lt;li&gt;503 Service Unavailable&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;http-header는-무엇이고-어떠한-종류가-있는지-설명해주세요&quot;&gt;HTTP Header는 무엇이고 어떠한 종류가 있는지 설명해주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTP Header는 클라이언트와 서버가 요청 또는 응답으로 부가적인 정보를 전송할 수 있도록 하는 데이터 구조입니다.&lt;/strong&gt; HTTP 헤더에는 Content-Type, Content-Language, User-Agent, Host, Server, Set-Cookie 등이 존재합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;처리량throughput과-지연시간latency에-대해서-설명해주세요&quot;&gt;처리량(Throughput)과 지연시간(Latency)에 대해서 설명해주세요.&lt;/h3&gt;
+
+&lt;p&gt;처리량과 지연시간은 둘 다 컴퓨터의 성능을 나타내는데 중요한 개념입니다. &lt;strong&gt;Throughput은 초당 처리하는 작업의 개수를 말하며, Latency는 하나의 작업을 처리하는데 걸리는 시간을 말합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;cookie와-session이-각각-무엇인지-설명해주시고-어떠한-차이점을-가지는지-설명해주세요&quot;&gt;Cookie와 Session이 각각 무엇인지 설명해주시고 어떠한 차이점을 가지는지 설명해주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;쿠키(Cookie)란 클라이언트의 로컬에 저장되는 Key-Value가 들어있는 작은 데이터 파일을 의미하구요 세션은 클라이언트의 정보를 서버 메모리에 저장하는 기술을 의미합니다.&lt;/strong&gt; 쿠키와 세션의 가장 큰 차이점은 “어디에서 데이터를 관리하느냐”의 차이일 것 같습니다. 쿠키는 클라이언트 쪽에서 데이터를 관리하구요, 세션은 서버 쪽에서 데이터를 관리합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;보통 클라이언트는 무수히 많고, 서버는 상대적으로 적기 때문에 세션이 많을 수록 서버는 부하가 걸리게 됩니다. 이러한 경우를 방지하고자 다양한 방법들을 생각해야만 합니다. 이슈 해결 방법으로는 세션을 디스크에 저장하는 방법도 있을것 같구요, 세션이 아닌 본인만의 클라이언트 식별 프로토콜을 만들어도 좋을 것 같습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;세션과-쿠키가-나오게된-이유는-무엇일까요&quot;&gt;&lt;strong&gt;세션과 쿠키가 나오게된 이유는 무엇일까요?&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTP는 무상태(stateless), 무연결(conectionless) 프로토콜입니다.&lt;/strong&gt; 즉, 클라이언트의 상태를 저장하지도, 클라이언트와의 연결을 지속하지도 않습니다. 하지만 대부분의 어플리케이션들은 상태를 기록할 필요와 연결을 유지할 필요가 있습니다. 이러한 문제를 해결하고자 등장한 것이 쿠키와 세션입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;http-세션-유지란-무엇이고-여러-서버가-존재할-때-세션은-어떻게-유지할-수-있을까&quot;&gt;HTTP 세션 유지란 무엇이고, 여러 서버가 존재할 때 세션은 어떻게 유지할 수 있을까?&lt;/h3&gt;
+
+&lt;p&gt;무상태 무연결 프로토콜인 HTTP의 세션 유지 방법은 &lt;strong&gt;첫 요청시 서버에서 세션을 만들고 클라이언트로 보내 쿠키에서 세션을 관리하게 끔 한 뒤 요청마다 쿠키에 세션을 담아서 서버와의 세션을 유지시킵니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;여러 서버가 존재할 때 세션은 서비스 노드에 들어가기 전에 처리되어야만 합니다. 저라면 클러스터를 구성해서 서비스 노드 앞단에 서버를 만들어 세션 처리를 진행한 뒤 서비스 노드로 요청을 넘길것 같습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;톰켓 레벨 세션 매니저 + 레디스로 클러스터링&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Mon, 01 Mar 2021 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/interview/2021/03/01/NAVER-Practical-Interview-Preparation-3.html</link>
+        <guid isPermaLink="true">http://localhost:4000/interview/2021/03/01/NAVER-Practical-Interview-Preparation-3.html</guid>
+        
+        <category>Database</category>
+        
+        <category>Transaction</category>
+        
+        <category>Index</category>
+        
+        <category>Network</category>
+        
+        <category>OSI</category>
+        
+        <category>DNS</category>
+        
+        <category>TCP/UDP</category>
+        
+        <category>HTTP</category>
+        
+        
+        <category>Interview</category>
+        
+      </item>
     
       <item>
         <title>[실무 면접 준비 - 2] 운영체제 (Operating System)</title>
@@ -20,7 +416,7 @@
 
 &lt;h3 id=&quot;core는-무엇인가요&quot;&gt;Core는 무엇인가요?&lt;/h3&gt;
 
-&lt;p&gt;Core란 Processor의 한 종류인 &lt;strong&gt;CPU의 기본 연산 단위를 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Core란 Processor의 한 종류인 &lt;strong&gt;CPU의 기본 계산 단위를 의미합니다.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;프로세스와-스레드는-각각-무엇이고-어떠한-차이가-존재하나요&quot;&gt;프로세스와 스레드는 각각 무엇이고 어떠한 차이가 존재하나요?&lt;/h3&gt;
 
@@ -31,7 +427,7 @@
 &lt;blockquote&gt;
   &lt;h3 id=&quot;process와-thread를-위한-참고-자료&quot;&gt;Process와 Thread를 위한 참고 자료&lt;/h3&gt;
 
-  &lt;p&gt;&lt;img src=&quot;/Users/baejongjin/Library/Application Support/typora-user-images/image-20210301002250030.png&quot; alt=&quot;image-20210301002250030&quot; /&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation2-1.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
 
   &lt;p&gt;&lt;strong&gt;메모리 컴포넌트&lt;/strong&gt;&lt;/p&gt;
 
@@ -101,7 +497,7 @@
 
 &lt;h3 id=&quot;critical-section은-무엇인가요&quot;&gt;Critical Section은 무엇인가요?&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;공유 자원을 접근하는 코드 영역을 Critical Section&lt;/strong&gt; 이라고 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;동일한 자원을 동시에 접근하는 작업을 실행하는 코드 영역을 Critical Section&lt;/strong&gt; 이라고 합니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;race-condition이란-무엇인가요&quot;&gt;Race Condition이란 무엇인가요?&lt;/h3&gt;
 
@@ -198,7 +594,7 @@
 
 &lt;h3 id=&quot;외부-단편화를-해결할-수-있는-또-다른-방법인-페이징-기법에-대해서-들어보셨나요&quot;&gt;외부 단편화를 해결할 수 있는 또 다른 방법인 페이징 기법에 대해서 들어보셨나요?&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;페이징(Paging) 기법이란 물리 메모리는 Frame이라는 고정 크기로 분리하고, 논리 메모리는 페이지라 불리는 고정 크기의 블록으로 분리하는 기법입니다.&lt;/strong&gt;  즉, 하나의 프로세스가 사용하는 공간을 여러개의 페이지로 나누어서 논리 메모리에서 관리하고, 개별 페이지는 물리 메모리 프레임의 순서에 상관없이 맵핑되어 저장하는 방법입니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;페이징(Paging) 기법이란 물리 메모리를 Frame이라는 고정 크기로 분리하고, 논리 메모리는 페이지라 불리는 고정 크기의 블록으로 분리하는 기법입니다.&lt;/strong&gt;  즉, 하나의 프로세스가 사용하는 공간을 여러개의 페이지로 나뉘어서 논리 메모리에서 관리하고, 개별 페이지는 순서에 상관없이 물리 메모리의 프레임에 맵핑되어 저장하는 방법입니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;페이징 기법을 통해서 외부 단편화는 없앨 수 있지만, 페이지의 크기는 정해져 있기 때문에 내부 단편화는 발생할 수 있습니다.&lt;/p&gt;
@@ -220,13 +616,15 @@
 
 &lt;h3 id=&quot;가상-메모리를-도입할-시-어떠한-효과를-얻을-수-있나요&quot;&gt;가상 메모리를 도입할 시 어떠한 효과를 얻을 수 있나요?&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;가상 메모리를 통해 프로그램의 일부분만 물리 메모리에 올릴 수 있게 되었고 이를 통해 물리 메모리 크기에 제약을 받지 않게 되었습니다.&lt;/strong&gt; 결국 더 많은 프로그램을 동시에 실행할 수 있게 되었고, swapping에 필요한 입출력이 줄었기 때문에 프로그램들이 빠르게 실행되어지는 효과를 얻을 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;가상 메모리를 통해 프로그램의 일부분만 물리 메모리에 올릴 수 있게 되었고 이를 통해 물리 메모리 크기에 제약을 받지 않게 되었습니다.&lt;/strong&gt; 결국 더 많은 프로그램을 동시에 실행할 수 있게 되었고, swap에 필요한 입출력이 줄었기 때문에 프로그램들이 빠르게 실행되어지는 효과를 얻을 수 있습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;가상-주소-공간은-무엇인가요&quot;&gt;가상 주소 공간은 무엇인가요?&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;가상 주소 공간이란 한 프로세스가 물리 메모리에 저장되는 논리적인 모습을 가상 메모리에 구현한 공간을 의미합니다.&lt;/strong&gt; 프로세스가 요구하는 메모리 공간을 물리 메모리가 아닌 가상 메모리에서 제공함으로써 현재 직접적으로 필요치 않는 메모리 공간은 실제 물리 메모리에 올리지 않는 것으로 메모리를 절약할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;가상 주소 공간이란 한 프로세스가 물리 메모리에 저장되는 논리적인 모습을 가상메모리에 구현한 공간을 의미합니다.&lt;/strong&gt; 프로세스가 요구하는 메모리 공간을 물리 메모리가 아닌 가상 메모리에서 제공함으로써 현재 직접적으로 필요치 않는 메모리 공간은 실제 물리 메모리에 올리지 않는 것으로 메모리를 절약할 수 있습니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
+  &lt;h3 id=&quot;tip&quot;&gt;Tip&lt;/h3&gt;
+
   &lt;ul&gt;
     &lt;li&gt;&lt;strong&gt;가상 메모리는 시스템 라이브러리가 여러 프로세스들 사이에서 공유되어질 수 있도록 합니다.&lt;/strong&gt; 실제 물리 메모리는 공유되어지지만 각 프로세스는 각자 자신의 주소 공간처럼 인식합니다.&lt;/li&gt;
     &lt;li&gt;&lt;strong&gt;프로세스들이 메모리를 공유하는 것을 가능하게 하고, 프로세스들은 공유 메모리를 통해 통신할 수 있습니다.&lt;/strong&gt; 이 또한 각 프로세스들은 공유 메모리를 각자 자신의 주소 공간처럼 인식하지만, 실제 물리 메모리는 공유되고 있습니다.&lt;/li&gt;
@@ -245,7 +643,7 @@
 
 &lt;ol&gt;
   &lt;li&gt;디스크에서 필요한 페이지의 위치를 찾는다.&lt;/li&gt;
-  &lt;li&gt;물리 메모리에서 빈 프레임을 찾는다.
+  &lt;li&gt;물리 메모리에서 빈 페이지 프레임을 찾는다.
     &lt;ol&gt;
       &lt;li&gt;빈 프레임이 없을 경우 페이지 교체 알고리즘을 통해 희생될(victim) 페이지를 고른다.&lt;/li&gt;
       &lt;li&gt;희생될 페이지를 디스크에 기록하고, 관련 페이지 테이블을 수정한다.&lt;/li&gt;
@@ -277,21 +675,19 @@
 
 &lt;h3 id=&quot;캐싱-작업시-가장-신경써야-하는-문제는-무엇인가요&quot;&gt;캐싱 작업시 가장 신경써야 하는 문제는 무엇인가요?&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;캐시의 역할을 극대화 시키기 위해서는 어떤 데이터가 얼마나 많이 참조 되는지를 고려해야합니다. 이를 통해 많이 참조되는 데이터들을 캐싱해야 합니다. 즉, 적중률(hit ratio)를 극대화 시켜야 합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;캐시의 역할을 극대화 시키기 위해서는 얼마나 데이터가 많이 참조 되는지를 고려해서 많이 참조되는 데이터들을 캐싱해야 합니다. 즉, 적중률(hit ratio)를 극대화 시켜야 합니다.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;캐시-적중률hit-ratio을-어떻게-극대화-시킬-수-있을까요&quot;&gt;캐시 적중률(hit ratio)을 어떻게 극대화 시킬 수 있을까요?&lt;/h3&gt;
 
-&lt;p&gt;적중률(hit ratio)을 극대화 시키기 위해서 &lt;strong&gt;지역성(Locality)의 원리&lt;/strong&gt;를 사용할 수 있습니다. &lt;strong&gt;지역성의 원리 즉, Locality이란 메모리 내의 정보는 균일하게 Access 되는 것이 아닌 &lt;u&gt;어느 한 순간에 특정 부분이 집중적으로 참조&lt;/u&gt;된다는 원리입니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;적중률(hit ratio)을 극대화 시키기 위해서 &lt;strong&gt;지역성(Locality)의 원리&lt;/strong&gt;를 사용할 수 있습니다. &lt;strong&gt;지역성의 원리 즉, Locality Principle이란 메모리 내의 정보는 균일하게 Access 되는 것이 아닌 &lt;u&gt;어느 한 순간에 특정 부분이 집중적으로 참조&lt;/u&gt;된다는 원리입니다.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;locality는-어떻게-나눌-수-있나요&quot;&gt;Locality는 어떻게 나눌 수 있나요?&lt;/h3&gt;
 
-&lt;p&gt;Locality는 크게 시간 지역성(Temporal Locality)과 공간 지역성(Spatial Locality)으로 나뉩니다. &lt;strong&gt;시간 지역성(Temporal Locality)이란 최근에 참조된 메모리의 주소는 곧 다시 참조된다는 특성을 의미하구요, 공간 지역성이란 참조된 메모리의 주소와 인접한 주소는 곧 다시 참조된다는 특성을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Locality는 크게 시간 지역성(Temporal Locality)과 공간 지역성(Spatial Locality)으로 나뉩니다. &lt;strong&gt;시간 지역성이란 최근에 참조된 메모리의 특정 주소는 곧 다시 참조된다는 특성을 의미하구요, 공간 지역성이란 참조된 메모리의 주소와 인접한 주소의 내용이 곧 다시 참조된다는 특성을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;caching-line이란-무엇인가요&quot;&gt;Caching Line이란 무엇인가요?&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;캐시에 데이터를 저장할 때 특정 자료구조를 사용하여 묶음으로 저장하게 되는데 이를 &lt;u&gt;캐싱 라인(Caching Line)&lt;/u&gt;이라고 합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;프로세스는 다양한 주소에 있는 데이터를 사용하므로 빈번하게 사용하는 데이터의 주소 또한 흩어져 있습니다. 따라서 캐시에 저장하는 데이터에는 데이터의 메모리 주소 등을 기록해 둔 태그를 달아놓을 필요가 있습니다. 이러한 태그들의 묶음을 캐싱 라인이라고 하고 메모리로부터 데이터를 가져올 때도 캐싱 라인을 기준으로 가져옵니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;캐시에 데이터를 저장할 때 특정 자료구조를 사용하여 묶음으로 저장하게 되는데 이를 &lt;u&gt;캐싱 라인(Caching Line)&lt;/u&gt;이라고 합니다.&lt;/strong&gt; 프로세스는 다양한 주소에 있는 데이터를 사용하므로 빈번하게 사용하는 데이터의 주소 또한 흩어져 있습니다. 따라서 캐시에 저장하는 데이터에는 데이터의 메모리 주소 등을 기록해 둔 태그를 달아놓을 필요가 있다. 이러한 태그들의 묶음을 캐싱 라인이라고 하고 메모리로부터 데이터를 가져올 때도 캐싱 라인을 기준으로 가져옵니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;캐싱 라인의 종류&lt;/strong&gt;&lt;/p&gt;
@@ -2125,225 +2521,6 @@ Old 영역에 있는 참조가 없는 객체들을 표시하고 그 해당 객�
         <category>Java</category>
         
         <category>OOP</category>
-        
-        
-        <category>Interview</category>
-        
-      </item>
-    
-      <item>
-        <title>[기술 면접 준비 - 2일차] Spring Framework &amp;&amp; Database</title>
-        <description>&lt;h1 id=&quot;spring-framework&quot;&gt;Spring Framework&lt;/h1&gt;
-
-&lt;h3 id=&quot;spring을-많이-공부하셨다고-했는데-spring-framework가-무엇인지-저희에게-설명해-주실-수-있나요&quot;&gt;Spring을 많이 공부하셨다고 했는데, Spring Framework가 무엇인지 저희에게 설명해 주실 수 있나요?&lt;/h3&gt;
-
-&lt;p&gt;스프링 프레임워크란 자바를 위한 오픈소스 애플리케이션 프레임워크로서 &lt;strong&gt;자바 기반 엔터프라이즈 애플리케이션 개발을 위해 다양한 서비스를 제공해주는 프레임워크&lt;/strong&gt;입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;spring-framework의-특징은-무엇인가요&quot;&gt;Spring Framework의 특징은 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;Spring Framework에는 여러 가지 특징이 존재하지만 대표적인 특징을 뽑자면 &lt;strong&gt;IoC, AOP, PSA&lt;/strong&gt;라고 할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;IoC란 Inversion of Control의 줄임말으로 개발자가 작성한 프로그램의 제어권이 개발자가 아닌 프레임워크에 넘어가 스프링에서 사용자의 코드를 호출하는 것을 말합니다.&lt;/strong&gt; 이는 사실 Spring Framework만의 특징은 아니고, 많은 프로그램들이 IoC를 적용하고 있습니다. &lt;strong&gt;IoC는 DI와 DL에 의해 구현되는데 DI는 클래스 및 계층간에 필요한 의존관계를 빈 설정 정보를 바탕으로 IoC Container가 자동으로 연결해주는 것을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;AOP란 Aspect Oriented Programming의 줄임말로 여러 모듈에서 공통적으로 사용하는 기능을 추출하여 핵심 로직에 영향을 끼치지 않게 공통 기능을 끼워 넣는 개발 형태를 의미합니다.&lt;/strong&gt; AOP의 사용 예로는 로깅, 트랜잭션, 보안 등이 있습니다. (사실 이는 자바의 상속이나 합성을 이용해서 구현할 수 있지만, 프로그래머가 작성하는 클래스간의 결합도가 높아진다는 측면에서 좋지는 않다고 생각합니다.) (컴파일 타임, 로드 타임, 런타임 등에서 AOP를 적용 가능하다고 알고 있습니다.)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;PSA란 Portable Service Abstraction의 줄임말로 추상화 계층을 사용해서 특정 기술을 내부에 숨기고 개발자에게 편의성을 제공하며 제공되는 기술을 다른 기술 스택으로 간편하게 바꿀 수 있는 확장성을 갖고 있는 것이 PSA입니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;그렇다면-ioc-conatiner에-대해서는-알고-있나요&quot;&gt;그렇다면 IoC Conatiner에 대해서는 알고 있나요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;IoC 컨테이너란 Bean 즉, IoC Container에서 관리하는 객체의 생성과 관계설정, 사용, 제거 등의 전체 라이프 사이클을 관리해주는 작업을 하는 컨테이너를 IoC 컨테이너라고 부릅니다.&lt;/strong&gt; IoC Container의 대표적인 명세는 BeanFactory인데 요즘은 이를 상속하는 ApplicationContext를 사용하는 추세입니다. ApplicationContext는 Bean Factory의 기능 뿐만 아니라, 메세지 다국화, 이벤트 발행 기능, 리소스 로딩 기능 등의 여러 기능을 명세하고 있습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;spring-ioc-container의-bean-등록-방법에는-무엇이-있는가&quot;&gt;Spring IoC Container의 Bean 등록 방법에는 무엇이 있는가?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;xml 설정파일을 이용해서 Bean 등록, @Annotatation을 통해 Bean 등록하는 방법 등이 존재합니다.&lt;/strong&gt; 하지만 Annotation 기반의 Bean 등록시에는 Component Scan을 꼭 필요로 하는데요, Component Scan을 직접 등록해 줄 수도 있겠지만 Spring Boot는 Component Scan까지 자동으로 구성해줘, 너무 잘 사용하고 있습니다!!!&lt;/p&gt;
-
-&lt;h3 id=&quot;spring-boot-이야기를-하셨는데-spring-boot와-spring-framework의-차이점은-무엇인가요&quot;&gt;Spring Boot 이야기를 하셨는데, Spring Boot와 Spring Framework의 차이점은 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;스프링 부트와 스프링 프레임워크의 가장 큰 차이는 Auto Configuration의 차이인 것 같습니다.&lt;/strong&gt; 한 예로써 Spring MVC 프로젝트를 Spring Framework 기반으로 구성을 한다면, 컴포넌트 스캔, bean 설정, Dispatcher Servlet 설정, View Resolver, JDBC 설정, 웹 jar 설정 등의 다양한 설정을 해야하지만 이를 Spring Boot 기반으로 구성함으로써 초기 개발 환경 세팅에 걸리는 리소스를 많이 아낄 수 있다고 생각합니다.&lt;/p&gt;
-
-&lt;p&gt;스프링 부트 프로젝트를 생성할 시 스프링 부트에서는 내장 서블릿 컨테이너인 톰캣(tomcat)이 자동적으로 설정됩니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;web-server-vs-web-application-server의-차이를-아시나요&quot;&gt;Web Server vs Web Application Server의 차이를 아시나요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Web Server는 클라이언트로부터 HTTP 요청을 받아 정적인 컨텐츠인 HTML, image file, css 등을 제공하는 서버&lt;/strong&gt;를 말합니다. Web Server의 예로는 Apach Server, Nginx 등이 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Web Application Server는 DB 조회나 다양한 로직 처리를 요구하는 동적인 컨텐츠를 제공하기 위해 만들어진 Application Server&lt;/strong&gt;를 말합니다. HTTP를 통해 컴퓨터나 장치에 애플리케이션을 수행해주는 미들웨어입니다. WAS는 Web Container 혹은 Servlet Container라고도 불리며 대표적인 예로는 Tomcat, Jetty 등이 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Web Server와 WAS를 분리하는 이유는 자원 이용의 효율성 및 장애 극복, 배포 및 유지보수의 편의성을 위해 분리합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;spring-bean을-주입받는-방법에는-무엇이-있나요&quot;&gt;Spring Bean을 주입받는 방법에는 무엇이 있나요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;@Autowired 애노테이션으로 필드에 주입받을 수도 있구요, 생성자를 통해서 주입 받을 수 있고, setter를 통해서 주입 받을 수 있습니다.&lt;/strong&gt; Bean이 주입 될 때 같은 이름 및 같은 타입의 빈이 존재한다면 @Primary 애노테이션으로 우선순위 설정할 수 있고, @Qulifier 애노테이션으로 Bean 이름을 통해서 주입 받을 수 있고, 해당 타입의 빈을 모두 List를 통해서 주입 받을 수 있습니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;database-system&quot;&gt;Database System&lt;/h1&gt;
-
-&lt;h3 id=&quot;데이터베이스를-사용하는-이유는-무엇인가요&quot;&gt;데이터베이스를 사용하는 이유는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;데이터베이스가 등장하기 전에 데이터는 파일 시스템을 이용하여 관리되었습니다. &lt;strong&gt;이로 인해 데이터의 종속성 문제와 무결성 문제가 발생하였으며 이를 해결하기 위한 데이터베이스 시스템이 등장하게 되었습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;데이터베이스의-특징은-무엇인가요&quot;&gt;데이터베이스의 특징은 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;데이터베이스의 특징은 크게 5가지로 나눌 수 있고 이는 &lt;strong&gt;데이터의 독립성, 무결성, 보안성, 일관성, 중복 최소화&lt;/strong&gt;를 의미합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;primary-key-foreign-key-entity-relation-모델에-대해서-설명해주세요&quot;&gt;Primary Key, Foreign Key, Entity Relation 모델에 대해서 설명해주세요&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Primary Key는 테이블에서 각 Row를 유일하게 구분하는 Column을 의미&lt;/strong&gt;하구요, &lt;strong&gt;Foreign Key는 하나의 테이블에 있는 Column중 다른 테이블의 행(row)을 식별할 수 있는 키&lt;/strong&gt;를 말한다. &lt;strong&gt;Entity Relation은 데이터베이스 설계에서 엔티티간의 관계를 표시해주기 위한 모델&lt;/strong&gt;을 의미한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;쿼리-문제&quot;&gt;쿼리 문제&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/interview/naver-interview-preparation2-1.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;테이블 생성 - 테이블 명은 ‘student’로 할 것&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;CREATE TABLE student (name VARCHAR(10) NOT NULL, num INT NOT NULL, pnum VARCHAR(20) NOT NULL, address VARCHAR(10) NOT NULL, email VARCHAR(10) NOT NULL, sec VARCHAR(2) NOT NULL, PRIMARY KEY(num));&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;테이블 수정 - 대학교(university)를 추가하고 null 값을 허용하게 하라&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;ALTER TABLE student ADD university VARCHAR(10) NULL;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;데이터 삽입 - 임의의 데이터 2개를 추가하라&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;INSERT INTO student (name, num, pnum, address, email, sex) VALUES (“홍길동”, 11, 010-1111-1111, “서울시”, “kim@com”, “여”);&lt;/li&gt;
-  &lt;li&gt;INSERT INTO student (name, num, pnum, address, email, sex) VALUES (“홍길동”, 11, 010-1111-1111, “서울시”, “kim@com”, “여”);&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;데이터 수정 - 홍길동의 핸드폰 번호를 010-5555-5555로 변경하라&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;UPDATE student SET pnum=”010-5555-5555” WHERE name=”홍길동”;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;데이터 검색&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;전체 자료 조회 : SELECT * FROM student;&lt;/li&gt;
-  &lt;li&gt;학번이 3번보다 이상인 사람들의 이름과 학번을 조회 : SELECT name, num FROM student WHERE num &amp;gt;= 3 ORDER BY num DESC;&lt;/li&gt;
-  &lt;li&gt;김자로 시작하는 학생의 이름을 조회 : SELECT name FROM student WHERE name LIKE ‘김%’;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;ORDER BY xx DESC (내림차순)&lt;/li&gt;
-    &lt;li&gt;ORDER BY xx ASC (오름차순)&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;데이터 삭제&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;모든 자료(행) : DELETE FROM students;&lt;/li&gt;
-  &lt;li&gt;특정 자료(행) : DELETE FROM students WHERE name=”홍길동”;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;join이란-무엇인가&quot;&gt;Join이란 무엇인가?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Join 이란 2개 이상의 테이블에서 조건에 맞는 데이터를 추출하기 위하여 사용하는 쿼리문&lt;/strong&gt;입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;조인에는-어떠한-종류들이-있는가&quot;&gt;조인에는 어떠한 종류들이 있는가?&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Inner Join: 2개 이상의 테이블에서 교집합만을 추출&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;ex) SELECT A.name, B.age FROM tableA A INNER JOIN tableB B ON A.no_emp = B.no_emp&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Left Join: 2개 이상의 테이블에서 from에 해당하는 부분을 추출&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;ex) SELECT A.name, B.age FROM tableA A LEFT JOIN tableB B ON A.no_emp = B.no_emp&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Right Join : 2개 이상의 테이블에서 from과 join하는 테이블에 해당하는 부분을 추출&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;ex) SELECT A.name, B.age FROM tableA A RIGHT JOIN tableB B ON A.no_emp = B.no_emp&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Outer Join : 아웃터 조인 또는 풀 조인이라고 불림, 2개 이상의 테이블에서 모든 테이블에 해당하는 부분을 추출&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;ex) SELECT A.name, B.age FROM tableA A OUTER JOIN tableB B ON A.no_emp = B.no_emp&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;인덱스index란-무엇인가요&quot;&gt;인덱스(Index)란 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;데이터베이스의 데이터를 빠르게 검색 및 정렬하기 위해서 인덱스를 두는 방법&lt;/strong&gt;입니다. (일반적인 책 뒤에 있는 색인을 보는 방법과 비슷합니다.)&lt;/p&gt;
-
-&lt;h3 id=&quot;dbms에서-사용하고-잇는-index-자료구조는-무엇인가요&quot;&gt;DBMS에서 사용하고 잇는 Index 자료구조는 무엇인가요??&lt;/h3&gt;
-
-&lt;p&gt;대표적으로 B+ Tree 인덱스 알고리즘과, Hash 인덱스 알고리즘이 존재하는 것으로 알고 있습니다. &lt;strong&gt;B+ Tree 인덱스는 칼럼의 값을 변형하지 않고, 원래의 값을 이용해 인덱싱하는 알고리즘이고, Hash 인덱스 알고리즘은 칼럼의 값으로 해시 값을 계산해서 인덱싱하는 알고리즘&lt;/strong&gt;입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;hash란-무엇인가요&quot;&gt;Hash란 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;해시란 임의의 길이를 가진 데이터를 고정된 길이를 가진 데이터로 매핑한 값입니다.&lt;/strong&gt; 이렇게 매핑 하는 함수를 해시 함수라고 하며 이로부터 얻어진 값을 해시 값, 해시 코드, 짧게 말해서 해시라고도 합니다.&lt;/p&gt;
-
-&lt;p&gt;해시의 단점은 정렬할 수 없고, 순서에 따라 값을 가져올 수도 없기 때문에 &lt;u&gt;상하관계가 있거나, 순서가 중요한 데이터의 경우 Hash와 어울리지 않는다는 것이 단점&lt;/u&gt;입니다. 또한 Hash Function의 의존도가 높고, 공간 효율성이 떨어진다는 점이 단점입니다. 하지만 평균 데이터 처리의 시간복잡도는 O(1)(상수 시간)에 가깝기 때문에 사용하기 빠릅니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;트랜잭션transaction이란-무엇인가요&quot;&gt;트랜잭션(Transaction)이란 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;트랜잭션은 데이터베이스의 상태를 변환시키는 하나의 논리적 기능을 수행하기 위한 작업의 단위 또는 한꺼번에 모두 수행되어야 할 일련의 연산들&lt;/strong&gt;을 의미한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;트랜잭션transaction의-성질은-무엇인가요&quot;&gt;트랜잭션(Transaction)의 성질은 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;트랜잭션의 성질은 ACID라고 불리는 &lt;strong&gt;원자성(Atomicity), 일관성(Consistency), 독립성(Isolation), 지속성(Durability)&lt;/strong&gt;이 있습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;원자성은 트랜잭션의 연산이 데이터베이스에 모두 반영되든지 아니면 전혀 반영되지 않아야 한다라는 것을 의미합니다.&lt;/li&gt;
-  &lt;li&gt;일관성은 트랜잭션이 그 실행을 성공적으로 완료된 다음의 상태에서도 데이터베이스느 언제나 일관성 있는 데이터를 보장해야 한다는 것을 의미합니다.&lt;/li&gt;
-  &lt;li&gt;독립성은 각각의 트랜잭션은 서로 간섭없이 독립적으로 수행되어야 한다는 것을 의미합니다.&lt;/li&gt;
-  &lt;li&gt;지속성은 성공적으로 완료된 트랜잭션의 결과는 영구적으로 데이터베이스에 작업의 결과가 저장되어야 한다는 것을 의미합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;정규화는-무엇인가요&quot;&gt;정규화는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;정규화란 데이터베이스에서 중복을 최소화하고 갱신 이상을 없애기 위해 하나의 테이블을 둘 이상으로 분리하는 작업&lt;/strong&gt;이다. 갱신 이상에는 삽입 이상, 삭제 이상, 수정 이상 등을 포함한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;정규형에는-무엇이-있는가&quot;&gt;정규형에는 무엇이 있는가?&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;1차 정규형: 각 로우마다 컬럼의 값이 1개씩만 있어야 하는 형태를 의미합니다. 이를 컬럼이 원자값(Atomic Value)를 갖는다고 합니다.
-    &lt;ul&gt;
-      &lt;li&gt;각 로우의 컬럼이 값이 1개 이상일 경우 1차 정규형을 만족하지 못한다고 할 수 있다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;2차 정규형: &lt;strong&gt;주키가 합성키&lt;/strong&gt;며 부분종속(기본키 중에 특정 컬럼에만 종속된 컬럼)이 없어야 한다는 것입니다. 테이블의 모든 컬럼이 완전 함수적 종속을 만족하는 것입니다.
-    &lt;ul&gt;
-      &lt;li&gt;주키가 합성키이며, 기본키 중에서 특정 컬럼에만 종속된 컬럼이 있을 경우 2차 정규형을 만족하지 못한다고 할 수 있다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;3차 정규형: 어떠한 비주요 애트리뷰트도 기본키에 대해서 이행적으로 종속되지 않으면 제 3 정규형을 만족한다고 볼 수 있다. 즉, X-&amp;gt;Y, Y-&amp;gt;Z의 경우에 의해서 추론될 수 있는 X-&amp;gt;Z의 종속관계가 없는 경우를 의미한다.
-    &lt;ul&gt;
-      &lt;li&gt;일반 컬럼이 다른 일반 컬럼에 종속되는 경우 제 3정규형을 만족하지 못한다고 볼 수 있다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;BCNF 정규형: 3차 정규형을 만족하면서 모든 결정자가 후보키 집합에 속한 정규형입니다.
-    &lt;ul&gt;
-      &lt;li&gt;ex) 일반 컬럼이 후보키를 결정하는 경우에 3차 정규형을 만족하면서 BCNF는 만족하지 않는 경우이다. =&amp;gt; 테이블 분리가 필요하다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;nosql이란-무엇인가요&quot;&gt;NoSQL이란 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;관계형 데이터 모델을 지양하며 대량의 분산된 데이터를 저장하고 조회하는데 특화되어있으며 스키마 없이 사용 가능하거나 느슨한 스키마를 제공하는 저장소를 말합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;NoSQL은 SQL보다 덜 제한적인 일관성 모델을 이용하는 데이터의 저장 및 검색을 위한 매커니즘을 제공합니다.&lt;/li&gt;
-  &lt;li&gt;단순 검색 및 추가 작업을 위한 매우 최적화된 key-value 저장 공간을 사용합니다.&lt;/li&gt;
-  &lt;li&gt;빅데이터 시대에 따라 많은 양의 데이터를 효율적으로 처리하기 위해 등장하였습니다.&lt;/li&gt;
-  &lt;li&gt;분산형 구조를 통해 여러 대의 서버에 분산해 저장하고, 분산시에는 데이터를 상호 복제에 특정 서버에 장애가 발생했을 때에도 데이터의 유실이나 서비스 중지가 없는 형태의 구조를 갖고 있습니다.&lt;/li&gt;
-  &lt;li&gt;HBase, MongoDB 등이 있습니다.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 10 Dec 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/interview/2020/12/10/NAVER-Interview-Preparation-2.html</link>
-        <guid isPermaLink="true">http://localhost:4000/interview/2020/12/10/NAVER-Interview-Preparation-2.html</guid>
-        
-        <category>Spring</category>
-        
-        <category>Framework</category>
-        
-        <category>Database</category>
         
         
         <category>Interview</category>

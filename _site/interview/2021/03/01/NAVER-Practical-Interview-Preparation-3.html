@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
+
+
+  <title>[실무 면접 준비 - 3] 데이터베이스 & 네트워크 (Database & Network)</title>
+  <meta name="description" content="">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="" />
+  <meta property="og:url" content="http://localhost:4000/interview/2021/03/01/NAVER-Practical-Interview-Preparation-3.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="[실무 면접 준비 - 3] 데이터베이스 & 네트워크 (Database & Network)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[실무 면접 준비 - 3] 데이터베이스 & 네트워크 (Database & Network)">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/interview/2021/03/01/NAVER-Practical-Interview-Preparation-3.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/interview/2021/03/01/NAVER-Practical-Interview-Preparation-3.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/portfolio/">Portfolio</a>
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">[실무 면접 준비 - 3] 데이터베이스 & 네트워크 (Database & Network)</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">March 1, 2021</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Interview">Interview</a> (default) -->
+    <a href="/category/Interview">Interview</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <hr />
+
+<h2 id="database">Database</h2>
+
+<hr />
+
+<h3 id="데이터베이스란-무엇인가요">데이터베이스란 무엇인가요?</h3>
+
+<p><strong>데이터베이스란 여러 사람이 공유하여 사용할 목적으로 통합되어 관리되는 데이터의 집합을 의미합니다.</strong> 이러한 데이터베이스를 관리하는 시스템을 데이터베이스 시스템 즉, DBMS라고 하는거구요.</p>
+
+<h3 id="데이터베이스의-특징은-무엇인가요">데이터베이스의 특징은 무엇인가요?</h3>
+
+<p><strong>데이터베이스의 특징으로는 독립성, 무결성, 보안성, 일관성, 중복 최소화가 있습니다.</strong></p>
+
+<ul>
+  <li><strong>독립성(Independence) :</strong> 데이터베이스는 데이터를 사용하는 응용 프로그램과 독립적으로 데이터를 저장 및 관리한다.</li>
+  <li><strong>무결성(Integrity) :</strong> 데이터베이스는 다양한 제약조건 및 기능을 통해 데이터의 무결성을 유지해준다.</li>
+  <li><strong>보안성(Security) :</strong> 데이터베이스는 계정 및 권한 관리를 통해 데이터들의 보안을 유지해준다.</li>
+  <li><strong>일관성(Consistency) :</strong> 데이터베이스는 다양한 제약조건을 통해 데이터를 일관되게 유지해준다.</li>
+  <li><strong>중복 최소화(Minimum Duplication) :</strong> 데이터베이스는 데이터를 통합해서 관리함으로써 데이터의 중복을 최소화한다.</li>
+</ul>
+
+<blockquote>
+  <h3 id="데이터-무결성">데이터 무결성</h3>
+
+  <p><strong>데이터 무결성이란 데이터의 정확성과 일관성을 유지하고 보증하는 것을 가리키며 데이터베이스 시스템의 중요한 기능이다.</strong> 데이터 무결성은 일반적으로 일련의 무결성 제한이나 규칙에 의해 데이터베이스 시스템이 강제한다.</p>
+
+  <p><strong>무결성 제한의 유형</strong></p>
+
+  <ul>
+    <li><strong>개체 무결성(Entity Integrity) :</strong> 모든 테이블은 기본 키(primary key)를 가져야 하며 기본 키로 선택된 열은 고유하고 빈 값은 허용되지 않음을 규정한다.</li>
+    <li><strong>참조 무결성(Referential Integrity) :</strong> 모든 외래 키 값은 Null이거나 참조 릴레이션의 기본키 값과 동일해야 한다는 규정이다. 즉, 릴레이션은 참조할 수 없는 외래키 값을 가질 수 없다는 규정이다.</li>
+    <li><strong>범위 무결성(Domain Integrity) :</strong> 정의된 범위에서 관계형 데이터베이스의 모든 열이 선언되도록 규정한다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="데이터베이스에-존재하는-key에-대해서-설명해주세요">데이터베이스에 존재하는 Key에 대해서 설명해주세요.</h3>
+
+<p><strong>기본키(Primary Key)란 하나의 테이블에서 특정 ROW를 구별할 수 있는 속성(Attribute)을 의미합니다.</strong> 개체 무결성에 의해 기본키에는 Null 값과 중복된 값이 저장되어질 수 없습니다.</p>
+
+<p><strong>외래키(Foreign Key)란 참조되는 테이블의 기본키와 대응되어 테이블 간에 참조 관계를 표시하는 키입니다.</strong> 외래키로 지정되면 참조 무결성에 의해 참조 테이블의 기본키에 없는 값은 입력할 수 없습니다.</p>
+
+<h3 id="조인이란-무엇이고-어떠한-조인이-있는지-알려주실-수-있나요">조인이란 무엇이고 어떠한 조인이 있는지 알려주실 수 있나요?</h3>
+
+<p><strong>조인이란 2개 이상의 테이블에서 조건에 맞는 데이터를 추출하기 위하여 사용하는 쿼리문을 의미합니다.</strong></p>
+
+<ul>
+  <li>Inner Join : 2개 이상의 테이블에서 교집합만을 추출</li>
+  <li>Left Join : 2개 이상의 테이블에서 FROM문에 해당하는 부분을 추출</li>
+  <li>Right Join : 2개 이상의 테이블에서 FROM 문의 테이블과 JOIN하는 테이블에 해당하는 부분을 추출</li>
+  <li>Outer Join : 2개 이상의 테이블에서 모든 테이블에 해당하는 부분을 추출</li>
+</ul>
+
+<p><img src="/assets/interview/naver-practical-interview-preparation3-1.png" style="width:80%" /></p>
+
+<hr />
+
+<h2 id="transaction">Transaction</h2>
+
+<hr />
+
+<h3 id="트랜잭션은-무엇인가요">트랜잭션은 무엇인가요?</h3>
+
+<p><strong>트랜잭션(Transaction)이란 데이터베이스의 상태를 변환시키는 하나의 논리적 기능을 수행하기 위한 작업의 단위 또는 한꺼번에 모두 수행되어야 할 일련의 연산들을 의미합니다.</strong></p>
+
+<h3 id="트랜잭션transaction의-특징은-어떤게-있나요">트랜잭션(Transaction)의 특징은 어떤게 있나요?</h3>
+
+<p><strong>트랜잭션의 특징으로는 ACID라고 하는 4가지 특성이 있으며 이는, 원자성(Atomicity), 일관성(Consistency), 격리성(Isolation), 지속성(Durability)을 의미합니다.</strong></p>
+
+<ul>
+  <li><strong>원자성(Atomicity) :</strong>  트랜잭션의 연산이 데이터베이스에 모두 반영되든지 아니면 전혀 반영되지 않아야 한다는 것을 의미합니다.</li>
+  <li><strong>일관성(Consistency) :</strong> 트랜잭션이 수행된 이후에도 데이터베이스는 언제나 일관성 있는 데이터를 보장해야 한다는 것을 의미합니다.</li>
+  <li><strong>독립성(Isolation) :</strong> 여러 트랜잭션이 동시에 수행되더라도 각각의 트랜잭션은 서로 간섭없이 독립적으로 수행되어야 한다는 것을 의미합니다.</li>
+  <li><strong>지속성(Duration) :</strong> 성공적으로 완료된 트랜잭션의 결과는 데이터베이스에 영구적으로 저장되어야 한다는 것을 의미합니다.</li>
+</ul>
+
+<h3 id="트랜잭션transaction은-어떻게-동작하나요">트랜잭션(Transaction)은 어떻게 동작하나요?</h3>
+
+<p><img src="/assets/interview/naver-practical-interview-preparation3-2.png" style="width:90%" /></p>
+
+<ol>
+  <li>트랜잭션을 시작합니다.</li>
+  <li>트랜잭션 내의 다양한 작업을 수행합니다.
+    <ul>
+      <li>트랜잭션 내의 모든 작업을 이상없이 완료했다면 해당 트랜잭션을 Commit 합니다.</li>
+      <li>트랜잭션 내의 작업을 진행하던 중에 실패했다면 해당 트랜잭션을 Rollback 또는 Abort 합니다.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="index">Index</h2>
+
+<hr />
+
+<h3 id="인덱스index란-무엇인가요">인덱스(Index)란 무엇인가요?</h3>
+
+<p><strong>데이터베이스 인덱스란 테이블의 동작 속도(Row 검색 속도)를 높여주는 자료구조를 의미합니다.</strong> 마치 책의 앞 부분에 존재하는 목차와 같습니다. 데이터베이스는 인덱스를 따로 저장하며 관계형 DB의 경우에는 테이블로 인덱스를 관리합니다.</p>
+
+<h3 id="인덱스를-구현하기-위한-자료구조는-어떤게-존재하나요">인덱스를 구현하기 위한 자료구조는 어떤게 존재하나요?</h3>
+
+<p><strong>인덱스를 구현하기 위한 대표적인 자료구조로는 Hash Table과 B+ Tree가 존재합니다.</strong></p>
+
+<ul>
+  <li><strong>Hash Table</strong>
+    <ul>
+      <li>해시 테이블은 Key와 Value로 데이터를 저장하는 자료구조로 <strong>빠른 데이터 검색이 필요할 때 유용</strong>합니다. 시간복잡도는 O(1) 입니다.</li>
+      <li>해시 테이블은 Key값을 이용해 고유한 Index를 생성하여 그 Index에 저장된 값을 꺼내오는 구조입니다.</li>
+      <li><strong>해시는 등호(=) 연산에만 특화되어 있기 때문에 부등호 연산(&gt;, &lt;)이 자주 사용되는 데이터베이스 검색을 위해서는 적절하지 않습니다.</strong> key-value 기반의 DB인 Redis에는 적절한 것 같다.</li>
+    </ul>
+  </li>
+  <li><strong>B+ Tree</strong>
+    <ul>
+      <li>DB의 인덱스를 위해 자식 노드가 2개 이상인 Binary Tree를 개선시킨 자료구조로서 아래와 같은 특성을 가진다.
+        <ul>
+          <li><strong>Leaf 노드(데이터 노드)만 인덱스와 함께 데이터(Value)를 가지고 있고, 나머지 노드(인덱스 노드)들은 데이터를 위한 인덱스(key)만을 갖는다.</strong> Leaf 노드들은 LinkedList로 연결되어 있다.</li>
+        </ul>
+      </li>
+      <li><strong>B+Tree의 리프노드들은 LinkedList로 연결하여 순차검색을 용이하게 하는 등 인덱스에 맞게 최적화하였다.</strong></li>
+    </ul>
+  </li>
+  <li><strong>[PostgreSQL] GIN(Generalized Inverted Index)</strong>
+    <ul>
+      <li><strong>GIN 자료구조는 인덱스를 적용하는 컬럼의 값을 일정한 규칙에 따라 쪼개고 이를 사용하는 자료구조입니다.</strong> 즉, LIKE와 같은 연산이 많을 경우 B+ Tree나 Hash Table 인덱스보다 훨씬 빠르게 동작할 수 있습니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="인덱스를-고려할-때-어떠한-점에-주의해야-하나요">인덱스를 고려할 때 어떠한 점에 주의해야 하나요?</h3>
+
+<p><strong>인덱스를 설정할 때 해당 테이블에서 어떠한 쿼리가 자주 사용되는지 분석 해야합니다.</strong> SELECT가 자주 사용되는 테이블이라면 인덱스 설정시 성능 향상의 효과를 기대할 수 있지만 UPDATE, DELETE, INSERT 쿼리가 자주 사용되는 테이블이라면 오히려 인덱스 설정시 성능이 감소될 수 있습니다.</p>
+
+<p><strong>인덱스 설정시 카디널리티가 높은 즉, 컬럼에 중복되는 값이 많이 없는 컬럼을 인덱스로 걸어야 합니다.</strong> 카디널리티가 낮은 컬럼을 인덱스로 사용시 인덱스를 통해서 수 많은 row가 검색 될 것이며, 이는 다시 Full Search로써 결과값을 검색해야합니다. 만약 카디널리티가 높은 컬럼을 인덱스로 사용한다면 인덱스를 통해서 소수의 row만 검색될 것이며 우리는 이들 중 조건에 맞는 row만 반환하면 되기 때문에 성능이 훨씬 좋습니다.</p>
+
+<hr />
+
+<h2 id="정규화normalization">정규화(Normalization)</h2>
+
+<hr />
+
+<h3 id="정규화는-무엇이며-왜-필요한가요">정규화는 무엇이며 왜 필요한가요?</h3>
+
+<p><strong>정규화란 데이터베이스에서 갱신 이상을 없애고 데이터의 중복을 최소화하기 위해 하나의 테이블을 둘 이상의 테이블로 분리하는 작업을 의미합니다.</strong> 갱신 이상에는 삽입 이상, 삭제 이상, 수정 이상 등이 포함됩니다.</p>
+
+<blockquote>
+  <h3 id="갱신-이상">갱신 이상</h3>
+
+  <ul>
+    <li><strong>삽입 이상(Insertion Anomalies) :</strong> 원하지 않는 자료가 삽입된다든지, 삽입하는데 자료가 부족해 삽입이 되지 않아 발생하는 이상을 의미합니다.</li>
+    <li><strong>삭제 이상(Deletion Anomalies) :</strong> 하나의 자료만 삭제하고 싶지만, 그 자료가 포함된 튜플 전체가 삭제됨으로써 원하지 않는 정보의 손실이 발생하는 이상을 의미합니다.</li>
+    <li><strong>수정 이상(Modification Anomalies) :</strong> 데이터 수정시 일부의 튜플만 갱신되어 데이터의 일관성에 이상이 생기는 현상을 의미합니다.</li>
+  </ul>
+</blockquote>
+
+<h3 id="정규형이란-무엇이고-이들의-종류에-대해서-설명해주실-수-있나요">정규형이란 무엇이고 이들의 종류에 대해서 설명해주실 수 있나요?</h3>
+
+<p><strong>정규형이란 특정 조건을 만족하는 테이블의 스키마 형태를 말하며 제 1 정규형, 제 2 정규형, 제 3 정규형, BCNF 정규형 등이 존재합니다.</strong></p>
+
+<ul>
+  <li><strong>제 1 정규형 :</strong> 테이블의 <u>각 로우에 컬럼의 값이 1개</u>만 있어야 하는 형태의 테이블 스키마를 의미합니다.</li>
+  <li><strong>제 2 정규형 :</strong> 제 1 정규형을 만족하면서 <u>Primary Key가 합성키이며, 부분 종속(Primary Key 중에 특정 컬럼에만 종속된 컬럼)이 없어야 하는 형태</u>의 테이블 스키마를 의미합니다.</li>
+  <li><strong>제 3 정규형 :</strong> 제 2 정규형을 만족하면서 테이블 내의 <u>비주요 속성이 기본 키에만 의존</u>하는 테이블 스키마를 의미합니다.</li>
+  <li><strong>BCNF 정규형 :</strong> 제 3 정규형을 만족하면서 <u>모든 결정자가 후보키 집합</u>에 속한 테이블 스키마를 의미합니다.</li>
+</ul>
+
+<blockquote>
+  <h3 id="함수적-종속성functional-dependency">함수적 종속성(Functional Dependency)</h3>
+
+  <p><strong>함수적 종속성이란 속성 값의 의미와 속성 간의 상호 관계로부터 유도되는 제약조건의 일종을 의미합니다.</strong> X와 Y를 임의의 속성 집합이라고 할 때, X의 값이 Y의 값을 유일하게(unique) 결정한다면 “X는 Y를 함수적으로 결정한다”라고 합니다.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="nosql">NoSQL</h2>
+
+<hr />
+
+<h3 id="nosql이란-무엇이고-어떠한-경우에-사용하는-것이-좋나요">NoSQL이란 무엇이고 어떠한 경우에 사용하는 것이 좋나요?</h3>
+
+<p><strong>NoSQL 테이터베이스란 전통적인 관계형 모델에서 벗어나서 다양한 데이터 모델을 사용하여 데이터의 관리와 접근을 지원하는 데이터베이스를 의미합니다.</strong> NoSQL은 데이터의 스펙이 자주 변경되는 경우나, Read 작업이 자주 일어나는 경우, 수 많은 양의 데이터를 다루기 위해 수평 확장이 자주 필요한 경우에 사용하면 좋습니다.</p>
+
+<h3 id="nosql의-장점과-단점에-대해서-말해주세요">NoSQL의 장점과 단점에 대해서 말해주세요.</h3>
+
+<p><strong>NoSQL의 장점으로는 스키마가 없거나 느슨하게 제공되기 때문에 요구사항 변경에 유연하게 대처할 수 있습니다. 또한 관계형 데이터베이스에 비해 수평 확장이 쉽기 때문에 대용량 데이터 처리시 성능상의 이점을 얻어갈 수 있습니다.</strong></p>
+
+<p><strong>NoSQL의 단점으로는 데이터베이스마다 사용하는 데이터의 모델이 다르기 때문에 이를 도입하기 위해서는 해당 데이터베이스를 깊게 공부해야해서 익숙한 관계형 데이터베이스보단 학습 비용이 많이 든다는 단점이 존재하구요, SQL처럼 엄격한 제약조건이 존재하지 않기 때문에 데이터를 수정하거나 삭제하는 경우 모든 컬렉션에 걸쳐서 이를 반영해야 하는 단점이 존재합니다.</strong></p>
+
+<h3 id="사용해보신-nosql이-있으시나요-있다면-무엇이고-왜-사용했는지-알려주세요">사용해보신 NoSQL이 있으시나요? 있다면 무엇이고 왜 사용했는지 알려주세요.</h3>
+
+<p><strong>저는 Key-Value 구조의 데이터베이스인 Redis를 사용해 보았습니다. 레디스는 인-메모리 기반의 데이터베이스로써 데이터 접근이 타 DB에 비해 상대적으로 빠르다는 장점을 가지고 있습니다. 이러한 이유에서 추천 정보를 캐싱하기 위해서 Redis를 사용했으며 장애 대응을 위해 Redis가 제공하는 Master-Replica 모델을 도입하였습니다.</strong></p>
+
+<h3 id="데이터-모델에-따라-nosql을-분류한다면-어떻게-분류할-수-있을까요">데이터 모델에 따라 NoSQL을 분류한다면 어떻게 분류할 수 있을까요?</h3>
+
+<p><strong>대표적으로 하나의 키에 하나의 데이터가 저장되는 Key-Value Data Model을 채택하고 있는 데이터베이스와 Key-Value 모델을 개념적으로 확장해서 하나의 키에 하나의 구조화된 문서를 저장하는 Document Data Model을 채택한 데이터베이스 등으로 나눌 수 있을것 같습니다.</strong> Key-Value Data Model을 채택하고 있는 데이터베이스는 대표적으로 Redis를 들 수 있구요, Document Data Model을 채택하고 있는 데이터베이스는 대표적으로 MongoDB가 존재합니다.</p>
+
+<hr />
+
+<h2 id="computer-network">Computer Network</h2>
+
+<hr />
+
+<h3 id="osi-7-layer에-대해서-설명해주실-수-있나요">OSI 7 Layer에 대해서 설명해주실 수 있나요?</h3>
+
+<p>OSI 7 Layer란 네트워크를 7개의 계층으로 추상화한 구조를 의미합니다.</p>
+
+<ol>
+  <li><strong>물리 계층(Physical Layer) :</strong> 하나의 비트를 노드에서 다음 노드로 전송해주는 <u>하드웨어 전송 기술</u>을 다루는 계층입니다.</li>
+  <li><strong>링크 계층(Link Layer) :</strong> 물리 계층을 통해 송수신되는 <u>정보의 오류와 흐름을 관리하여 신뢰성있는 전송을 보장</u>하는 계층입니다. (MAC)</li>
+  <li><strong>네트워크 계층(Network Layer) :</strong> 송신 호스트에서 수신 호스트까지 패킷을 전달하기 위해 <u>라우팅과 포워딩을 담당</u>하는 계층입니다. (IP)</li>
+  <li><strong>전송 계층(Transport Layer) :</strong> <u>End-to-End 사용자들이 신뢰성있는 데이터를 주고받</u>을 수 있게 도와주는 계층입니다.(TCP, UDP)</li>
+  <li><strong>세션 계층(Session Layer) :</strong> <u>양 끝단의 응용 프로세스가 통신(동시 송수신, 반이중, 전이중)을 관리하기 위한 방법을 제공</u>해주는 계층입니다.</li>
+  <li><strong>표현 계층(Presentation Layer) :</strong> <u>코드간의 번역</u>을 담당하여 사용자 시스템에서 데이터의 형식상 차이를 다루는 부담을 응용 계층으로부터 덜어주는 계층입니다.</li>
+  <li><strong>응용 계층(Application Layer) :</strong> 응용 프로세스와 직접 관계하여 <u>일반적인 응용 서비스를 수행</u>하는 계층입니다. (HTTP, DNS, SSH)</li>
+</ol>
+
+<h3 id="네트워크를-7개의-계층으로-나눈-이유가-무엇일까요">네트워크를 7개의 계층으로 나눈 이유가 무엇일까요?</h3>
+
+<p>네트워크를 7계층으로 나눈 이유는 <strong>네트워크에서 이상이 발생했을 경우 다른 레이어의 장비 및 소프트웨어를 건들지 않고도 이상이 생긴 특정 레어어만 고칠 수 있는 유지보수 측면에서의 장점</strong>과, 예로들어 새로운 응용 계층 프로토콜을 개발할 경우 <strong>물리계층 부터 개발하지 않고 표현계층까지 재사용함으로써 확장성 및 재사용성 측면에서의 장점</strong>을 가지기 때문에 네트워크를 계층적 구조인 OSI 7 레이어로 나눈 것 같습니다.</p>
+
+<h3 id="dns는-무엇인가요">DNS는 무엇인가요?</h3>
+
+<p><strong>DNS란 Domain Name System의 약자로 Host의 Domain Name을 IP로 변환해주는 서비스를 의미합니다.</strong> DNS는 서버들의 계층 구조로 구현된 분산형 데이터베이스로서 주요 구성 요소로 Root, Top Level Domain(TLD), Authoritative, Local DNS Server가 존재합니다.</p>
+
+<h3 id="브라우저에-wwwnavercom을-입력시-dns가-동작하는-순서를-저희에게-설명해주실수-있나요">브라우저에 www.naver.com을 입력시 DNS가 동작하는 순서를 저희에게 설명해주실수 있나요?</h3>
+
+<ol>
+  <li>Host가 www.naver.com 도메인 네임에 해당하는 IP를 얻기 위해 Local DNS Server에 요청을 보냅니다.</li>
+  <li>Local DNS Server에 해당 IP가 캐시되어 있을 경우 바로 응답해줄 수 있지만, 없을경우 Root DNS Server에 요청을 보냅니다. <strong>Root DNS Server</strong>는 <strong>.com</strong>을 인식한 후  <strong>.com 도메인을 관리하는 서버인 Top Level Domain(TLD) Server의 IP를 알려줍니다.</strong></li>
+  <li>Local DNS Server는 TLD Server에 www.naver.com 도메인 네임에 해당하는 IP를 얻을 수 있는지 요청합니다. TLD Server에서 해당 IP를 캐시하고 있을 경우 바로 응답해줄 수 있지만, 없을경우 <strong>naver.com을 인식한후 naver.com을 관리하는 서버인 Authoritative Server의 IP를 알려줍니다.</strong></li>
+  <li>Local DNS Server는 Authoritative Server에 www.naver.com 도메인 네임에 해당하는 IP를 얻을 수 있는지 요청합니다. <strong>Authoritative Server는 해당 도메인 네임에 대응하는 IP를 응답해 줍니다.</strong></li>
+  <li>Local DNS Server는 Host에게 www.naver.com 도메인 네임에 대응하는 IP를 xxx.xxx.xxx.xxx 응답해줍니다.</li>
+  <li>Host는 IP를 사용해서 다른 호스트에게 요청을 보냅니다.</li>
+</ol>
+
+<h3 id="ip는-무엇인가요">IP는 무엇인가요?</h3>
+
+<p><strong>IP(Internet Protocol)는 Internet Protocol의 약자로써 송신 호스트와 수신 호스트가 패킷 교환 네트워크에서 정보를 주고받는데 사용하는 프로토콜입니다.</strong> 이는 네트워크 계층에서 <u>호스트의 주소지정과 패킷 분할 및 조립 기능을 담당</u>합니다.</p>
+
+<blockquote>
+  <p>IP는 비신뢰성(unreliability)과 비연결성(connectionlessness)이 특징이며 패킷 전송의 정확한 순서를 보장하려면 TCP 프로토콜 즉, 전송 계층과 같은 상위 프로토콜을 사용해야 합니다.</p>
+</blockquote>
+
+<h3 id="tcp와-udp는-각각-무엇이고-이들의-차이점에-대해서-알려주시고-각각-언제-사용하면-좋을지-알려주세요">TCP와 UDP는 각각 무엇이고 이들의 차이점에 대해서 알려주시고 각각 언제 사용하면 좋을지 알려주세요.</h3>
+
+<p><strong>UDP는 비신뢰적이고 비연결형 서비스를 제공하는 프로토콜이구요 TCP는 신뢰적이고 연결형 서비스를 제공하는 프로토콜입니다.</strong> 신뢰성이 요구되어지는 HTTP와 같은 응용 계층 프로토콜은 TCP를 사용하구요, 신뢰성이 중요하지 않고 데이터를 빠른 속도로 전송하고자하는 DNS나 VoIP와 같은 응용 계층 프로토콜은 UDP를 사용합니다.</p>
+
+<h3 id="3-way-handshake와-4-way-handshake에-대해서-설명해주세요">3 way handshake와 4 way handshake에 대해서 설명해주세요.</h3>
+
+<p><strong>TCP는 정확한 전송을 보장하기 위해서 두 호스트간에 논리적인 접속을 위해 3 way handshake를 진행합니다. 전송이 완료되었다면 4 way handshake를 통해서 호스트간의 연결이 해제됩니다.</strong></p>
+
+<blockquote>
+  <h3 id="3-way-handshake---연결-성립"><strong>3 way handshake - 연결 성립</strong></h3>
+
+  <p>TCP는 정확한 전송을 보장해야하기 때문에 두 호스트간에 논리적인 접속을 위해서 3 way handshake를 진행합니다.</p>
+
+  <p><img src="/assets/interview/naver-practical-interview-preparation3-3.png" style="width:60%" /></p>
+
+  <ol>
+    <li>클라이언트가 서버에게 SYN 패킷을 보낸다.(seq : x)</li>
+    <li>서버가 SYN(x)를 받고, 클라이언트로 ACK와 SYN 패킷을 보낸다. (seq : y , ACK : x + 1)</li>
+    <li>클라이언트가 패킷을 받았다면 ACK(y+1)을 다시 서버로 보낸다.</li>
+    <li>두 호스트간에 연결 성공</li>
+  </ol>
+
+  <h3 id="4-way-handshake---연결-해제">4 way handshake - 연결 해제</h3>
+
+  <p>TCP는 두 호스트간의 연결을 해제하기위해 4 way handshake를 진행합니다.</p>
+
+  <p><img src="/assets/interview/naver-practical-interview-preparation3-4.png" style="width:60%" /></p>
+
+  <ol>
+    <li>클라이언트는 서버에게 연결을 종료한다는 FIN 플래그를 보냅니다.</li>
+    <li>서버는 FIN을 받고, 확인했다는 ACK를 클라이언트에게 보냅니다.
+(이때 모든 데이터를 보내기 위해 TIME OUT 상태가 됩니다.)</li>
+    <li>서버는 데이터를 모두 보냈다면, 연결이 종료되었다는 FIN 플래그를 클라이언트에게 보냅니다.</li>
+    <li>클라이언트는 FIN을 받고, 확인했다는 ACK를 서버에게 보냅니다.
+(아직 서버로부터 받지 못한 데이터가 있을 수 있으므로 TIME_WAIT을 통해 기다립니다.)</li>
+    <li>두 호스트간에 연결 해제</li>
+  </ol>
+</blockquote>
+
+<h3 id="http란-무엇인가요">HTTP란 무엇인가요?</h3>
+
+<p><strong>HTTP는 어플리케이션 계층 프로토콜의 한 종류로써 TCP/IP 기반의 신뢰적인 프로토콜입니다.</strong> 주로 브라우저와 서버간의 통신을 하기 위해 자주 사용합니다.</p>
+
+<h3 id="http와-https의-차이는-무엇인가요">HTTP와 HTTPS의 차이는 무엇인가요?</h3>
+
+<p>HTTP와 HTTPS는 TCP/IP 기반의 신뢰적인 어플리케이션 계층 프로토콜입니다. 두 프로토콜 모두 브라우저와 서버간의 통신을 위해서 자주 사용하지만 HTTP는 텍스트 교환이므로, 누군가가 네트워크에서 신호를 가로채면 내용이 노출되는 보안 이슈가 존재합니다. 이러한 <strong>보안 이슈를 해결하기 위해 SSL 인증서를 사용해서 HTTP를 암호화한 프로토콜이 HTTPS 입니다.</strong></p>
+
+<h3 id="http-request-method는-무엇이고-어떤-종류가-있는지-설명해주세요">HTTP Request Method는 무엇이고 어떤 종류가 있는지 설명해주세요.</h3>
+
+<p><strong>HTTP는 Request Method를 정의하여, 주어진 리소스에서 수행하길 원하는 행동을 나타냅니다.</strong> HTTP Request Method 종류로는 <u>GET, POST, PUT, DELETE, PATCH</u> 등이 존재합니다.</p>
+
+<ul>
+  <li><strong>GET :</strong> GET 메서드는 특정 리소스를 요청합니다.</li>
+  <li><strong>POST :</strong> POST 메서드는 특정 리소스에 요청에 포함된 데이터를 처리하는 것을 요청합니다.</li>
+  <li><strong>PUT :</strong> PUT 메서드는 특정 리소스의 현재 표현식을 모두 요청에 포함된 payload로 바꿉니다.</li>
+  <li><strong>DELETE :</strong> DELETE 메서드는 특정 리소스를 삭제합니다.</li>
+  <li><strong>PATCH :</strong> PATCH 메서드는 특정 리소스의 특정 부분만을 수정하는데 사용합니다.</li>
+</ul>
+
+<h3 id="http-response-status-code는-무엇이며-어떤-종류가-있는지-설명해주세요">HTTP Response Status Code는 무엇이며 어떤 종류가 있는지 설명해주세요.</h3>
+
+<p><strong>HTTP Reponse Status Code는 말 그대로 HTTP 요청에 대한 상태를 나타내는 코드이며 100번대 코드부터 500번대 코드까지 존재합니다.</strong></p>
+
+<ul>
+  <li><strong>1xx :</strong> 서버는 요청을 받았으며 작업을 계속진행한다는 상태를 나타내는 코드들의 집합
+    <ul>
+      <li>100 Continue</li>
+      <li>101 Switching Protocol</li>
+    </ul>
+  </li>
+  <li><strong>2xx :</strong> 서버는 클라이언트의 요청을 성공적으로 처리했다는 상태를 나타내는 코드들의 집합
+    <ul>
+      <li>200 OK</li>
+      <li>201 Created</li>
+    </ul>
+  </li>
+  <li><strong>3xx :</strong> 서버는 클라이언트의 요청을 성공적으로 처리했지만 클라이언트는 요청을 마치기 위해 추가 동작을 취해야 한다는 상태를 나타내는 코드들의 집합
+    <ul>
+      <li>301 Moved Permanently</li>
+      <li>302 Found</li>
+    </ul>
+  </li>
+  <li><strong>4xx :</strong> 서버는 클라이언트의 요청에 오류가 있다는 상태를 나타내는 코드들의 집합
+    <ul>
+      <li>400 Bad Request</li>
+      <li>401 Unauthorized</li>
+    </ul>
+  </li>
+  <li><strong>5xx :</strong> 서버는 클라이언트의 요청에는 이상이 없지만 이를 처리하는 서버에 문제가 있다는 것을 나타내는 코드들의 집합
+    <ul>
+      <li>500 Internal Server Error</li>
+      <li>503 Service Unavailable</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="http-header는-무엇이고-어떠한-종류가-있는지-설명해주세요">HTTP Header는 무엇이고 어떠한 종류가 있는지 설명해주세요.</h3>
+
+<p><strong>HTTP Header는 클라이언트와 서버가 요청 또는 응답으로 부가적인 정보를 전송할 수 있도록 하는 데이터 구조입니다.</strong> HTTP 헤더에는 Content-Type, Content-Language, User-Agent, Host, Server, Set-Cookie 등이 존재합니다.</p>
+
+<h3 id="처리량throughput과-지연시간latency에-대해서-설명해주세요">처리량(Throughput)과 지연시간(Latency)에 대해서 설명해주세요.</h3>
+
+<p>처리량과 지연시간은 둘 다 컴퓨터의 성능을 나타내는데 중요한 개념입니다. <strong>Throughput은 초당 처리하는 작업의 개수를 말하며, Latency는 하나의 작업을 처리하는데 걸리는 시간을 말합니다.</strong></p>
+
+<h3 id="cookie와-session이-각각-무엇인지-설명해주시고-어떠한-차이점을-가지는지-설명해주세요">Cookie와 Session이 각각 무엇인지 설명해주시고 어떠한 차이점을 가지는지 설명해주세요.</h3>
+
+<p><strong>쿠키(Cookie)란 클라이언트의 로컬에 저장되는 Key-Value가 들어있는 작은 데이터 파일을 의미하구요 세션은 클라이언트의 정보를 서버 메모리에 저장하는 기술을 의미합니다.</strong> 쿠키와 세션의 가장 큰 차이점은 “어디에서 데이터를 관리하느냐”의 차이일 것 같습니다. 쿠키는 클라이언트 쪽에서 데이터를 관리하구요, 세션은 서버 쪽에서 데이터를 관리합니다.</p>
+
+<blockquote>
+  <p>보통 클라이언트는 무수히 많고, 서버는 상대적으로 적기 때문에 세션이 많을 수록 서버는 부하가 걸리게 됩니다. 이러한 경우를 방지하고자 다양한 방법들을 생각해야만 합니다. 이슈 해결 방법으로는 세션을 디스크에 저장하는 방법도 있을것 같구요, 세션이 아닌 본인만의 클라이언트 식별 프로토콜을 만들어도 좋을 것 같습니다.</p>
+</blockquote>
+
+<h3 id="세션과-쿠키가-나오게된-이유는-무엇일까요"><strong>세션과 쿠키가 나오게된 이유는 무엇일까요?</strong></h3>
+
+<p><strong>HTTP는 무상태(stateless), 무연결(conectionless) 프로토콜입니다.</strong> 즉, 클라이언트의 상태를 저장하지도, 클라이언트와의 연결을 지속하지도 않습니다. 하지만 대부분의 어플리케이션들은 상태를 기록할 필요와 연결을 유지할 필요가 있습니다. 이러한 문제를 해결하고자 등장한 것이 쿠키와 세션입니다.</p>
+
+<h3 id="http-세션-유지란-무엇이고-여러-서버가-존재할-때-세션은-어떻게-유지할-수-있을까">HTTP 세션 유지란 무엇이고, 여러 서버가 존재할 때 세션은 어떻게 유지할 수 있을까?</h3>
+
+<p>무상태 무연결 프로토콜인 HTTP의 세션 유지 방법은 <strong>첫 요청시 서버에서 세션을 만들고 클라이언트로 보내 쿠키에서 세션을 관리하게 끔 한 뒤 요청마다 쿠키에 세션을 담아서 서버와의 세션을 유지시킵니다.</strong></p>
+
+<p>여러 서버가 존재할 때 세션은 서비스 노드에 들어가기 전에 처리되어야만 합니다. 저라면 클러스터를 구성해서 서비스 노드 앞단에 서버를 만들어 세션 처리를 진행한 뒤 서비스 노드로 요청을 넘길것 같습니다.</p>
+
+<blockquote>
+  <p>톰켓 레벨 세션 매니저 + 레디스로 클러스터링</p>
+</blockquote>
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Database">Database</a>,&nbsp;<a href="/tag/Transaction">Transaction</a>,&nbsp;<a href="/tag/Index">Index</a>,&nbsp;<a href="/tag/Network">Network</a>,&nbsp;<a href="/tag/OSI">OSI</a>,&nbsp;<a href="/tag/DNS">DNS</a>,&nbsp;<a href="/tag/TCP/UDP">TCP/UDP</a>,&nbsp;<a href="/tag/HTTP">HTTP</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=%5B%EC%8B%A4%EB%AC%B4+%EB%A9%B4%EC%A0%91+%EC%A4%80%EB%B9%84+-+3%5D+%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4+%26+%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC+%28Database+%26+Network%29&u=http%3A%2F%2Flocalhost%3A4000%2Finterview%2F2021%2F03%2F01%2FNAVER-Practical-Interview-Preparation-3.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Finterview%2F2021%2F03%2F01%2FNAVER-Practical-Interview-Preparation-3.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/portfolio/">Portfolio</a>
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://www.linkedin.com/in/%EC%A2%85%EC%A7%84-%EB%B0%B0-9992251a8/" title="Connect with me on LinkedIn">
+              <i class="fa fa-linkedin"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">객체지향을 사랑하고 클린코드에 관심이 많습니다. 질문을 좋아하고 생각하는 것을 좋아합니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>
