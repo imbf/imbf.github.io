@@ -15,7 +15,7 @@ tags: Operating-System OS Thread Process Async Sync Concurrent-Control Memory
 
 ### Core는 무엇인가요?
 
-Core란 Processor의 한 종류인 **CPU의 기본 계산 단위를 의미합니다.**
+Core란 Processor의 한 종류인 **CPU의 기본 연산 단위를 의미합니다.**
 
 ### 프로세스와 스레드는 각각 무엇이고 어떠한 차이가 존재하나요?
 
@@ -108,7 +108,7 @@ Stack은 함수의 Argument, Return Address & Value, Local Variable 등을 저�
 
 ### Critical Section은 무엇인가요?
 
-**동일한 자원을 동시에 접근하는 작업을 실행하는 코드 영역을 Critical Section** 이라고 합니다.
+**공유 자원을 접근하는 작업을 실행하는 코드 영역을 Critical Section** 이라고 합니다.
 
 
 
