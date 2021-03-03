@@ -6,9 +6,696 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 02 Mar 2021 16:00:51 +0900</pubDate>
-    <lastBuildDate>Tue, 02 Mar 2021 16:00:51 +0900</lastBuildDate>
+    <pubDate>Wed, 03 Mar 2021 18:53:28 +0900</pubDate>
+    <lastBuildDate>Wed, 03 Mar 2021 18:53:28 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>[실무 면접 준비 - 4] 객체지향 &amp; JVM (OOP &amp; JVM)</title>
+        <description>&lt;hr /&gt;
+
+&lt;h2 id=&quot;object-oriented-programmingoop&quot;&gt;Object Oriented Programming(OOP)&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;좋은-코드란-무엇인가요&quot;&gt;좋은 코드란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;코드란 특정 문제를 해결하기 위해 작성하는 것이라고 생각합니다. 이러한 문제들은 요구사항으로 표현할 수 있기 때문에 &lt;strong&gt;좋은 코드란 현재의 요구사항을 만족하면서 불확실한 미래의 요구사항까지 유연하게 대처할 수 있는 코드&lt;/strong&gt;를 좋은 코드라고 생각합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;좋은-코드를-작성하기-위해서는-무엇이-가장-중요하나요&quot;&gt;좋은 코드를 작성하기 위해서는 무엇이 가장 중요하나요?&lt;/h3&gt;
+
+&lt;p&gt;좋은 코드를 작성하기 위해서는 &lt;strong&gt;도메인에 대한 깊은 이해&lt;/strong&gt;가 가장 중요하다고 생각합니다. 도메인에 대한 깊은 이해 없이 작성된 코드는 일단 현재의 요구사항은 만족할지 몰라도 &lt;strong&gt;도메인의 특성들이 코드에 잘 녹여져 있지 않기 때문에 조그마한 요구사항에도 코드의 큰 변화가 필요하게 됩니다.&lt;/strong&gt; 이러한 큰 변화들은 자연스레 버그를 유발하게 되구요 결국 좋지 못한 코드가 됩니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;비즈니스 요구사항은 도메인으로부터 발생합니다. 만약 코드가 도메인의 특성이 잘 반영하지 않는다면 도메인으로부터 발생한 조그마한 요구사항에도 코드는 큰 변경을 요구할 것이며 이는 자연스레 많은 버그를 유발하게 됩니다. 이러한 버그들은 개발자들에게 부담으로 다가와서 변경에 소극적이게 되고 자연스레 기획자의 다양한 요구사항들을 받아들이지 못하게 됩니다.&lt;/p&gt;
+
+  &lt;p&gt;서비스를 운영하면서 수 많은 요구사항이 발생하는데 기획자가 이를 파악해서 개발자에게 요구사항을 전달함에도 불구하고 개발자가 이러한 요구사항을 시스템에 반영하지 못하는 코드 구조라… &lt;strong&gt;너무 슬프다고 생각합니다. 저는 이러한 시스템을 구성하는 개발자는 되고 싶지 않습니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;객체-지향-프로그래밍이란-무엇인가요&quot;&gt;객체 지향 프로그래밍이란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;객체 지향 프로그래밍이란 데이터와 프로시저를 각각 따로 관리하는 것이 아닌 객체에 위치시켜서 객체 간의 협력을 통해서 시스템을 구성하는 프로그래밍 방식입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;절차-지향-프로그래밍이란-무엇인가요&quot;&gt;절차 지향 프로그래밍이란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;절차지향 프로그래밍이란 순차적인 처리를 중요시하여 시스템을 구성하는 프로그래밍 방식입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;객체-지향과-절차-지향-프로그래밍의-장단점은-무엇이고-언제-사용해야-할까요&quot;&gt;객체 지향과 절차 지향 프로그래밍의 장단점은 무엇이고 언제 사용해야 할까요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;객체 지향 프로그래밍의 장점으로는 코드의 재사용성이 높아지고 유지보수가 쉬워진다는 장점이 있으며 단점으로는 객체 생성 및 참조 시에 발생하는 오버헤드 때문에 절차지향에 비해 상대적으로 느리다는 단점이 존재합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;절차 지향 프로그래밍의 장점으로는 불필요한 오버헤드를 줄여 속도가 빠르다는 장점이 있으며 단점으로는 코드의 재사용성과 유지보수성이 객체지향 비해 떨어진다는 단점이 존재합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;객체 지향의 경우 요구사항이 자주 발생하거나 변경되는 Web이나 Mobile App 같은 서비스 개발하면서 객체 지향을 사용하면 좋을 것 같구요, 절차 지향의 경우 요구사항 변경보다는 성능에 중점을 두고 싶은 일괄 처리와 같은 시스템에서 절차 지향을 사용하면 좋을것 같습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;오버헤드(overhead)&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;오버헤드란 어떤 처리를 하기 위해 들어가는 &lt;u&gt;간접적인 처리 시간, 메모리&lt;/u&gt; 등을 말합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;객체-지향의-3대-특징에-대해서-설명해주세요&quot;&gt;객체 지향의 3대 특징에 대해서 설명해주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;캡슐화란 객체의 속성과 행위를 하나로 묶어서 세부 구현은 내부로 감추고 최소한의 인터페이스만 객체 외부로 노출시키는 것을 의미합니다.&lt;/strong&gt; 이를 통해 자율적인 객체를 만들 수 있으며 다른 객체와 불필요하게 결합될 필요가 없어서 자연스레 시스템의 결합도는 떨어지고 응집도는 올라가게 됩니다. 이의 결과로서 시스템은 유지보수하기 쉬워지고 추후 변경에 유연하게 대처할 수 있게되는 효과를 가져옵니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;상속이란 자식이 부모의 특징을 물려받는 것을 의미하구요, 자바에서는 인터페이스 상속과 클래스 상속으로 나뉩니다.&lt;/strong&gt; 이를 통해 모듈 즉, 클래스의 재사용성이 높아지고 다형성을 구현할 수 있게 되어집니다. 하지만 무분별한 상속 자체는 모듈간의 결합도를 올리기 때문에 무분별하게 남용할 시 추후 변경에 유연하게 대응하지 못하는 시스템 구조를 가질 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;다형성이란 같은 요청으로부터 응답이 객체의 타입에 따라 다르게 나타나는 것을 의미합니다.&lt;/strong&gt; 이를 통해 객체지향은 더 유연한 설계를 가질 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;객체object와-클래스class의-차이는-무엇인가요&quot;&gt;객체(Object)와 클래스(Class)의 차이는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;클래스는 시스템의 정적인(static) 구성요소를 나타내는 것이구요, 객체는 클래스의 인스턴스로써 시스템의 동적인(dynamic) 구성 요소를 나타냅니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;추상화abstraction란-무엇인가요&quot;&gt;추상화(Abstraction)란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;추상화란 특정 개념이나 개체를 보았을 때 특정 관점에서 관심있거나 중요한 부분을 강조하거나 추려내는 작업을 의미합니다.&lt;/strong&gt;  즉, 중요한 정보만 객체의 인터페이스로써 표시하고 세부 구현 정보는 객체의 내부로 숨겨서 객체 지향 프로그래밍을 하기 위한 매우 중요한 개념입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;객체-지향-설계-5원칙은-각각-무엇이며-우리는-이를-통해-무엇을-얻고-싶은-걸까요&quot;&gt;객체 지향 설계 5원칙은 각각 무엇이며 우리는 이를 통해 무엇을 얻고 싶은 걸까요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;객체 지향 설계 5 원칙은 원칙들의 앞글자만 따서 SOLID 원칙이라고도 불리는데요, 시스템의 결합도를 낮추고 응집도를 높이는 고전적인 시스템 설계 원칙을 객체 지향 관점에서 5가지의 원칙으로 재정립한 것입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;단일 책임 원칙(Single Reponsibility Principle, SRP) :&lt;/strong&gt; 한 클래스는 하나의 책임만 가지며 클래스는 그 책임을 완전히 캡슐화해야 한다는 원칙입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;개방 폐쇄 원칙(Open Closed Principle, OCP) :&lt;/strong&gt; 소프트웨어 요소(메서드, 클래스, 모듈)는 확장에 대해서는 열려 있어야 하고 수정(변경)에 대해서는 닫혀 있어야 한다는 원칙입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;리스코프 치환 원칙(Liskov Substitution Principle, LSP) :&lt;/strong&gt; 서브 클래스의 인스턴스는 슈퍼 클래스의 인스턴스로 치환할 수 있어야 한다는 원칙입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;인터페이스 분리 원칙(Interface Separation Principle, ISP) :&lt;/strong&gt; 클라이언트는 자신이 이용하지 않는 메서드에 의존하지 않아야 한다는 원칙입니다.
+    &lt;ul&gt;
+      &lt;li&gt;큰 덩어리의 인터페이스들을 구체적이고 작은 단위들로 분리 시킴으로써 시스템의 결합도를 낮추고 응집도를 높인다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;의존 역전 원칙(Dependency Inversion Principle, DIP) :&lt;/strong&gt; 특정 소프트웨어 요소를 개발하면서 자신보다 변하기 쉬운것에 의존하지 말라는 원칙입니다. 즉, 보다 추상적인 것에 의존하라는 원칙입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;디자인-패턴이란-무엇인가요&quot;&gt;디자인 패턴이란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;소프트웨어를 설계할 때 특정 문맥에서 자주 발생하는 문제들을 해결할 수 있는 재사용 가능한 Best Practice 설계 패턴을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;singleton-패턴은-무엇이고-언제-사용되며-어떻게-구현하나요&quot;&gt;Singleton 패턴은 무엇이고 언제 사용되며 어떻게 구현하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Singleton 패턴이란 시스템에서 인스턴스가 오직 1개만 생성되어야 하는 경우에 사용되는 패턴을 의미합니다.&lt;/strong&gt; 시스템에서 동일한 커넥션 객체를 만든다던지, 하나만 사용되어야하는 객체를 만들 때 매우 유용합니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Eager Initialization&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.junit.jupiter.api.Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;junit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jupiter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+      
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+      
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+      
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;singletonTest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singletonA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singletonB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;singletonA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singletonB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Lazy Initialization&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.junit.jupiter.api.Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;junit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jupiter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+      
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+      
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;synchronized&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;singleton&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+      
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;singletonTest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singletonA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singletonB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Singleton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;singletonA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singletonB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;factory-method-패턴은-무엇이고-언제-사용되며-어떻게-구현하나요&quot;&gt;Factory Method 패턴은 무엇이고 언제 사용되며 어떻게 구현하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;부모 클래스로부터 객체를 생성하는 부분을 서브 클래스에 위임하여 다형성을 통해 클래스간의 결합도를 낮추기 위한 디자인 패턴을 의미합니다.&lt;/strong&gt; 팩토리 메서드 패턴을 사용함으로써 객체 생성시 발생하는 요구사항들에 유연하게 대처할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.junit.jupiter.api.Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;junit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;jupiter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Assertions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FactoryMethod&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;factoryMethodTest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Factory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;factoryA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StringFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Factory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;factoryB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EnumFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;factoryA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;APPLE&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;factoryB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;APPLE&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    
+    
+        &lt;span class=&quot;n&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;factoryA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GRAPE&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;factoryB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GRAPE&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fruit&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StringFactory&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;Fruit&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Fruit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;APPLE&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Apple&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;GRAPE&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Grape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;MELON&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Melon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EnumFactory&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Factory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;Fruit&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Fruit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;FruitCategory&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fruitCategory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FruitCategory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;valueOf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fruitCategory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;FruitCategory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;APPLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Apple&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fruitCategory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;FruitCategory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GRAPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Grape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fruitCategory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;FruitCategory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MELON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Melon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FruitCategory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;APPLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;GRAPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MELON&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fruit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Apple&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fruit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Grape&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fruit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Melon&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fruit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;adapater-패턴은-무엇이고-언제-사용되며-어떻게-구현하나요&quot;&gt;Adapater 패턴은 무엇이고 언제 사용되며 어떻게 구현하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;어댑터 패턴(Adapter pattern)은 클래스의 인터페이스를 사용자가 기대하는 다른 인터페이스로 변환하는 패턴으로 서로 호환성이 없는 인터페이스 때문에 함께 동작할 수 없는 클래스들이 작동하도록 해줍니다.&lt;/strong&gt; 대표적으로 JDBC가 어댑터 패턴을 활용하여 시스템을 단일한 인터페이스로 조작할 수 있게끔 해줍니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ServiceA&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceB&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ServiceB&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterServiceA&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;ServiceA&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sa1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sa1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterServiceB&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;ServiceB&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sb1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sb1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ClientWithAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;AdapterService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asa1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterServiceA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;AdapterService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asb1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AdapterServiceB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;asa1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;asb1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;template-method-패턴은-무엇이고-언제-사용되며-어떻게-구현하나요&quot;&gt;Template Method 패턴은 무엇이고 언제 사용되며 어떻게 구현하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;템플릿 메서드 패턴(Template Method Pattern)이란 알고리즘의 구조를 바꾸지 않고 서브클래스에서 알고리즘의 특정 단계를 재정의하는 것을 의미합니다.&lt;/strong&gt; 즉, 상속을 통해 슈퍼클래스의 기능을 확장할 때 사용하는 가장 대표적인 방법이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.junit.jupiter.api.Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Business&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;======================&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;printBusinessName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;======================&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printBusinessName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Cafe&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Business&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printBusinessName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;카페&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HairShop&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Business&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printBusinessName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;헤어샵&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TemplateMethod&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Cafe&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cafe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Cafe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;HairShop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hairShop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HairShop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cafe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;hairShop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;strategy-패턴은-무엇이고-언제-사용되며-어떻게-구현하나요&quot;&gt;Strategy 패턴은 무엇이고 언제 사용되며 어떻게 구현하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;전략 패턴(Strategy Pattern)이란 전략 객체를 통해서 알고리즘의 구조를 바꿀 수 있는 디자인 패턴을 의미합니다.&lt;/strong&gt; 전략 객체를 위한 인터페이스를 정의하고 알고리즘의 구조를 바꾸고 싶은 경우 직접 로직을 수정하지 않고 전략 객체를 바꿔줌으로써 시스템의 결합도를 낮출 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Java Util의 PriorityQueue가 전략 패턴을 사용하는 대표적인 예이며 Comparator 인터페이스가 전략 객체로써 사용됩니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.junit.jupiter.api.Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StrategyTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;strategyTest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Strategy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Solider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rambo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    
+        &lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StrategyGun&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;rambo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    
+        &lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StrategySword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;rambo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Strategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runStrategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StrategyGun&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Strategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runStrategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;탕, 타당, 타다당&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StrategySword&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Strategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runStrategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;챙.. 채쟁챙 챙챙&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runContext&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Strategy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;전투 시작&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;runStrategy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;전투 종료&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;proxy-패턴과-decorator패턴은-각각-무엇이고-언제-사용되며-어떻게-구현하나요&quot;&gt;Proxy 패턴과 Decorator패턴은 각각 무엇이고 언제 사용되며 어떻게 구현하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Proxy와 Decorator 패턴 모두 Target Object와 동일한 인터페이스를 가진 객체를 이용해서 다양한 행위를 추가하기 위한 의도가 존재합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Decorator 패턴은 기존 타겟 객체의 기능에 책임을 추가시키는 것을 의미합니다.&lt;/strong&gt; 예로 들어 어떤 메소드의 시작이나 끝에 &lt;u&gt;로깅이나 트랜잭션을 추가&lt;/u&gt;해주는 것을 Decorator 패턴이 적용된 예시라고 할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.webhook.receiver.slack.test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.junit.jupiter.api.Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Plan&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;기획&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Design&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;develop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Design&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;develop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;develop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;develop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;develop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;설계&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Implement&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;develop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Implement&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;develop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;develop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;develop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;develop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;개발&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Decorator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;decoratorTest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plan&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Plan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;design&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Design&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plan&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Develop&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;implement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Implement&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;design&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        
+        &lt;span class=&quot;n&quot;&gt;implement&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Proxy 패턴은 기존 타겟 객체의 기능에 특정 책임을 추가시키는 것이 아니라, 이러한 기능들을 다양한 방식으로 제어 해주는 즉, 접근에 대한 제어가 목적인 패턴을 의미합니다.&lt;/strong&gt; 예로 들어 &lt;u&gt;메소드의 실행을 remote host로 보낸다든지, lazy Initialization 한다든지, 캐쉬된 데이터를 사용하는 등의 작업&lt;/u&gt;들을 Proxy 패턴이 적용된 예시라고 할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.junit.jupiter.api.Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Coffee&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Americano&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Coffee&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;아메리카노 맛있어~&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CoffeeProxy&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Coffee&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Coffee&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;coffee&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CoffeeProxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Coffee&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;coffee&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;coffee&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;coffee&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 호출에 대한 흐름 제어가 주목적!!!&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;coffee&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Proxy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;proxyTest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Coffee&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CoffeeProxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Americano&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;연관association-vs-합성composition-vs-집합aggregation의-차이는-무엇인가요&quot;&gt;연관(Association) vs 합성(Composition) vs 집합(Aggregation)의 차이는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;두 객체 간의 관계가 존재할 때 이를 연관(Association)이라고 부릅니다.&lt;/strong&gt;  연관(Association)은 합성(Composition)과 집합(Aggregation)으로 나눌 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Engine 객체가 Car 객체의 일부분 일 때 이 둘의 관계는 Composition 이라고 합니다.&lt;/strong&gt; 즉, Car 객체가 죽으면 Engine 객체도 죽습니다. (Engine 객체가 Car 객체 내부에서 생성) &lt;strong&gt;(Part of 관계)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Engine&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;  
+       
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Car&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+       &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Engine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Organization 객체가 Person 객체들을 가지고 있을 때 이 둘의 관계는 Aggregation 이라고 합니다.&lt;/strong&gt; 즉, Organization 객체가 죽어도 Person 객체는 죽지 않습니다. (Person 객체가 Organization 객체 외부에서 독립적으로 생성) &lt;strong&gt;(has A 관계)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Organization&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;employees&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;   
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;java-virtual-machine-jvm&quot;&gt;Java Virtual Machine (JVM)&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;jvm-아키텍처&quot;&gt;JVM 아키텍처&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation4-1.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;java와-class파일의-차이는-무엇이고-어떻게-동작하나요&quot;&gt;java와 class파일의 차이는 무엇이고 어떻게 동작하나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;응용 프로그래머는 자바 파일(.java)을 작성하고 컴파일러가 이를 바이트 코드 파일(.class)로 변경시켜 Class Loader에 의해 JVM 메모리에 로드됩니다.&lt;/strong&gt; 즉, java 파일은 프로그래머가 작성하는 파일이고, class 파일은 컴파일러에 의해서 java 파일이 바이트 코드로 변경된 파일입니다. JVM은 클래스 로더를 사용해서 클래스 파일을 JVM 메모리 즉, Runtime Data Area에 올려놓습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;자바는-어떠한-linking-알고리즘을-사용하고-이러한-알고리즘이-가능한-이유는-무엇인가요&quot;&gt;자바는 어떠한 Linking 알고리즘을 사용하고 이러한 알고리즘이 가능한 이유는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Linking이란 여러 개의 코드와 데이터를 모아서 연결하는 작업을 의미합니다.&lt;/strong&gt; Linking을 통해서 생성된 실행 가능한 파일은 Loader를 통해 메모리에 배치됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;자바는 동적 링킹(Dynamic Linking)을 사용하여 실행 가능한 파일을 만들 때 프로그램에서 사용하는 모든 라이브러리 모듈을 복사하지 않고, 해당 모듈의 주소만 가지고 있다가 런타임에 실행 파일과 라이브러리가 메모리에 위치될 때 해당 모듈의 주소로 가서 필요한 것을 들고 오는 방식을 사용합니다.&lt;/strong&gt; (가상 메모리 방식과 비슷한 감도 없지 않아 있다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;자바가 동적 링킹(Dynamic Linking)을 사용할 수 있는 이유는 .class 파일이 실행 가능한 형태가 아닌 JVM이 읽을 수 있는 형태 Java Byte Code 이기 때문입니다.&lt;/strong&gt; &lt;u&gt;class 파일은 JVM위에서 Linking 작업을 수행할 수 있도록, 라이브러리에 대한 Symbolic Reference만을 가지고 있게 됩니다.&lt;/u&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;runtime-dynamic-loading이란-무엇인가요&quot;&gt;Runtime Dynamic Loading이란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Runtime Dynamic Loading이란 소스코드에서 객체를 참조하는 순간에 동적으로 Loading 하는 방식입니다.&lt;/strong&gt; 이는 Reflection 이라는 기술의 기본입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;class-loader란-무엇인가요&quot;&gt;Class Loader란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Class Loader는 컴파일 타임에 생성된 바이트코드(.class)를 런타임에 Load하고 배치하는 일을 담당합니다.&lt;/strong&gt; 클래스가 참조되는 순간 동적으로 Load 및 Link가 이루어지는 Dynamic Loading을 담당하는 주체입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;runtime-data-area-란-무엇인가요&quot;&gt;Runtime Data Area 란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Runtime Data Area란 JVM이 프로그램을 수행하기 위해 OS로부터 할당 받는 메모리 영역을 의미합니다.&lt;/strong&gt; Runtime Data Area는 각각의 목적에 따라 5개의 영역으로 나뉘며 이는 PC Register, JVM Stacks, Heap, Method Area, Native Method Stacks 입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;pc-register는-무엇인가요&quot;&gt;PC Register는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;PC Registers는 Thread가 생성될 때 마다 생기는 공간으로 Thread가 어떠한 명령을 실행하게 될지에 대한 부분을 기록하는 공간입니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;jvm-stacks는-무엇인가요&quot;&gt;JVM Stacks는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;JVM Stack은 스레드마다 할당되며 스레드와 동시에 생성되고 소멸됩니다. &lt;strong&gt;JVM 스택은 Frame을 넣고 빼는 작업을 수행하는 곳으로 지역 변수와 부분적인 결과를 보유하고 메소드 호출과 반환에서 역할을 수행합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;jvm-stack에-존재하는-frame은-무엇인가요&quot;&gt;JVM Stack에 존재하는 Frame은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Frame은 데이터와 부분적인 결과를 저장하고, 동적인 linking을 수행하고, 메소드를 위해 값을 리턴하고, 예외를 dispatch 하기 위해 사용되어집니다.&lt;/strong&gt; 프레임은 메서드를 호출하는 스레드의 JVM Stack으로 부터 할당되어지고 메서드가 호출되어질 때 생성되고 메서드가 완료되어질 때 소멸합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Frame은 Local Variable Section, Operand Stack, Frame Data 총 3부분으로 구성되어 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Local Variable Section&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;u&gt;Method의 Parameters와 Local Variables을 저장&lt;/u&gt;합니다. Primitive Type의 경우 Local Variable Section에 저장되지만 Reference Type은 Local Variable Section에 저장되지 않고 heap에 저장한 후 저장된 위치의 Reference를 Frame의 Local Variable Section에 저장합니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Operand Stack&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Frame의 Operand Stack이란 스레드의 작업공간이라고 할 수 있다. 프로그램 연산을 수행하면서 필요한 데이터 및 결과를 저장하는 곳이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Frame Data&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Constant Pool Resolution 정보와 Method가 정상 종료되었을 때의 정보, 비정상 종료했을 때 Exception 관련 정보가 포함되어 있습니다.&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;Constant Pool Resolution이란 Constant Pool의 Pointer 정보를 의미합니다.&lt;/p&gt;
+
+      &lt;p&gt;Constant Pool은 Method Area에 있는 곳으로 &lt;strong&gt;Class의 모든 Symbolic Reference가 저장&lt;/strong&gt;되어 있습니다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;native-method-stack은-무엇인가요&quot;&gt;Native Method Stack은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Native Method Stack이란 Native Method 즉, 자바 프로그래밍 언어 이외의 언어로 작성된 메서드를 지원하기 위한 스택이며 이를 호출할 시 JVM Stack은 동작하지 않고, Native Method Stack을 활용하여 Frame을 push, pop 한다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;method-area란-무엇인가요&quot;&gt;Method Area란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;Method Area란 모든 JVM 스레드 사이에서 공유되어지는 영역으로 JVM이 시작할 때 생성되어지며 종료될 때 소멸합니다. &lt;strong&gt;Method Area는 run-time constant pool, 필드, 메소드, 생성자 등의 클래스별 구조를 저장합니다.&lt;/strong&gt; 이러한 정보들은 ClassLoader에서 넘겨 받은 Class File의 관련 정보를 추출하여 저장합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;run-time-constant-pool이란-무엇인가요&quot;&gt;Run-Time Constant Pool이란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;run-time constant pool은 클래스 파일에 있는 constant_pool table에 대한 클래스별 또는 인터페이스별 runtime 표현입니다.&lt;/strong&gt; 클래스와 인터페이스의 모든 Constant 정보를 가지고 있는 곳이며 여기서의 &lt;u&gt;Constant는 상수만을 의미하는 것이 아니라 Literal Constant, Type Field(Local Variable, Class Variable), Method로의 모든 Symbolic Reference&lt;/u&gt; 까지 확장된 개념을 의미한다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;symbolic-reference&quot;&gt;Symbolic Reference&lt;/h3&gt;
+
+  &lt;p&gt;자바에서는 특정 객체를 참조할 때 Memory Address를 직접 참조하는게 아니라, &lt;strong&gt;객체의 이름으로 참조&lt;/strong&gt;합니다. 이렇게 &lt;strong&gt;객체의 이름으로 참조하는 것은 Symbolic Reference&lt;/strong&gt;라고 합니다.&lt;/p&gt;
+
+  &lt;p&gt;Symbolic Reference는 Constant Pool에 저장되며 객체에 접근할 필요가 있으면 Constant Pool에서 Symbolic Reference를 통해 해당 객체의 Memory Address를 찾아 동적으로 연결합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;heap이란-무엇인가요&quot;&gt;Heap이란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;Heap은 JVM의 모든 스레드 사이에서 공유되어지는 영역입니다. Heap은 JVM이 시작할 때 생성되고 종료될 때 소멸됩니다. &lt;strong&gt;Heap은 모든 클래스의 인스턴스와 배열에 대한 메모리가 할당되는 영역입니다.&lt;/strong&gt; 자바에서 객체들은 절대 명시적으로 할당이 해제되지않으며 Garbage Collector에 의해서만 메모리가 회수됩니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;jvm-heap-구조&quot;&gt;JVM Heap 구조&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation4-2.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Young Generation :&lt;/strong&gt; Object가 최초로 할당 되는 장소이며 Eden이 꽉 차게 되면 Eden 의 모든 객체들의 참조 여부를 따져서 참조가 되어있는 Object이면 Survivor영역으로 옮기고, 참조가 없는 Object라면, 그냥 남겨 놓는다. 이후에 Eden 영역을 모두 청소해버린 다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Old Generation :&lt;/strong&gt; Young Generation영역에서 Live Object로 오랫동안 살아남아 성숙한 Object는 Old Generation영역으로 이동하게 된다. 이를 &lt;strong&gt;Promotion&lt;/strong&gt;이라고 한다. 비교 적 오랫동안 참조가되어 앞으로도 계속 이용될 확률이 높은 Object를 저장하는 공간이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;execute-engine&quot;&gt;Execute Engine&lt;/h3&gt;
+
+&lt;p&gt;Execute Engine은 JVM의 다양한 메모리 영역과 통신합니다.  &lt;strong&gt;Execute Engine은 클래스 로더를 통해서 JVM의 run-time data area에 할당되어진 바이트 코드를 실행하는 역할을 담당합니다.&lt;/strong&gt; Execute Engine은 Java byte code를 실행하기 위해 3가지 주요 요소인 Interpreter, JIT Compiler, Garbage Collector을 포함한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Interpreter :&lt;/strong&gt; Interpreter는 Java Byte Code를 읽고 OS의 native code로 변화하여 이들을 순차적인 방식으로 실행하는 구성요소를 의미합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;JIT Compiler :&lt;/strong&gt; JIT Compiler는 컴파일러를 통해 interpreter의 느린 실행의 단점을 상쇄하고 성능을 향상시킵니다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Garbage Collector :&lt;/strong&gt; 메모리를 자동으로 관리하는 도구를 의미하며 백그라운드에서 항상 실행하고있는 daemon 스레드 입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Java Native Interface(JNI) :&lt;/strong&gt; JNI는 자바 메소드 호출과 관련된 native libraries 와의 다리 역할을 해줍니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;garbage-collection&quot;&gt;Garbage Collection&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Garbage Collection이란 Heap을 재활용하기 위해 Root Set에서 참조되지 않는 Object(Unreachable Object)를 없애 가용한 공간을 만드는 작업이라고 할 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Garbage Collection은 보통 메모리의 압박이 있을 때 수행되고 이 과정에서 Heap의 단편화(Fragmentation)가 발생할 수 있습니다. 이러한 문제를 해결하기 위해 Garbage Collection은 Compaction Algorithm을 사용합니다.&lt;/p&gt;
+
+&lt;p&gt;JVM Garbage Collection은 여러 알고리즘을 사용하는데요 대표적으로는 &lt;strong&gt;Reference Counting Algorithm&lt;/strong&gt;이 존재합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;root-set&quot;&gt;Root Set&lt;/h3&gt;
+
+  &lt;p&gt;&lt;strong&gt;Reacheable Reference 여부를 파악하려면 항상 &lt;u&gt;유효한 최초의 참조&lt;/u&gt;가 있어야 하는데 이를 객체 참조의 root set 이라고 합니다.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Root Set의 구분&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;Stack의 참조 정보&lt;/strong&gt;&lt;/p&gt;
+
+      &lt;p&gt;Local Variable Section과 Operand Stack의 참조&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;JVM Method Area의 Constant Pool에서 참조&lt;/strong&gt; (정적 변수에 의한 참조)&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;Native Method Stack으로 넘겨진 Object의 Reference 참조&lt;/strong&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;이 3가지 Reference 정보에 의해 직간접적으로 참조되고 있다면 Reachable Object이고, 그렇지 않다면 모두 Garbage Object(Unreachable Object)이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;reference-counting-algorithm이란-무엇인가요&quot;&gt;Reference Counting Algorithm이란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference Counting Algorithm의 기본 아이디어는 각 Object마다 Reference Count를 관리하여 Object가 참조되면 Count를 1증가시키고 참조가 사라지면 1을 감소하는 식으로 동작합니다.&lt;/strong&gt; 이 알고리즘에서 객체 참조는 직접적인 참조와 간접적인 참조 모두를 포함합니다.&lt;/p&gt;
+
+&lt;p&gt;Reference Counting Algorithm은 Garbage Object를 확인하는 방법이 매우 간단하다는 장점이 있지만, 참조의 변경이 있을 때마다 Object의 Reference Count를 변경해줘야 하기 때문에 동기화 측면에서도 그리고 비용적인 측면에서도 좋지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;LinkedList와 같은 Self Circular Reference 즉, 선형 참조의 경우에는 분명히 Garbage Object임에도 불구하고 Count가 0이 아니여서 Reachable Object로 간주되어 GC의 대상이 안된다면 메모리 누수(Memory Leak)가 발생할 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;메모리-누수-memory-leak&quot;&gt;메모리 누수 (Memory Leak)&lt;/h3&gt;
+
+  &lt;p&gt;&lt;strong&gt;메모리 누수란 프로그램에서 필요하지 않은 메모리들이 계속 점유되고 있는 현상을 의미합니다.&lt;/strong&gt; 즉, 더이상 사용하지 않는 객체가 GC에 의해서 회수되지 않고 계속 누적되는 현상을 의미합니다. 메모리 누수가 계속 중첩되다보면 heap 영역의 공간이 부족해져서 OutOfMemeoryError가 발생할 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Tue, 02 Mar 2021 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/interview/2021/03/02/NAVER-Practical-Interview-Preparation-4.html</link>
+        <guid isPermaLink="true">http://localhost:4000/interview/2021/03/02/NAVER-Practical-Interview-Preparation-4.html</guid>
+        
+        <category>OOP</category>
+        
+        <category>SOLID</category>
+        
+        <category>Design-Pattern</category>
+        
+        <category>JVM</category>
+        
+        <category>Java</category>
+        
+        <category>Runtime-Storage-Area</category>
+        
+        
+        <category>Interview</category>
+        
+      </item>
     
       <item>
         <title>[실무 면접 준비 - 3] 데이터베이스 &amp; 네트워크 (Database &amp; Network)</title>
@@ -416,7 +1103,7 @@
 
 &lt;h3 id=&quot;core는-무엇인가요&quot;&gt;Core는 무엇인가요?&lt;/h3&gt;
 
-&lt;p&gt;Core란 Processor의 한 종류인 &lt;strong&gt;CPU의 기본 계산 단위를 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Core란 Processor의 한 종류인 &lt;strong&gt;CPU의 기본 연산 단위를 의미합니다.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;프로세스와-스레드는-각각-무엇이고-어떠한-차이가-존재하나요&quot;&gt;프로세스와 스레드는 각각 무엇이고 어떠한 차이가 존재하나요?&lt;/h3&gt;
 
@@ -497,7 +1184,7 @@
 
 &lt;h3 id=&quot;critical-section은-무엇인가요&quot;&gt;Critical Section은 무엇인가요?&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;동일한 자원을 동시에 접근하는 작업을 실행하는 코드 영역을 Critical Section&lt;/strong&gt; 이라고 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;공유 자원을 접근하는 작업을 실행하는 코드 영역을 Critical Section&lt;/strong&gt; 이라고 합니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;race-condition이란-무엇인가요&quot;&gt;Race Condition이란 무엇인가요?&lt;/h3&gt;
 
@@ -2322,205 +3009,6 @@ Old 영역에 있는 참조가 없는 객체들을 표시하고 그 해당 객�
         <category>Data-Structure</category>
         
         <category>Spring-MVC</category>
-        
-        
-        <category>Interview</category>
-        
-      </item>
-    
-      <item>
-        <title>[기술 면접 준비 - 3일차] 자바 &amp; 객체 지향 프로그래밍</title>
-        <description>&lt;h1 id=&quot;java&quot;&gt;Java&lt;/h1&gt;
-
-&lt;h3 id=&quot;java-8을-많이-공부하셨다고-했는데-java-8의-특징이-뭔가요&quot;&gt;Java 8을 많이 공부하셨다고 했는데 Java 8의 특징이 뭔가요?&lt;/h3&gt;
-
-&lt;p&gt;Java 8은 Java에 &lt;strong&gt;함수형 프로그래밍이 처음으로 도입된 버젼&lt;/strong&gt;이며 새롭게 도입된 기능으로는 &lt;strong&gt;Stream API, Lamda 표현식, Method Reference, Default Method, Optional Class&lt;/strong&gt; 등이 있습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;stream-api란-무엇인가요&quot;&gt;Stream API란 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Stream API란 자바에서의 일련의 데이터 요소인 배열이나 컬렉션 등의 데이터를 처리하기 위한 API 입니다.&lt;/strong&gt; Stream API의 특징은 멀티 스레드를 활용해서 병렬로 연산을 수행할 수 있고, 내부 반복으로 연산을 수행하기 때문에 코드가 매우 간단해진다는 것을 알 수 있습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;lamda-expression은-무엇인가요&quot;&gt;Lamda Expression은 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Lamda Expression이란 Functional Interface를 구현하는 객체를 만들지 않고도 메서드로 전달할 수 있는 익명 함수를 단순화한 것입니다.&lt;/strong&gt; 즉, 특정 메소드의 사용을 위해서 일회용 객체를 만들지 않아도 됨으로 성능면에서 좋다고 생각합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;functional-interface란-무엇인가요&quot;&gt;Functional Interface란 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Functional Interface란 정확히 하나의 추상 메서드가 정의된 인터페이스&lt;/strong&gt;를 의미합니다. 예로는 Predicate, Comparator, Runnable 인터페이스등이 존재합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;method-reference는-무엇인가요&quot;&gt;Method Reference는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;람다 표현식 직접 작성하는 대신해 기존의 메서드 정의를 이용하는 방법&lt;/strong&gt;입니다. 기존의 메서드의 정의와 동일한 람다 표현식을 매번 작성하는 불편함에서 나온 기법이며, 가독성을 높일 수 있다고 생각합니다. 하지만, 저는 아직은 잘 익숙하지 않아서 IDE에 도움을 많이 받고 있습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;optional-클래스는-무엇인가요&quot;&gt;Optional 클래스는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;Optional 클래스란 Java 8에서 새롭게 등장한 클래스이구요 &lt;strong&gt;util 패키지&lt;/strong&gt; 속해 있습니다. &lt;strong&gt;Optional 클래스는 자바 프로그래머들이 가장 자주 접하는 예외인 NPE를 관리 하기 위해 기존 객체를 감싼 Wrapper Class 입니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;default-method-란-무엇인가요&quot;&gt;Default Method 란 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;메서드 구현을 포함하는 인터페이스를 정의하기 위해 사용되어집니다.&lt;/strong&gt; 이 인터페이스를 구현하는 클래스는 인터페이스에 디폴트 메소드도 상속받게 되기 때문에 서브클래스는 최소한의 메소드만 구현해도 됩니다. &lt;strong&gt;즉, 인터페이스는 서브클래스가 구현해야 하는 최소한의 인터페이스를 유지할 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;추상-클래스와-인터페이스의-차이는-무엇인가요&quot;&gt;추상 클래스와 인터페이스의 차이는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;추상 클래스와 인터페이스의 가장 큰 차이는 사용법에서 존재한다고 생각합니다. &lt;strong&gt;추상 클래스는 멤버와, 메소드 명세, 구현 등 모든 부분이 상속이 되기 때문에 대부분의 경우 코드의 재사용을 위해서 사용되는 경우가 많고, 인터페이스는 메소드 Java 8 이전에는 명세만 상속되었기 때문에 메소드 명세의 상속을 위해서 사용&lt;/strong&gt;된다고 생각합니다. 또한 단일 상속을 지원하는 자바의 특성상 클래스를 상속하는 추상화 계층이 많아질 수록 결합도가 증가하기 때문에 도메인에 맞추어서 잘 사용해야 한다고 생각합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;오버라이딩과-오버로딩의-차이는-무엇인가요&quot;&gt;오버라이딩과 오버로딩의 차이는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;오버라이딩이란 서브클래스가 상속받은 메소드를 클래스에 맞게 재구현 하는 것을 의미&lt;/strong&gt;하구요 &lt;strong&gt;오버로딩이란 동일한 메서드 이름이지만 매개 변수 타입이나 개수가 다른 즉, 다른 명세를 가진 함수를 같은 클래스 내에 만드는 것을 의미&lt;/strong&gt;합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;업캐스팅과-다운캐스팅의-차이는-무엇인가요&quot;&gt;업캐스팅과 다운캐스팅의 차이는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;일단 Java에서는 슈퍼 클래스의 변수에 서브 클래스의 객체가 들어가는 것을 업캐스팅&lt;/strong&gt;이라구 하구요, &lt;strong&gt;업캐스팅 된 변수의 타입을 서브 클래스로 변경하는 것을 다운 캐스팅&lt;/strong&gt;이라고 합니다. &lt;u&gt;서브 클래스 객체는 슈퍼 클래스의 메소드 명세를 상속 받기 때문에 슈퍼 클래스의 변수에 들어가 슈퍼 클래스 인 것처럼 사용될 수 있는 것은 당연하구요, 업 캐스팅 된 변수의 타입이 다시 서브 클래스로 돌아와 본인의 클래스 객체인 것처럼 사용할 수 있는 것도 당연합니다.&lt;/u&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;제네릭은-이란-무엇인가&quot;&gt;제네릭은 이란 무엇인가?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;제네릭은 클래스나 메소드에서 사용할 내부 데이터 타입을 컴파일 시에 미리 지정하는 방법입니다.&lt;/strong&gt; 이를 통해서 클래스나 메소드 내부에서 사용되는 객체의 타입 안정성을 높일 수 있습니다. 기존에는 Object객체를 사용 했지만 이제는 &amp;lt;T&amp;gt;를 사용함으로써 컴파일 시에 타입을 지정할 수 있게 되었고 다운 캐스팅이 필요없게 되었습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;어디에서-제네릭을-보았나요&quot;&gt;어디에서 제네릭을 보았나요??&lt;/h3&gt;
-
-&lt;p&gt;여러 프로젝트를 진행하면서 제네릭을 보았는데, 특히 Pinpoint 프로젝트를 진행하면서 제네릭을 보았던 경험이 기억에 남습니다. Checker 도메인이 검색하는 Metric 타입을 제네릭 와일드 카드로 지정해 놓고 이를 상속해 서브 타입의 Checker에서 제네릭 타입을 설정해 구현한 경험이 생각 납니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;이를 통해 얻었던 장점은 특정 Metric을 검색하는 Checker 클래스를 여러개 만들 필요가 없었고, 컴파일 시에 타입 에러를 받을 수 있어서 확실한 장점이 있었지만, 처음 코드를 보는 사람들한테는 조금 어렵게 보여 가독성 측면에서는 좋지 않았던 것 같습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;자바-컬렉션에-대해서-설명해-주실-수-있나요&quot;&gt;자바 컬렉션에 대해서 설명해 주실 수 있나요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;자바에서 컬렉션이란 데이터의 집합, 그룹을 의미하며 이를 저장하고 연산할 수 있는 집합을 의미합니다.&lt;/strong&gt; &lt;strong&gt;Collection 프레임워크는 크게 두개로 나눌 수 있는데요 순서나 집합적인 저장 공간의 명세를 나타내는 Collection 인터페이스와 키와 값으로 데이터를 핸들링하는 명세를 정의하는 Map 인터페이스로 나눌 수 있습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Set, List, Queue 인터페이스가 Collection 인터페이스를 상속해서 각 특성에 맞게 명세를 구체화하고 HashMap, TreeMap 등이 Map 인터페이스를 구현해서 컬렉션 프레임 워크를 형성합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;set-list-queue의-차이를-설명해-주실-수-있나요&quot;&gt;Set, List, Queue의 차이를 설명해 주실 수 있나요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;List 인터페이스는 객체의 순서가 있고, 원소가 중복될 수 있는 명세&lt;/strong&gt;를 가지고 있으며 구현체는 ArrayList(동기화 보장 x)가 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Queue 인터페이스는 객체를 입력한 순서대로 저장하며, 원소가 중복될 수 있는 명세&lt;/strong&gt;를 가지고 있으며 구현체로는 LinkedList 등이 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Set 인터페이스는 객체의 순서가 없으며, 동일한 원소를 중복 저장 할 수 없는 명세&lt;/strong&gt;를 가지고 있으며 구현체로는 HashSet, TreeSet 등이 있습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;linkedlist와-arraylist의-차이는-무엇인가요&quot;&gt;LinkedList와 ArrayList의 차이는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;ArrayList는 내부적으로 특정 데이터 타입의 배열에서 데이터를 관리하고, LinkedList는 노드에 데이터를 저장하고 앞 뒤 노드의 주소값을 연결지어 데이터를 관리&lt;/strong&gt;합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;u&gt;삽입 및 삭제시 LinkedList는 O(1)의 시간이 걸리고, ArrayList는 O(n)의 시간이 걸립니다. 하지만 인덱스를 통해서 검색시 ArrayList는 O(1)의 시간이 걸리고 링크르 리스트는 O(n)의 시간이 걸립니다.&lt;/u&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;hashmap은-무엇인가요&quot;&gt;HashMap은 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;HashMap은 Hashing을 사용해서 Map 데이터를 관리 및 연산하는 데이터 구조를 의미합니다.&lt;/strong&gt; key 값을 hash 함수를 이용해서 hash code로 바꾸고 이를 저장해서 hashcode를 기반으로 검색하는 자료구조 입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;hashmap과-hashtable의-차이를-아시나요&quot;&gt;HashMap과 HashTable의 차이를 아시나요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;HashTable은 동기화 기능을 제공해 주기 때문에 멀티 스레드 환경에서 스레드 세이프하고, HashMap은 동기화 기능을 제공해 주지 않기 때문에 멀티 스레드 환경에서 스레드 세이프 하지 않습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;arraylist와-vector의-차이는&quot;&gt;ArrayList와 Vector의 차이는?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;ArrayList와 Vector의 차이는 동기화 제공해주는 자료구조의 차이라고 생각합니다. Vector는 멀티스레드 환경에서 스레드 세이프하고, ArrayList는 스레드세이프 하지 않습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;treemap과-treeset의-차이는&quot;&gt;TreeMap과 TreeSet의 차이는?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;TreeSet과 TreeMap은 둘다 Red Black Tree를 기반으로 이루어져 있습니다. 가장 큰 차이라고 하면 Set과 Map의 차이&lt;/strong&gt; 입니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;red black tree는 balanced binary search tree의 한 종류 로써 BST에서 발생하는 불균형 문제를 색깔을 통해서 자체적으로 해결하는 자료구조 입니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;garbage-collection이란-무엇인가요&quot;&gt;Garbage Collection이란 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;가비지 콜렉션이랑 자동 메모리 관리를 구현한 것입니다. 더 이상 사용하지 않는 객체들이 차지하는 Heap 메모리를 관리한다고 알고 있습니다.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;객체-지향-프로그래밍oop&quot;&gt;객체 지향 프로그래밍(OOP)&lt;/h1&gt;
-
-&lt;h3 id=&quot;객체-지향-프로그래밍이란-무엇인가요&quot;&gt;객체 지향 프로그래밍이란 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;객체 지향 프로그래밍이란 데이터와 프로세스를 동일한 모듈인 객체에 위치하도록 만들어 객체 간의 협력을 통해서 프로그래밍하는 방식이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;절차-지향-프로그래밍이란-무엇인가요&quot;&gt;절차 지향 프로그래밍이란 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;절차 지향 프로그래밍이란 데이터와 프로세스를 별도의 모듈에 위치시키고 위에서부터 순차적으로 실행하는 프로그래밍 방식이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;객체-지향의-3대-특징인-캡슐화-상속-다형성에-대해서-설명해주세요&quot;&gt;객체 지향의 3대 특징인 캡슐화, 상속, 다형성에 대해서 설명해주세요&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;캡슐화란 데이터와 프로세스를 하나의 객체에 위치하도록 만드는 것을 말한다.&lt;/strong&gt; 이를 통해 객체는 자율적으로 다른 객체들과 협력할 수 있는 객체가 되며 자연스레 시스템의 결합도는 떨어지고 응집도는 올라가게 된다. 이의 결과로서 시스템 전체는 유지보수하기 쉬워지고 추후 변경에 유연하게 대처할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;상속이란 부모 객체의 특징을 그대로 물려받는 것을 의미하고, 자바에서는 인터페이스 상속과 클래스 상속으로 나뉜다.&lt;/strong&gt; 이를 통해 모듈의 재사용성이 높아지고, 다형성을 구현할 수 있다. 하지만 무분별한 상속의 남용은 시스템의 결합도를 올려 추후 변경에 유연하게 대응하지 못하기 때문에 자제해야한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;객체지향에서 다형성이란 같은 요청으로부터 응답이 객체의 타입에 따라 다르게 나타나는 것을 의미합니다.&lt;/strong&gt; 이를 통해 객체지향은 더 유연한 설계를 가질 수 있습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;object와-class의-차이는-무엇인가요&quot;&gt;Object와 Class의 차이는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Class는 시스템의 정적인 구성요소를 나타내는 것이구요, Object는 클래스의 인스턴스로써 시스템의 동적인 구성 요소&lt;/strong&gt;를 나타냅니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;추상화란-무엇인가요&quot;&gt;추상화란 무엇인가요??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;추상화란 특정 개념이나 개체를 보았을 때 특정 관점에서 관심있거나 중요한 부분만 추려내는 작업을 의미합니다.&lt;/strong&gt; 즉, OOP에서 중요한 정보만 객체의 인터페이스로써 표시하고 구현 세부 정보를 숨길 수 있는 OOP의 매우 중요한 기능입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;디자인-패턴이란-무엇인가요&quot;&gt;디자인 패턴이란 무엇인가요??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;소프트웨어를 설계할 때 특정 문맥에서 자주 발생하는 고질적인 문제들이 또 발생했을 때 재사용할 수 있는 설계 패턴&lt;/strong&gt;을 의미합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;singleton-pattern에-대해서-설명해주세요&quot;&gt;Singleton Pattern에 대해서 설명해주세요.&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Singleton 패턴이란 시스템에서 인스턴스가 오직 1개만 생성되어야 하는 경우에 사용되는 패턴입니다. 하지만 동시성 문제를 꼭 고려&lt;/strong&gt;해야만 합니다.&lt;/p&gt;
-
-&lt;p&gt;자바와 스프링의 싱글톤 차이점은, 싱글톤 객체의 생명주기가 다르다는 것입니다. &lt;strong&gt;자바에서 싱글톤 객체의 범위는 클래스 로더가 기준이지만, 스프링에서는 어플리케이션 컨텍스트가 기준이 됩니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;스프링에서 빈을 등록할 때 범위(scope)를 지정할 수 잇는데 디폴트가 Singleton이고, prototype, request, session 등이 존재합니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;prototype: 컨테이너에 빈을 요청할 때마다 매번 새로운 객체를 만드는 범위를 의미합니다.&lt;/li&gt;
-  &lt;li&gt;request: HTTP 요청 하나당 하나의 객체를 만드는 범위를 의미합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;proxy-pattern에-대해서-설명해주세요&quot;&gt;Proxy Pattern에 대해서 설명해주세요.&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;프록시 패턴이란 특정 객체를 대신해서 프록시 객체가 해당 역할을 수행해주는 것을 의미합니다.(다형성)&lt;/strong&gt; 특정 인터페이스를 상속받는 A 클래스와 Proxy 클래스가 존재하고 Proxy 클래스 내부적으로 A 객체를 사용한다면 인터페이스의 특정 메소드 명세를 사용 했을 때 프록시처럼 동작하게 만들 수 있겠군!&lt;/p&gt;
-
-&lt;h3 id=&quot;association-vs-composition-vs-aggregation의-차이는-무엇인가요&quot;&gt;Association vs Composition vs Aggregation의 차이는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;Associaton의 부분 집합으로 Aggregation과 Composition이 존재한다.&lt;/p&gt;
-
-&lt;p&gt;Composition은 A클래스에서 B를 Composition 한다고 했을 때 A가 죽으면 B도 죽는다.&lt;/p&gt;
-
-&lt;p&gt;Aggregation은 A클래스에서 B를 Aggregation 한다고 했을 때 A가 죽어도 B는 죽지 않는다.&lt;/p&gt;
-
-&lt;h3 id=&quot;decorator-pattern에-대해서-설명해주세요&quot;&gt;Decorator Pattern에 대해서 설명해주세요&lt;/h3&gt;
-
-&lt;p&gt;데코레이터 패턴은 프록시 패턴과 구현 방법은 비슷하지만 프록시 패턴은 클라이언트가 최종적으로 돌려 받는 반환값을 조작하지 않고 그대로 전달하는 반면 &lt;strong&gt;데코레이터 페턴은 클라이언트가 받는 반환값에 장식을 덧입힌다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;특정 인터페이스를 상속받는 A 클라스와 Decorator 클래스가 존재하고 Decorator 클래스 내부에서 A 클래스 객체를 사용한다면 인터페이스의 특정 메소드 명세를 사용 했을 때 A 클라스 객체의 반환값에 추가적으로 장식을 덧 붙일 수 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;adapter-pattern에-대해서-설명해주세요&quot;&gt;Adapter Pattern에 대해서 설명해주세요.&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;어댑터 패턴은 클래스의 인터페이스를 사용자가 기대하는 다른 인터페이스로 변환하는 패턴입니다.&lt;/strong&gt; 호환성이 없는 인터페이스 때문에 함께 동작할 수 없는 클래스들이 함께 작동하도록 해줍니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;template-method-pattern에-대해서-설명해주세요&quot;&gt;Template Method Pattern에 대해서 설명해주세요.&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;템플릿 메서드 패턴(Template Method Pattern)이란 알고리즘의 구조를 바꾸지 않고 서브클래스에서 알고리즘의 특정 단계를 재정의하는 것을 의미한다. 즉, 상속을 통해 슈퍼클래스의 기능을 확장할 때 사용하는 가장 대표적인 방법이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;ex) Pinpoint의 Checker Domain에서 자주 볼 수 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;strategy-pattern에-대해서-설명해주세요&quot;&gt;Strategy Pattern에 대해서 설명해주세요.&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Strategy Pattern이란 전략 객체를 통해서 알고리즘의 구조를 바꿀 수 있는 디자인 패턴을 의미합니다.&lt;/strong&gt; Strategy 인터페이스를 구성하고 이를 구현하는 StrategyA, StrategyB의 구현체를 다르게 함으로써 전략 패턴을 만들 수 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;객체-지향-설계-5원칙은-무엇인가요&quot;&gt;객체 지향 설계 5원칙은 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;객체 지향 설계 5원칙은 SOLID원칙이라고 불리기도 하는데요, &lt;strong&gt;시스템의 결합도는 낮추고 응집도를 높이는 고전 원칙을 객체 지향 관점에서 5가지 원칙으로 재정립&lt;/strong&gt; 한 것입니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;단일 책임 원칙(Single Resposibility, SRP)&lt;/strong&gt;: 한 클래스는 하나의 책임만 가지며 그 책임을 완전히 캡슐화해야 한다는 원칙입니다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;개방 폐쇄 원칙(Open Closed Principle, OCP)&lt;/strong&gt;: 소프트웨어 요소(메서드, 클래스, 모듈)는 확장에 대해 열려 있어야 하고, 수정(변경)에 대해서는 닫혀 있어야 한다는 원칙입니다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;리스코프 치환 원칙(Liskov Substitution Principle, LSP)&lt;/strong&gt;: 서브 클래스의 인스턴스는 슈퍼 클래스의 인스턴스로 치환할 수 있어야 한다는 원칙입니다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;인터페이스 분리 원칙(Interface Separation Principle, ISP)&lt;/strong&gt;: 클라이언트가 자신이 이용하지 않는 메서드에 의존하지 않아야 한다는 원칙입니다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;의존 역전 원칙(Dependency Inversion Principle, DIP)&lt;/strong&gt;: 특정 소프트웨어 요소를 개발하면서 자신보다 변하기 쉬운 것에 의존하지 말라는 원칙입니다. 즉, 추상적인 것에 의존하라는 원칙입니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Fri, 11 Dec 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/interview/2020/12/11/NAVER-Interview-Preparation-3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/interview/2020/12/11/NAVER-Interview-Preparation-3.html</guid>
-        
-        <category>Java</category>
-        
-        <category>OOP</category>
         
         
         <category>Interview</category>
