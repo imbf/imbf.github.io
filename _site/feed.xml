@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 04 Mar 2021 18:39:28 +0900</pubDate>
-    <lastBuildDate>Thu, 04 Mar 2021 18:39:28 +0900</lastBuildDate>
+    <pubDate>Fri, 05 Mar 2021 10:02:07 +0900</pubDate>
+    <lastBuildDate>Fri, 05 Mar 2021 10:02:07 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -357,9 +357,9 @@
 
 &lt;h3 id=&quot;linkedlist와-arraylist의-차이는-무엇인가요&quot;&gt;LinkedList와 ArrayList의 차이는 무엇인가요?&lt;/h3&gt;
 
-&lt;p&gt;ArrayList는 내부적으로 원소를 배열에서 관리하고, LinkedList는 노드에 데이터를 저장하고 포인터를 사용해서 앞 뒤의 노드와 연결지어 데이터를 관리합니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ArrayList는 내부적으로 원소를 배열에서 관리하고, LinkedList는 노드에 데이터를 저장하고 포인터를 사용해서 앞 뒤의 노드와 연결지어 데이터를 관리합니다.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;삽입 및 삭제시 LinkedList는 O(1)의 시간이 걸리고, ArrayList는 O(n)의 시간이 걸립니다. 하지만 인덱스를 통해서 검색시 ArrayList는 O(1)의 시간이 걸리고 LinkedList는 O(n)의 시간이 걸립니다.&lt;/p&gt;
+&lt;p&gt;삽입 및 삭제시 LinkedList는 O(1)의 시간이 걸리고, ArrayList는 O(n)의 시간이 걸립니다. 하지만 인덱스를 통해서 검색시 ArrayList는 O(1)의 시간이 걸리고 LinkedList는 O(n)의 시간이 걸립니다. 인덱스를 통해서 데이터를 관리하고 싶은 경우 ArrayList를 사용하면 좋을 것 같구요, 그렇지 않다면 LinkedList를 사용하면 좋을것 같습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;hashmap은-무엇인가요&quot;&gt;HashMap은 무엇인가요?&lt;/h3&gt;
 

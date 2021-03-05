@@ -366,9 +366,9 @@ Set, List, Queue 인터페이스가 Collection 인터페이스를 상속해서 �
 
 ### LinkedList와 ArrayList의 차이는 무엇인가요?
 
-ArrayList는 내부적으로 원소를 배열에서 관리하고, LinkedList는 노드에 데이터를 저장하고 포인터를 사용해서 앞 뒤의 노드와 연결지어 데이터를 관리합니다.
+**ArrayList는 내부적으로 원소를 배열에서 관리하고, LinkedList는 노드에 데이터를 저장하고 포인터를 사용해서 앞 뒤의 노드와 연결지어 데이터를 관리합니다.**
 
-삽입 및 삭제시 LinkedList는 O(1)의 시간이 걸리고, ArrayList는 O(n)의 시간이 걸립니다. 하지만 인덱스를 통해서 검색시 ArrayList는 O(1)의 시간이 걸리고 LinkedList는 O(n)의 시간이 걸립니다.
+삽입 및 삭제시 LinkedList는 O(1)의 시간이 걸리고, ArrayList는 O(n)의 시간이 걸립니다. 하지만 인덱스를 통해서 검색시 ArrayList는 O(1)의 시간이 걸리고 LinkedList는 O(n)의 시간이 걸립니다. 인덱스를 통해서 데이터를 관리하고 싶은 경우 ArrayList를 사용하면 좋을 것 같구요, 그렇지 않다면 LinkedList를 사용하면 좋을것 같습니다.
 
 
 
