@@ -30,13 +30,21 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
 
 ---
 
+# Careers
+
+### *Booking Recommendation System - NAVER Glace CIC Intern (2021.01 ~ 02)
+
+NAVER Glace CIC에서 네이버 주문/예약 추천을 위한 시스템을 개발하였습니다. (업데이트 예정)
+
+---
+
 # Projects
 
-### *Pinpoint Contribution - 오픈소스 컨트리뷰톤 (2020.08 ~ ing)
+### *Pinpoint Contribution - 오픈소스 컨트리뷰톤 (2020.08 ~ 2021.01)
 
 오픈소스 컨트리뷰톤에 참가하여 대규모 분산 시스템을 위한 APM 도구인 Pinpoint의 web모듈에 기여하였습니다.
 
-- **Batch 내의 Alarm Webhook 기능 개발 (진행중)** - [https://github.com/imbf/pinpoint](https://github.com/imbf/pinpoint)
+- **Batch 모듈에 Alarm Webhook 기능 개발** - [https://github.com/pinpoint-apm/pinpoint/pull/7553](https://github.com/pinpoint-apm/pinpoint/pull/7553)
     - Webhook 요구사항 추가에 따른 Alarm 도메인 재설계 및 구현
     - Webhook Data Spec 작성
     - DB 스키마 변경에 따른 하위호환 구현
@@ -46,7 +54,7 @@ DevOps에 관심이 많아 개발, 운영, 커뮤니케이션 등의 분야를 �
     - Receiver 도메인 모델 설계 및 구현
     - 동적인 Webhook Message를 위한 Deserialize 기능 구현
 
-- **Batch 내의 Mail Sender 테스트 작성** - [https://github.com/pinpoint-apm/pinpoint/pull/7271](https://github.com/pinpoint-apm/pinpoint/pull/7271)
+- **Batch 모듈에 Mail Sender 테스트 작성** - [https://github.com/pinpoint-apm/pinpoint/pull/7271](https://github.com/pinpoint-apm/pinpoint/pull/7271)
 - **프로젝트의 Annotation 및 Typo 수정**
 - **컨트리뷰톤에서 Pinpoint팀 멘티 대표로 최종 발표를 진행해 장려상(정보통신산업진흥원장상) 수상**
 
@@ -125,23 +133,23 @@ Mobius 플랫폼을 활용한 스마트 도어락을 설계해서 전남대학�
 
 현재 진행되는 프로젝트에 사용중 혹은 과거에 사용했던 기술들입니다.
 
-### Backend
+### *Backend
 - **Java, NodeJS**
 - **Spring Boot, Spring MVC, Spring Batch, Spring Security, Spring Data JPA**
 - **JUnit, Mockito**
 - **Maven**
 - **IntelliJ, Visual Studio Code**
 
-### DevOps
+### *DevOps
 
-- **MySQL**
+- **MySQL, PostgreSQL, Redis**
 - **Jenkins**
 - **Pinpoint**
 - **nCloud**
 
-### Front-End
+### *Front-End
 
-- **Javascript**
+- **Javascript, React**
 - **HTML, CSS**
 
 ---
