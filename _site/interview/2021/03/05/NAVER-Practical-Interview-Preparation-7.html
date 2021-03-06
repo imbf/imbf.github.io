@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="B7c_ecRqLF3-nPb0TKaSDlu3xHPQXRZkwl-UcutOMgo" />
+
+
+  <title>[실무 면접 준비 - 7] 스마트도어락 & webper (Smart Doorlock & Webper)</title>
+  <meta name="description" content="">
+  
+  <meta name="author" content="배종진">
+  <meta name="copyright" content="&copy; 배종진 2021">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  
+  <!-- Facebook OGP cards -->
+  <meta property="og:description" content="" />
+  <meta property="og:url" content="http://localhost:4000/interview/2021/03/05/NAVER-Practical-Interview-Preparation-7.html">
+  <meta property="og:site_name" content="Green Frog Developer" />
+  <meta property="og:title" content="[실무 면접 준비 - 7] 스마트도어락 & webper (Smart Doorlock & Webper)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="http://localhost:4000/assets/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="612" />
+  <meta property="og:image:height" content="605" />
+  
+
+  
+  <!-- Twitter: card tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="[실무 면접 준비 - 7] 스마트도어락 & webper (Smart Doorlock & Webper)">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="http://localhost:4000/assets/logo.png">
+  <meta name="twitter:url" content="http://localhost:4000/interview/2021/03/05/NAVER-Practical-Interview-Preparation-7.html">
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/interview/2021/03/05/NAVER-Practical-Interview-Preparation-7.html">
+	<link rel="alternate" type="application/rss+xml" title="Green Frog Developer" href="http://localhost:4000/feed.xml" />
+	
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/logo.png" alt="Green Frog Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/portfolio/">Portfolio</a>
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container " >
+  <div class="scrim ">
+    <header class="post-header">
+      <h1 class="title">[실무 면접 준비 - 7] 스마트도어락 & webper (Smart Doorlock & Webper)</h1>
+      <p class="info">by <strong>Green Frog Developer</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+ <span class="page-divider">
+  <span class="one"></span>
+  <span class="two"></span>
+</span>
+ 
+
+<section class="post-meta">
+  <div class="post-date">March 5, 2021</div>
+  <div class="post-categories">
+  in 
+    
+    <!-- <a href="/category/Interview">Interview</a> (default) -->
+    <a href="/category/Interview">Interview</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <hr />
+
+<h2 id="smart-doorlock">Smart Doorlock</h2>
+
+<hr />
+
+<h3 id="스마트도어락은-무엇인가요">스마트도어락은 무엇인가요?</h3>
+
+<p><strong>스마트도어락이란 오픈소스 IoT 서버 플랫폼인 Mobius를 활용한 사용자의 완벽한 외출을 도와주는 IoT 플랫폼입니다.</strong> 자택 현관문 내부에 존재하는 기존의 도어락 본체는 제거하고 그 자리에 터치식 디스플레이를 설치하여 <strong>사용자가 외출 시에 필요한 날씨 및 미세먼지 등의 다양한 정보를 제공하고 가스 밸브 및 전등과 같은 가전들을 등록해 상태 확인 및 제어할 수 있는 기능을 가진 IoT 플랫폼</strong>입니다.</p>
+
+<h3 id="사용하신-mobius-플랫폼이-무엇인지-알-수-있을까요">사용하신 Mobius 플랫폼이 무엇인지 알 수 있을까요?</h3>
+
+<p><strong>Mobius 플랫폼이란 oneM2M 표준을 기반으로 한 오픈소스 IoT 서버 플랫폼입니다.</strong> Mobius는 다양한 도메인의 IoT 애플리케이션에 대한 미들웨어로써 oneM2M표준에 해당하는 공통 서비스 기능인 CSE와 AE 등록, 데이터 관리, pub/sub, 보안 등의 기능을 제공합니다.</p>
+
+<blockquote>
+  <h3 id="system-structure">System Structure</h3>
+
+  <p><img src="/assets/interview/naver-practical-interview-preparation7-1.png" style="width:100%" /></p>
+</blockquote>
+
+<h3 id="onem2m을-말씀하셨는데-이건-무엇인가요-하나의-표준인가요">oneM2M을 말씀하셨는데 이건 무엇인가요? 하나의 표준인가요?</h3>
+
+<p><strong>oneM2M이란 말 그대로 one + M2M의 합성어로 Machine간에 통신을 하나의 인프라 환경에 통합하기 위한 플랫폼 개발 표준화 단체 및 표준을 의미합니다.</strong></p>
+
+<h3 id="onem2m의-구성요소-중-cse는-무엇인가요">oneM2M의 구성요소 중 CSE는 무엇인가요?</h3>
+
+<p><strong>CSE란 Common Service Entity의 줄임말로 oneM2M 스팩을 구현한 서비스 플랫폼에서 공통적으로 제공되어야하는 서비스 기능을 제공하는 미들웨어를 의미합니다.</strong></p>
+
+<h3 id="onem2m의-구성요소-중-ae는-무엇인가요">oneM2M의 구성요소 중 AE는 무엇인가요?</h3>
+
+<p><strong>AE란 Application Entity의 줄임말로서 M2M(Machine to Machine)서비스를 제공하기 위한 논리적인 엔티티</strong>를 의미합니다.</p>
+
+<h3 id="미들웨어middleware란-무엇인가요">미들웨어(Middleware)란 무엇인가요?</h3>
+
+<p><strong>미들웨어(Middleware)란 운영체제와 응용 소프트웨어 사이에서 조정과 중개의 역할을 수행하는 소프트웨어</strong>를 의미하구요, 이를 통해 응용 소프트웨어는 운영체제로부터 제공받는 서비스 이외에 추가적인 서비스를 받을 수 있습니다.</p>
+
+<ul>
+  <li>대표적인 미들웨어로는 메시징 처리 소프트웨어나 데이터베이스 시스템 등이 존재합니다.</li>
+  <li>Mobius 플랫폼 즉, 미들웨어인 CSE를 통해서 oneM2M 스팩에서 제공해야하는 공통 서비스 기능인 pub/sub, 데이터관리, 보안 등을 제공합니다.</li>
+</ul>
+
+<h3 id="ininfrastructure-node은-무엇인가요">IN(Infrastructure Node)은 무엇인가요?</h3>
+
+<p><strong>IN이란 Infrastructure Node의 줄임말로서 인프라 도메인에 위치한 CSE를 포함하는 서버 기기</strong>를 의미합니다.</p>
+
+<h3 id="adnapplication-dedicated-node란-무엇인가요">ADN(Application Dedicated Node)란 무엇인가요?</h3>
+
+<p><strong>ADN이란 Applicaton Dedicated Node의 줄임말로서 필드 도메인에 위치한 ADN-AE를 포함하고 CSE를 포함하지 않는 논리적 기기</strong>를 의미합니다.</p>
+
+<h3 id="cube와-tas는-각각-무엇인가요">&amp;Cube와 TAS는 각각 무엇인가요?</h3>
+
+<p><strong>&amp;Cube는 IoT 디바이스에 탑재되는 소프트웨어 플랫폼으로서 IN-CSE 즉, 모비우스와 통신할 수 있도록 지원하는 소프트웨어</strong>입니다. <strong>TAS란 실제 사물을 디바이스에 연결하기 위한 S/W로서 사물과 &amp;Cube간의 통신을 지원하는 역할</strong>을 합니다.</p>
+
+<p>즉, 사물과 &amp;Cube를 TAS로써 연결하고 사물과 IN-CSE를 &amp;Cube로써 연결할 수 있습니다.</p>
+
+<h3 id="in-ae로-nodejs를-사용한-이유가-있나요">IN-AE로 Node.js를 사용한 이유가 있나요?</h3>
+
+<p>IN-AE로 Node.js를 사용한 이유는 IN-CSE인 Mobius 자체가 Node.js로 구현되어 있기 때문에 <strong>IN-AE를 개발하기 위해 새로운 언어를 배워야 하는 학습 비용을 줄이기 위해서 Node.js를 사용</strong>하였습니다. 또한 마감이 정해진 개발자 대회 특성상 <strong>빠르게 프로젝트를 빌드업하기 위해 프로토타입 개발에 생산성이 높은 Node.js를 사용</strong>하였습니다.</p>
+
+<h3 id="nodejs의-특징에-대해서-알고-있나요">Node.js의 특징에 대해서 알고 있나요?</h3>
+
+<p><strong>Node.js란 자바스크립트를 사용하고 Non-blocking I/O와 싱글 스레드 이벤트 루프를 통한 높은 처리 성능</strong>을 가지고 있습니다. 또한 내장 HTTP 서버 라이브러리를 포함하고 있어 서버 구현 시 아파치 등의 별도의 소프트웨어 없이 동작하는 것이 가능하기 때문에 빠르게 프로토타입을 제작 할 수 있습니다.</p>
+
+<h3 id="non-blocking-io와-blocking-io의-차이에-대해서-말씀해주세요">Non-Blocking I/O와 Blocking I/O의 차이에 대해서 말씀해주세요.</h3>
+
+<p><strong>멀티 스레드 환경에서 Non-Blocking I/O란 하나의 스레드에서 I/O가 일어날 때 다른 스레드들이 Block되지 않고 병렬로써 실행하는 것을 의미하구요, Blocking I/O란 하나의 스레드에서 I/O가 일어날 때 해당 스레드가 I/O 작업을 완료할 때까지 다른 스레드들이 기다리는 것을 의미합니다.</strong></p>
+
+<hr />
+
+<h2 id="webper">webper</h2>
+
+<hr />
+
+<h3 id="webper는-어떤-서비스이고-본인은-팀에서-어떠한-역할을-맡으셨나요">webper는 어떤 서비스이고 본인은 팀에서 어떠한 역할을 맡으셨나요?</h3>
+
+<p><strong>webper는 관심있는 웹 사이트를 drag &amp; drop으로 모아서 보관할 수 있는 웹 디렉토리 서비스입니다.</strong> 저는 webper 프로젝트에서 백앤드를 맡았으며 인증 및 데이터 API 서버 개발과 CI/CD 구축을 진행하였습니다.</p>
+
+<h3 id="webper의-시스템-아키텍처에-대해서-저희에게-설명해주실-수-있나요">Webper의 시스템 아키텍처에 대해서 저희에게 설명해주실 수 있나요?</h3>
+
+<p><strong>Webper는 사용자에게 뷰를 서비스하기위한 Front-End와 인증 및 데이터를 처리하기위한 Back-End로 나뉩니다.</strong> Front-End는 뷰를 서비스하기위해 React를 사용해서 개발했구요, Back-End는 인증 및 데이터 API 서버를 위해 Spring Boot, html 페이지의 특정 요소에 분석하기 위해서 Node.js를 사용해서 개발하였습니다.</p>
+
+<blockquote>
+  <h3 id="webper-system-architecture">Webper System Architecture</h3>
+
+  <p><img src="/assets/interview/naver-practical-interview-preparation7-2.png" style="width:100%" /></p>
+</blockquote>
+
+<h3 id="왜-백앤드-기술-스택을-spring-boot와-nodejs를-나누었나요">왜 백앤드 기술 스택을 Spring Boot와 Node.js를 나누었나요?</h3>
+
+<p><strong>일단 팀 내에서 각 구성원들이 맡은 부분과 기술 스택이 서로 달랐기 때문에 서버를 두개로 나누었습니다.</strong> 뿐만 아니라 <strong>인증 및 데이터 API 서버와 HTML 페이지 분석 서버는 서로 맡은 책임이 완전히 다르기 때문에 서버를 두개로 나누었을 경우에 더 독립적으로 진화</strong>할 수 있겠다고 생각했구요, <strong>HTML 페이지의 Meta 태그가 아닌 DIV 태그 등의 디테일한 데이터들에 쉬운 접근을 제공하는 puppeteer 라이브러리가 Node 라이브러리이기 때문에 팀원분이 Node.js를 사용하신걸로 알고 있습니다.</strong> 저는 인증 및 데이터 API 서버를 개발하기 위해 Spring Boot를 사용했구요.</p>
+
+<h3 id="puppeteer란-정확히-무엇인가요">Puppeteer란 정확히 무엇인가요?</h3>
+
+<p><strong>Puppeteer는 DevTools Protocol을 통해 Chrome 또는 Chromium을 제어하기 위한 API를 제공하는 Node.js 라이브러리 입니다.</strong> 다양한 기능이 존재하지만 가장 큰 특징은 브라우저가 사용자 눈에 보여지지 않고 백그라운드 환경에서 작동하는 즉, <strong>headless로 브라우저를 실행</strong>할 수 있다는 점입니다. 이러한 특징을 통해서 저희는 메타데이터가 아닌 body 내부에 존재하는 다양한 요소의 데이터를 가져올 수 있게 됩니다.</p>
+
+<h3 id="webper를-통해서-무엇을-얻으셨나요">Webper를 통해서 무엇을 얻으셨나요?</h3>
+
+<p><strong>처음으로 스프링을 사용해서 여러 노드간에 통신할 수 있는 API 서버 개발을 진행했기 때문에 전체적인 시스템 아키텍처에 대한 이해를 높일 수 있는 계기가 되었구요 또한 스프링 프레임워크에 대한 이해가 높아질 수 있는 계기가 되었습니다.</strong></p>
+
+<p>프론트와 백앤드를 나누어 서로 독립적으로 개발을 진행함으로써 <u>소스 코드 관리의 중요성, API 명세의 중요성, 문서화의 중요성, 협업의 중요성, 설계의 중요성</u> 등의 다양한 깨달음을 얻을 수 있었습니다.</p>
+
+<h3 id="webper-프로젝트-진행간에-가장-어려웠던-점이-있었나요">Webper 프로젝트 진행간에 가장 어려웠던 점이 있었나요?</h3>
+
+<p><strong>프로젝트 개발간에 가장 어려웠던 점은 API서버에 인증을 구현하는게 가장 어려웠던 것 같습니다.</strong> 토큰 기반의 인증 구현을 위해 Spring Security와 JWT를 사용했으며 이를 도입해서 개발하는 과정에서 다양한 이슈가 발생하였습니다. 대부분의 이슈들은 제가 Servlet이나, Servlet Container, Spring MVC 스펙들을 잘 몰라서 생긴 이슈였으며 이번 프로젝트를 통해서 전체적인 아키텍처를 많이 배울 수 있었습니다.</p>
+
+<h3 id="세션과-쿠키-기반의-인증-방식의-장단점은-무엇인가요">세션과 쿠키 기반의 인증 방식의 장단점은 무엇인가요?</h3>
+
+<p><strong>장점</strong></p>
+
+<ul>
+  <li>세션 ID는 서버에서 암호화 하기 때문에 이 자체가 유의미한 값을 갖지 않아서 보안에 강합니다.</li>
+  <li>세션 ID는 보통 메모리에 저장되고 처리되기 때문에 바로 검색할 수 있어서 성능 향상 효과를 가져다 줄 수 있습니다.</li>
+</ul>
+
+<p><strong>단점</strong></p>
+
+<ul>
+  <li>통신 중에 해커가 가로챈 세션 ID를 가지고 서버에게 동일한 요청을 보낼 경우 서버는 해당 사용자 진짜 사용자인지 해커인지 구분할 수가 없습니다. (세션 유효시간을 짧게 설정하거나, HTTPS  프로토콜을 사용)</li>
+  <li>세션 저장소는 보통 서버의 메모리를 사용하기 때문에 사용자가 많을 수록 서버에 부하가 걸립니다.</li>
+</ul>
+
+<h3 id="토큰-기반-인증-방식은-무엇인가요">토큰 기반 인증 방식은 무엇인가요?</h3>
+
+<p><strong>클라이언트와 서버간에 인증에 필요한 정보들을 토큰으로 암호화시키고 이를 통해서 인증을 진행하는 방식을 의미합니다.</strong></p>
+
+<p><strong>토큰 인증 동작 방식</strong></p>
+
+<ol>
+  <li>클라이언트가 로그인 한다.</li>
+  <li>서버는 클라이언트를 확인하고 Access Token을 발급해 사용자에게 응답해준다.</li>
+  <li>사용자는 Access Token을 받아 쿠키와 같은 곳에 저장한 후, 인증이 필요한 요청마다 토큰을 헤더에 실어 보낸다.</li>
+  <li>서버는 해당 토큰을 검증하고 적절한 토큰일 경우 해당 사용자에게 알맞는 데이터를 보낸다.</li>
+</ol>
+
+<h3 id="토큰-기반-인증-방식의-장단점은-무엇인가요">토큰 기반 인증 방식의 장단점은 무엇인가요?</h3>
+
+<p><strong>장점</strong></p>
+
+<ol>
+  <li>세션/쿠키와 달리 토큰은 별도의 저장소 관리가 필요 없고 해당 토큰을 검증만 하면 되기 때문에 추가 저장소가 필요 없습니다.</li>
+  <li>Facebook이나 Google에서 지원해주는 다양한 서비스도 토큰 기반으로 진행되기 떄문에 관련 기능을 확장하는데 용이합니다.</li>
+</ol>
+
+<p><strong>단점</strong></p>
+
+<ol>
+  <li>통신 중에 해커가 가로챈 토큰을 가지고 서버에게 요청을 보낼 경우 서버는 해당 사용자 진짜 사용자인지 해커인지 구분할 수가 없습니다. (토큰 유효기간을 짧게 설정하거나, HTTPS  프로토콜을 사용)</li>
+  <li>토큰의 길이는 세션 ID보다 훨씬 길기 때문에 많은 요청이 발생할 수록 오버헤드가 많이 발생합니다.</li>
+</ol>
+
+<h3 id="jwtjson-web-token란-무엇인가요">JWT(Json Web Token)란 무엇인가요?</h3>
+
+<p><strong>JWT란 Json Web Token의 줄임말로써 Json 포맷을 통해 사용자에 대한 속성을 저장하는 Web Token이다.</strong></p>
+
+<p><img src="/assets/interview/naver-interview-preparation8-1.png" /></p>
+
+<p><strong>JWT는 <u>Header, Payload, Signature</u> 3개의 부분으로 나뉘며 .을 통해서 구분합니다.</strong></p>
+
+<ul>
+  <li>Header: Signature를 해싱하기 위한 알고리즘이나 토큰의 타입을 지정하는 부분이다.</li>
+  <li>Payload: 토큰에서 사용할 정보의 조각들인 Claim으로 구성되어 있습니다. <code class="highlighter-rouge">Payload에 담는 정보의 '한 조각'을 Claim이라고 부르고, 이는 Key/Value의 한 쌍으로 이루어져 있습니다.</code></li>
+  <li>Signature: 토큰을 인코딩하거나 유효성 검증을 할 때 사용하는 고유한 암호화 코드입니다.</li>
+</ul>
+
+<h3 id="jwt를-사용하신-이유가-있나요">JWT를 사용하신 이유가 있나요?</h3>
+
+<p><strong>토큰 기반 인증을 위해서 토큰 생성이 가장 간단하면서도 토큰 만료 기간과 같은 다양한 기능 명세가 존재했기 때문에 JWT를 사용하였습니다.</strong> 또한 자바단에서 JWT를 생성하고 검증할 수 있는 라이브러리가 잘 형성되어 있었기 때문에 이를 사용하기도 하였습니다.</p>
+
+<h3 id="jwt의-단점은-무엇인가요">JWT의 단점은 무엇인가요?</h3>
+
+<ul>
+  <li>JWT 토큰은 상태 정보를 저장하지 않아서 한번 발행된 토큰이 임의로 삭제될 수 없기 때문에 적절한 토큰 만료 기간을 넣어줘야만 합니다.</li>
+  <li>JWT 토큰은 전체적으로 길이가 길기 때문에 많은 요청과 응답이 발생 할 경우 성능에 영향을 줄 수 있습니다.</li>
+  <li>JWT의 Payload 자체는 암호화 된 것이 아니라 인코딩 된 것이기 때문에 암호화에 신경 쓰거나, 중요 데이터를 Payload에 넣지 말아야 합니다.</li>
+  <li>Token 기반의 인증과 마찬가지로 Token을 탈취 당했을 경우 올바른 사용자 식별을 할 수 없습니다. 이를 위해 HTTPS 프로토콜을 사용하거나 토큰에 적절한 만료 기간을 설정해야만 했습니다.</li>
+</ul>
+
+<h3 id="oauth는-무엇인가요">OAuth는 무엇인가요?</h3>
+
+<p>OAuth는 인터넷 사용자들이 비밀번호를 제공하지 않고 다른 웹사이트 상의 자신들의 정보에 대해 웹사이트나 애플리케이션의 접근 권한을 부여할 수 있는 공통적인 수단으로서 사용되는, 접근 위임을 위한 개방형 표준이다. <strong>즉, OAuth란 특정 애플리케이션이 다른 애플리케이션의 정보에 접근할 수 잇는 권한을 관리하는 프로토콜을 의미합니다.</strong></p>
+
+
+</article>
+
+
+
+<section class="tags">
+  <strong>Tags:</strong> <a href="/tag/Smart-Doorlock">Smart-Doorlock</a>,&nbsp;<a href="/tag/Mobius">Mobius</a>,&nbsp;<a href="/tag/Webper">Webper</a>,&nbsp;<a href="/tag/Spring">Spring</a>,&nbsp;<a href="/tag/Security">Security</a>,&nbsp;<a href="/tag/JPA">JPA</a>,&nbsp;<a href="/tag/MVC">MVC</a>
+</section>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+      <a href="//www.facebook.com/sharer.php?t=%5B%EC%8B%A4%EB%AC%B4+%EB%A9%B4%EC%A0%91+%EC%A4%80%EB%B9%84+-+7%5D+%EC%8A%A4%EB%A7%88%ED%8A%B8%EB%8F%84%EC%96%B4%EB%9D%BD+%26+webper+%28Smart+Doorlock+%26+Webper%29&u=http%3A%2F%2Flocalhost%3A4000%2Finterview%2F2021%2F03%2F05%2FNAVER-Practical-Interview-Preparation-7.html"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+        <i class="fa fa-facebook-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+      <a href="//www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Finterview%2F2021%2F03%2F05%2FNAVER-Practical-Interview-Preparation-7.html"
+        onclick="window.open(this.href, 'linkedin-share', 'width=550,height=255');return false;">
+        <i class="fa fa-linkedin-square fa-lg"></i>
+      </a>
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Green Frog Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/portfolio/">Portfolio</a>
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:qowhdwlsdk@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">qowhdwlsdk@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100046067473526" title="Friend me on Facebook">
+              <i class="fa fa-facebook"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://github.com/imbf" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">imbf</span>
+            </a>
+          </li>
+          
+        
+          
+          <li>
+            <a href="https://www.linkedin.com/in/%EC%A2%85%EC%A7%84-%EB%B0%B0-9992251a8/" title="Connect with me on LinkedIn">
+              <i class="fa fa-linkedin"></i>
+              <span class="username">배종진</span>
+            </a>
+          </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">객체지향을 사랑하고 클린코드에 관심이 많습니다. 질문을 좋아하고 생각하는 것을 좋아합니다.
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

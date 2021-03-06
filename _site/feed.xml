@@ -6,9 +6,216 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 05 Mar 2021 17:57:33 +0900</pubDate>
-    <lastBuildDate>Fri, 05 Mar 2021 17:57:33 +0900</lastBuildDate>
+    <pubDate>Sat, 06 Mar 2021 13:36:12 +0900</pubDate>
+    <lastBuildDate>Sat, 06 Mar 2021 13:36:12 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>[실무 면접 준비 - 7] 스마트도어락 &amp; webper (Smart Doorlock &amp; Webper)</title>
+        <description>&lt;hr /&gt;
+
+&lt;h2 id=&quot;smart-doorlock&quot;&gt;Smart Doorlock&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;스마트도어락은-무엇인가요&quot;&gt;스마트도어락은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;스마트도어락이란 오픈소스 IoT 서버 플랫폼인 Mobius를 활용한 사용자의 완벽한 외출을 도와주는 IoT 플랫폼입니다.&lt;/strong&gt; 자택 현관문 내부에 존재하는 기존의 도어락 본체는 제거하고 그 자리에 터치식 디스플레이를 설치하여 &lt;strong&gt;사용자가 외출 시에 필요한 날씨 및 미세먼지 등의 다양한 정보를 제공하고 가스 밸브 및 전등과 같은 가전들을 등록해 상태 확인 및 제어할 수 있는 기능을 가진 IoT 플랫폼&lt;/strong&gt;입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;사용하신-mobius-플랫폼이-무엇인지-알-수-있을까요&quot;&gt;사용하신 Mobius 플랫폼이 무엇인지 알 수 있을까요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Mobius 플랫폼이란 oneM2M 표준을 기반으로 한 오픈소스 IoT 서버 플랫폼입니다.&lt;/strong&gt; Mobius는 다양한 도메인의 IoT 애플리케이션에 대한 미들웨어로써 oneM2M표준에 해당하는 공통 서비스 기능인 CSE와 AE 등록, 데이터 관리, pub/sub, 보안 등의 기능을 제공합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;system-structure&quot;&gt;System Structure&lt;/h3&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation7-1.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;onem2m을-말씀하셨는데-이건-무엇인가요-하나의-표준인가요&quot;&gt;oneM2M을 말씀하셨는데 이건 무엇인가요? 하나의 표준인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;oneM2M이란 말 그대로 one + M2M의 합성어로 Machine간에 통신을 하나의 인프라 환경에 통합하기 위한 플랫폼 개발 표준화 단체 및 표준을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;onem2m의-구성요소-중-cse는-무엇인가요&quot;&gt;oneM2M의 구성요소 중 CSE는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;CSE란 Common Service Entity의 줄임말로 oneM2M 스팩을 구현한 서비스 플랫폼에서 공통적으로 제공되어야하는 서비스 기능을 제공하는 미들웨어를 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;onem2m의-구성요소-중-ae는-무엇인가요&quot;&gt;oneM2M의 구성요소 중 AE는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;AE란 Application Entity의 줄임말로서 M2M(Machine to Machine)서비스를 제공하기 위한 논리적인 엔티티&lt;/strong&gt;를 의미합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;미들웨어middleware란-무엇인가요&quot;&gt;미들웨어(Middleware)란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;미들웨어(Middleware)란 운영체제와 응용 소프트웨어 사이에서 조정과 중개의 역할을 수행하는 소프트웨어&lt;/strong&gt;를 의미하구요, 이를 통해 응용 소프트웨어는 운영체제로부터 제공받는 서비스 이외에 추가적인 서비스를 받을 수 있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;대표적인 미들웨어로는 메시징 처리 소프트웨어나 데이터베이스 시스템 등이 존재합니다.&lt;/li&gt;
+  &lt;li&gt;Mobius 플랫폼 즉, 미들웨어인 CSE를 통해서 oneM2M 스팩에서 제공해야하는 공통 서비스 기능인 pub/sub, 데이터관리, 보안 등을 제공합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ininfrastructure-node은-무엇인가요&quot;&gt;IN(Infrastructure Node)은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;IN이란 Infrastructure Node의 줄임말로서 인프라 도메인에 위치한 CSE를 포함하는 서버 기기&lt;/strong&gt;를 의미합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;adnapplication-dedicated-node란-무엇인가요&quot;&gt;ADN(Application Dedicated Node)란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;ADN이란 Applicaton Dedicated Node의 줄임말로서 필드 도메인에 위치한 ADN-AE를 포함하고 CSE를 포함하지 않는 논리적 기기&lt;/strong&gt;를 의미합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;cube와-tas는-각각-무엇인가요&quot;&gt;&amp;amp;Cube와 TAS는 각각 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;&amp;amp;Cube는 IoT 디바이스에 탑재되는 소프트웨어 플랫폼으로서 IN-CSE 즉, 모비우스와 통신할 수 있도록 지원하는 소프트웨어&lt;/strong&gt;입니다. &lt;strong&gt;TAS란 실제 사물을 디바이스에 연결하기 위한 S/W로서 사물과 &amp;amp;Cube간의 통신을 지원하는 역할&lt;/strong&gt;을 합니다.&lt;/p&gt;
+
+&lt;p&gt;즉, 사물과 &amp;amp;Cube를 TAS로써 연결하고 사물과 IN-CSE를 &amp;amp;Cube로써 연결할 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;in-ae로-nodejs를-사용한-이유가-있나요&quot;&gt;IN-AE로 Node.js를 사용한 이유가 있나요?&lt;/h3&gt;
+
+&lt;p&gt;IN-AE로 Node.js를 사용한 이유는 IN-CSE인 Mobius 자체가 Node.js로 구현되어 있기 때문에 &lt;strong&gt;IN-AE를 개발하기 위해 새로운 언어를 배워야 하는 학습 비용을 줄이기 위해서 Node.js를 사용&lt;/strong&gt;하였습니다. 또한 마감이 정해진 개발자 대회 특성상 &lt;strong&gt;빠르게 프로젝트를 빌드업하기 위해 프로토타입 개발에 생산성이 높은 Node.js를 사용&lt;/strong&gt;하였습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;nodejs의-특징에-대해서-알고-있나요&quot;&gt;Node.js의 특징에 대해서 알고 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Node.js란 자바스크립트를 사용하고 Non-blocking I/O와 싱글 스레드 이벤트 루프를 통한 높은 처리 성능&lt;/strong&gt;을 가지고 있습니다. 또한 내장 HTTP 서버 라이브러리를 포함하고 있어 서버 구현 시 아파치 등의 별도의 소프트웨어 없이 동작하는 것이 가능하기 때문에 빠르게 프로토타입을 제작 할 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;non-blocking-io와-blocking-io의-차이에-대해서-말씀해주세요&quot;&gt;Non-Blocking I/O와 Blocking I/O의 차이에 대해서 말씀해주세요.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;멀티 스레드 환경에서 Non-Blocking I/O란 하나의 스레드에서 I/O가 일어날 때 다른 스레드들이 Block되지 않고 병렬로써 실행하는 것을 의미하구요, Blocking I/O란 하나의 스레드에서 I/O가 일어날 때 해당 스레드가 I/O 작업을 완료할 때까지 다른 스레드들이 기다리는 것을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;webper&quot;&gt;webper&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;webper는-어떤-서비스이고-본인은-팀에서-어떠한-역할을-맡으셨나요&quot;&gt;webper는 어떤 서비스이고 본인은 팀에서 어떠한 역할을 맡으셨나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;webper는 관심있는 웹 사이트를 drag &amp;amp; drop으로 모아서 보관할 수 있는 웹 디렉토리 서비스입니다.&lt;/strong&gt; 저는 webper 프로젝트에서 백앤드를 맡았으며 인증 및 데이터 API 서버 개발과 CI/CD 구축을 진행하였습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;webper의-시스템-아키텍처에-대해서-저희에게-설명해주실-수-있나요&quot;&gt;Webper의 시스템 아키텍처에 대해서 저희에게 설명해주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Webper는 사용자에게 뷰를 서비스하기위한 Front-End와 인증 및 데이터를 처리하기위한 Back-End로 나뉩니다.&lt;/strong&gt; Front-End는 뷰를 서비스하기위해 React를 사용해서 개발했구요, Back-End는 인증 및 데이터 API 서버를 위해 Spring Boot, html 페이지의 특정 요소에 분석하기 위해서 Node.js를 사용해서 개발하였습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;webper-system-architecture&quot;&gt;Webper System Architecture&lt;/h3&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation7-2.png&quot; style=&quot;width:100%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;왜-백앤드-기술-스택을-spring-boot와-nodejs를-나누었나요&quot;&gt;왜 백앤드 기술 스택을 Spring Boot와 Node.js를 나누었나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;일단 팀 내에서 각 구성원들이 맡은 부분과 기술 스택이 서로 달랐기 때문에 서버를 두개로 나누었습니다.&lt;/strong&gt; 뿐만 아니라 &lt;strong&gt;인증 및 데이터 API 서버와 HTML 페이지 분석 서버는 서로 맡은 책임이 완전히 다르기 때문에 서버를 두개로 나누었을 경우에 더 독립적으로 진화&lt;/strong&gt;할 수 있겠다고 생각했구요, &lt;strong&gt;HTML 페이지의 Meta 태그가 아닌 DIV 태그 등의 디테일한 데이터들에 쉬운 접근을 제공하는 puppeteer 라이브러리가 Node 라이브러리이기 때문에 팀원분이 Node.js를 사용하신걸로 알고 있습니다.&lt;/strong&gt; 저는 인증 및 데이터 API 서버를 개발하기 위해 Spring Boot를 사용했구요.&lt;/p&gt;
+
+&lt;h3 id=&quot;puppeteer란-정확히-무엇인가요&quot;&gt;Puppeteer란 정확히 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Puppeteer는 DevTools Protocol을 통해 Chrome 또는 Chromium을 제어하기 위한 API를 제공하는 Node.js 라이브러리 입니다.&lt;/strong&gt; 다양한 기능이 존재하지만 가장 큰 특징은 브라우저가 사용자 눈에 보여지지 않고 백그라운드 환경에서 작동하는 즉, &lt;strong&gt;headless로 브라우저를 실행&lt;/strong&gt;할 수 있다는 점입니다. 이러한 특징을 통해서 저희는 메타데이터가 아닌 body 내부에 존재하는 다양한 요소의 데이터를 가져올 수 있게 됩니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;webper를-통해서-무엇을-얻으셨나요&quot;&gt;Webper를 통해서 무엇을 얻으셨나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;처음으로 스프링을 사용해서 여러 노드간에 통신할 수 있는 API 서버 개발을 진행했기 때문에 전체적인 시스템 아키텍처에 대한 이해를 높일 수 있는 계기가 되었구요 또한 스프링 프레임워크에 대한 이해가 높아질 수 있는 계기가 되었습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;프론트와 백앤드를 나누어 서로 독립적으로 개발을 진행함으로써 &lt;u&gt;소스 코드 관리의 중요성, API 명세의 중요성, 문서화의 중요성, 협업의 중요성, 설계의 중요성&lt;/u&gt; 등의 다양한 깨달음을 얻을 수 있었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;webper-프로젝트-진행간에-가장-어려웠던-점이-있었나요&quot;&gt;Webper 프로젝트 진행간에 가장 어려웠던 점이 있었나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;프로젝트 개발간에 가장 어려웠던 점은 API서버에 인증을 구현하는게 가장 어려웠던 것 같습니다.&lt;/strong&gt; 토큰 기반의 인증 구현을 위해 Spring Security와 JWT를 사용했으며 이를 도입해서 개발하는 과정에서 다양한 이슈가 발생하였습니다. 대부분의 이슈들은 제가 Servlet이나, Servlet Container, Spring MVC 스펙들을 잘 몰라서 생긴 이슈였으며 이번 프로젝트를 통해서 전체적인 아키텍처를 많이 배울 수 있었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;세션과-쿠키-기반의-인증-방식의-장단점은-무엇인가요&quot;&gt;세션과 쿠키 기반의 인증 방식의 장단점은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;세션 ID는 서버에서 암호화 하기 때문에 이 자체가 유의미한 값을 갖지 않아서 보안에 강합니다.&lt;/li&gt;
+  &lt;li&gt;세션 ID는 보통 메모리에 저장되고 처리되기 때문에 바로 검색할 수 있어서 성능 향상 효과를 가져다 줄 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;단점&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;통신 중에 해커가 가로챈 세션 ID를 가지고 서버에게 동일한 요청을 보낼 경우 서버는 해당 사용자 진짜 사용자인지 해커인지 구분할 수가 없습니다. (세션 유효시간을 짧게 설정하거나, HTTPS  프로토콜을 사용)&lt;/li&gt;
+  &lt;li&gt;세션 저장소는 보통 서버의 메모리를 사용하기 때문에 사용자가 많을 수록 서버에 부하가 걸립니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;토큰-기반-인증-방식은-무엇인가요&quot;&gt;토큰 기반 인증 방식은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;클라이언트와 서버간에 인증에 필요한 정보들을 토큰으로 암호화시키고 이를 통해서 인증을 진행하는 방식을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;토큰 인증 동작 방식&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;클라이언트가 로그인 한다.&lt;/li&gt;
+  &lt;li&gt;서버는 클라이언트를 확인하고 Access Token을 발급해 사용자에게 응답해준다.&lt;/li&gt;
+  &lt;li&gt;사용자는 Access Token을 받아 쿠키와 같은 곳에 저장한 후, 인증이 필요한 요청마다 토큰을 헤더에 실어 보낸다.&lt;/li&gt;
+  &lt;li&gt;서버는 해당 토큰을 검증하고 적절한 토큰일 경우 해당 사용자에게 알맞는 데이터를 보낸다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;토큰-기반-인증-방식의-장단점은-무엇인가요&quot;&gt;토큰 기반 인증 방식의 장단점은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;세션/쿠키와 달리 토큰은 별도의 저장소 관리가 필요 없고 해당 토큰을 검증만 하면 되기 때문에 추가 저장소가 필요 없습니다.&lt;/li&gt;
+  &lt;li&gt;Facebook이나 Google에서 지원해주는 다양한 서비스도 토큰 기반으로 진행되기 떄문에 관련 기능을 확장하는데 용이합니다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;단점&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;통신 중에 해커가 가로챈 토큰을 가지고 서버에게 요청을 보낼 경우 서버는 해당 사용자 진짜 사용자인지 해커인지 구분할 수가 없습니다. (토큰 유효기간을 짧게 설정하거나, HTTPS  프로토콜을 사용)&lt;/li&gt;
+  &lt;li&gt;토큰의 길이는 세션 ID보다 훨씬 길기 때문에 많은 요청이 발생할 수록 오버헤드가 많이 발생합니다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;jwtjson-web-token란-무엇인가요&quot;&gt;JWT(Json Web Token)란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;JWT란 Json Web Token의 줄임말로써 Json 포맷을 통해 사용자에 대한 속성을 저장하는 Web Token이다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/interview/naver-interview-preparation8-1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;JWT는 &lt;u&gt;Header, Payload, Signature&lt;/u&gt; 3개의 부분으로 나뉘며 .을 통해서 구분합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Header: Signature를 해싱하기 위한 알고리즘이나 토큰의 타입을 지정하는 부분이다.&lt;/li&gt;
+  &lt;li&gt;Payload: 토큰에서 사용할 정보의 조각들인 Claim으로 구성되어 있습니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;Payload에 담는 정보의 '한 조각'을 Claim이라고 부르고, 이는 Key/Value의 한 쌍으로 이루어져 있습니다.&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Signature: 토큰을 인코딩하거나 유효성 검증을 할 때 사용하는 고유한 암호화 코드입니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;jwt를-사용하신-이유가-있나요&quot;&gt;JWT를 사용하신 이유가 있나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;토큰 기반 인증을 위해서 토큰 생성이 가장 간단하면서도 토큰 만료 기간과 같은 다양한 기능 명세가 존재했기 때문에 JWT를 사용하였습니다.&lt;/strong&gt; 또한 자바단에서 JWT를 생성하고 검증할 수 있는 라이브러리가 잘 형성되어 있었기 때문에 이를 사용하기도 하였습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;jwt의-단점은-무엇인가요&quot;&gt;JWT의 단점은 무엇인가요?&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JWT 토큰은 상태 정보를 저장하지 않아서 한번 발행된 토큰이 임의로 삭제될 수 없기 때문에 적절한 토큰 만료 기간을 넣어줘야만 합니다.&lt;/li&gt;
+  &lt;li&gt;JWT 토큰은 전체적으로 길이가 길기 때문에 많은 요청과 응답이 발생 할 경우 성능에 영향을 줄 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;JWT의 Payload 자체는 암호화 된 것이 아니라 인코딩 된 것이기 때문에 암호화에 신경 쓰거나, 중요 데이터를 Payload에 넣지 말아야 합니다.&lt;/li&gt;
+  &lt;li&gt;Token 기반의 인증과 마찬가지로 Token을 탈취 당했을 경우 올바른 사용자 식별을 할 수 없습니다. 이를 위해 HTTPS 프로토콜을 사용하거나 토큰에 적절한 만료 기간을 설정해야만 했습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;oauth는-무엇인가요&quot;&gt;OAuth는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;OAuth는 인터넷 사용자들이 비밀번호를 제공하지 않고 다른 웹사이트 상의 자신들의 정보에 대해 웹사이트나 애플리케이션의 접근 권한을 부여할 수 있는 공통적인 수단으로서 사용되는, 접근 위임을 위한 개방형 표준이다. &lt;strong&gt;즉, OAuth란 특정 애플리케이션이 다른 애플리케이션의 정보에 접근할 수 잇는 권한을 관리하는 프로토콜을 의미합니다.&lt;/strong&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 05 Mar 2021 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/interview/2021/03/05/NAVER-Practical-Interview-Preparation-7.html</link>
+        <guid isPermaLink="true">http://localhost:4000/interview/2021/03/05/NAVER-Practical-Interview-Preparation-7.html</guid>
+        
+        <category>Smart-Doorlock</category>
+        
+        <category>Mobius</category>
+        
+        <category>Webper</category>
+        
+        <category>Spring</category>
+        
+        <category>Security</category>
+        
+        <category>JPA</category>
+        
+        <category>MVC</category>
+        
+        
+        <category>Interview</category>
+        
+      </item>
     
       <item>
         <title>[실무 면접 준비 - 6] Pinpoint Webhook Contribution</title>
@@ -3179,55 +3386,6 @@ Old 영역에 있는 참조가 없는 객체들을 표시하고 그 해당 객�
         <guid isPermaLink="true">http://localhost:4000/interview/2020/12/15/NAVER-Interview-Preparation-7.html</guid>
         
         <category>Introduction</category>
-        
-        
-        <category>Interview</category>
-        
-      </item>
-    
-      <item>
-        <title>[기술 면접 준비 - 6일차] Github Pages Blog</title>
-        <description>&lt;h1 id=&quot;github-pages-blog&quot;&gt;Github Pages Blog&lt;/h1&gt;
-
-&lt;h3 id=&quot;github-pages란-무엇인가&quot;&gt;Github Pages란 무엇인가??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;GitHub Pages란 Github 저장소의 내용을 웹페이지로 만들어 주는 정적 웹 사이트 호스팅 서비스&lt;/strong&gt;입니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;tistory-velog-등-다양한-글쓰기-플랫폼이-존재하는데-왜-github-pages를-사용했는가&quot;&gt;Tistory, Velog 등 다양한 글쓰기 플랫폼이 존재하는데 왜 Github Pages를 사용했는가?&lt;/h3&gt;
-
-&lt;p&gt;말씀하신대로 글쓰기 플랫폼은 아주 다양하고 편리한 기능들을 지원해 줍니다. 이러한 기능들을 사용해서 나만의 멋진 블로그를 만들 수 있지만 &lt;strong&gt;모든 기능이 플랫폼에 종속&lt;/strong&gt;되어 있기 때문에 자유자재로 나만의 특징을 가진 블로그를 만들기에는 한계가 존재한다고 생각했습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;어렵지만 난 개발자니까 할 수 있을꺼다 라고 생각해서 좀 더 로우 레벨인 Github pages로 나만의 블로그를 만들었습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;아주-좋은-접근인-것-같다-그렇다면-어떤-정적-사이트-생성기를-활용하여-github-pages-서비스를-이용했는가&quot;&gt;아주 좋은 접근인 것 같다. 그렇다면 어떤 정적 사이트 생성기를 활용하여 Github Pages 서비스를 이용했는가?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Jekyll이라고 하는 Ruby 언어 기반의 정적 사이트 생성기&lt;/strong&gt;를 사용했습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;왜-jekyll을-사용-했는가&quot;&gt;왜 Jekyll을 사용 했는가??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;일단 Github Pages가 Jekyll을 기본 엔진&lt;/strong&gt;으로 하기 때문에 사용한 것도 있지만, 마음에 드는 템플릿이 대부분 Jekyll을 사용하기 때문에 Jekyll을 사용해서 Github Pages 서비스를 이용하였습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;jekyll을-사용하는데-어려움이-없었는가&quot;&gt;Jekyll을 사용하는데 어려움이 없었는가??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;첫 블로깅 환경을 구성하는데 어려움&lt;/strong&gt;이 있었습니다. 정적 사이트 생성기라서 단순할 줄 알았지만 생각보다 복잡했고 어떤 모듈이 어떠한 역할을 하는지에 대해 파악하는데 어려웠습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;어떻게-어려움을-극복하게-되었는가&quot;&gt;어떻게 어려움을 극복하게 되었는가??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;템플릿을 만든 사람이 사용자 친화적으로 코드 작성 및 모듈화를 해줘서 구조를 파악하는데 많은 도움&lt;/strong&gt;이 되었습니다. 그래도 모르는 부분은 &lt;strong&gt;직접 모듈 하나 하나를 뜯어보거나 공식 문서&lt;/strong&gt;를 통해서 이슈를 해결했던 것 같습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;구체적으로-어려움이-무엇이었는가&quot;&gt;구체적으로 어려움이 무엇이었는가??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;제가 원하는 디자인의 블로그&lt;/strong&gt;를 만들면서 이슈가 발생했습니다. &lt;strong&gt;블로그의 메인 컬러라는 property가 존재했고, 이는 블로그의 메인 컬러 뿐만 아니라 텍스트의 색깔에도 종속&lt;/strong&gt;되어 있었습니다. 이를 해결하기 위해 저는 &lt;strong&gt;properties파일에서 메인 컬러 Property를 배경 Color와 텍스트 색깔 property를 나누었고 관련 코드를 바꿈&lt;/strong&gt;으로써 제가 원하는 디자인을 가진 블로그를 만들 수 있었습니다.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 14 Dec 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/interview/2020/12/14/NAVER-Interview-Preparation-6.html</link>
-        <guid isPermaLink="true">http://localhost:4000/interview/2020/12/14/NAVER-Interview-Preparation-6.html</guid>
-        
-        <category>GitHub-Pages</category>
-        
-        <category>Blog</category>
-        
-        <category>Jekyll</category>
         
         
         <category>Interview</category>
