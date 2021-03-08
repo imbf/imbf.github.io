@@ -426,13 +426,13 @@
 
 <p><strong>프레임워크(Framework)는 특정한 문제 해결을 위해 어느 정도의 뼈대 즉, 구조를 제공</strong>해주는 것을 의미하구요, <strong>라이브러리(Library)는 특정 기능 사용을 위한 도구나 함수들의 모음</strong>을 의미합니다.</p>
 
-<p>라이브러리와 프레임워크의 차이는 <strong>프로그램의 전체 흐름에 대한 제어권</strong>이 어디있는지에 관해서 차이가 발생하며 <strong>프레임워크는 프로그램의 전체적인 흐름을 자체적으로 가지고 있으며 사용자가 작성한 코드를 호출해서 사용하구요 즉, 이를 IoC(Inversion Of Control)</strong> 라고 합니다. <strong>라이브러리는 사용자가 프로그램의 전체적인 흐름을 제어하며 사용자 코드에서 라이브러리의 특정 기능을 직접 가져다 쓰는것을 의미</strong>합니다.</p>
+<p>라이브러리와 프레임워크의 차이는 <strong>프로그램의 전체 흐름에 대한 제어권</strong>에서 차이가 발생합니다. <strong>프레임워크는 프로그램의 전체적인 흐름을 자체적으로 가지고 있으며 프레임워크가 사용자가 작성한 코드를 호출해서 사용합니다.</strong> 하지만 <strong>라이브러리는 사용자가 프로그램의 전체적인 흐름을 제어하며 사용자가 코드로써 라이브러리의 특정 기능을 직접 가져다 쓰는것을 의미</strong>합니다.</p>
 
 <h3 id="spring-framework의-3대-특징인-ioc-aop-psa에-대해서-설명해주실레요">Spring Framework의 3대 특징인 IoC, AOP, PSA에 대해서 설명해주실레요?</h3>
 
 <ul>
   <li><strong>IoC란 Inversion of Control의 줄임말로 개발자가 작성한 프로그램의 제어권이 프레임워크에 넘어가서 Spring Framework에서 개발자의 코드를 호출하는 것을 의미합니다.</strong> <strong>IoC는 DL(Dependency Lookup)과 DI(Dependency Injection)에 의해서 구현되는데 클래스 및 계층간에 필요한 의존관계를 빈 설정 정보를 바탕으로 IoC Container가 의존성을 찾아주는 것을 DL이라고 하구요, 의존성을 주입해 주는 것을 DI라고 합니다.</strong></li>
-  <li><strong>AOP란 Aspect Oriented Programming의 줄임말로 여러 모듈에서 공통적으로 사용하는 기능 및 로직을 추출하여 따로 관리하며 핵심 로직에 영향을 끼치지 않게끔 공통 로직을 끼워 넣는 개발 형태를 의미합니다.</strong> AOP의 사용 예로는 로깅, 트랜잭션, 인증 등의 기능이 존재합니다. 컴파일 타임과 클래스 로드 타임, 런 타임 등 모든 시간에 AOP를 적용할 수 있는 방법이 존재한다고 들었습니다. (Java Reflection, Proxy, …)</li>
+  <li><strong>AOP란 Aspect Oriented Programming의 줄임말로 여러 모듈에서 공통적으로 사용하는 기능 및 로직들을 분리하여 관리함을 통해서 모듈화하는 프로그래밍 패러다임을 의미합니다.</strong> AOP의 사용 예로는 로깅, 트랜잭션, 인증 등이 존재합니다. 컴파일 타임과 클래스 로드 타임, 런타임 등 모든 시간에 AOP를 적용할 수 있는 방법이 존재한다고 알고 있습니다. (Java Reflection, Proxy, …)</li>
   <li><strong>PSA란 Portable Service Abstraction의 줄임말로 환경과 세부 기술의 변화에 관계없이 일관된 방식으로 기술에 접근할 수 있게 해주는 것을 의미합니다.</strong> PSA가 적용된 대표적인 곳은 JDBC, JPA, Transaction Manager 등이 존재합니다.</li>
 </ul>
 
@@ -442,7 +442,7 @@
 
 <h3 id="ioc-container에-bean을-등록하는-방법은-무엇이-있나요">IoC Container에 Bean을 등록하는 방법은 무엇이 있나요?</h3>
 
-<p><strong>IoC Container에 Bean을 등록하는 방법으로는 xml 설정파일을 이용하는 방법, Configuration 클래스에서 애노테이션을 사용해서 Bean을 등록하는 방법, Bean 등록을 하고 싶은 클래스에서 애노테이션을 통해서 Bean을 등록하는 방법이 존재합니다.</strong> 마지막의 경우 Component Scan이 꼭 필요하지만 Spring Boot의 경우 Component Scan까지 자동으로 구성해줘서 편리합니다.</p>
+<p><strong>IoC Container에 Bean을 등록하는 방법으로는 xml 설정파일을 이용하는 방법, Configuration 클래스에서 애노테이션을 사용해서 Bean을 등록하는 방법, Bean 등록을 하고 싶은 클래스에서 애노테이션을 통해서 Bean을 등록하는 방법이 존재합니다.</strong> 마지막의 경우 Component Scan이 꼭 필요하지만 Spring Boot의 경우 Component Scan까지 자동으로 구성해줘서 스프링 환경을 매우 편리하게 사용할 수 있습니다.</p>
 
 <h3 id="ioc-container로부터-bean을-주입받는-방법은-무엇이-있나요">IoC Container로부터 Bean을 주입받는 방법은 무엇이 있나요?</h3>
 
@@ -458,7 +458,7 @@
 
 <h3 id="java-reflection이란-무엇인가요">Java Reflection이란 무엇인가요?</h3>
 
-<p><strong>Java Reflection이란 컴파일 타임에 클래스나 메서드의 이름을 알지 못해도 런타임에 클래스나 인터페이스, 메서드나 필드를 접근할 수 있게 해주는 기능을 의미합니다.</strong> Java Reflection을 사용하면 새로운 객체를 만들수도 있고, 메서드를 호출할 수 있으며, 필드 값을 얻거나 설정할 수 있습니다.</p>
+<p><strong>Java Reflection이란 컴파일 타임에 클래스나 메서드의 이름을 알지 못해도 런타임에 클래스나 인터페이스, 메서드, 필드 등을 접근할 수 있게 해주는 기능을 의미합니다.</strong> Java Reflection을 사용하면 새로운 객체를 만들수도 있고, 메서드를 호출할 수 있으며, 필드 값을 얻거나 설정할 수 있습니다.</p>
 
 <p>Java Reflection이 사용되는 대표적인 예로는 스프링의 Dependency Injection이 존재하며 Jackson 라이브러리의 ObjectMapper 에서도 사용되어집니다.</p>
 
@@ -466,12 +466,12 @@
 
 <p><strong>Spring Boot와 Spring Framework의 가장 큰 차이는 AutoConfiguration 즉, 자동 설정의 차이입니다.</strong> Spring Boot는 Spring Boot Starter Project를 통해서 특정 어플리케이션 개발을 위한 설정을 자동으로 구성해주고 관련 라이브러리간에 호환성 문제를 해결해줍니다.</p>
 
-<p>한 예로써 Spring MVC 프로젝트를 Spring Framework 기반으로 구성 한다면, 관련 Bean 설정, DispatcherServlet 설정, View Resolver 설정, JDBC 설정 등의 다양한 설정 및 버젼간에 호환성 문제가 발생하지만 Spring Boot Starter Web을 사용해서 프로젝트를 구성한다면 초기 구성에 걸리는 비용 문제와 이슈들을 해결할 수 있습니다.</p>
+<p>한 예로써 Spring MVC 프로젝트를 Spring Framework 기반으로 구성 한다면, 관련 Bean 설정, DispatcherServlet 설정, View Resolver 설정, JDBC 설정 등의 다양한 설정 및 버젼간에 호환성 문제가 발생하지만 Spring Boot Starter Web을 사용해서 프로젝트를 구성한다면 초기 구성에 걸리는 비용 문제와 호환성 이슈들을 해결할 수 있습니다.</p>
 
 <blockquote>
   <h3 id="jarjava-archive">JAR(Java Archive)</h3>
 
-  <p><strong>JAR(Java Archive, 자바 아카이브)</strong>는 여러개의 자바 클래스 파일과 클래스들이 이용하는 관련 리소스(텍스트, 그림 등) 및 메타데이터를 하나의 파일로 모아서 자바 플랫폼에 응용 소프트웨어나 라이브러리를 배포하기 위한 소프트웨어 패키지 파일 포맷입니다.</p>
+  <p><strong>JAR(Java Archive, 자바 아카이브)</strong>는 여러개의 자바 클래스 파일과 클래스들이 이용하는 관련 리소스(텍스트, 그림 등) 및 메타데이터를 하나의 파일로 모아서 자바 플랫폼에 응용 소프트웨어나 라이브러리를 배포하기 위한 소프트웨어 패키지 파일 포맷을 의미합니다.</p>
 </blockquote>
 
 <hr />
@@ -485,7 +485,7 @@
 <p><strong>MVC 패턴이란 웹 어플리케이션에서 자주 사용되는 디자인 패턴으로 시스템을 크게 Model, View, Controller로 나누어 모듈간에 결합도를 낮추고 응집도를 높이기 위해 사용하는 패턴입니다.</strong></p>
 
 <ul>
-  <li>Controller란 사용자로부터 요청을 받아서 모델, 뷰와의 상호작용을 통해 적절한 응답을 제공해주는 중개자의 역할을 하는 컴포넌트를 합니다.</li>
+  <li>Controller란 사용자로부터 요청을 받아서 모델, 뷰와의 상호작용을 통해 적절한 응답을 제공해주는 중개자의 역할을 하는 컴포넌트를 의미합니다.</li>
   <li>Model은 시스템에서 사용하는 도메인 등을 의미합니다.</li>
   <li>View는 사용자에게 제공하는 화면이나 페이지등을 의미합니다.</li>
 </ul>
@@ -506,7 +506,7 @@
 
 <h3 id="mvc-패턴-model1과-model2를-비교해주세요">MVC 패턴 Model1과 Model2를 비교해주세요.</h3>
 
-<p><strong>MVC 패턴 Model 1은 사용자의 요청과 응답을 JSP가 전부 다 처리하는 모델</strong>을 의미하구요, <strong>MVC패턴 Model 2는 컨트롤러에서 사용자의 요청을 받아 비즈니스 로직을 태우고 데이터를 JSP로 넘겨서 응답을 모델</strong>을 의미합니다.</p>
+<p><strong>MVC 패턴 Model 1은 사용자의 요청과 응답을 전부 다  JSP가 처리하는 모델</strong>을 의미하구요, <strong>MVC패턴 Model 2는 컨트롤러에서 사용자의 요청을 받아 비즈니스 로직을 태우고 데이터를 JSP로 넘겨서 응답을 하는 모델</strong>을 의미합니다.</p>
 
 <blockquote>
   <h3 id="mvc-model-1">MVC Model 1</h3>
@@ -608,7 +608,7 @@
 
 <ol>
   <li>Client가 요청을 보내면, Servlet Filter에 의해서 Security Filter로 작업이 위임되고 여러 Security Filter 중에서 <code class="highlighter-rouge">JwtAuthenticationFilter</code>에서 인증을 처리합니다.</li>
-  <li><code class="highlighter-rouge">JwtAuthenticationFilter</code>는 Servlet 요청 객체에서 토큰을 가져와서 <code class="highlighter-rouge">JwtTokenProvider</code>가 해당  토큰을 검증해 해당 토큰이 유효한지 검사합니다.</li>
+  <li><code class="highlighter-rouge">JwtAuthenticationFilter</code>는 Servlet 요청 객체에서 토큰을 가져와서 <code class="highlighter-rouge">JwtTokenProvider</code>가 해당  토큰을 검증해 토큰이 유효한지 검사합니다.</li>
   <li>토큰이 유효하다면 <code class="highlighter-rouge">Authentication</code> 객체를 만들고 <code class="highlighter-rouge">AuthenticationManager</code>를 사용할 필요 없이 직접 <code class="highlighter-rouge">SecurityContextHolder</code>에 접근해서 <code class="highlighter-rouge">Authentication</code> 객체를 저장합니다.</li>
 </ol>
 
@@ -636,7 +636,7 @@
   <li><strong>ORM은 객체 지향 프로그램과 관계형 데이터베이스간에 통신시 발생하는 패러다임 문제를 해결하기 위해 데이터를 자동으로 매핑해주는 기술을 의미합니다.</strong></li>
   <li><strong>JPA란 자바 진영의 ORM을 위한 명세를 의미합니다.</strong></li>
   <li><strong>Hibernate란 Java 진영의 ORM 명세인 JPA를 구현한 여러 구현체 중 하나</strong>를 의미합니다. JPA 구현체로써 Hibernate 외에도 EclipseLink나 DataNucleus 등이 존재합니다.</li>
-  <li><strong>Spring Data JPA는 Spring 환경에서 JPA를 편리하게 사용할 수 있도록 JPA를 Repository 기반으로 추상화 시킨 스프링 서브 프로젝트입니다.</strong> Spring Data JPA는 JPA 사용시 발생하는 수 많은 boilerplate를 없애주고 pagination이나 Query Method 등의 다양한 기능을 지원합니다.</li>
+  <li><strong>Spring Data JPA는 Spring 환경에서 JPA를 편리하게 사용할 수 있도록 Repository 기반으로 추상화 시킨 스프링 서브 프로젝트입니다.</strong> Spring Data JPA는 JPA 사용시 발생하는 수 많은 boilerplate를 없애주고 pagination이나 Query Method 등의 다양한 기능을 지원합니다.</li>
 </ul>
 
 <h3 id="프로젝트에-jpa를-사용하신-이유가-뭔가요">프로젝트에 JPA를 사용하신 이유가 뭔가요?</h3>
@@ -671,11 +671,11 @@
 
 <h3 id="1차-caching은-무엇인가요">1차 Caching은 무엇인가요?</h3>
 
-<p><strong>트랜잭션이 끝나기 전까지 영속성 컨텍스트 내부에서 엔티티를 캐싱하는 것을 1차 캐싱이라고 합니다.</strong></p>
+<p><strong>Flush가 발생하기 전까지 Persistent Context 내부에서 엔티티를 캐싱하는 것을 1차 캐싱이라고 합니다.</strong></p>
 
 <h3 id="write-behind는-무엇인가요">Write Behind는 무엇인가요?</h3>
 
-<p><strong>트랜잭션이 끝나기 전까지 DB에 write 하는 쿼리문을 영속성 컨텍스트 내의 쓰기 지연 SQL 저장소에서 관리해서 flush가 일어날 때 이를 데이터베이스에 반영하는 것을 Write Behind 라고 합니다.</strong></p>
+<p><strong>Flush가 발생하기 전까지 DB에 write 하는 쿼리문을 Persistent Context 내의 쓰기 지연 SQL 저장소에서 관리해서 flush가 일어날 때 이를 데이터베이스에 반영하는 것을 Write Behind 라고 합니다.</strong></p>
 
 <h3 id="dirty-checking은-무엇인가요">Dirty Checking은 무엇인가요?</h3>
 
@@ -683,7 +683,7 @@
 
 <h3 id="lazy-loading은-무엇인가요">Lazy Loading은 무엇인가요?</h3>
 
-<p><strong>Lazy Loading이란 DB로부터 엔티티를 가져올 때 참조된 엔티티와 관련된 select 쿼리가 발생하는 것이 아닌 프록시를 통해서 직접 참조된 엔티티를 사용할 경우에 select 쿼리가 발생하는 것을 의미합니다.</strong></p>
+<p><strong>Lazy Loading이란 DB로부터 엔티티를 가져올 때 참조된 엔티티와 관련된 select 쿼리가 발생하는 것이 아닌 프록시를 통해서 직접 참조된 엔티티를 사용될 경우에 select 쿼리가 발생하는 것을 의미합니다.</strong></p>
 
 <ul>
   <li>DB로부터 직접 가져오는 엔티티와 이에 참조된 엔티티가 자주 같이 사용된다면 즉시 로딩을 사용하면 좋다.</li>
@@ -691,7 +691,7 @@
 
 <h3 id="querydsl은-무엇인가요">Querydsl은 무엇인가요?</h3>
 
-<p><strong>Querydsl이란 Type-safe한 방식으로 쿼리를 작성할 수 있도록 도와주는 프레임워크입니다.</strong> querydsl을 사용하면 컴파일 타임에 쿼리의 문법 오류를 검증할 수 있고, IDE의 다양한 자동 완성 기능을 사용해서 보다 type-safe한 쿼리를 작성할 수 있습니다.</p>
+<p><strong>Querydsl이란 Type-safe한 방식으로 쿼리를 작성할 수 있도록 도와주는 프레임워크를 의미합니다.</strong> querydsl을 사용하면 컴파일 타임에 쿼리의 문법 오류를 검증할 수 있고, IDE의 자동 완성 기능을 사용해서 보다 type-safe한 쿼리를 작성할 수 있습니다.</p>
 
 
 </article>
