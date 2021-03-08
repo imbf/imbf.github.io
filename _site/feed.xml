@@ -6,9 +6,147 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 07 Mar 2021 17:01:52 +0900</pubDate>
-    <lastBuildDate>Sun, 07 Mar 2021 17:01:52 +0900</lastBuildDate>
+    <pubDate>Mon, 08 Mar 2021 13:50:46 +0900</pubDate>
+    <lastBuildDate>Mon, 08 Mar 2021 13:50:46 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>[실무 면접 준비 - 9] 자기 소개 &amp; 대외 활동 &amp; 인성 면접</title>
+        <description>&lt;hr /&gt;
+
+&lt;h2 id=&quot;about-me&quot;&gt;About Me&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;간단한-자기소개-부탁드릴게요&quot;&gt;간단한 자기소개 부탁드릴게요&lt;/h3&gt;
+
+&lt;p&gt;만나뵙게 되어서 반갑습니다. 네이버 예약 주문 플랫폼에 백앤드 개발자로 지원하게 된 배종진입니다. 저는 생각하는 것과 공유하는 것을 좋아하며 전남대학교 IT 개발 동아리 회장으로 지내는 동안 전남대학교에 온라인 해커톤과 Dev 컨퍼런스를 개최해 개발생태계에 이바지한 경험이 있습니다. 또한 저를 통해서 전 세계의 모든 개발자들이 편리해졌으면 좋겠다는 생각으로 Pinpoint 프로젝트와 Spring Data Redis 프로젝트에 기여한 경험을 가지고 있구요, 제가 겪었던 이슈나 경험들을 공유하는 블로그도 운영하고 있습니다. 항상 주어진 환경에서 최선의 변화를 시도하며 많은 사람들에게 선한 영향력을 끼칠 수 있는 개발자가 되고 싶습니다.&lt;/p&gt;
+
+&lt;p&gt;이러한 저의 역량을 바탕으로 네이버 예약 주문 플랫폼 팀에 입사하여 예약 주문 서비스를 최고의 글로벌 서비스로 성장시키고 싶습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;it-개발-동아리-회장&quot;&gt;IT 개발 동아리 회장&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;회장직으로-있으셨던-동아리는-무엇을-하는-동아리인가요&quot;&gt;회장직으로 있으셨던 동아리는 무엇을 하는 동아리인가요?&lt;/h3&gt;
+
+&lt;p&gt;저희 동아리는 전남대학교 대표 IT 개발 동아리로써 학기마다 팀을 구성해서 문제를 정의하고 이를 해결하는 다양한 프로젝트를 수행합니다. 이러한 프로젝트의 진행 과정과 결과는 동아리 내에서 뿐만 아니라 전남대학교 학생 모두에게 공유하며 전남대학교 개발 생태계 활성화를 가장 주된 목표로 삼는 동아리입니다. 저희 동아리는 프로젝트 진행 뿐만 아니라 전남대학교 내에서 해커톤이나 컨퍼런스와 같은 다양한 행사도 진행하고있습니다. 조금 더 말씀 드려보자면 작년에는 저희 동아리가 직접 주관하여 전남대학교 최초의 온라인 해커톤을 개최했을 뿐만 아니라 전라남도 주요 대학 4개가 참여하는 대학 연합 해커톤도 직접 개최해서 성공적으로 운영하였습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;코로나-시기에-동아리를-운영하시면서-어려웠던-점은-없었나요&quot;&gt;코로나 시기에 동아리를 운영하시면서 어려웠던 점은 없었나요?&lt;/h3&gt;
+
+&lt;p&gt;코로나 시기에 동아리를 운영하면서 가장 어려웠던 점은 오프라인 활동을 전체 온라인으로 전환하는 것이 가장 어려웠습니다. 온라인 활동은 저희 동아리가 한 번도 가보지 못한 길이어서 이를 어떻게 전환해야할지 처음에는 감도 안잡혔지만 저희 동아리가 추구하는 목적과 본질에 집중해서 전환 작업을 수행하니 잘 할 수 있었던 것 같습니다. 또한 동아리 회원들에게 예전부터 Slack이나 Google Meets, Git 등을 교육시키고 사용을 권장했어서 더 수월하게 온라인 전환을 진행할 수 있었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;동아리가-추구하는-목적과-본질은-무엇인가요&quot;&gt;동아리가 추구하는 목적과 본질은 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;저희 동아리는 지식의 선순환을 가장 중요시 생각합니다. 일주일에 한 번씩 주간 발표를 통해 프로젝트 진행 과정에서 문제를 해결한 경험이나 기술을 학습하고 적용하면서 발생한 이슈 및 경험들에 대해서 공유합니다. 뿐만 아니라 다양한 스터디나 멘토 멘티 제도를 통해 끊임없이 지식의 선순환을 추구하는 동아리입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;동아리-회장을-하시면서-얻은-부분이-있으시나요&quot;&gt;동아리 회장을 하시면서 얻은 부분이 있으시나요?&lt;/h3&gt;
+
+&lt;p&gt;동아리 회장을 하면서 책임감이나 리더쉽 부분에 대해서도 많이 배우고 느꼈지만 가장 가치있게 느꼈던 점은 지식 공유의 힘에 대해서 많이 배울 수 있어서 좋았다고 생각합니다. 저희 동아리는 지식 공유를 위해 다양한 행사와 기회를 제공합니다. 이러한 기회를 통해 구성원들은 다른 사람의 잘 구조화된 지식을 얻을 수 있었고 시야를 넓힐 수 있었습니다. 또한 발표를 직접 준비하면서 자신의 지식의 깊이도 깊어지는 효과를 얻을 수 있었습니다. 이러한 지식의 선순환 구조에서 저는 지식 공유의 힘을 느꼈고 현재에도 동아리 내의 지식의 선순환을 위해 열심히 노력하고 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;동아리-회장을-하시면서-갈등을-겪으신-적이-있나요-있다면-어떻게-해결하셨죠&quot;&gt;동아리 회장을 하시면서 갈등을 겪으신 적이 있나요? 있다면 어떻게 해결하셨죠?&lt;/h3&gt;
+
+&lt;p&gt;저는 동아리의 체계적인 운영을 위해 많은 규칙과 규정을 운영진과의 논의하에 만들었습니다. 나름 저희가 많은 부분을 고려해서 적절한 규칙과 규정을 만들었지만 항상 예외적으로 이를 만족하지 않는 케이스들이 생겼고 이러한 케이스들 중심에 회원들이 있었기 때문에 회원들과의 갈등이 생겼던 것 같습니다. 저는 이러한 갈등을 해결하기 위해 한발짝 뒤로 물러서 회원들의 입장을 듣고 공감하며 제 입장을 다시 논리 정연하게 이야기해주고 서로간에 해당 문제의 본질을 보려는 노력 끝에 문제를 해결할 수 있었던 것 같습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;동아리-운영에서-가장-중요한-부분은-무엇이라고-생각하시나요&quot;&gt;동아리 운영에서 가장 중요한 부분은 무엇이라고 생각하시나요?&lt;/h3&gt;
+
+&lt;p&gt;저는 동아리 운영에서 가장 중요한 부분으로 동아리원들간의 유대감과 지식의 선순환이라고 생각합니다. 동아리원들간의 친목이나 유대감 없는 지식의 공유는 금방 중단되기 싶고, 지식의 공유가 없는 동아리원들간의 친목과 유대감은 IT 개발 동아리인 저희 동아리의 본질과 목적을 흐립니다. 이 둘중 어느 것도 중요하지 않는게 없다고 생각해서 동아리원들간의 유대감과 지식의 선순환이 동아리 운영시에 가장 중요시 되어야하는 부분이라고 생각합니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;온라인-해커톤-개최&quot;&gt;온라인 해커톤 개최&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;본인이-주관했던-온라인-해커톤에-대해서-소개해주실-수-있나요&quot;&gt;본인이 주관했던 온라인 해커톤에 대해서 소개해주실 수 있나요?&lt;/h3&gt;
+
+&lt;p&gt;제가 TF팀의 리더로써 주관했던 해커톤은 전남대학교 이노베이션 온라인 해커톤으로 비대면 환경에서 빅데이터/클라우드 자원을 활용한 서비스 개발을 주제로 전남대학교 학생들을 대상으로 한 온라인 해커톤입니다. 4개월에 걸쳐서 해커톤을 기획하고 준비하였으며 총 인원 40명 정도가 참가한 전남대학교 최초의 온라인 해커톤이었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;온라인-해커톤을-왜-운영하시게-되었나요&quot;&gt;온라인 해커톤을 왜 운영하시게 되었나요?&lt;/h3&gt;
+
+&lt;p&gt;전남대학교 온라인 해커톤을 운영하게 된 이유는 지방 학생들은 수도권 학생들에 비해서 IT 분야의 대회나 교육, 경험 등이 상대적으로 부족하다고 생각했습니다. 이러한 저희 학교 학생들에게 다양한 경험과 기회를 제공해주고 싶고 전남대학교 개발 생태계를 활성화 시키고 싶어서 코로나가 유행함에도 불구하고 온라인 해커톤을 기획하고 운영하게 되었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;해커톤을-운영하면서-무엇을-얻을-수-있었나요&quot;&gt;해커톤을 운영하면서 무엇을 얻을 수 있었나요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;해커톤을 기획하고 운영함을 통해서 코로나와 같은 악조건에도 불구하고 항상 변화하고 도전한다면 성취할 수 있다는 자신감을 얻게 되었습니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;또한 해커톤을 성공적으로 운영하면서 모든 학생들이 잘 참여해주셔서 뿌듯했고 이를 기반으로 직접 사업화 하는 팀도 생겼고, 마음이 맞는 사람들끼리 스터디를 꾸려서 진행하는 학생들도 생겼습니다. 이를 통해서 정말 저희가 전남대학교 개발 생태계에 큰 이바지를 했구나 하는 뿌듯함을 느낄 수 있었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;해커톤을-운영하시면서-어려웠던-점과-해결-방안에-대해서-말씀해주세요&quot;&gt;해커톤을 운영하시면서 어려웠던 점과 해결 방안에 대해서 말씀해주세요.&lt;/h3&gt;
+
+&lt;p&gt;코로나에 의해서 해커톤의 운영 뿐만 아니라 기획도 온라인으로 진행되었습니다. 이러한 과정에서 ‘어떻게 하면 TF팀 내에서 해커톤 프로젝트를 생산성 있게 관리할 수 있을까?’에 대한 고민이 굉장히 어려웠던 것 같습니다. 저는 이러한 문제를 해결하고자 칸반 기반의 소프트웨어인 Trello를 도입해서 팀 내에서 프로젝트 전체 진행상황을 관리하고 공유하면서 생산성 향상을 이룰 수 있었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;해커톤을-운영하면서-발생한-팀내의-갈등과-해결방안에-대해서-말씀해주세요&quot;&gt;해커톤을 운영하면서 발생한 팀내의 갈등과 해결방안에 대해서 말씀해주세요.&lt;/h3&gt;
+
+&lt;p&gt;팀 내에서 발생한 사건들 중에 갈등이라고 할 정도의 사건은 없었던 것 같습니다. 하지만 항상 회의간에 크고 작은 논쟁은 발생 했으며 서로의 입장을 잘 전달하고 공감하고 본질을 보려는 시각을 통해서 이를 잘 해결했습니다.&lt;/p&gt;
+
+&lt;p&gt;또한 큰 논쟁이 발생한 회의가 끝난 후에 항상 팀원들에게 모두의 의견들은 다 해커톤이 잘 기획되고 운영되었으면 좋겠다는 목적하에서 나온거기 때문에 서로 감정적으로 이야기하거나 상처받을 필요가 없다고 말했던 것 같습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;인성-면접&quot;&gt;인성 면접&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;비전공자이신데-개발에-관심을-갖게-된-이유가-무엇인가요&quot;&gt;비전공자이신데 개발에 관심을 갖게 된 이유가 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;비전공자인 제가 개발에 관심을 갖게 된 이유는 개발을 통해서 제 자신이 많이 바뀌었기 때문입니다. 개발을 하다보면 보통 ‘왜’라는 것을 많이 생각하게 됩니다. 예로 들면, ‘이 기술은 왜 쓰고, 다른 기술은 왜 안쓰는지, 더 좋은 방법은 없는지, 이 기술과 구조의 장단점은 무엇인지?’ 등 항상 이유를 생각하게됩니다. 어느 순간부터 이러한 이유를 찾는 습관들이 개발을 넘어서 제 삶 속에도 들어오기 시작했습니다. ‘왜 나는 이러한 행동을 하고, 왜 이런 말을 하며, 이러한 문제를 해결하기 위해서 더 좋은 방법이 존재하지 않을까?’ 등의 생각들 덕분에 눈치없고 철없던 20살의 제 자신을 개발이 좀 더 성숙하게 만들어주었기 때문에 개발에 관심을 갖게 되었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;개발의-수-많은-분야-중-백앤드를-선택하신-이유가-있나요&quot;&gt;개발의 수 많은 분야 중 백앤드를 선택하신 이유가 있나요?&lt;/h3&gt;
+
+&lt;p&gt;제가 수 많은 개발 분야 중 백앤드를 선택하게 된 이유는 동아리 회장이나 개발이 아닌 다양한 프로젝트를 진행하면서 주로 밖으로 보여지는 모습보다는 내부에서 이들이 어떻게 동작하는지에 대해서 궁금했던 경우가 많았습니다. 이러한 성향때문에 IT 프로젝트를 진행하면서도 프론트앤드보다는 백앤드를 더 선호했고 재미있어 했습니다. 그러다 보니 자연스레 백앤드 개발자를 직업으로 삼은게 아닐까 싶습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;본인은-10년뒤에-어떠한-개발자가-되고-싶나요&quot;&gt;본인은 10년뒤에 어떠한 개발자가 되고 싶나요?&lt;/h3&gt;
+
+&lt;p&gt;저는 10년 뒤에 많은 사람들에게 선한 영향력을 끼칠 수 있는 개발자가 되고 싶습니다. 팀의 구성원으로써 조직의 성장을 위해 꾸준히 노력하는 개발자가 되고 싶구요, 오픈 소스에 꾸준히 기여함을 통해 전 세계의 개발자들이 저로 인해 편리해졌으면 좋겠습니다. 마지막으로 제가 현업에 몸담으면서 배웠던 지식이나 경험들을 책, 블로그, 멘토링을 통해서 공유하는 다양한 개발자들과 함께 성장하는 개발자가 되고 싶습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;우리가-본인을-뽑아야-할-본인만의-강점이나-이유가-있나요&quot;&gt;우리가 본인을 뽑아야 할 본인만의 강점이나 이유가 있나요?&lt;/h3&gt;
+
+&lt;p&gt;제 자신의 가장 큰 장점은 맡은 일에 깊게 몰입한다는 것입니다. 조직이나 팀에서 저에게 일를 맡기면 항상 책임감을 갖고 깊게 몰입해서 ‘어떻게 하면 주어진 환경에서 더 좋은 결과를 낼 수 있을까?’ 에 대해서 항상 고민하고 생각하는 타입입니다. 이러한 저의 장점은 대부분 조직과의 시너지를 발휘해서 좋은 결과를 냈었구요, 네이버 예약/주문 플랫폼에서도 주어진 일에 책임감을 갖고 깊게 몰입함을 통해서 좋은 결과를 만들어 보겠습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;저희-예약-주문-플랫폼에-지원하게-된-동기가-있나요&quot;&gt;저희 예약 주문 플랫폼에 지원하게 된 동기가 있나요?&lt;/h3&gt;
+
+&lt;p&gt;네이버 예약 주문 플랫폼에 지원하게 된 동기는 제가 기존에 헤어샵이나, 숙소, 펜션 등을 예약하기 위해서 자주 사용했던 서비스인 네이버 예약 서비스 개발에 직접 참여하고 싶어서 지원하게 되었습니다. 사용자들의 다양한 요구사항들을 받아들이고 이를 직접 코드에 반영함을 통해서 저 뿐만 제 지인들 그리고 이를 사용하는 모든 사용자들에게 편의를 제공할 수 있다면 더 뿌듯하고 개발에 더 몰입할 수 있을 것 같아 지원하게 되었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;실패했던-경험이-무엇이고-어떻게-극복-했는지&quot;&gt;실패했던 경험이 무엇이고 어떻게 극복 했는지?&lt;/h3&gt;
+
+&lt;p&gt;과거에 프로젝트나 맡은 일에 너무 몰입하다보니 식사도 자주 놓치고, 자는 시간도 매일 바뀌어 건강관리에 실패했던 경험이 존재했습니다. 이를 극복하기 위해서 아침에 일어나자마자 규칙적인 계획을 세우고 자기전에 하루의 계획을 평가하는 좀 더 계획적이고 규칙적인 삶을 살고 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;백앤드가-아닌-프론트엔드나-인공지능-직무에-배치된다면&quot;&gt;백앤드가 아닌 프론트엔드나 인공지능 직무에 배치된다면?&lt;/h3&gt;
+
+&lt;p&gt;일단 직원은 회사에 이익을 가져다 주는게 주 목적이기 때문에 회사에서 저를 다른 직무에 배치한데는 다 이유가 있을거라고 생각합니다. 일단 다른 직무이지만 주어진 일을 열심히 수행하고, 추후에 백앤드에 자리가 남거나 직무를 변경할 수 있는 기회가 생길 경우 회사에 명확하고 논리 정연하게 제가 왜 백앤드를 개발자를 해야하는지에 대해서 전달할 것 같습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;상사의-불합리한-지시-어떻게-대응할-것인가&quot;&gt;상사의 불합리한 지시 어떻게 대응할 것인가?&lt;/h3&gt;
+
+&lt;p&gt;상사가 저에게 불합리한 지시를 했을 경우 일단 상사님이 그렇게 지시를 한 데는 다 이유가 존재하기 때문에 일단 지시를 따를 것 같구요, 시간이 남는다면 제가 생각하는 방향으로 추가적으로 개발을 진행해 볼 것 같습니다. 이를 통해서 상사님이 지시하신 이런 것들은 이런 장점과 이런 단점이 있으며, 제가 추가적으로 구현해 본 것들은 이런 장점과 이런 단점이 존재합니다를 상사님께 명확하고 논리정연하게 설명해 드릴것 같습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;궁금한-점이-있냐&quot;&gt;궁금한 점이 있냐?&lt;/h3&gt;
+
+&lt;p&gt;업무를 진행하다보면 빠르게 기술을 배워야 하거나, 추후 요구사항에 대비해서 미리 지식을 습득해야할 필요가 있을거라고 생각합니다. 인터넷에 공식 문서나 다양한 블로그들이 존재하지만 몇몇 상황에서는 책이나 강의를 통해서 지식을 습득했을 경우에 더 생산성이 높아진다고 느낄때도 있었습니다. 이러한 목적에서 업무에 필요한 책이나 강의가 필요한 경우 따로 지원해주는 제도가 존재하나요?&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 07 Mar 2021 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/interview/2021/03/07/NAVER-Practical-Interview-Preparation-9.html</link>
+        <guid isPermaLink="true">http://localhost:4000/interview/2021/03/07/NAVER-Practical-Interview-Preparation-9.html</guid>
+        
+        <category>Me</category>
+        
+        <category>Personality</category>
+        
+        <category>Activity</category>
+        
+        <category>Hackaton</category>
+        
+        <category>ECONOVATION</category>
+        
+        <category>President</category>
+        
+        
+        <category>Interview</category>
+        
+      </item>
     
       <item>
         <title>[실무 면접 준비 - 8] Spring Framework</title>
@@ -3415,193 +3553,6 @@ Old 영역에 있는 참조가 없는 객체들을 표시하고 그 해당 객�
         <category>Webper</category>
         
         <category>Projects</category>
-        
-        
-        <category>Interview</category>
-        
-      </item>
-    
-      <item>
-        <title>[기술 면접 준비 - 8일차] 네트워크</title>
-        <description>&lt;hr /&gt;
-
-&lt;h1 id=&quot;네트워크&quot;&gt;네트워크&lt;/h1&gt;
-
-&lt;h3 id=&quot;쿠키와-세션이-등장하게-된-이유를-아시나요&quot;&gt;쿠키와 세션이 등장하게 된 이유를 아시나요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;HTTP는 클라이언트가 요청을 한 후 응답을 받으면 그 연결을 끊어 버리는 특징인 connectionless와 통신이 끝나면 상태를 유지하지 않는 특징인 stateless를 해결하기 위해서 쿠키와 세션이 등장하게 되었습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;쿠키는-무엇인가요&quot;&gt;쿠키는 무엇인가요??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;쿠키란 클라이언트의 로컬에 저장되는 키-값이 들어있는 작은 데이터 파일을 의미합니다.&lt;/strong&gt; 쿠키에는 유효 시간을 지정할 수 있으며, 쿠키의 유효 시간이 남을 경우 브라우저가 종료되도 스토리지에 남아있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;쿠키 동작 방식&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;클라이언트가 페이지를 요청&lt;/li&gt;
-  &lt;li&gt;서버에서 쿠키를 생성&lt;/li&gt;
-  &lt;li&gt;HTTP 헤더에 쿠키를 포함 시켜 응답 (Set-Cookie)&lt;/li&gt;
-  &lt;li&gt;브라우저에서 쿠키를 저장&lt;/li&gt;
-  &lt;li&gt;쿠키가 존재하면 요청을 할 경우 HTTP 헤더에 쿠키를 함께 보내서 요청 한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;팝업, 자동 로그인, 장바구니 등의 기능을 구현할 때 쿠키를 사용합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;세션이란-무엇인가요&quot;&gt;세션이란 무엇인가요??&lt;/h3&gt;
-
-&lt;p&gt;세션은 인증과정에서 보통 쿠키를 기반으로 하고 있지만, &lt;strong&gt;클라이언트의 상태 정보를 서버 메모리에 저장하는 기술을 의미합니다.&lt;/strong&gt; &lt;u&gt;서버 메모리에서 관리하기 때문에 사용자 수가 많을 경우 성능 저하의 요인&lt;/u&gt;이 됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;세션 동작 방식&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;클라이언트가 서버에 접속 시 세션 ID를 발급&lt;/li&gt;
-  &lt;li&gt;클라이언트는 세션 ID를 쿠키를 사용해 저장 (쿠키 이름 : JSESSIONID)&lt;/li&gt;
-  &lt;li&gt;클라이언트가 서버에 다시 접속 시 이 쿠키를 이용해서 세션 ID값을 서버에 전달&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;세션과-쿠키의-차이는-무엇인가요&quot;&gt;세션과 쿠키의 차이는 무엇인가요??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;세션과 쿠키의 가장 큰 차이는 사용자의 상태 정보가 어디에 저장되어 있느냐의 차이 입니다.&lt;/strong&gt; 쿠키는 클라이언트 로컬에 저장되고 세션은 서버 메모리에서 저장합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;세션-쿠키-방식의-장단점은-무엇인가요&quot;&gt;세션 쿠키 방식의 장단점은 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;세션 ID는 유의미한 값을 갖지 않기 때문에 HTTP 헤더나 바디에 직접 계정정보를 담아 전송하는 것 보다 보안에 강하다.&lt;/li&gt;
-  &lt;li&gt;세션 ID는 고유의 ID값이기 때문에 서버 메모리에서 바로 검색할 수 있어 성능 향상을 기대할 수 있습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;단점&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;가로챈 쿠키 즉, 세션 ID를 가지고 해커가 동일한 요청을 보낼 경우 진짜 사용자 인지 해커인지 구분할 수가 없다. (세션 유효시간을 짧게 설정, HTTPS 프로토콜 사용)&lt;/li&gt;
-  &lt;li&gt;세션 저장소는 서버의 메모리를 사용하기 때문에 동시 사용자가 많을 수록 서버의 부하가 심하게 걸린다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;토큰-기반-인증-방식은-무엇인가요&quot;&gt;토큰 기반 인증 방식은 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;인증에 필요한 정보들을 암호화시킨 토큰을 통해서 인증을 하는 방식&lt;/strong&gt;을 의미합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;토큰 인증 동작 방식&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;클라이언트가 로그인 한다.&lt;/li&gt;
-  &lt;li&gt;서버는 사용자를 확인하고 Access Token을 발급해 사용자에게 응답해준다.&lt;/li&gt;
-  &lt;li&gt;사용자는 Access Token을 받아 쿠키와 같은 곳에 저장한 후, 인증이 필요한 요청마다 토큰을 헤더에 실어 보낸다.&lt;/li&gt;
-  &lt;li&gt;서버는 해당 토큰을 검증하고 적절한 토큰일 경우 사용자에 알맞는 데이터를 보낸다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;토큰-기반-인증-방식의-장단점은-무엇인가요&quot;&gt;토큰 기반 인증 방식의 장단점은 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;세션/쿠키와 달리 토큰은 별도의 저장소 관리가 필요 없고 검증만 하면 되기 때문에 추가 저장소가 필요 없습니다.&lt;/li&gt;
-  &lt;li&gt;Facebook이나 Google에서 지원해주는 다양한 서비스도 토큰 기반으로 진행되기 때문에 관련 기능을 확장하기 용이합니다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;단점&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;토큰의 경우도 세션 ID와 마찬가지로 탈취되었을 경우 진짜 사용자인지 해커인지 구분할 수 없습니다. (HTTPS 프토콜을 사용, 토큰 유효기간을 짧게 한다.(Refresh Token 사용))&lt;/li&gt;
-  &lt;li&gt;토큰의 길이는 세션 ID보다 훨씬 길기 떄문에 많은 요청이 발생할 수록 오버헤드도 많이 발생합니다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;jwt는-무엇인가요&quot;&gt;JWT는 무엇인가요?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;JWT란 Json Web Token의 줄임말로써 Json 포맷을 통해 사용자에 대한 속성을 저장하는 Web Token이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/interview/naver-interview-preparation8-1.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;JWT의 구조는 &lt;strong&gt;Header, Payload, Signature&lt;/strong&gt;의 3부분으로 이루어 지며 각각의 역할을 다음과 같습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Header: Signature를 해싱하기 위한 알고리즘이나 토큰의 타입을 지정하는 부분&lt;/li&gt;
-  &lt;li&gt;Payload: 토큰에서 사용할 정보의 조각들인 Claim으로 구성되어 있다.
-    &lt;ul&gt;
-      &lt;li&gt;Payload에 담는 정보의 ‘한 조각’을 Claim이라고 부르고, 이는 key/value의 한 쌍으로 이루어져 있습니다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Signature: 토큰을 인코딩하거나 유효성 검증을 할 때 사용하는 고유한 암호화 코드이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;jwt를-사용하신-이유가-있나요&quot;&gt;JWT를 사용하신 이유가 있나요??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;토큰 기반 인증을 위해 토큰 생성이 가장 간단하면서도 만료 기간과 같은 다양한 기능 명세가 존재했기 때문에 사용하였습니다.&lt;/strong&gt; 또한 자바 단에 JWT Token을 생성하고 검증할 수 있는 라이브러리가 잘 형성 되어있었기 때문에 사용하기도 하였습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;jwt의-단점은-무엇인가요&quot;&gt;JWT의 단점은 무엇인가요??&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JWT 토큰은 상태 정보를 저장하지 않아 한번 발행된 토큰이 임의로 삭제될 수 없기 때문에 적절한 토큰 만료 기간을 넣어줘야 했습니다.&lt;/li&gt;
-  &lt;li&gt;JWT 토큰은 전체적으로 길이가 길기 때문에 많은 요청과 응답이 발생할 경우 성능에 영향을 줄 수 있습니다.&lt;/li&gt;
-  &lt;li&gt;JWT의 Payload 자체는 암호화 된 것이 아니라 인코딩 된 것이기 때문에 암호화에 신경 쓰거나, 중요 데이터를 Payload에 넣지 않아야 합니다.&lt;/li&gt;
-  &lt;li&gt;Token 기반의 인증과 마찬가지로 Token을 탈취 당했을 경우 올바른 사용자 식별을 할 수 없습니다. 이를 위해 HTTPS나 적절한 만료 기간을 설정했어야만 했습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;oauth&quot;&gt;OAuth&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;OAuth란 특정 애플리케이션이 다른 애플리케이션의 정보에 접근할 수 있는 권한을 관리하는 프로토콜 입니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;osi-7-레이어는-무엇인가&quot;&gt;OSI 7 레이어는 무엇인가??&lt;/h3&gt;
-
-&lt;p&gt;OSI 7 레이어란 네트워크를 계층적인 구조로 표현한 것을 가리키며 구조는 아래와 같습니다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;물리 계층(Physical Layer)&lt;/strong&gt; : 하나의 비트를 노드에서 다음 노드로 전송해주는 서비스를 담당한다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;링크 계층(Link Layer)&lt;/strong&gt; : 물리 계층을 통해 송수신되는 정보의 오류와 흐름을 관리하여 안전한 정보의 전달을 수행할 수 있도록 도와주는 서비스를 담당한다. (MAC)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;네트워크 계층(Network Layer)&lt;/strong&gt; : 데이터를 목적지까지 가장 안전하고 빠르게 전달하는 라우팅과 포워딩 서비스를 담당한다. (IP)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;전송 계층(Transport Layer)&lt;/strong&gt; : End to End 사용자들이 신뢰성있는 데이터를 주고받을 수 있게 도와준다. (TCP, UDP)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;세션 계층(Session Layer)&lt;/strong&gt; : 양 끝단의 응용 프로세스가 통신(동시 송수신, 반이중, 전이중)을 관리하기 위한 방법을 제공한다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;표현 계층(Presentation Layer)&lt;/strong&gt; : 코드 간의 번역을 담당하여 데이터의 형식상 차이를 다루는 부담을 응용 계층으로부터 덜어 준다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;응용 계층(Application Layer)&lt;/strong&gt; : 응용 프로세스와 직접 관계하여 일반적인 응용 서비스를 수행한다. (HTTP, DNS, SSH)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;왜-osi-7-레이어로-나누었을까&quot;&gt;왜 OSI 7 레이어로 나누었을까??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;네트워크를 7계층으로 나눈 이유는 네트워크에서 이상이 발생했을 경우 다른 레이어의 장비 및 소프트웨어를 건들지 않고도 이상이 생긴 특정 레어어만 고칠 수 있는 유지보수 측면에서의 장점과, 새로운 응용 계층 프로토콜을 개발할 경우 물리계층 부터 개발하지 않고 표현계층까지 재사용함으로써 확장성 측면에서의 장점을 가지기 때문에 네트워크를 계층적 구조인 OSI 7 레이어로 나누었습니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;http는-무엇인가&quot;&gt;HTTP는 무엇인가?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;HTTP는 어플리케이션 계층 프로토콜의 한 종류로써 TCP/IP 기반의 신뢰적인 프로토콜입니다. 주로 브라우저와 서버간의 통신을 하기 위해 자주 사용합니다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;헤더 필드로는 Content-Legth, Content-Type, Connection, User-Agent, Accept, Status Code 등이 존재합니다.&lt;/p&gt;
-
-&lt;p&gt;http status code는 HTTP Response의 필드 중에 하나인데 순서는 아래와 같습니다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;1xx: 서버는 요청을 받았으며 작업을 계속한다.&lt;/li&gt;
-  &lt;li&gt;2xx: 클라이언트가 요청한 동작을 수신하고 이해했으며 성공적으로 처리했음을 가리킨다.&lt;/li&gt;
-  &lt;li&gt;3xx: 클라이언트는 요청을 마치기 위해 추가 동작을 취해야 한다는 것을 의미하구요&lt;/li&gt;
-  &lt;li&gt;4xx: 클라이언트의 요청에 오류가 있다는 것을 말합니다.&lt;/li&gt;
-  &lt;li&gt;5xx: 클라이언트 요청은 이상이 없지만 이를 처리하는 서버에 문제가 있다는 것을 말합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;dns-서비스는-무엇인가&quot;&gt;DNS 서비스는 무엇인가??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;DNS란 Host의 Domain Name을 Host의 IP로 변환해주는 서비스를 말합니다.&lt;/strong&gt; DNS 서버들은 계층구조로 구현된 분산 데이터베이스로 주요 구성 요소로써 Root, Top Level Domain(TLD), Authoritative, Local DNS Server가 존재합니다.&lt;/p&gt;
-
-&lt;p&gt;DNS 서비스 과정 (캐싱 x)&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Host가 gaia.cs.umass.edu의 IP주소를 Local DNS서버에게 요청을 보낸다.&lt;/li&gt;
-  &lt;li&gt;Local DNS서버는 루트 DNS 서버에게 Domain Name을 보내고 루트 DNS 서버는 edu를 인식한 후 TLD 서버의 주소를 넘겨준다&lt;/li&gt;
-  &lt;li&gt;Local DNS서버는 TLD서버에게 Domain Name을 보내고 TLD 서버는 unmass.edu를 인식한 후 Authoritative 서버의 주소를 넘겨준다.&lt;/li&gt;
-  &lt;li&gt;Local DNS서버는 Authoritative 서버에게 Domain Name을 보내고 gaia.cs.umass.edu에 해당하는 Ip주소를 얻어온다.&lt;/li&gt;
-  &lt;li&gt;변환된 Ip 주소를 Host에게 넘겨주고 Host는 이 IP를 사용해서 어플리케이션 간에 통신 한다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;tcp와-udp의-차이는-무엇인가&quot;&gt;TCP와 UDP의 차이는 무엇인가?&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;UDP는 비신뢰적이고 비연결형 서비스를 제공하는 프로토콜이구요 TCP는 신뢰적이고 연결형 서비스를 제공하는 프로토콜 입니다.&lt;/strong&gt; UDP는 주로 DNS나, IPTV등에서 사용하고 TCP는 HTTP 등에서 사용됩니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;tcp의-3-way-handshake에-대해서-알고-잇나요&quot;&gt;TCP의 3 Way-HandShake에 대해서 알고 잇나요??&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;TCP의 3 Way Handshake란 TCP로 통신을 하는 장치간에 서로 연결이 잘 되어있는지 확인하는 과정, 방법이다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;synchronize의 줄임말인 syn 세그먼트를 클라이언트가 서버로 보낸다.&lt;/li&gt;
-  &lt;li&gt;서버는 클라이언트에게 syn에 대한 ack를 보낸다&lt;/li&gt;
-  &lt;li&gt;클라이언트는 syn에 대한 ack의 ack를 보낸다.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Wed, 16 Dec 2020 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/interview/2020/12/16/NAVER-Interview-Preparation-8.html</link>
-        <guid isPermaLink="true">http://localhost:4000/interview/2020/12/16/NAVER-Interview-Preparation-8.html</guid>
-        
-        <category>Introduction</category>
         
         
         <category>Interview</category>
