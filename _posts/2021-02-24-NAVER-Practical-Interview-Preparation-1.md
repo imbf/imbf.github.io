@@ -286,6 +286,9 @@ tags: Booking-Recommendation-System Batch PostgreSQL Spring Redis React
 
 다양한 운영 모델이 존재합니다.
 
+### Redis Cluster란 무엇인가요?
+
+**Redis Cluster란 레디스의 높은 가용성을 위한 하나의 운영모델을 의미하구요, 자체적으로 Hash Slot을 사용해 샤딩을 지원하고 자체적인 Primary, Secondary Failover를 통해 자동화 된 장애 대응을 지원합니다.**
 
 
 > ### **데이터 분산 방법**
@@ -604,7 +607,19 @@ UPDATE나 INSERT가 자주 일어나는 테이블에 수 많은 인덱스를 설
 - **Code-On-Demand (Optional):** 서버가 네트워크를 통해 클라이언트에 프로그램을 전달하면 그 프로그램이 클라이언트에서 실행될 수 있어야 한다.
   - 이 제약조건은 팔수는 아니며 Javascript나 Java applet을 의미한다.
 
+> ### SOAP(Simple Object Message Protocol)
+> 
+> SOAP는 일반적으로 널리 알려진 HTTP, HTTPS, SMTP 등을 통해 XML 기반의 메세지를 컴퓨터 네트워크 상에서 교환하는 프로토콜입니다.
+>
+> ### GraphQL
+>
+> GraphQL은 API를 위한 데이터 쿼리 언어입니다. 이를 통해서 클라이언트가 직접 필요한 데이터를 정의하고 서버는 요청된 데이터를 정확하게 반환합니다.
+>
+>
 
+> ### SOAP vs REST vs GraphQL
+>
+> <img src="/assets/interview/naver-practical-interview-preparation1-5.png" style="width:90%">
 
 ---
 

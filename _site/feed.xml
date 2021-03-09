@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Mar 2021 11:04:41 +0900</pubDate>
-    <lastBuildDate>Tue, 09 Mar 2021 11:04:41 +0900</lastBuildDate>
+    <pubDate>Tue, 09 Mar 2021 15:41:51 +0900</pubDate>
+    <lastBuildDate>Tue, 09 Mar 2021 15:41:51 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -3378,6 +3378,10 @@ T(n) = nlogn(비교) + 2nlogn(이동) = 3nlogn = &lt;strong&gt;O(nlogn)&lt;/stro
 
 &lt;p&gt;다양한 운영 모델이 존재합니다.&lt;/p&gt;
 
+&lt;h3 id=&quot;redis-cluster란-무엇인가요&quot;&gt;Redis Cluster란 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Redis Cluster란 레디스의 높은 가용성을 위한 하나의 운영모델을 의미하구요, 자체적으로 Hash Slot을 사용해 샤딩을 지원하고 자체적인 Primary, Secondary Failover를 통해 자동화 된 장애 대응을 지원합니다.&lt;/strong&gt;&lt;/p&gt;
+
 &lt;blockquote&gt;
   &lt;h3 id=&quot;데이터-분산-방법&quot;&gt;&lt;strong&gt;데이터 분산 방법&lt;/strong&gt;&lt;/h3&gt;
 
@@ -3718,6 +3722,23 @@ Old 영역에 있는 참조가 없는 객체들을 표시하고 그 해당 객�
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;soapsimple-object-message-protocol&quot;&gt;SOAP(Simple Object Message Protocol)&lt;/h3&gt;
+
+  &lt;p&gt;SOAP는 일반적으로 널리 알려진 HTTP, HTTPS, SMTP 등을 통해 XML 기반의 메세지를 컴퓨터 네트워크 상에서 교환하는 프로토콜입니다.&lt;/p&gt;
+
+  &lt;h3 id=&quot;graphql&quot;&gt;GraphQL&lt;/h3&gt;
+
+  &lt;p&gt;GraphQL은 API를 위한 데이터 쿼리 언어입니다. 이를 통해서 클라이언트가 직접 필요한 데이터를 정의하고 서버는 요청된 데이터를 정확하게 반환합니다.&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;h3 id=&quot;soap-vs-rest-vs-graphql&quot;&gt;SOAP vs REST vs GraphQL&lt;/h3&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/assets/interview/naver-practical-interview-preparation1-5.png&quot; style=&quot;width:90%&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;hr /&gt;
 
