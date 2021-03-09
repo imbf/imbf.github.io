@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Mar 2021 15:41:51 +0900</pubDate>
-    <lastBuildDate>Tue, 09 Mar 2021 15:41:51 +0900</lastBuildDate>
+    <pubDate>Tue, 09 Mar 2021 20:05:21 +0900</pubDate>
+    <lastBuildDate>Tue, 09 Mar 2021 20:05:21 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -3090,6 +3090,15 @@ T(n) = nlogn(비교) + 2nlogn(이동) = 3nlogn = &lt;strong&gt;O(nlogn)&lt;/stro
   &lt;/ol&gt;
 &lt;/blockquote&gt;
 
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;etc&quot;&gt;ETC&lt;/h2&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;32비트-컴퓨터와-64비트-컴퓨터의-차이는-무엇인가요&quot;&gt;32비트 컴퓨터와 64비트 컴퓨터의 차이는 무엇인가요?&lt;/h3&gt;
+
+&lt;p&gt;32비트 컴퓨터는 레지스터의 크기가 32비트인 컴퓨터를 의미하는 것이구요 64비트 컴퓨터는 레지스터의 크기가 64비트인 컴퓨터를 의미합니다. 32비트 컴퓨터는 2^32 약 42억개 정도의 주소공간을 사용할 수 있고 주소 공간 하나당 크기는 1Byte이기 떄문에 이론적으로 4GB의 메모리를 사용할 수 있습니다. 64비트는 2^64개의 주소 공간을 사용할 수 있고 주소 공간 하나당 크기는 1Byte이기 떄문에 이론적으로 2^34GB의 메모리를 사용할 수 있습니다. 이론직으로 사용할 수 있는 메모리는 위와 같지만 실제 사용가능한 메모리는 훨씬 적은걸로 알고 있습니다.&lt;/p&gt;
 </description>
         <pubDate>Sun, 28 Feb 2021 00:00:00 +0900</pubDate>
         <link>http://localhost:4000/interview/2021/02/28/NAVER-Practical-Interview-Preparation-2.html</link>
